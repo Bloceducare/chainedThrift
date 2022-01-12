@@ -1,14 +1,7 @@
 import React from 'react';
 import { landingNav } from '../../data/data';
 import Header from '../../layout/header/index';
-import coin from '../../assets/coin.svg';
 import Button from '../../components/buttons/Button';
-import metamask from '../../assets/metamask.svg';
-import wallet from '../../assets/Wallet.svg';
-import money from '../../assets/Money.svg';
-import home from '../../assets/home.svg'
-import chat from '../../assets/chat.svg'
-import customer from '../../assets/customer.svg';
 import { BsArrowRightShort } from 'react-icons/bs'
 
 const Landing = () => {
@@ -26,7 +19,7 @@ const Landing = () => {
                     </div>
                     <div className="-translate-x-3/4">
                         <div>
-                            <img src={coin} alt="coin" />
+                            <img src = "/assets/coin.svg" alt="coin" />
                         </div>
                     </div>
                 </div>
@@ -35,17 +28,17 @@ const Landing = () => {
                     <h4 className="text-center text-white-1 mb-10 text-Poppins font-bold text-xl">How it works</h4>
                     <div className="flex items-center justify-evenly">
                         <div>
-                            <img className="block mx-auto" src={metamask} alt="meta-mask-svg" />
+                            <img className="block mx-auto" src= "/assets/Wallet.svg" alt="meta-mask-svg" />
                             <p className="text-center font-Montserrat font-bold text-white-1">Connect Wallet</p>
                             <p className="text-center font-Montserrat font-normal text-white-1">Tap the connect wallet icon above</p>
                         </div>
                         <div>
-                            <img className="block mx-auto" src={wallet} alt="wallet-svg" />
+                            <img className="block mx-auto" src= "/assets/Money.svg" alt="wallet-svg" />
                             <p className="text-center font-Montserrat  font-bold text-white-1">Create/Join Purse</p>
                             <p className="text-center font-Montserrat font-normal text-white-1">Join existing purse that matches<br /> your savings target</p>
                         </div>
                         <div>
-                            <img className="block mx-auto " src={money} alt="deposit-svg" />
+                            <img className="block mx-auto " src= "/assets/Money.svg" alt="deposit-svg" />
                             <p className="text-center font-Montserrat font-bold text-white-1">Deposit</p>
                             <p className="text-center font-Montserrat font-normal text-white-1">Use the depsit function to start<br /> saving</p>
                         </div>
@@ -56,7 +49,7 @@ const Landing = () => {
                     <div className="w-3/6 mr-24">
                         <div className="bg-white w-full rounded-lg p-8">
                             <h5 className="text-dark font-extrabold font-Poppins">Safe and open source</h5>
-                            <img className="block mx-auto" src={home} alt="home-svg" />
+                            <img className="block mx-auto" src= "/assets/home.svg" alt="home-svg" />
                             <p className="font-Montserrat font-light">Fully transparent and secure purses. Our purse is
                                 <b> open source</b> and trusted by all.</p>
 
@@ -67,7 +60,7 @@ const Landing = () => {
                             <p className="text-white-1 font-Poppins mb-12 font-bold">What we do to help<br />
                                 our users.</p>
                             <div className="bg-white  rounded-lg mr-11 p-8">
-                                <img className="block mx-auto" src={customer} alt="customer-svg" />
+                                <img className="block mx-auto" src= "/assets/customer.svg" alt="customer-svg" />
                                 <h5 className="text-dark font-extrabold font-Poppins mt-6">Stake</h5>
                                 <p className="font-Montserrat font-light">We offer stake function for user to stake and earn rewards on thier savings.</p>
                                 <p className="flex items-center mt-4 text-purple-400">
@@ -77,7 +70,7 @@ const Landing = () => {
                             </div>
                         </div>
                         <div className="bg-white rounded-lg mb-24 -translate-y-16 p-6">
-                            <img className="block mx-auto  -translate-y-12" src={chat} alt="chat-svg" />
+                            <img className="block mx-auto  -translate-y-12" src= "/assets/chat.svg" alt="chat-svg" />
                             <h5 className="text-dark font-extrabold font-Poppins">Swap</h5>
                             <p className="font-Montserrat font-light">Easily swap Ethereum and other Erc-20 tokens </p>
                             <p className="flex items-center mt-4 text-purple-400">

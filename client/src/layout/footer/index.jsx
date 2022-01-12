@@ -11,7 +11,7 @@ import {BsPencilSquare} from 'react-icons/bs'
 
 const Footer = () => {
     return (
-        <footer className="bg-blue-gradient-2 p-20">
+        <footer className="bg-gray-8 p-20">
             <div className="flex items-center">
                 <div className="w-3/6">
                     <Button className="mb-6">Launch App</Button>
