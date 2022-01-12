@@ -1,21 +1,20 @@
 import React, {Suspense, lazy} from 'react';
 import {Routes, Route} from 'react-router-dom';
-import Header from './header/';
+// import Header from './header/';
 import Footer from './footer/';
 import Fallback from './fallback/';
 import { routes } from '../utils/routes';
-
-// importing routes
 const Landing = lazy(() => import('../pages/landing'));
 const Swap = lazy(() => import('../pages/swap'));
 const Purses = lazy(() => import('../pages/purses'));
 const PurseLayout = lazy(() => import('../layout/purseLayout'));
 const NotFound = lazy(() => import('./notFound'));
 
+
 const Layout = () => {
     return (
         <>
-            <Header />
+        {/* <Header/> */}
             <main>
                 <Suspense fallback = {<Fallback />}>
                     <Routes>
