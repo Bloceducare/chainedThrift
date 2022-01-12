@@ -38,13 +38,24 @@ module.exports = {
         'blue-4': '#70B2FF',
         'blue-5': '#171538',
         'blue-6': '#1A66FF',
+        'yellow-dark':'#FDCB6E;'
+        
+
 
       },
       backgroundImage: {
+        'overlay-img': "url('../src/assets/bg.svg')",
         'btn': 'linear-gradient(180deg, #833EF1 0%, #491CB5 100%)',
         'nav-dark': 'linear-gradient(90.18deg, rgba(61, 61, 61, 0.2052) 0%, rgba(29, 29, 29, 0.285) 100%)', //used for navbar in dark mode
         'blue-gradient': 'linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)', // dashbord side nav bg color
         'pink-gradient': 'linear-gradient(136.67deg, #FF409A 8.34%, #C438EF 95.26%)', //notification badge bg
+        'blue-gradient-2': 'linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)',
+      },
+      fontFamily:{
+        Poppins: ['Poppins', 'sans-serif'],
+        Monserat: ['Montserrat', 'sans-serif'],
+        Inter: [ 'Inter', 'sans-serif']
+
       },
       boxShadow: {
         'card': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
