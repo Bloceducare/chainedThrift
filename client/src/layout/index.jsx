@@ -1,7 +1,7 @@
 import React, {Suspense, lazy} from 'react';
 import {Routes, Route} from 'react-router-dom';
 // import Header from './header/';
-import Footer from './footer/';
+import Footer from './footer/index';
 import Fallback from './fallback/';
 import { routes } from '../utils/routes';
 const Landing = lazy(() => import('../pages/landing'));
