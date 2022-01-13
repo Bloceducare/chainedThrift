@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const SideBar = () => {
-    return (
-        <div>
-            purse sidebar
-        </div>
-    )
-}
+  return <div>purse sidebar</div>;
+};
 
-export default SideBar
+export default SideBar;
