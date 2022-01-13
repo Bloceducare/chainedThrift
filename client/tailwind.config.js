@@ -38,10 +38,7 @@ module.exports = {
         'blue-4': '#70B2FF',
         'blue-5': '#171538',
         'blue-6': '#1A66FF',
-        'yellow-dark':'#FDCB6E;'
-        
-
-
+        'yellow-dark':'#FDCB6E',
       },
       backgroundImage: {
         'overlay-img': "url('../public/assets/bg.svg')",
@@ -59,6 +56,9 @@ module.exports = {
       },
       boxShadow: {
         'card': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+      },
+      spacing: {
+        '128': '37rem',
       }
     },
   },
