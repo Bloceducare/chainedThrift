@@ -1,21 +1,24 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import { GiHamburgerMenu } from "react-icons/gi"
-// import HeaderButton from "../../../../components/buttons/HeaderButton";
 
-const Navbar = ({ data = [] }) => {
-  // const navigate = useNavigate();
-  // const handleRedirect = (link) => {
-  //   navigate(link);
-  // };
+const Navbar = ({ data }) => {
   return (
-    <>
-      <nav className="relative flex flex-wrap items-center justify-between px-2 py-2 bg-dark-1 mb-3">
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <p className="text-white-1">Dashboard Header....</p>
+    <div className="bg-dark-1 w-full h-40 pl-8 pr-8 flex justify-between items-center">
+      <div className="flex flex-col">
+        <div>
+          <p className="Montserrat font-extrabold text-3xl text-white-1">Dashboard</p>
+          <div className="Poppins font-medium text-white-1">Purse ID: 0xBBB6...e96e</div>
         </div>
-      </nav>
-    </>
+      </div>
+      <div className="flex flex-col ">
+        <div>
+          <div className="Poppins text-white-1 font-medium">Bal. of BentoBox: 0.0 DAI</div>
+        </div>
+      </div>
+      <div className="flex items-center bg-pink-gradient rounded-3xl p-1">
+        <img src="/assets/overView.svg" alt="arrow" className="w-2 h-2 mr-1" />
+        <p className="Poppins text-white-1 text-xs font-thin">15</p>
+      </div>
+    </div>
   );
 };
 

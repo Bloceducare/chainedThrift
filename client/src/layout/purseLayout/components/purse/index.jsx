@@ -9,7 +9,7 @@ const Purse = ({ created, member, tvl, purseId, onClick }) => {
       <div className="flex justify-between">
         <div className="Poppins text-xl font-extrabold text-purple-1">0xBBB6...e96e</div>
         <div>
-          <img src="/assets/lock.svg" alt="coin" className="img-responsive" />
+          <img src="/assets/lock.svg" alt="coin" className="img-responsive rounded-2xl" />
         </div>
       </div>
       <div className="flex justify-between mt-6">
