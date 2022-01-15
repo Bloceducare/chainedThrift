@@ -4,10 +4,11 @@ import { innerNav } from "../../static/data";
 import Navbar from "../../components/appHeader";
 import { purseData } from "../../static/data";
 import PurseList from "../../layout/purseLayout/components/purseList";
+import NoPurse from "../../layout/purseLayout/components/noPurse";
 
 const Purses = () => {
   const navigate = useNavigate();
-  const [category, setCategory] = useState("myPurses");
+  const [category, setCategory] = useState("noPurse");
   const [createPurseModal, setCreatePurseModal] = React.useState(false);
   const [purseDetailModal, setPurseDetailModal] = React.useState(false);
   // const [selectedPurse, setSelectPurse] = useState(null);
@@ -19,11 +20,11 @@ const Purses = () => {
   };
   useEffect(() => {}, [category]);
   return (
-    <section className="bg-overlay-img bg-dark-1 h-screen flex justify-center h-auto">
+    <section className="bg-overlay-img bg-dark-1 flex justify-center h-screen pb-8">
       <div className="container">
         <Navbar data={innerNav} />
-        <section className="bg-dark-1 px-8 mt-12">
-          <div className="flex justify-between pt-12">
+        <section className="bg-dark-1 pl-4 md:pl-8 pr-4 md:pr-12 mt-12">
+          <div className="flex justify-between pt-4 md:pt-12">
             <p className="font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg text-white-1">
               Thrift Purses
             </p>
@@ -41,7 +42,7 @@ const Purses = () => {
                 className={
                   category === "myPurses"
                     ? "flex items-center border-b-4 border-b-white cursor-pointer lg:mr-12"
-                    : "flex items-center cursor-pointer lg:mr-12"
+                    : "flex items-center cursor-pointer md:mr-12"
                 }
                 onClick={() => setCategory("myPurses")}
               >
@@ -69,7 +70,7 @@ const Purses = () => {
               </div>
             </div>
           </div>
-          <div className="mt-8">
+          <div className="mt-8 pb-8">
             {category === "myPurses" && (
               <PurseList list={purseData.myPurses} onAction={handleClick} />
             )}
@@ -79,10 +80,16 @@ const Purses = () => {
                 onAction={handleClick}
               />
             )}
+            {category === "noPurse" && (
+              <NoPurse
+                openCreatePurse={setCreatePurseModal}
+                openJoinPurse={setPurseDetailModal}
+              />
+            )}
           </div>
         </section>
       </div>
-      {/* <!-- Create Modal --> */}
+      {/* <!-- Create Purse Modal --> */}
       {createPurseModal ? (
         <>
           <div className="justify-center items-center backdrop-blur-sm shadow-lg flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -104,11 +111,11 @@ const Purses = () => {
                   </button>
                 </div>
                 {/*body*/}
-                <form class="px-2 pb-4 space-y-1 lg:px-4" action="#">
+                <form className="px-2 pb-4 space-y-1 lg:px-4" action="#">
                   <div>
                     <label
-                      for="email"
-                      class="block mb-2 text-sm font-thin text-white-1"
+                      htmlFor="email"
+                      className="block mb-2 text-sm font-thin text-white-1"
                     >
                       Amount in DAI
                     </label>
@@ -116,15 +123,15 @@ const Purses = () => {
                       type="text"
                       name="amount"
                       id="amount"
-                      class="border border-gray-7 bg-dark-4 text-sm text-white-1 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="border border-gray-7 bg-dark-4 text-sm text-white-1 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       placeholder="name@company.com"
                       required
                     />
                   </div>
                   <div>
                     <label
-                      for="members"
-                      class="block mb-2 text-sm font-thin text-white-1"
+                      htmlFor="members"
+                      className="block mb-2 text-sm font-thin text-white-1"
                     >
                       Number of Members
                     </label>
@@ -133,14 +140,14 @@ const Purses = () => {
                       name="members"
                       id="members"
                       placeholder="2"
-                      class="bg-dark-4 border border-gray-300 text-sm text-white-1 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="bg-dark-4 border border-gray-300 text-sm text-white-1 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       required
                     />
                   </div>
                   <div>
                     <label
-                      for="frequency"
-                      class="block mb-2 text-sm font-thin text-white-1"
+                      htmlFor="frequency"
+                      className="block mb-2 text-sm font-thin text-white-1"
                     >
                       Frequency (In Days)
                     </label>
@@ -149,14 +156,14 @@ const Purses = () => {
                       name="members"
                       id="members"
                       placeholder="2"
-                      class="bg-dark-4 border border-gray-300 text-sm text-white-1 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="bg-dark-4 border border-gray-300 text-sm text-white-1 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       required
                     />
                   </div>
                   <div>
                     <label
-                      for="members"
-                      class="block mb-2 text-sm font-thin text-white-1"
+                      htmlFor="members"
+                      className="block mb-2 text-sm font-thin text-white-1"
                     >
                       Number of Members
                     </label>
@@ -165,7 +172,7 @@ const Purses = () => {
                       name="members"
                       id="members"
                       placeholder="2"
-                      class="bg-dark-4 border border-gray-300 text-sm text-white-1 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="bg-dark-4 border border-gray-300 text-sm text-white-1 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       required
                     />
                   </div>
@@ -190,11 +197,11 @@ const Purses = () => {
           <div className="justify-center items-center backdrop-blur-sm shadow-lg flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">
               {/*content*/}
-              <div className="border-0 rounded-lg bg-dark-4 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="border-0 rounded-lg bg-dark-4 shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between pt-5 pb-2 px-4 rounded-t">
                   <h3 className="Poppins text-base font-semibold text-white-1">
-                    Create a Purse
+                    Account
                   </h3>
                   <button
                     className="p-1 ml-auto border-0 text-white-1 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -223,7 +230,7 @@ const Purses = () => {
                       <img
                         src="/assets/lock.svg"
                         alt="coin"
-                        className="img-responsive"
+                        className="img-responsive rounded-2xl"
                       />
                     </div>
                   </div>
@@ -275,7 +282,7 @@ const Purses = () => {
                         className="flex flex-row-reverse pt-4"
                         onClick={() => navigate("/app/purse/1234")}
                       >
-                        <p className="text-green-1 font-thin text-sm">
+                        <p className="text-green-1 font-thin text-sm cursor-pointer">
                           This purse is now Open!
                         </p>
                       </div>
@@ -288,7 +295,6 @@ const Purses = () => {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
-      
     </section>
   );
 };
