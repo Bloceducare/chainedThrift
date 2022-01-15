@@ -27,11 +27,14 @@ module.exports = {
         'gray-12': '#DBDBDB',
         'gray-13': '#8786AB',
         'gray-14': '#59588D',
+        'gray-15': '#59B7E6',
+        'gray-16': '#282A2E',
         'white-1': '#fff',
         'white-2': '#CFCFCF',
         'white-3': '#E0E0E0',
         'purple-1': '#833EF1',
         'purple-2': '#6C5CE7',
+        'purple-3': '#242140',
         'blue-1': '#0177FB',
         'blue-2': '#2F6EFF',
         'blue-3': '#3D8DFF',
@@ -58,6 +61,9 @@ module.exports = {
       boxShadow: {
         'card': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       },
+      width: {
+        'large': '78rem',
+      }
     },
   },
   plugins: [],
