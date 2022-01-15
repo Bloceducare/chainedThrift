@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { purseSideBar } from "../../../../static/data";
 
 const SideBar = () => {
+  const [activeTab, setActiveTab] = useState(purseSideBar[0].name);
+  const navigate = useNavigate();
   return (
-    <div className="lg:h-screen bg-gray-11">
-      <div>arrow</div>
-      <div>
-        <div>Overview</div>
-        <div>Actions</div>
-        <div>Chat Room</div>
-        <div>Settings</div>
+    <div className="bg-blue-gradient w-48">
+      <div className="w-48 h-40 flex justify-center items-center">
+        <img
+          src="/assets/arrowLeft.svg"
+          alt="arrow"
+          className="w-6 h-6 cursor-pointer"
+          onClick={() => navigate("/app/purses")}
+        />
+      </div>
+      <div className="">
+        {purseSideBar.map((item, idx) => (
+          <div
+            className={
+              activeTab === item.name
+                ? "Poppins text-sm cursor-pointer text-gray-15 flex items-center h-12 bg-purple-3 pl-8 border-l-2 border-l-white-1"
+                : "Poppins text-sm cursor-pointer text-white-1 hover:text-purple-2 flex items-center h-12 hover:bg-gray-3 pl-8 hover:border-l-2 border-l-white-1"
+            }
+            onClick={() => {
+              navigate(item.link);
+              setActiveTab(item.name);
+            }}
+          >
+            <img src={item.icon} alt="arrow" className="w-6 h-6 mr-2" />
+            {item.name}
+          </div>
+        ))}
       </div>
     </div>
   );
