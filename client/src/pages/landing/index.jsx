@@ -15,19 +15,18 @@ const Landing = () => {
     <section>
       <div className="bg-overlay-img bg-dark-1 bg-unset bg-contain bg-no-repeat h-auto">
         <Header data={landingNav} />
-        <div className="flex items-center p-16">
-          <div className="">
-            <h2 className="font-Montserrat leading-tight font-extrabold text-6xl mb-4 text-white-1">
+        <div className=" flex-col-reverse flex md:justify-between mb-16 md:mb-0 lg:mb-0 md:flex md:flex-row md:items-center lg:justify-between lg:flex  lg:flex-row lg:items-center p-9 md:p-8 lg:p-16">
+          <div className=" -mt-48 md:mt-0 lg:mt-0 text-center md:text-left lg:text-left">
+            <h2 className="font-Montserrat lg:leading-tight font-extrabold text-xl md:text-3xl lg:text-6xl mb-4 text-white-1">
               Here it is, your truly Decentralised Thrift
             </h2>
-            <p className="text-white-1  break-words font-Poppins font-bold text-2xl">
+            <p className="text-white-1 leading-tight break-words font-Poppins font-bold text-xs md:text-xl w-full md:w-full lg:w-3/5">
               Create or join already created purses to quickly
-              <br />
               and easily meet your financial target.
             </p>
             <Button action={redirectToApp}>Launch App</Button>
           </div>
-          <div className="-translate-x-3/4">
+          <div className=" -mt-24 md:mt-0 lg:mt-0 md:-translate-x-36 lg:-translate-x-96">
             <div>
               <img src="/assets/coin.svg" alt="coin" />
             </div>
@@ -38,7 +37,8 @@ const Landing = () => {
           <h4 className="text-center text-white-1 mb-10 text-Poppins font-bold text-xl">
             How it works
           </h4>
-          <div className="flex items-center justify-evenly">
+          {/* <div className=" flex-wrap md:justify-between md:flex  lg:flex lg:items-center lg:justify-between"> */}
+          <div className="grid gap-8 lg:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  ">
             <div>
               <img
                 className="block mx-auto"
@@ -83,8 +83,8 @@ const Landing = () => {
           </div>
         </div>
         {/* DESC */}
-        <div className="bg-dark-1 flex justify-between mt-12 p-24">
-          <div className="w-3/6 mr-24">
+        <div className="bg-dark-1 p-6  md:p-12 lg:flex lg:justify-between lg:mt-12 lg:p-24">
+          <div className="lg:w-3/6 mb-24 lg:mr-24">
             <div className="bg-white w-full rounded-lg p-8">
               <h5 className="text-dark font-extrabold font-Poppins">
                 Safe and open source
@@ -100,14 +100,14 @@ const Landing = () => {
               </p>
             </div>
           </div>
-          <div className="w-3/6 flex justify-center">
+          <div className="lg:w-3/6 lg:flex lg:justify-center">
             <div>
               <p className="text-white-1 font-Poppins mb-12 font-bold">
                 What we do to help
                 <br />
                 our users.
               </p>
-              <div className="bg-white  rounded-lg mr-11 p-8">
+              <div className="bg-white  rounded-lg mb-36 lg:mr-11 p-8">
                 <img
                   className="block mx-auto"
                   src="/assets/customer.svg"
@@ -130,7 +130,7 @@ const Landing = () => {
                 </p>
               </div>
             </div>
-            <div className="bg-white rounded-lg mb-24 -translate-y-16 p-6">
+            <div className="bg-white rounded-lg mb-48 -translate-y-16 p-6">
               <img
                 className="block mx-auto  -translate-y-12"
                 src="/assets/chat.svg"
