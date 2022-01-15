@@ -12,19 +12,23 @@ const PurseSettings = lazy(() => import("../../pages/purseSettings"));
 
 const PurseLayout = () => {
   return (
-    <div>
-      <Header />
-      <SideBar />
-      <Suspense fallback={<Fallback />}>
-        <Routes>
-          <Route path={purseRoutes.home} element={<Purse />} />
-          <Route path={purseRoutes.chat} element={<PurseChat />} />
-          <Route path={purseRoutes.actions} element={<PurseActions />} />
-          <Route path={purseRoutes.settings} element={<PurseSettings />} />
-          <Route path="*" element={<Navigate to={routes.purses} />} />
-        </Routes>
-      </Suspense>
-    </div>
+    <section className="bg-overlay-img bg-dark-1 h-screen flex justify-center">
+      <div className="container flex bg-dark-4">
+        <SideBar />
+        <div className="w-full">
+          <Header />
+          <Suspense fallback={<Fallback />}>
+            <Routes>
+              <Route path={purseRoutes.home} element={<Purse />} />
+              <Route path={purseRoutes.chat} element={<PurseChat />} />
+              <Route path={purseRoutes.actions} element={<PurseActions />} />
+              <Route path={purseRoutes.settings} element={<PurseSettings />} />
+              <Route path="*" element={<Navigate to={routes.purses} />} />
+            </Routes>
+          </Suspense>
+        </div>
+      </div>
+    </section>
   );
 };
 
