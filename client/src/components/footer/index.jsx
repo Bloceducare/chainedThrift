@@ -11,9 +11,9 @@ import { BsPencilSquare } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-8 p-20">
-      <div className="flex items-center">
-        <div className="w-3/6">
+    <footer className="bg-gray-8 p-6 lg:p-8">
+      <div className="lg:flex lg:justify-between items-center">
+        <div className=" md:w-full lg:w-3/6">
           <Button className="mb-6">Launch App</Button>
           <span className="block uppercase mb-4 font-Inter font-extrabold text-white-1">
             Follow us
@@ -21,24 +21,24 @@ const Footer = () => {
           <div className="flex mb-6">
             <span className="mr-12 text-dark-6">
               <a href="!#">
-                <FaLinkedinIn />
+                <FaLinkedinIn size={30} />
               </a>
             </span>
             <span className="mr-12 text-dark-6">
               <a href="!#">
-                <IoLogoSlack />
+                <IoLogoSlack size={30} />
               </a>
             </span>
             <span className="mr-12 text-dark-6">
               <a href="!#">
-                <FiTwitter />
+                <FiTwitter size={30} />
               </a>
             </span>
           </div>
           <span className="block uppercase mb-6 font-Inter font-extrabold text-white-1">
             Information
           </span>
-          <ul className="grid mb-8 gap-4 grid-cols-3">
+          <ul className="grid mb-8 gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
             {footer.map((item, index) => {
               return (
                 <li key={index}>
@@ -54,7 +54,7 @@ const Footer = () => {
           </ul>
           <Switch />
         </div>
-        <div className="w-3/6 mt-32">
+        <div className="md:w-full lg:w-3/6 mt-32">
           <h4 className="font-Inter font-bold text-2xl">
             <span className="text-white">hello</span>{" "}
             <span className="text-purple-1">@chainedthrift.com</span>
@@ -67,14 +67,14 @@ const Footer = () => {
             <h6 className="font-Inter font-extrabold text-white">
               keep in touch
             </h6>
-            <div className="flex  items-center mb-8">
-              <label className="relative" htmlFor="name">
+            <div className="lg:flex   items-baseline mb-2">
+              <label className="relative md:mr-6 lg:mr-6" htmlFor="name">
                 <input
                   type="text"
                   placeholder="Your name"
-                  className="mr-4 p-1 text-white-1  placeholder-gray-9 bg-dark-1  pr-6 outline-none rounded-lg"
+                  className=" p-1 text-white-1  placeholder-gray-9 bg-dark-1 w-full mb-5 md:w-2/5  lg:w-full pr-8 md:pr-8 lg:pr-12  outline-none rounded-lg"
                 />
-                <div className="text-gray-9 absolute right-6 bottom-2">
+                <div className="text-gray-9 right-2 bottom-0 absolute md:right-4 md:bottom-1 lg:right-4 lg:bottom-8">
                   <BiUser />
                 </div>
               </label>
@@ -82,28 +82,28 @@ const Footer = () => {
                 <input
                   type="text"
                   placeholder="E-mail"
-                  className="mr-4 p-1  text-white-1 placeholder-gray-9  pr-6 bg-dark-1 outline-none rounded-lg"
+                  className="mr-4 p-1  text-white-1 placeholder-gray-9 w-full md:w-2/5  lg:w-full pr-8 md:pr-8 lg:pr-12 bg-dark-1 outline-none rounded-lg"
                 />
-                <div className="text-gray-9 absolute right-6 bottom-2">
+                <div className="text-gray-9 right-6 bottom-0 absolute md:right-6 md:bottom-1 lg:right-4 lg:bottom-2">
                   <MdOutlineEmail />
                 </div>
               </label>
             </div>
-            <div className="flex items-center">
-              <label className="relative" htmlFor="email">
+            <div className="lg:items-center md:flex lg:flex ">
+              <label className="relative mt-3 md:mr-10 md:w-8/12 lg:mr-8 lg:w-3/5" htmlFor="email">
                 <textarea
                   type="email"
                   placeholder="Leave your messages"
-                  className="mr-4 resize-none pr-32 py-1 text-white-1 placeholder-white bg-dark-1  px-1 rounded-lg outline-none"
+                  className="mr-4 w-full resize-none pr-12 md:pr-12 lg:pr-12 py-1 text-white-1 placeholder-white bg-dark-1  px-1 rounded-lg outline-none"
                 />
-                <div className="text-yellow-dark absolute right-6 bottom-10">
+                <div className="text-yellow-dark absolute hidden bottom-20 md:right-6 md:bottom-10 lg:right-6 lg:bottom-10">
                   <BsPencilSquare />
                 </div>
               </label>
 
               <button
                 type="submit"
-                className="text-white bg-purple-1 mb-1 px-6 py-3 rounded-lg"
+                className="text-white w-full md:w-24 lg:w-24 bg-purple-1 mb-1 mt-3 px-6 py-3 rounded-lg"
               >
                 Send
               </button>
@@ -112,7 +112,7 @@ const Footer = () => {
         </div>
       </div>
       <hr className="text-white-1 mt-6" />
-      <p className="text-center text-white-1 font-bold font-Poppins mt-6">
+      <p className="text-center text-white-1 text-xs md:text-sm lg:text-xl font-bold font-Poppins mt-6">
         ChainedThrift is a sample project for Web3Bridge. © 2021 All rights
         reserved.
       </p>
