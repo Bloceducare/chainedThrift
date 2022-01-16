@@ -1,3 +1,4 @@
+
 export const landingNav = [
   {
     value: "About",
@@ -65,6 +66,34 @@ export const footer = [
   },
 ];
 
+
+export const tokenData = [
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  },
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  },
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  },
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  },
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  }
+]
 export const purseData = {
   myPurses: [
     { created: "23 Sep. 2021", member: "2", tvl: "1000 USDC" },
