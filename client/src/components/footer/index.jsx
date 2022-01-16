@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Button from "../../components/buttons/Button";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FiTwitter } from "react-icons/fi";
@@ -8,8 +8,13 @@ import { footer } from "../../static/data";
 import { MdOutlineEmail } from "react-icons/md";
 import Switch from "../../components/switch/Switch";
 import { BsPencilSquare } from "react-icons/bs";
+import {useNavigate} from 'react-router-dom';
 
 const Footer = () => {
+  useEffect(() =>{
+   window.scroll(0,0)
+  })
+  const navigate = useNavigate();
   return (
     <footer className="bg-gray-8 p-6 lg:p-8">
       <div className="lg:flex lg:justify-between items-center">
@@ -20,19 +25,19 @@ const Footer = () => {
           </span>
           <div className="flex mb-6">
             <span className="mr-12 text-dark-6">
-              <a href="!#">
+              <div className="cursor-pointer" onClick={()=> navigate('#')}>
                 <FaLinkedinIn size={30} />
-              </a>
+              </div>
             </span>
             <span className="mr-12 text-dark-6">
-              <a href="!#">
+              <div onClick={()=> navigate('#')}>
                 <IoLogoSlack size={30} />
-              </a>
+              </div>
             </span>
             <span className="mr-12 text-dark-6">
-              <a href="!#">
+              <div onClick={()=> navigate('#')}>
                 <FiTwitter size={30} />
-              </a>
+              </div>
             </span>
           </div>
           <span className="block uppercase mb-6 font-Inter font-extrabold text-white-1">
@@ -42,12 +47,12 @@ const Footer = () => {
             {footer.map((item, index) => {
               return (
                 <li key={index}>
-                  <a
+                  <div
                     className="font-Inter text-gray-9  hover:underline hover:text-yellow-dark font-normal"
-                    href={item.link}
+                onClick={() => navigate(`${item.link}`)}
                   >
                     {item.value}
-                  </a>
+                  </div>
                 </li>
               );
             })}

@@ -59,6 +59,9 @@ module.exports = {
       boxShadow: {
         'card': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       },
+      spacing: {
+        "98": "38rem"
+      }
     },
   },
   plugins: [],
