@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi"
+import { GiHamburgerMenu } from "react-icons/gi";
 import HeaderButton from "../buttons/HeaderButton";
 
 const Navbar = ({ data = [] }) => {
   const navigate = useNavigate();
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const [activeTab, setActiveTab] = React.useState(data[2].value);
+  console.log({ activeTab });
   const handleRedirect = (link) => {
     navigate(link);
   };
@@ -53,8 +55,15 @@ const Navbar = ({ data = [] }) => {
                 return (
                   <div
                     key={index}
-                    className="font-Poppins  text-base  font-extrabold text-white-1 mr-24 cursor-pointer"
-                    onClick={() => handleRedirect(item.link)}
+                    className={
+                      activeTab === item.value
+                        ? "font-Poppins  text-base  font-extrabold text-white-1 mr-24 cursor-pointer border-b-4 border-b-white lg:px-6 mb-2 lg:mb-0"
+                        : "font-Poppins  text-base  font-extrabold text-white-1 mr-24 cursor-pointer mb-2 lg:mb-0"
+                    }
+                    onClick={() => {
+                      handleRedirect(item.link);
+                      setActiveTab(item.value);
+                    }}
                   >
                     {item.value}
                   </div>
