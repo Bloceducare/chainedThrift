@@ -142,7 +142,7 @@ const Landing = () => {
               </p>
               <p className="flex items-center mt-4 text-purple-400">
                 <span className="font-semibold font-Monserat">
-                  <a href="!#"> Learn more</a>
+                  <a href="/"> Learn more</a>
                 </span>
                 <span>
                   <BsArrowRightShort />
