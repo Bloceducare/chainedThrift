@@ -1,3 +1,4 @@
+
 export const landingNav = [
   {
     value: "About",
@@ -87,6 +88,34 @@ export const footer = [
   },
 ];
 
+
+export const tokenData = [
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  },
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  },
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  },
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  },
+  {
+    icon: "/assets/image.svg",
+    abv: "ETH"
+
+  }
+]
 export const purseData = {
   noPurse: true,
   myPurses: [
