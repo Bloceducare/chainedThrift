@@ -1,7 +1,8 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Fallback from "./fallback/";
 import { routes } from "../utils/routes";
+import ConnectWalletModal from '../components/connectWalletModal';
 const Landing = lazy(() => import("../pages/landing"));
 const Swap = lazy(() => import("../pages/swap"));
 const Purses = lazy(() => import("../pages/purses"));
@@ -9,6 +10,10 @@ const PurseLayout = lazy(() => import("../layout/purseLayout"));
 const NotFound = lazy(() => import("./notFound"));
 
 const Layout = () => {
+
+  const [displayWalletModal, setDisplayWalletModal] = useState(true)
+  
+
   return (
     <>
       <main>
@@ -21,6 +26,7 @@ const Layout = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
+        { displayWalletModal && <ConnectWalletModal dismissModal = {() => setDisplayWalletModal(!displayWalletModal)} /> }
       </main>
     </>
   );

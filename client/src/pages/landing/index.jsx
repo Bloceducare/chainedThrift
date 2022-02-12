@@ -122,7 +122,7 @@ const Landing = () => {
                 </p>
                 <p className="flex items-center mt-4 text-purple-400">
                   <span className="mr-4 font-semibold font-Monserat">
-                    <div className="cursor-pointer" onClick={() =>navigate('#')}> Coming soon ......</div>
+                    <button  className="cursor-pointer" onClick={() =>navigate('#')}> Coming soon ......</button>
                   </span>
                   <span>
                     <BsArrowRightShort />
@@ -142,7 +142,7 @@ const Landing = () => {
               </p>
               <p className="flex items-center mt-4 text-purple-400">
                 <span className="font-semibold font-Monserat">
-                <div className="cursor-pointer" onClick={() =>navigate('#')}> Learn more ......</div>
+                <button className="cursor-pointer" onClick={() =>navigate('#')}> Learn more ......</button>
                 </span>
                 <span>
                   <BsArrowRightShort />
