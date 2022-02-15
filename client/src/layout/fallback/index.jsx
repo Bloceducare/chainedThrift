@@ -3,7 +3,7 @@ import Loader from '../../components/loader'
 
 const Fallback = () => {
     return (
-        <div>
+        <div className='flex items-center justify-center'>
             <Loader />
         </div>
     )

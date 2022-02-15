@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import SideBar from "./components/sideBar";
 import Header from "./components/header";
 import Fallback from "../fallback/";
-import { routes, purseRoutes } from "../../utils/routes";
+import { appRoutes, purseRoutes } from "../../utils/routes";
 
 const Purse = lazy(() => import("../../pages/purse"));
 const PurseChat = lazy(() => import("../../pages/purseChat"));
@@ -23,7 +23,7 @@ const PurseLayout = () => {
               <Route path={purseRoutes.chat} element={<PurseChat />} />
               <Route path={purseRoutes.actions} element={<PurseActions />} />
               <Route path={purseRoutes.settings} element={<PurseSettings />} />
-              <Route path="*" element={<Navigate to={routes.purses} />} />
+              <Route path="*" element={<Navigate to={appRoutes.purses} />} />
             </Routes>
           </Suspense>
         </div>
