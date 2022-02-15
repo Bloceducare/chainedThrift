@@ -4,9 +4,15 @@ import {BsFillCheckSquareFill} from 'react-icons/bs'
 import Backdrop from "../Backdrop";
 import { connectorsData } from "../../web3";
 import { useWeb3React } from "@web3-react/core";
+import { useEagerConnect } from "../../web3/walletHooks";
 
 const ConnectWalletModal = ({dismissModal}) => {
-    const {active, activate, account} = useWeb3React();
+
+    const {active, activate, account, error} = useWeb3React();
+
+    const {tried} = useEagerConnect();
+    console.log("error: ", error);
+    console.log("account: ", account);
 
     // handle logic to recognize the connector currently being activated
     const [activatingConnector, setActivatingConnector] = useState(undefined);
@@ -34,7 +40,7 @@ const ConnectWalletModal = ({dismissModal}) => {
                                     activate(connector.connector);
                                 }
                             }>
-                                <img className="w-10 md:w-12 h-10 md:h-12 inline-block mr-6" src = {connector.iconUrl} /> 
+                                <img className="w-10 md:w-12 h-10 md:h-12 inline-block mr-6" src = {connector.iconUrl} />
                                 <span className="inline-block text-base">{connector.name}</span>
                             </button>
                         )
@@ -43,7 +49,7 @@ const ConnectWalletModal = ({dismissModal}) => {
 
                 <div className="mt-6 text-sm text-gray-6">
                     <p>New to Wallet?</p>
-                    <a href = "https://ethereum.org/wallets/" className="text-blue-1">Learn more about wallets</a>
+                    <a href = "https://ethereum.org/wallets/" target="_blank" className="text-blue-1">Learn more about wallets</a>
                 </div>
 
             </div>

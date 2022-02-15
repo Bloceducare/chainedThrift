@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Fallback from "./fallback/";
 import { routes } from "../utils/routes";
 import ConnectWalletModal from '../components/connectWalletModal';
+// import { useEagerConnect } from "../web3/walletHooks";
 const Landing = lazy(() => import("../pages/landing"));
 const Swap = lazy(() => import("../pages/swap"));
 const Purses = lazy(() => import("../pages/purses"));

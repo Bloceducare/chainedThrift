@@ -6,7 +6,7 @@ const rpcUrls = {
     4: 'https://speedy-nodes-nyc.moralis.io/9d1f9e8f5fbf596688e88840/eth/rinkeby'
 }
 
-const injected = new InjectedConnector({
+export const injected = new InjectedConnector({
     supportedChainIds: [4]
 });
 
