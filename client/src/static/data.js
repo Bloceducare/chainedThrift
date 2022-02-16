@@ -36,17 +36,17 @@ export const purseSideBar = [
   {
     name: "Actions",
     link: "/app/purse/1234/actions",
-    icon: "/assets/overView.svg"
+    icon: "/assets/hash.svg"
   },
   {
     name: "Chat Room",
     link: "/app/purse/1234/chat",
-    icon: "/assets/overView.svg"
+    icon: "/assets/chatroom.svg"
   },
   {
     name: "Settings",
     link: "/app/purse/1234/settings",
-    icon: "/assets/overView.svg"
+    icon: "/assets/settings.svg"
   },
 ];
 
