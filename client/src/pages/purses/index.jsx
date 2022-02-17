@@ -95,7 +95,7 @@ const Purses = () => {
           <div className="justify-center items-center backdrop-blur-sm shadow-lg flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">
               {/*content*/}
-              <div className="border-0 rounded-lg bg-dark-4 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="border-0 rounded-lg bg-dark-4 shadow-lg relative flex flex-col w-full  outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between py-5 px-4 rounded-t">
                   <h3 className="text-base font-semibold text-white-1">

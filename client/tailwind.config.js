@@ -11,6 +11,7 @@ module.exports = {
         "dark-5": "#181E25",
         "dark-6": "rgba(32, 29, 41, 0.72);", //this is used for modal backdrop background color in dark mode
         "transparent-white": "rgba(74, 153, 211, 0.1)", //used as bg color of the 'how it works section of the landing page
+        "gray-0":"#8786AB",
         "gray-1": "#A6A0BB",
         "gray-2": "#2F2A3C",
         "gray-3": "#9FA2B4",
@@ -69,6 +70,9 @@ module.exports = {
       spacing: {
         98: "38rem",
       },
+      minWidth:{
+        400:"400px"
+      }
     },
   },
   plugins: [],
