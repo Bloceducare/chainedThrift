@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import HeaderButton from "../buttons/HeaderButton";
 
-const Navbar = ({ data = [] }) => {
+const Navbar = ({displayWalletModal, data = [] }) => {
   const navigate = useNavigate();
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState(data[2].value);
@@ -69,7 +69,7 @@ const Navbar = ({ data = [] }) => {
                   </div>
                 );
               })}
-              <HeaderButton>0xBBB6...e96e</HeaderButton>
+              <HeaderButton action = {displayWalletModal}>Connect wallet</HeaderButton>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { connectorsData } from "../../web3";
 import { useWeb3React } from "@web3-react/core";
 import { useEagerConnect } from "../../web3/walletHooks";
 
-const ConnectWalletModal = ({dismissModal}) => {
+const ConnectWalletModal = ({show, dismissModal}) => {
 
     const {active, activate, account, error} = useWeb3React();
 
@@ -16,6 +16,8 @@ const ConnectWalletModal = ({dismissModal}) => {
 
     // handle logic to recognize the connector currently being activated
     const [activatingConnector, setActivatingConnector] = useState(undefined);
+
+    if(!show) return null;
 
     return(
         <>
