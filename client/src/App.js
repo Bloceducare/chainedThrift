@@ -10,16 +10,16 @@ function App() {
   const wallet = useSelector(state => state.wallet);
   console.log(wallet);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-      // this is just to test the wallet reducer
-      dispatch(connectWallet({
-        address: "0x67dBAF6D282E42F1374300284d439222C08D8dd2",
-        connectedWallet: "trust wallet",
-        ethBalance: 1.2,
-        tokenBalance: 164
-      }));
-  }, [dispatch])
+  //     // this is just to test the wallet reducer
+  //     dispatch(connectWallet({
+  //       address: "0x67dBAF6D282E42F1374300284d439222C08D8dd2",
+  //       connectedWallet: "trust wallet",
+  //       ethBalance: 1.2,
+  //       tokenBalance: 164
+  //     }));
+  // }, [dispatch])
 
 
   return (
