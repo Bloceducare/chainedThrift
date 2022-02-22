@@ -30,7 +30,7 @@ const Swap = () => {
   return (
     <section className="bg-overlay-img bg-dark-1 h-screen flex justify-center">
       <div className="container">
-        <Navbar data={innerNav} />
+        {/* <Navbar data={innerNav} /> */}
         {showSwap && (
           <div className="justify-center items-center backdrop-blur-sm shadow-lg flex lg:mt-16">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">

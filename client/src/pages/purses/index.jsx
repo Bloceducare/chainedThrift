@@ -22,7 +22,7 @@ const Purses = () => {
   return (
     <section className="bg-overlay-img bg-dark-1 flex justify-center h-screen pb-8">
       <div className="container">
-        <Navbar data={innerNav} />
+        {/* <Navbar data={innerNav} /> */}
         <section className="bg-dark-1 pl-4 md:pl-8 pr-4 md:pr-12 mt-12">
           <div className="flex justify-between pt-4 md:pt-12">
             <p className="font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg text-white-1">
