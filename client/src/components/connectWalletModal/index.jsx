@@ -5,6 +5,8 @@ import Backdrop from "../Backdrop";
 import { connectorsData } from "../../web3";
 import { useWeb3React } from "@web3-react/core";
 import { useEagerConnect } from "../../web3/walletHooks";
+import clsx from 'clsx';
+import './index.scss'
 
 const ConnectWalletModal = ({show, dismissModal}) => {
 
@@ -17,12 +19,10 @@ const ConnectWalletModal = ({show, dismissModal}) => {
     // handle logic to recognize the connector currently being activated
     const [activatingConnector, setActivatingConnector] = useState(undefined);
 
-    if(!show) return null;
-
     return(
-        <>
-            <Backdrop dismissModal = {dismissModal} />
-            <div className="absolute top-1/2 left-1/2 w-72 md:w-96 -translate-x-1/2 -translate-y-1/2 z-20 bg-gray-4 p-6 rounded-3xl">
+        <div>
+            {show && <Backdrop dismissModal = {dismissModal} />}
+            <div className={clsx({"absolute top-1/2 left-1/2 w-72 md:w-96 -translate-x-1/2 -translate-y-full opacity-0 z-20 bg-gray-4 p-6 rounded-3xl modal": true, "show-modal": show})}>
                 <div className = "flex justify-between items-center text-white-1 font-semibold text-xl">
                     <h2>Connect Wallet</h2>
                     <CgCloseR className = "cursor-pointer" onClick = {dismissModal}/>
@@ -55,7 +55,7 @@ const ConnectWalletModal = ({show, dismissModal}) => {
                 </div>
 
             </div>
-        </>
+        </div>
     )
 }
 
