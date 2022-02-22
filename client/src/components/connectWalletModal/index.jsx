@@ -22,7 +22,7 @@ const ConnectWalletModal = ({show, dismissModal}) => {
     return(
         <div>
             {show && <Backdrop dismissModal = {dismissModal} />}
-            <div className={clsx({"absolute top-1/2 left-1/2 w-72 md:w-96 -translate-x-1/2 -translate-y-full opacity-0 z-20 bg-gray-4 p-6 rounded-3xl modal": true, "show-modal": show})}>
+            <div className={clsx({"absolute top-1/2 left-1/2 w-72 md:w-96 -translate-x-1/2 -translate-y-full opacity-0 -z-20 bg-gray-4 p-6 rounded-3xl modal": true, "show-modal": show})}>
                 <div className = "flex justify-between items-center text-white-1 font-semibold text-xl">
                     <h2>Connect Wallet</h2>
                     <CgCloseR className = "cursor-pointer" onClick = {dismissModal}/>
