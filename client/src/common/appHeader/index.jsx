@@ -1,16 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import HeaderButton from "../buttons/HeaderButton";
+import { useWeb3React } from "@web3-react/core";
+import Connected from "../connected";
 
-const Navbar = ({displayWalletModal, data = [] }) => {
+const AppHeader = ({displayWalletModal, data = [] }) => {
   const navigate = useNavigate();
+  const {active, account} = useWeb3React()
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState(data[2].value);
   console.log({ activeTab });
   const handleRedirect = (link) => {
     navigate(link);
   };
+
+  useEffect(() => {
+    console.log("inside app header: ", active, account);
+  }, [active])
+  
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-2 bg-dark-1">
@@ -69,10 +77,11 @@ const Navbar = ({displayWalletModal, data = [] }) => {
                   </div>
                 );
               })}
-              <button className="border-purple-1 text-purple-1 cursor-pointer outline outline-offset-2 outline-1 rounded-lg px-6 py-1" onClick={displayWalletModal}>
-                Connect wallet
-              </button>
-              {/* <HeaderButton action = {displayWalletModal}>Connect wallet</HeaderButton> */}
+              {active ? 
+                <Connected address={account} balance = {0} /> :
+                <HeaderButton action = {displayWalletModal}>Connect wallet</HeaderButton>
+              }
+              
             </div>
           </div>
         </div>
@@ -81,4 +90,4 @@ const Navbar = ({displayWalletModal, data = [] }) => {
   );
 };
 
-export default Navbar;
+export default AppHeader;

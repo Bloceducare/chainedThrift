@@ -6,9 +6,9 @@ import './App.scss';
 import Layout from './layout'
 
 function App() {
-  const dispatch = useDispatch();
-  const wallet = useSelector(state => state.wallet);
-  console.log(wallet);
+  // const dispatch = useDispatch();
+  // const wallet = useSelector(state => state.wallet);
+  // console.log(wallet);
 
   // useEffect(() => {
 

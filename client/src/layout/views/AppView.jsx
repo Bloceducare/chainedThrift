@@ -5,7 +5,7 @@ import { appRoutes, absoluteRoutes } from "../../utils/routes";
 import ConnectWalletModal from '../../components/connectWalletModal';
 import { Web3ReactProvider} from '@web3-react/core'
 import { getLibrary } from '../../web3'
-import Navbar from "../../components/appHeader";
+import HeaderButton from "../../components/appHeader";
 import { innerNav } from "../../static/data";
 // import { useEagerConnect } from "../web3/walletHooks";
 const Swap = lazy(() => import("../../pages/swap"));
@@ -20,7 +20,7 @@ const AppView = () => {
   
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <Navbar
+      <HeaderButton
         data={innerNav}
         displayWalletModal = {toggleWalletModalDisplay}
       />

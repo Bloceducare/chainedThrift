@@ -1,23 +1,34 @@
 import React, {useState} from "react";
 import {CgCloseR} from 'react-icons/cg'
 import {BsFillCheckSquareFill} from 'react-icons/bs'
-import Backdrop from "../Backdrop";
-import { connectorsData } from "../../web3";
+import Backdrop from "../backdrop";
+import { connectorsData, useEagerConnect } from "../../web3";
 import { useWeb3React } from "@web3-react/core";
-import { useEagerConnect } from "../../web3/walletHooks";
+import { getConnectionError } from "../../web3";
 import clsx from 'clsx';
 import './index.scss'
 
 const ConnectWalletModal = ({show, dismissModal}) => {
 
-    const {active, activate, account, error} = useWeb3React();
+    const {active, activate, connector, account, error} = useWeb3React();
 
-    const {tried} = useEagerConnect();
-    console.log("error: ", error);
-    console.log("account: ", account);
+    // helps to connect quickly incase the user previusly has browser wallet connected
+    const triedEagerConnect = useEagerConnect();
+    
 
     // handle logic to recognize the connector currently being activated
     const [activatingConnector, setActivatingConnector] = useState(undefined);
+
+    const connectWallet = (connector) => {
+        setActivatingConnector(JSON.stringify(connector));
+        activate(connector, handleError)
+    }
+
+    const handleError = (err) => {
+        const errorString = getConnectionError(err);
+        // the errorString will be used to triger error snackbar
+        console.log("Yay: ", errorString)
+    }
 
     return(
         <div>
@@ -35,15 +46,18 @@ const ConnectWalletModal = ({show, dismissModal}) => {
                             <span>to <a href = "#" className="text-blue-1">terms of service</a></span>
                         </span>
                     </div>
-                    {connectorsData.map((connector, idx) => {
+                    {connectorsData.map((connectorObj, idx) => {
+                        const currentConnector = connectorObj.connector;
+                        const isActivating = currentConnector === activatingConnector;
+                        const isConnected = currentConnector === connector
+                        const shouldBeDisabled = !triedEagerConnect || !!activatingConnector || isConnected || !!error
                         return(
-                            <button key={idx} className="bg-gray-5 text-white-1 p-2 md:p-4 rounded-xl md:rounded-2xl block w-full mt-4 text-left align-middle" onClick={() => {
-                                    setActivatingConnector(connector.name);
-                                    activate(connector.connector);
-                                }
-                            }>
-                                <img className="w-10 md:w-12 h-10 md:h-12 inline-block mr-6" src = {connector.iconUrl} />
-                                <span className="inline-block text-base">{connector.name}</span>
+                            <button key={idx}
+                                className={clsx({"bg-gray-5 text-white-1 p-2 md:p-4 rounded-xl md:rounded-2xl block w-full mt-4 text-left align-middle": true, "opacity-60 cursor-not-allowed": shouldBeDisabled})}
+                                onClick={() => connectWallet(connectorObj.connector)}
+                            >
+                                <img className="w-10 md:w-12 h-10 md:h-12 inline-block mr-6" src = {connectorObj.iconUrl} />
+                                <span className="inline-block text-base">{connectorObj.name}</span>
                             </button>
                         )
                     })}
