@@ -14,11 +14,16 @@ const PurseLayout = lazy(() => import("../../layout/purseLayout"));
 
 const AppView = () => {
 
-  const [displayWalletModal, setDisplayWalletModal] = useState(true)
+  const [displayWalletModal, setDisplayWalletModal] = useState(false)
+
+  const toggleWalletModalDisplay = () => setDisplayWalletModal(!displayWalletModal)
   
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <Navbar data={innerNav} />
+      <Navbar
+        data={innerNav}
+        displayWalletModal = {toggleWalletModalDisplay}
+      />
       <main>
         <Suspense fallback={<Fallback />}>
           <Routes>
@@ -28,7 +33,10 @@ const AppView = () => {
             <Route path="*" element={<Navigate to={absoluteRoutes.purses} />} />
           </Routes>
         </Suspense>
-        { displayWalletModal && <ConnectWalletModal dismissModal = {() => setDisplayWalletModal(!displayWalletModal)} /> }
+        <ConnectWalletModal
+          show = {displayWalletModal}
+          dismissModal = {toggleWalletModalDisplay}
+        />
       </main>
       </Web3ReactProvider>
   );
