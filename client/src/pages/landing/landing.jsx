@@ -1,7 +1,7 @@
 import React from "react";
 import { landingNav } from "../../static/data";
-import Footer from "../../components/footer";
-import Header from "../../components/header";
+import Footer from "../../common/footer/footer";
+import Header from "../../common/header/header";
 import Features from "./components/Features";
 import Actions from "./components/Actions";
 import Jumbotron from "./components/Jumbotron";

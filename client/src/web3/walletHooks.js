@@ -14,7 +14,6 @@ export const useEagerConnect = () => {
         }).finally(() => {
             setTriedEagerConnect(true);
         })
-
     }, [])
 
     useEffect(() => {

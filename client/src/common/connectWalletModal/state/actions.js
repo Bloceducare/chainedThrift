@@ -1,14 +1,13 @@
-import {CONNECT, DISCONNECT} from './types'
+import { OPEN, CLOSE } from ".";
 
-export const connectWallet = (payload) => {
+export const openWalletModal = () => {
     return {
-        type: CONNECT,
-        payload: payload
+        type: OPEN
     }
 }
 
-export const disconnectWallet = () => {
+export const closeWalletModal = () => {
     return {
-        type: DISCONNECT
+        type: CLOSE
     }
 }
