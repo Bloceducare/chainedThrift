@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../../components/buttons/Button';
+import Button from '../../../common/buttons/button';
 
 function Deposit() {
     const [depositHistModal, setDepositHistModal] = React.useState(false);
