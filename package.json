@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "size": "yarn run hardhat size-contracts",
+    "script": "npx hardhat run",
+    "lint": "prettier --list-different 'contracts/**/*.sol' ; solhint 'contracts/**/*.sol'"
   },
   "keywords": [],
   "author": "",
