@@ -1,5 +1,4 @@
 import React,{useEffect} from "react";
-import Button from "../buttons/button";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FiTwitter } from "react-icons/fi";
 import { IoLogoSlack } from "react-icons/io";
@@ -9,6 +8,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import Switch from "../switch/Switch";
 import { BsPencilSquare } from "react-icons/bs";
 import {useNavigate} from 'react-router-dom';
+import Button from "../buttons/button";
 
 const Footer = () => {
   useEffect(() =>{
