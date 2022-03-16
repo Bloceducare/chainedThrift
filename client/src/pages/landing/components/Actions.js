@@ -2,10 +2,10 @@ import React from 'react';
 
 
 
-const Actions = () => {
+const Actions = ({theme}) => {
     return (
         <React.Fragment>
-            <div className=" bg-transparent-white p-10">
+            <div className={ `${theme === 'dark'? 'bg-transparent-white' : 'bg-dark-1'} p-10`}>
                 <h4 className="text-center text-white-1 mb-10 text-Poppins font-bold text-xl">
                     How it works
                 </h4>
