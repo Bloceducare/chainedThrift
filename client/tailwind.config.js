@@ -42,9 +42,11 @@ module.exports = {
         "blue-6": "#1A66FF",
         "yellow-dark": "#FDCB6E",
         "green-1": "#42FF00",
+        "light-1": "#FAFAFA",
       },
       backgroundImage: {
         "overlay-img": "url('../public/assets/bg.svg')",
+        "overlay-img-light": "url('../public/assets/lightbg.svg')",
         "overlay-img-2": "url('../public/assets/coin.svg')",
         btn: "linear-gradient(180deg, #833EF1 0%, #491CB5 100%)",
         "nav-dark":
@@ -55,7 +57,16 @@ module.exports = {
           "linear-gradient(136.67deg, #FF409A 8.34%, #C438EF 95.26%)", //notification badge bg
         "blue-gradient-2":
           "linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)",
+          "light-gradient": "linear-gradient(rgba(61, 61, 61, 0.21) rgba(29, 29, 29, 0.28)"
       },
+      boxShadow: {
+        "3xl": "hsla(205, 61%, 56%, 0.2)"
+      },
+//       Linear Gradient
+// #3D3D3D
+// 20.52%
+// #1D1D1D
+// 28.5%
       fontFamily: {
         Poppins: ["Poppins", "sans-serif"],
         Monserat: ["Montserrat", "sans-serif"],
