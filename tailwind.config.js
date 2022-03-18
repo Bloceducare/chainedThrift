@@ -40,6 +40,7 @@ module.exports = {
         "blue-4": "#70B2FF",
         "blue-5": "#171538",
         "blue-6": "#1A66FF",
+         "blue-7":"#D4E5F1", 
         "yellow-dark": "#FDCB6E",
         "green-1": "#42FF00",
         "light-1": "#FAFAFA",
@@ -57,10 +58,7 @@ module.exports = {
           "linear-gradient(136.67deg, #FF409A 8.34%, #C438EF 95.26%)", //notification badge bg
         "blue-gradient-2":
           "linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)",
-          "light-gradient": "linear-gradient(rgba(61, 61, 61, 0.21) rgba(29, 29, 29, 0.28)"
-      },
-      boxShadow: {
-        "3xl": "hsla(205, 61%, 56%, 0.2)"
+          "light-gradient": "linear-gradient(to right top, #e5e5e5, #e5e5e7, #e5e5e9, #e5e5ec, #e5e5ee);",
       },
 //       Linear Gradient
 // #3D3D3D
@@ -74,6 +72,7 @@ module.exports = {
       },
       boxShadow: {
         card: "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
+        box:" 0 3px 10px rgba(75,155,210,0.2)"
       },
       width: {
         large: "78rem",

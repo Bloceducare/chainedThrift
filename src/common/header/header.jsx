@@ -15,8 +15,8 @@ const Header = ({ data = [] , theme, changeTheme},) => {
   };
   return (
     <>
-      <nav className={`relative flex flex-wrap items-center justify-between px-2 py-2${theme === 'dark'?'bg-dark-1' : 'light-gradient'} mb-3`}>
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+      <nav className={`relative flex flex-wrap items-center justify-between px-2 py-0  mb-3`}>
+        <div className={`container px-4 py-2  ${theme === 'dark'?'bg-dark-1' : 'bg-light-gradient'} mx-auto flex flex-wrap rounded-br rounded-bl  items-center justify-between`}>
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <div
               className="flex items-center cursor-pointer"
@@ -24,7 +24,7 @@ const Header = ({ data = [] , theme, changeTheme},) => {
               // onClick={() => handleRedirect("/")}
             >
               <div
-                className={`w-${42} h-${42} rounded-full overflow-hidden shrink-0`}
+                className={`w-10 h-10 rounded-full overflow-hidden shrink-0`}
               >
                 <img
                   className="w-10 md:w-10 lg:w-14 -rotate-12"
@@ -53,7 +53,7 @@ const Header = ({ data = [] , theme, changeTheme},) => {
             }
             id="example-navbar-danger"
           >
-            <div className="flex flex-col lg:flex-row list-none lg:ml-auto lg:mr-4">
+            <div className="flex flex-col lg:flex-row items-center list-none lg:ml-auto lg:mr-4">
               {data.map((item, index) => {
                 return (
                   <div

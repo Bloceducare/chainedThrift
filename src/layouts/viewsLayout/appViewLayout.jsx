@@ -1,4 +1,5 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { Suspense, lazy } from "react";
+import useTheme from "../../hooks/useTheme";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Fallback from "../fallback";
 import { appRoutes, absoluteRoutes } from "../../utils/routes";
@@ -14,7 +15,9 @@ const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
 
+
 const AppViewLayout = () => {
+  const {theme, changeTheme} = useTheme()
   const ConnectWalletModalState = useSelector(state => state.ConnectWalletModal);
   const dispatch = useDispatch()
   const handleWalletModalClose = () => {
@@ -31,6 +34,8 @@ const AppViewLayout = () => {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <HeaderButton
+        theme={theme}
+        changeTheme={changeTheme}
         data={innerNav}
         displayWalletModal = {handleWalletModalOpen}
       />
@@ -38,7 +43,7 @@ const AppViewLayout = () => {
         <Suspense fallback={<Fallback />}>
           <Routes>
             <Route path={appRoutes.swap} element={<Swap />} />
-            <Route path={appRoutes.purses} element={<Purses />} />
+            <Route path={appRoutes.purses} element={<Purses theme={theme} changeTheme={changeTheme} />} />
             <Route path={appRoutes.purse} element={<PurseLayout />} />
             <Route path="*" element={<Navigate to={absoluteRoutes.purses} />} />
           </Routes>
