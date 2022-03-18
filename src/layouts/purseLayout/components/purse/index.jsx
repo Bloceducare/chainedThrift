@@ -1,9 +1,10 @@
 import React from "react";
 
-const Purse = ({ created, member, tvl, purseId, onClick }) => {
+const Purse = ({ created, member, tvl, purseId, onClick, theme }) => {
+  console.log(theme)
   return (
     <div
-      className="h-44 bg-dark-2 p-4 rounded-2xl cursor-pointer"
+      className={`h-44   ${theme === 'dark'?  'bg-dark-2' : 'bg-blue-7'} p-4 rounded-2xl cursor-pointer`}
       onClick={() => onClick(purseId)}
     >
       <div className="flex justify-between">
@@ -14,16 +15,16 @@ const Purse = ({ created, member, tvl, purseId, onClick }) => {
       </div>
       <div className="flex justify-between mt-6">
         <div>
-          <p className="Poppins text-white-1 font-thin text-sm">Created</p>
-          <p className="Poppins text-white-1 font-bold">{created}</p>
+          <p className={`Poppins ${theme === 'dark'?'text-white-1' : 'text-dark-2' }  font-thin text-sm`}>Created</p>
+          <p className={`Poppins ${theme === 'dark'? 'text-white-1' : 'text-dark-2'} text-white-1 font-bold`}>{created}</p>
         </div>
         <div className="text-center">
-          <p className="Poppins text-white-1 font-thin text-sm">Current Members</p>
-          <p className="Poppins text-white-1 font-bold">{member}</p>
+          <p className={`Poppins  ${theme === 'dark'? 'text-white-1' : 'text-dark-2'} font-thin text-sm`}>Current Members</p>
+          <p className={`Poppins  ${theme === 'dark'? 'text-white-1' : 'text-dark-2'} font-bold`}>{member}</p>
         </div>
         <div>
-          <p className="Poppins text-white-1 font-thin text-sm">Amount(TVL)</p>
-          <p className="Poppins text-white-1 font-bold">{tvl}</p>
+          <p className={`Poppins ${theme === 'dark'? 'text-white-1' : 'text-dark-2'} font-thin text-sm`}>Amount(TVL)</p>
+          <p className={`Poppins ${theme === 'dark'? 'text-white-1' : 'text-dark-2'} font-bold`}>{tvl}</p>
         </div>
       </div>
     </div>

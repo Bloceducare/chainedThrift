@@ -4,7 +4,8 @@ import { purseData } from "../../static/data";
 import PurseList from "../../layouts/purseLayout/components/purseList";
 import NoPurse from "./components/noPurse";
 
-const Purses = () => {
+const Purses = ({theme}) => {
+  console.log(theme)
   const navigate = useNavigate();
   const [category, setCategory] = useState("noPurse");
   const [createPurseModal, setCreatePurseModal] = React.useState(false);
@@ -18,11 +19,11 @@ const Purses = () => {
   };
   useEffect(() => {}, [category]);
   return (
-    <section className="bg-overlay-img bg-dark-1 flex justify-center h-screen pb-8">
+    <section className={`${theme === 'dark'? 'bg-overlay-img' : 'bg-overlay-img-light'} ${theme === 'dark' ?  `bg-dark-1` : `bg-light-1` } bg-dark-1 flex justify-center h-screen pb-8`}>
       <div className="container">
-        <section className="bg-dark-1 pl-4 md:pl-8 pr-4 md:pr-12 mt-12">
+        <section className={`${theme === 'dark'?'bg-dark-1  ':'' } pl-4 md:pl-8 pr-4 md:pr-12 mt-12`}>
           <div className="flex justify-between pt-4 md:pt-12">
-            <p className="font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg text-white-1">
+            <p className={`font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg ${theme === 'dark'?'text-white-1' :'text-dark-1' } `}>
               Thrift Purses
             </p>
             <button
@@ -33,12 +34,12 @@ const Purses = () => {
               Create New +
             </button>
           </div>
-          <div className="flex w-full mt-6 border-b-2 border-b-white">
+          <div className={`flex w-full mt-6 border-b-2 ${theme ==='dark'? 'border-b-white': 'border-b-dark-1' } `}>
             <div className="flex">
               <div
                 className={
                   category === "myPurses"
-                    ? "flex items-center border-b-4 border-b-white cursor-pointer lg:mr-12"
+                    ? `flex items-center border-b-4 ${theme === 'dark'? 'border-b-white': 'border-b-dark-1'} border-b-white cursor-pointer lg:mr-12`
                     : "flex items-center cursor-pointer md:mr-12"
                 }
                 onClick={() => setCategory("myPurses")}
@@ -48,20 +49,20 @@ const Purses = () => {
                   alt="coin"
                   className="img-responsive"
                 />
-                <p className="Poppins font-medium text-base text-white-1">
+                <p className={`Poppins font-medium ${theme === 'dark'?'text-white-1' :'text-dark-1' } text-base text-white-1`}>
                   My Purses
                 </p>
               </div>
               <div
                 className={
                   category === "explorePurses"
-                    ? "flex lg:w-64 items-center cursor-pointer lg:ml-12 border-b-4 border-b-white"
+                    ? `flex lg:w-64 items-center cursor-pointer lg:ml-12 border-b-4 ${theme === 'dark'? 'border-b-white' : 'border-b-dark-1'}`
                     : "flex lg:w-64 items-center cursor-pointer lg:ml-12"
                 }
                 onClick={() => setCategory("explorePurses")}
               >
                 <img src="/assets/explore.svg" alt="coin" className="w-8 h-8" />
-                <p className="Poppins font-medium text-base text-white-1">
+                <p className={`Poppins font-medium text-base ${theme === 'dark'?'text-white-1' :'text-dark-1' }`}>
                   Expolore Purses
                 </p>
               </div>
@@ -69,16 +70,18 @@ const Purses = () => {
           </div>
           <div className="mt-8 pb-8">
             {category === "myPurses" && (
-              <PurseList list={purseData.myPurses} onAction={handleClick} />
+              <PurseList theme={theme} list={purseData.myPurses} onAction={handleClick} />
             )}
             {category === "explorePurses" && (
               <PurseList
+              theme={theme}
                 list={purseData.explorePurses}
                 onAction={handleClick}
               />
             )}
             {category === "noPurse" && (
               <NoPurse
+              theme={theme}
                 openCreatePurse={setCreatePurseModal}
                 openJoinPurse={setPurseDetailModal}
               />

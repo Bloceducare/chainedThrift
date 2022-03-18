@@ -1,14 +1,14 @@
 import React from "react";
 import Button from "../../../../common/buttons/button";
 
-const NoPurse = ({ openCreatePurse, openJoinPurse }) => {
+const NoPurse = ({ openCreatePurse, openJoinPurse,theme }) => {
   return (
     <div className="flex flex-col items-center">
-      <div className="h-32 w-32 bg-indigo-700 rounded-3xl text-white-1 flex justify-center items-center">
-        Image
+      <div className="h-32 w-32 text-indigo rounded-3xl text-white-1 flex justify-center items-center">
+        <img src="/assets/purse_wallet.svg" alt="wallet"/>
       </div>
       <div className="w-full md:w-3/6 mt-8 lg:px-8">
-        <p className="text-white-1 text-sm text-center">
+        <p className={`${theme === 'dark'?'text-white-1' :'text-dark-1' } font-bold text-sm text-center`}>
           New to Purse? A Purse is a Decentralized Thrift (i.e, it requires no
           trust) where different individual come together to form a group with
           the aim of putting money together to be disbursed to each member of
