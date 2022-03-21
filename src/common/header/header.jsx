@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi"
 import HeaderButton from "../buttons/headerButton";
+import Button from "../../common/themeingToggle/Button";
 
 const Header = ({ data = [] , theme, changeTheme},) => {
   
@@ -13,6 +14,7 @@ const Header = ({ data = [] , theme, changeTheme},) => {
   const handleRedirect = (link) => {
     navigate(link);
   };
+  const toggleClass = ' transform translate-x-6';
   return (
     <>
       <nav className={`relative flex flex-wrap items-center justify-between px-2 py-0  mb-3`}>
@@ -20,8 +22,7 @@ const Header = ({ data = [] , theme, changeTheme},) => {
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <div
               className="flex items-center cursor-pointer"
-              onClick={changeTheme}
-              // onClick={() => handleRedirect("/")}
+              onClick={() => handleRedirect("/")}
             >
               <div
                 className={`w-10 h-10 rounded-full overflow-hidden shrink-0`}
@@ -67,6 +68,7 @@ const Header = ({ data = [] , theme, changeTheme},) => {
               })}
             <HeaderButton action={redirectToApp}>Launch App</HeaderButton>
             </div>
+            <Button theme={theme} className={`${theme === 'dark'? null : toggleClass}`} action={changeTheme}/>
           </div>
         </div>
       </nav>

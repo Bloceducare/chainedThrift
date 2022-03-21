@@ -1,7 +1,6 @@
 import React from "react";
 
 const Purse = ({ created, member, tvl, purseId, onClick, theme }) => {
-  console.log(theme)
   return (
     <div
       className={`h-44   ${theme === 'dark'?  'bg-dark-2' : 'bg-blue-7'} p-4 rounded-2xl cursor-pointer`}

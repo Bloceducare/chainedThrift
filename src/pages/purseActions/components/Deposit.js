@@ -1,18 +1,18 @@
 import React from 'react';
 import Button from '../../../common/buttons/button';
 
-function Deposit() {
+function Deposit({theme}) {
     const [depositHistModal, setDepositHistModal] = React.useState(false);
     const openDepositHistoryModal = () => {
       setDepositHistModal(true);
     };
     return (
         <React.Fragment>
-<div className="h-auto lg:w-1/2 bg-gray-16 p-6 rounded-xl mt-8">
+<div className={`h-auto lg:w-1/2 ${theme === 'dark'? 'bg-gray-16': 'bg-blue-7'}  p-6 rounded-xl mt-8`}>
         <p className="Poppins text-xl font-extrabold text-purple-1">
           Deposit for the next round
         </p>
-        <p className="Poppins text-white-1 text-xs">
+        <p className={`Poppins ${theme === 'dark'? 'text-white-1' : 'text-dark-1'} text-xs`}>
           It is time for another round of deposit
         </p>
         <div className="Poppins text-white-1 mt-4">
