@@ -14,7 +14,7 @@ const Actions = ({theme}) => {
                     <div>
                         <img
                             className="block mx-auto"
-                            src="/assets/Wallet.svg"
+                            src="/assets/metamask.svg"
                             alt="meta-mask-svg"
                         />
                         <p className="text-center font-Montserrat font-bold text-white-1">
@@ -27,7 +27,7 @@ const Actions = ({theme}) => {
                     <div>
                         <img
                             className="block mx-auto"
-                            src="/assets/metamask.svg"
+                            src="/assets/Wallet.svg"
                             alt="wallet-svg"
                         />
                         <p className="text-center font-Montserrat  font-bold text-white-1">

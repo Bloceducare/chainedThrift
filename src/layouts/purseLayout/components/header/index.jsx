@@ -2,22 +2,22 @@ import React,{useState} from "react";
 import Notification from "./Notification";
 import {FiBell} from 'react-icons/fi';
 
-const Navbar = ({ data }) => {
+const Navbar = ({ theme }) => {
   const [show, setShow] = useState(false)
   const showHandler = () =>{
       setShow(!show)
   }
   return (
-    <div className="bg-dark-1 w-full h-40 pl-8 pr-8 flex justify-between items-center">
+    <div className={` ${theme === 'dark'?'bg-dark-1' : 'bg-white-1'} w-full h-40 pl-8 pr-8 flex justify-between items-center`}>
       <div className="flex flex-col">
         <div>
-          <p className="Montserrat font-extrabold text-3xl text-white-1">Dashboard</p>
-          <div className="Poppins font-medium text-white-1">Purse ID: 0xBBB6...e96e</div>
+          <p className={`Montserrat font-extrabold text-3xl ${theme === 'dark'? 'text-white-1':'text-dark-1'}`}>Dashboard</p>
+          <div className={`Poppins font-medium ${theme === 'dark'? 'text-white-1':'text-dark-1'}`}>Purse ID: 0xBBB6...e96e</div>
         </div>
       </div>
       <div className="flex flex-col ">
         <div>
-          <div className="Poppins text-white-1 font-medium">Bal. of BentoBox: 0.0 DAI</div>
+          <div className={`Poppins ${theme === 'dark'? 'text-white-1':'text-dark-1'} font-medium`}>Bal. of BentoBox: 0.0 DAI</div>
         </div>
       </div>
       <div className="relative ">

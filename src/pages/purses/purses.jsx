@@ -197,32 +197,32 @@ const Purses = ({theme}) => {
           <div className="justify-center items-center backdrop-blur-sm shadow-lg flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">
               {/*content*/}
-              <div className="border-0 rounded-lg bg-dark-4 shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
+              <div className={`border-0 rounded-lg ${theme === 'dark'? `bg-dark-4` : `bg-blue-7` }  shadow-lg relative flex flex-col w-full outline-none focus:outline-none`}>
                 {/*header*/}
                 <div className="flex items-start justify-between pt-5 pb-2 px-4 rounded-t">
-                  <h3 className="Poppins text-base font-semibold text-white-1">
+                  <h3 className={`Poppins text-base font-semibold ${theme === 'dark'? 'text-white-1': 'text-dark-1' }`}>
                     Account
                   </h3>
                   <button
-                    className="p-1 ml-auto border-0 text-white-1 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    className={`p-1 ml-auto border-0 ${theme === 'dark'? 'text-white-1': 'text-dark-1' } opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none`}
                     onClick={() => setPurseDetailModal(false)}
                   >
-                    <span className="text-white-1 opacity-100 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                    <span className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } opacity-100 h-6 w-6 text-2xl block outline-none focus:outline-none`}>
                       ×
                     </span>
                   </button>
                 </div>
                 {/*body*/}
                 <div className="pl-4 pr-8 pt-4 pb-12">
-                  <p className="Poppins text-white-1 text-xl font-extrabold">
+                  <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } text-xl font-extrabold`}>
                     0xBBB6...e96e
                   </p>
                   <div className="flex justify-between pt-4">
                     <div>
-                      <p className="Poppins text-white-1 font-thin text-sm">
+                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
                         Created
                       </p>
-                      <p className="Poppins text-white-1 font-bold">
+                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>
                         23 Sep. 2021
                       </p>
                     </div>
@@ -236,44 +236,44 @@ const Purses = ({theme}) => {
                   </div>
                   <div className="flex justify-between pt-4">
                     <div>
-                      <p className="Poppins text-white-1 font-thin text-sm">
+                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
                         Frequency
                       </p>
-                      <p className="text-white-1 font-bold">5 Days</p>
+                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>5 Days</p>
                     </div>
                     <div>
-                      <p className="Poppins text-white-1 font-thin text-sm">
+                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
                         Amount(TVL)
                       </p>
-                      <p className="text-white-1 font-bold">1000 USDC</p>
+                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>1000 USDC</p>
                     </div>
                   </div>
                   <div className="flex justify-between pt-4">
                     <div>
-                      <p className="Poppins text-white-1 font-thin text-sm">
+                      <p className={` ${theme === 'dark'? 'text-white-1': 'text-dark-1' } Poppins  font-thin text-sm`}>
                         Current Members
                       </p>
-                      <p className="text-white-1 font-bold">2</p>
+                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>2</p>
                     </div>
                     <div>
-                      <p className="Poppins text-white-1 font-thin text-sm">
+                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
                         Max Members
                       </p>
-                      <p className="text-white-1 font-bold">2</p>
+                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>2</p>
                     </div>
                   </div>
                   <div className="flex pt-4">
                     <div>
-                      <p className="Poppins text-white-1 font-bold">Note:</p>
+                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } Poppins  font-bold`}>Note:</p>
                     </div>
                     <div className="ml-2">
-                      <p className="text-white-1 font-thin text-sm">
+                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
                         You are to deposit a collateral of 10.0 DAI which will
                         be put in yield farming. You can withdraw this
                         collateral plus the yield to your wallet immediately
                         after everyone have gotten their funds from the purse
                       </p>
-                      <p className="text-white-1 font-thin text-sm pt-4">
+                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm pt-4`}>
                         By clicking the "JOIN PURSE" button, you are sending
                         10.0 DAI as collateral and 10.0 DAI for the purse amount
                         which makes it total of 20 DAI

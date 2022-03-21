@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import HeaderButton from "../buttons/headerButton";
 import { useWeb3React } from "@web3-react/core";
 import Connected from "../connected/connected";
+import Button from "../../common/themeingToggle/Button";
 
 const AppHeader = ({ displayWalletModal, theme, changeTheme, data = [] }) => {
 
@@ -11,15 +12,16 @@ const AppHeader = ({ displayWalletModal, theme, changeTheme, data = [] }) => {
   const { active, account } = useWeb3React()
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState(data[2].value);
-  console.log({ activeTab });
+  // console.log({ activeTab });
   const handleRedirect = (link) => {
     navigate(link);
   };
 
   useEffect(() => {
-    console.log("inside app header: ", active, account);
+    // console.log("inside app header: ", active, account);
+    /* eslint-disable */
   }, [active])
-
+  const toggleClass = ' transform translate-x-6';
   return (
     <>
       <nav className={`relative flex flex-wrap items-center justify-between px-2 py-0 ${theme === 'dark'? 'bg-dark-1' : 'bg-light-1'}`}>
@@ -27,8 +29,7 @@ const AppHeader = ({ displayWalletModal, theme, changeTheme, data = [] }) => {
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <div
               className="flex items-center cursor-pointer"
-              // onClick={() => handleRedirect("/")}
-              onClick={changeTheme}
+              onClick={() => handleRedirect("/")}
             >
               <div
                 className={`w-10 h-10 rounded-full overflow-hidden shrink-0`}
@@ -85,6 +86,7 @@ const AppHeader = ({ displayWalletModal, theme, changeTheme, data = [] }) => {
               }
 
             </div>
+            <Button theme={theme} className={`${theme === 'dark'? null : toggleClass}`} action={changeTheme}/>
           </div>
         </div>
       </nav>
