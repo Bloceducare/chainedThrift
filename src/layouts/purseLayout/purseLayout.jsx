@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import SideBar from "./components/sideBar";
 import Header from "./components/header";
+// import MobileBar from "./components/MobileBar"
 import Fallback from "../fallback";
 import { appRoutes, purseRoutes } from "../../utils/routes";
 
@@ -17,6 +18,7 @@ const PurseLayout = ({theme}) => {
         <SideBar />
         <div className="w-full">
           <Header theme={theme} />
+          {/* <MobileBar theme={theme} /> */}
           <Suspense fallback={<Fallback />}>
             <Routes>
               <Route path={purseRoutes.home} element={<Purse theme={theme} />} />

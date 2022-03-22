@@ -15,7 +15,7 @@ function Deposit({theme}) {
         <p className={`Poppins ${theme === 'dark'? 'text-white-1' : 'text-dark-1'} text-xs`}>
           It is time for another round of deposit
         </p>
-        <div className="Poppins text-white-1 mt-4">
+        <div className="Poppins text-white-1 mt-4 flex gap-4">
           <Button
             className="Poppins text-white-1 font-medium lg:mr-8  cursor-pointer px-12"
             action={() => {}}
@@ -33,7 +33,7 @@ function Deposit({theme}) {
         {/* Deposit History modal */}
         {depositHistModal ? (
         <>
-          <div onClick={() =>setDepositHistModal(false)} className="justify-center items-center backdrop-blur-sm shadow-lg flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div onClick={() =>setDepositHistModal(false)} className="justify-center items-center backdrop-blur-sm shadow-lg top-60 md:top-0 flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">
               {/*content*/}
               <div  className="border-0 rounded-lg bg-dark-4 shadow-lg relative flex flex-col w-full outline-none focus:outline-none">

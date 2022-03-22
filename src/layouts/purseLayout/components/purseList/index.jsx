@@ -7,7 +7,7 @@ const PurseList = ({ list = [], onAction, theme }) => {
     <div className="grid lg:grid-cols-2 gap-8">
       {list.map((item, idx) => (
         <Purse
-        theme={theme}
+          theme={theme}
           key={idx}
           purseId={idx}
           created={item.created}
