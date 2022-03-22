@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { purseSideBar } from "../../../../static/data";
 
-const MobileBar = ({theme}) => {
-  const [activeTab, setActiveTab] = useState(purseSideBar[0].name);
+const MobileBar = ({theme, activeTab, setActiveTab}) => {
+  // const [activeTab, setActiveTab] = useState(purseSideBar[0].name);
+  console.log({theme, activeTab, setActiveTab})
   const navigate = useNavigate();
   return (
     <div className={`flex w-full pt-8 border-b-2 ${theme ==='dark'? 'border-b-white': 'border-b-dark-1' } md:hidden`}>
