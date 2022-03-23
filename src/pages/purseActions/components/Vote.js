@@ -1,13 +1,13 @@
 import React from 'react'
 
-function Vote({theme}) {
+function Vote() {
     return (
         <React.Fragment>
-            <div className={`h-auto lg:w-1/2  ${theme === 'dark'? 'bg-gray-16': 'bg-blue-7'} p-6 rounded-xl mt-8`}>
+            <div className={`h-auto lg:w-1/2  dark:bg-gray-16 bg-blue-7 p-6 rounded-xl mt-8`}>
                 <p className="Poppins text-xl font-extrabold text-purple-1">
                     Vote to disburse fund to a member
                 </p>
-                <p className={`Poppins ${theme=== 'dark'? 'text-white': 'text-dark-1'} text-xs`}>
+                <p className={`Poppins dark:text-white text-dark-1 text-xs`}>
                     It is time for another round of disbursement
                 </p>
                 <div className="Poppins mt-6 flex w-full">
