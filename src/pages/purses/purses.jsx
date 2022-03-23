@@ -5,7 +5,6 @@ import PurseList from "../../layouts/purseLayout/components/purseList";
 import NoPurse from "./components/noPurse";
 
 const Purses = ({theme}) => {
-  console.log(theme)
   const navigate = useNavigate();
   const [category, setCategory] = useState("noPurse");
   const [createPurseModal, setCreatePurseModal] = React.useState(false);

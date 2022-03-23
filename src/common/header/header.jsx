@@ -68,7 +68,7 @@ const Header = ({ data = [] , theme, changeTheme},) => {
               })}
             <HeaderButton action={redirectToApp}>Launch App</HeaderButton>
             </div>
-            <Button theme={theme} className={`${theme === 'dark'? null : toggleClass}`} action={changeTheme}/>
+            <Button  className={`${theme === 'dark'? null : toggleClass}`} action={changeTheme}/>
           </div>
         </div>
       </nav>

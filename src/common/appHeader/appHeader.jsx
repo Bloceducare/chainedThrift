@@ -24,7 +24,7 @@ const AppHeader = ({ displayWalletModal, theme, changeTheme, data = [] }) => {
   const toggleClass = ' transform translate-x-6';
   return (
     <>
-      <nav className={`relative flex flex-wrap items-center justify-between px-2 py-0 ${theme === 'dark'? 'bg-dark-1' : 'bg-light-1'}`}>
+      <nav className={`relative flex flex-wrap items-center justify-between px-2 py-0 `}>
         <div className={`container px-4 py-2  ${theme === 'dark' ? 'bg-dark-1' : 'bg-light-gradient'} mx-auto flex flex-wrap rounded-br rounded-bl  items-center justify-between`}>
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <div
@@ -86,7 +86,7 @@ const AppHeader = ({ displayWalletModal, theme, changeTheme, data = [] }) => {
               }
 
             </div>
-            <Button theme={theme} className={`${theme === 'dark'? null : toggleClass}`} action={changeTheme}/>
+            <Button  className={`${theme === 'dark'? null : toggleClass}`} action={changeTheme}/>
           </div>
         </div>
       </nav>
