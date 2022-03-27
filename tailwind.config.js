@@ -40,7 +40,7 @@ module.exports = {
         "blue-4": "#70B2FF",
         "blue-5": "#171538",
         "blue-6": "#1A66FF",
-         "blue-7":"#D4E5F1", 
+        "blue-7":"#D4E5F1", 
         "yellow-dark": "#FDCB6E",
         "green-1": "#42FF00",
         "light-1": "#FAFAFA",

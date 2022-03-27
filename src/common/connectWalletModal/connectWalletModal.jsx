@@ -33,7 +33,7 @@ const ConnectWalletModal = ({ onClose }) => {
     <>
       <div className="flex justify-between items-center text-white-1 font-semibold text-xl">
         <h2 className="dark:text-white-1 text-dark-1">Connect Wallet</h2>
-        <CgCloseR className="cursor-pointer" onClick={onClose} />
+        <CgCloseR className="cursor-pointer dark:text-white-1 text-dark-1" onClick={onClose} />
       </div>
       <div className="">
         <div
@@ -54,7 +54,7 @@ const ConnectWalletModal = ({ onClose }) => {
             <button
               key={idx}
               className={clsx({
-                "bg-gray-5 text-white-1 dark:bg-gray-5 bg-white-1 p-2 rounded md:rounded-xl block w-full mt-4 text-left align-middle": true,
+                "bg-white-1 dark:bg-gray-5 text-white-1 p-2 rounded md:rounded-xl block w-full mt-4 text-left align-middle": true,
                 "opacity-60 cursor-not-allowed": false,
               })}
               onClick={() => connectWallet(connector)}
