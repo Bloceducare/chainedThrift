@@ -1,5 +1,7 @@
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
+import { MathWallet, Metamask, SafePal, TrustWallet, WalletConnect } from '../common/svgIcons';
+
 
 
 const rpcUrls = {
@@ -20,13 +22,28 @@ const walletConnect = new WalletConnectConnector({
 
 export const connectorsData = [
     {
-        name: 'Browser wallet',
-        iconUrl: '/assets/metamask.png',
-        connector: injected
+        name: 'Metamask',
+        connector: injected,
+        icon: Metamask
     },
     {
-        name: 'WalletConnect',
-        iconUrl: '/assets/walletConnect.png',
-        connector: walletConnect
-    }
+        name: 'Trust Wallet',
+        connector: walletConnect,
+        icon: TrustWallet
+    },
+    {
+        name: 'Wallet Connect',
+        connector: walletConnect,
+        icon: WalletConnect
+    },
+    {
+        name: 'SafePal',
+        connector: injected,
+        icon: SafePal
+    },
+    {
+        name: 'MathWallet',
+        connector: injected,
+        icon: MathWallet
+    },
 ]
