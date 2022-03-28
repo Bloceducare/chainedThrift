@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from "../../../common/buttons/button";
 
-const Jumbotron = ({theme}) => {
+const Jumbotron = () => {
     const navigate = useNavigate();
     const redirectToApp = () => {
       navigate("/app/purses");
@@ -11,10 +11,10 @@ const Jumbotron = ({theme}) => {
         <React.Fragment>
             <div className=" flex-col-reverse flex md:justify-between mb-16 md:mb-0 lg:mb-0 md:flex md:flex-row md:items-center lg:justify-between lg:flex  lg:flex-row lg:items-center p-9 md:p-8 lg:p-16">
                 <div className=" -mt-48 md:mt-0 lg:mt-0 text-center md:text-left lg:text-left">
-                    <h2 className={`font-Montserrat lg:leading-tight font-extrabold text-xl md:text-3xl lg:text-6xl mb-4 ${theme === 'dark'? 'text-white-1' : 'text-dark-1'}`}>
+                    <h2 className={`font-Montserrat lg:leading-tight font-extrabold text-xl md:text-3xl lg:text-6xl mb-4 dark:text-white-1 text-dark-1`}>
                         Here it is, your truly Decentralised Thrift
                     </h2>
-                    <p className={`${theme === 'dark'?'text-white-1' : 'text-dark-1' }  leading-tight break-words font-Poppins font-bold text-xs md:text-xl w-full md:w-full lg:w-3/5`}>
+                    <p className={`dark:text-white-1 text-dark-1  leading-tight break-words font-Poppins font-bold text-xs md:text-xl w-full md:w-full lg:w-3/5`}>
                         Create or join already created purses to quickly
                         and easily meet your financial target.
                     </p>

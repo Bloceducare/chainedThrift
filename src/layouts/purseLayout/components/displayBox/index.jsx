@@ -1,6 +1,6 @@
 import React from "react";
 
-const DisplayBox = ({ icon, name, desc, theme }) => {
+const DisplayBox = ({ icon, name, desc }) => {
 
   return (
     <div className={`h-auto md:h-28 ${theme === 'dark'?'bg-dark-2': 'bg-white-1' } p-2 md:p-8 rounded-2xl sm:flex items-center border-purple-1 border`}>

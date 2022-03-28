@@ -42,15 +42,14 @@ const AppViewLayout = () => {
       <main>
         <Suspense fallback={<Fallback />}>
           <Routes>
-            <Route path={appRoutes.swap} element={<Swap theme={theme} />} />
+            <Route path={appRoutes.swap} element={<Swap />} />
             <Route path={appRoutes.purses} element={<Purses theme={theme} changeTheme={changeTheme} />} />
-            <Route path={appRoutes.purse} element={<PurseLayout theme={theme} />} />
+            <Route path={appRoutes.purse} element={<PurseLayout />} />
             <Route path="*" element={<Navigate to={absoluteRoutes.purses} />} />
           </Routes>
         </Suspense>
       </main>
       <ModalWrapper
-        theme ={theme}
         open = {ConnectWalletModalState.open}
         onClose = {handleWalletModalClose}
         label = "Connect wallet modal"

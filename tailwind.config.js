@@ -45,6 +45,7 @@ module.exports = {
         "yellow-dark": "#FDCB6E",
         "green-1": "#42FF00",
         "light-1": "#FAFAFA",
+        "blue-10":"#D4E5F1",
       },
       backgroundImage: {
         "overlay-img": "url('../public/assets/bg.svg')",

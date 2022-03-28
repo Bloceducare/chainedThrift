@@ -6,7 +6,7 @@ import {BsQuestionCircle} from 'react-icons/bs';
 import Switch from '../../common/switch/Switch'
 
 
-const Swap = ({theme}) => {
+const Swap = () => {
   const [settingsModal, setSettingsModal] = React.useState(false);
   const [showSwap, setShowSwap] = React.useState(true);
   const [show, setShow] = React.useState(false);
@@ -27,21 +27,21 @@ const Swap = ({theme}) => {
     setShow(show => !show)
   }
   return (
-    <section className={` ${theme === 'dark'? 'bg-overlay-img' : 'bg-overlay-img-light'} ${theme === 'dark' ?  `bg-dark-1` : `bg-light-1` } h-screen flex justify-center`}>
+    <section className={` dark:bg-overlay-img bg-overlay-img-light dark:bg-dark-1 bg-light-1 h-screen flex justify-center`}>
       <div className="container">
         {/* <Navbar data={innerNav} /> */}
         {showSwap && (
           <div className="justify-center items-center backdrop-blur-sm  flex lg:mt-16">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">
-              <div className={`border-0 rounded-lg ${theme === 'dark'? 'bg-dark-4' : 'bg-blue-7'} shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none`}>
+              <div className={`border-0 rounded-lg dark:bg-dark-4 bg-blue-10 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none`}>
                 <div className="flex justify-center py-12 pb-2 px-4 rounded-t">
-                  <h3 className={`Poppins text-base font-semibold ${theme === 'dark'? 'text-white' : 'text-dark'}`}>
+                  <h3 className={`Poppins text-base font-semibold dark:text-white text-dark`}>
                     Swap
                   </h3>
                 </div>
                 <div className="flex flex-row-reverse pr-8 -mt-4">
                   <img
-                    src={` ${theme === 'dark'? '/assets/overView.svg' :  '/assets/settings.svg'}`}
+                    src={`/assets/settings.svg`}
                     alt="settings"
                     className="w-6 cursor-pointer"
                     onClick={() => {
@@ -53,18 +53,18 @@ const Swap = ({theme}) => {
                 <div className="pl-4 pr-8 pt-4 pb-12">
                   <div className="flex justify-between pt-4">
                     <div>
-                      <p className={`Poppins font-bold ${theme === 'dark'? 'text-white' : 'text-dark'} font-thin text-sm mb-1`}>
+                      <p className={`Poppins font-bold dark:text-white text-dark font-thin text-sm mb-1`}>
                         Swap from
                       </p>
                       <input placeholder="0"  className="w-1/4 border-none outline-none bg-transparent text-center placeholder:font-extrabold placeholder:text-2xl" />
-                      <p className={`Poppins ${theme === 'dark'? 'text-white' : 'text-dark'} font-thin text-sm`}>
+                      <p className={`Poppins dark:text-white text-dark font-thin text-sm`}>
                         Balance: - <span className="font-semibold">70.42</span>
                       </p>
                     </div>
                     <div className="flex items-center">
                       <img src="/assets/image.svg" alt="coin" className="img-responsive" />
                       <div onClick={() => setShow(!show)} className="flex items-center">
-                        <button className={`ml-2 mr-2 ${theme === 'dark'? 'text-white' : 'text-dark'}`}>ETH </button>
+                        <button className={`ml-2 mr-2 dark:text-white text-dark`}>ETH </button>
                         <IoIosArrowDown className="text-white cursor-pointer" size={20} />
                       </div>
                       {
@@ -106,11 +106,11 @@ const Swap = ({theme}) => {
                   </div>
                   <div className="flex justify-between pt-4 mb-4">
                     <div>
-                      <p className={`Poppins ${theme === 'dark'? 'text-white': 'text-dark'} font-thin text-sm mb-2`}>
+                      <p className={`Poppins dark:text-white text-dark font-thin text-sm mb-2`}>
                         Swap from
                       </p>
                       <input placeholder="0" className="w-1/4 border-none outline-none bg-transparent text-center placeholder:font-extrabold placeholder:text-2xl" />
-                      <p className={`Poppins ${theme === 'dark'? 'text-white': 'text-dark'} font-thin text-sm`}>
+                      <p className={`Poppins dark:text-white text-dark font-thin text-sm`}>
                         Balance: - <span className="font-semibold"></span>
                       </p>
                     </div>
@@ -136,10 +136,10 @@ const Swap = ({theme}) => {
           <div className="justify-center items-center shadow-lg flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">
               {/*content*/}
-              <div className={`border-0 rounded-lg ${theme === 'dark'? 'bg-dark-4' : 'bg-blue-7'} shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none`}>
+              <div className={`border-0 rounded-lg dark:bg-dark-4 bg-blue-10 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none`}>
                 {/*header*/}
                 <div className="flex items-center justify-between pt-5 pb-2 px-4 rounded-t">
-                  <h3 className={`Poppins text-base font-semibold ${theme === 'dark'? 'text-white-1' :'text-dark-1'}`}>
+                  <h3 className={`Poppins text-base font-semibold dark:text-white-1 text-dark-1`}>
                     Transaction Settings
                   </h3>
                   <button
@@ -149,7 +149,7 @@ const Swap = ({theme}) => {
                       setShowSwap(true);
                     }}
                   >
-                    <span className={`${theme === 'dark'? 'text-white-1' : 'text-dark-1'} opacity-100 h-6 w-6 text-2xl block outline-none focus:outline-none`}>
+                    <span className={`dark:text-white-1 text-dark-1 opacity-100 h-6 w-6 text-2xl block outline-none focus:outline-none`}>
                       ×
                     </span>
                   </button>
@@ -157,8 +157,8 @@ const Swap = ({theme}) => {
                 {/*body*/}
                 <div className="pl-4 pr-8 pt-4 pb-12">
                   <div className="flex items-center">
-                  <h5 className={`${theme === 'dark'? 'text-white-1' :'text-dark-1'} mr-2 font-Poppins font-normal`}>Slippage Tolerance</h5>
-                  <p className={`${theme === 'dark'? 'text-white-1' : 'text-dark-1'}`}><BsQuestionCircle/></p>
+                  <h5 className={`dark:text-white-1 text-dark-1 mr-2 font-Poppins font-normal`}>Slippage Tolerance</h5>
+                  <p className={`dark:text-white-1 text-dark-1`}><BsQuestionCircle/></p>
                   </div>
                   <div className="flex items-center mt-4">
                     <button onClick={activeHandlerA} className={`font-semibold outline-none focus:outline-none ${active === 'a' ? 'bg-purple-1' : ''} mr-5 text-white p-1 rounded-full pl-2 pr-2`}>0.1%</button>
@@ -171,18 +171,18 @@ const Swap = ({theme}) => {
                   {
                     active === 'a'? (
                       <div>
-                      <p className={`mt-4 ${theme === 'dark'? 'text-white-1' :'text-dark-1'} font-Poppins font-normal`}>Transaction deadlines</p>
+                      <p className={`mt-4 dark:text-white-1 text-dark-1 font-Poppins font-normal`}>Transaction deadlines</p>
                       <div className="flex mb-4 mt-4">
                       <input type="num" className="w-24 mr-2 border-0 outline-none rounded-lg pl-1 pr-1" placeholder="0.5%" />
-                      <p className={`${theme === 'dark'? 'text-white-1' :'text-dark-1'} font-Poppins font-normal`}>Minutes</p>
+                      <p className={`dark:text-white-1 text-dark-1 font-Poppins font-normal`}>Minutes</p>
                       </div>
-                        <p className={`${theme === 'dark'? 'text-white-1' :'text-dark-1'} mt-2 mb-2 font-Poppins text-xl font-bold`}>Interface Settings</p>
+                        <p className={`dark:text-white-1 text-dark-1 mt-2 mb-2 font-Poppins text-xl font-bold`}>Interface Settings</p>
                        <div className="flex items-center justify-between mb-6">
-                         <p className={`flex items-center ${theme === 'dark'? 'text-white-1' :'text-dark-1'}`}>Total deadline <span><BsQuestionCircle/></span></p>
+                         <p className={`flex items-center dark:text-white-1 text-dark-1`}>Total deadline <span><BsQuestionCircle/></span></p>
                          <Switch/>
                        </div>
                        <div className="flex items-center justify-between">
-                         <p className={`flex items-center ${theme === 'dark'? 'text-white-1' :'text-dark-1'}`}>Disable multiples <span><BsQuestionCircle/></span></p>
+                         <p className={`flex items-center dark:text-white-1 text-dark-1`}>Disable multiples <span><BsQuestionCircle/></span></p>
                          <Switch/>
                        </div>
                      </div>

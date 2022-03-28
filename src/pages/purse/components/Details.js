@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Details({theme}) {
+function Details() {
     return (
         <React.Fragment>
             <div className="flex flex-col items-center">
@@ -12,7 +12,7 @@ function Details({theme}) {
                     <p className={`Poppins ${theme === 'dark'? 'text-white-1' : 'text-dark-1'} font-medium text-xs md:text-sm`}>Members Expected</p>
                 </div>
                 <div className="mt-8">
-                    <p className={`Poppins ${theme === 'dark'? 'text-white-1' : 'text-dark-1'} font-semibold text-lg text-center`}>
+                    <p className="Poppins dark:text-white-1 text-dark-1 font-semibold text-lg text-center">
                         Dont know about BentoBox?
                     </p>
                     <p className="Poppins font-normal text-sm text-center text-purple-1 underline underline-offset-4 cursor-pointer">
