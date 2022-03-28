@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Details() {
+function Details({theme}) {
     return (
         <React.Fragment>
             <div className="flex flex-col items-center">

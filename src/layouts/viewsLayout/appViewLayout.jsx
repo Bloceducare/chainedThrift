@@ -44,7 +44,7 @@ const AppViewLayout = () => {
           <Routes>
             <Route path={appRoutes.swap} element={<Swap />} />
             <Route path={appRoutes.purses} element={<Purses theme={theme} changeTheme={changeTheme} />} />
-            <Route path={appRoutes.purse} element={<PurseLayout />} />
+            <Route path={appRoutes.purse} element={<PurseLayout theme={theme} />} />
             <Route path="*" element={<Navigate to={absoluteRoutes.purses} />} />
           </Routes>
         </Suspense>

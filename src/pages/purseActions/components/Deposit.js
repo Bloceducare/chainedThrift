@@ -8,14 +8,14 @@ function Deposit() {
     };
     return (
         <React.Fragment>
-<div className={`h-auto lg:w-1/2 dark:bg-gray-16 bg-blue-7  p-6 rounded-xl mt-8`}>
+        <div className={`h-auto lg:w-1/2 dark:bg-gray-16 bg-blue-7  p-6 rounded-xl mt-8`}>
         <p className="Poppins text-xl font-extrabold text-purple-1">
           Deposit for the next round
         </p>
         <p className={`Poppins dark:text-white-1 text-dark-1 text-xs`}>
           It is time for another round of deposit
         </p>
-        <div className="Poppins text-white-1 mt-4 flex gap-4">
+        <div className="Poppins text-white-1 mt-4 flex flex-col md:flex-row gap-4">
           <Button
             className="Poppins text-white-1 font-medium lg:mr-8  cursor-pointer px-12"
             action={() => {}}

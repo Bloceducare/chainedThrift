@@ -1,11 +1,12 @@
 import React from "react";
 import DisplayBox from "../displayBox";
 
-function LisplayBox() {
+function LisplayBox({ theme }) {
 
   return (
     <div className="grid grid-cols-3 gap-2 md:gap-8">
       <DisplayBox
+        theme={theme}
         icon="/assets/calendar.svg"
         name="Created on"
         desc="29 Sept. 2021"
