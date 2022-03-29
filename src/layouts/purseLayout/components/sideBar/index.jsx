@@ -6,7 +6,7 @@ const SideBar = () => {
   const [activeTab, setActiveTab] = useState(purseSideBar[0].name);
   const navigate = useNavigate();
   return (
-    <div className="bg-blue-gradient w-48">
+    <div className="bg-blue-gradient w-48 hidden md:block">
       <div className="w-48 h-40 flex justify-center items-center">
         <img
           src="/assets/arrowLeft.svg"
@@ -18,6 +18,7 @@ const SideBar = () => {
       <div className="">
         {purseSideBar.map((item, idx) => (
           <div
+            key={item.name}
             className={
               activeTab === item.name
                 ? "Poppins text-sm cursor-pointer text-gray-15 flex items-center h-12 bg-purple-3 pl-8 border-l-2 border-l-white-1"
