@@ -40,7 +40,8 @@ module.exports = {
         "blue-4": "#70B2FF",
         "blue-5": "#171538",
         "blue-6": "#1A66FF",
-         "blue-7":"#D4E5F1", 
+        "blue-7":"#D4E5F1", 
+        "blue-8": "#004EA5",
         "yellow-dark": "#FDCB6E",
         "green-1": "#42FF00",
         "light-1": "#FAFAFA",
@@ -60,7 +61,8 @@ module.exports = {
         "blue-gradient-2":
           "linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)",
           "light-gradient": "linear-gradient(to right top, #e5e5e5, #e5e5e7, #e5e5e9, #e5e5ec, #e5e5ee);",
-      },
+         "members-gradient": "conic-gradient(#004EA5 0deg, #004EA5 130deg, #7195BD 130deg, #7195BD 220deg, #2E81DF 220deg, #2E81DF 310deg, #B3D2F5 310deg)"
+        },
 //       Linear Gradient
 // #3D3D3D
 // 20.52%

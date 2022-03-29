@@ -1,11 +1,12 @@
 import React from "react";
 import Purse from "../purse";
 
-const PurseList = ({ list = [], onAction, }) => {
+const PurseList = ({ list = [], onAction, theme}) => {
   return (
     <div className="grid lg:grid-cols-2 gap-8">
       {list.map((item, idx) => (
         <Purse
+          theme={theme}
           key={idx}
           purseId={idx}
           created={item.created}
