@@ -53,6 +53,8 @@ module.exports = {
         btn: "linear-gradient(180deg, #833EF1 0%, #491CB5 100%)",
         "nav-dark":
           "linear-gradient(90.18deg, rgba(61, 61, 61, 0.2052) 0%, rgba(29, 29, 29, 0.285) 100%)", //used for navbar in dark mode
+        "nav-light":
+          "linear-gradient(90.22deg, rgba(61, 61, 61, 0.2052) 0%, rgba(29, 29, 29, 0.285) 99.19%)", //used for navbar in dark mode
         "blue-gradient":
           "linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)", // dashbord side nav bg color
         "pink-gradient":

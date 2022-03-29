@@ -6,15 +6,11 @@ const Landing = lazy(() => import("../../pages/landing/landing"));
 
 const LandingViewLayout = () => {
   return (
-    <>
-      <main>
-        <Suspense fallback={<Fallback />}>
-          <Routes>
-            <Route path= {absoluteRoutes.landing} element={<Landing />} />
-          </Routes>
-        </Suspense>
-      </main>
-    </>
+    <Suspense fallback={<Fallback />}>
+      <Routes>
+        <Route path= {absoluteRoutes.landing} element={<Landing />} />
+      </Routes>
+    </Suspense>
   );
 };
 

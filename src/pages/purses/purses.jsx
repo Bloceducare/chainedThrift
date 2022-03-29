@@ -3,28 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { purseData } from "../../static/data";
 import PurseList from "../../layouts/purseLayout/components/purseList";
 import NoPurse from "./components/noPurse";
+import clsx from "clsx";
 
-const Purses = ({theme}) => {
+const Purses = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState("noPurse");
   const [createPurseModal, setCreatePurseModal] = React.useState(false);
   const [purseDetailModal, setPurseDetailModal] = React.useState(false);
-  // const [selectedPurse, setSelectPurse] = useState(null);
   const handleClick = (purseId) => {
-    // console.log(purseId);
-    // console.log("clicked....");
-    // setSelectPurse(purseId);
     setPurseDetailModal(true);
   };
   useEffect(() => {}, [category]);
   return (
-    <section className={`${theme === 'dark'? 'bg-overlay-img' : 'bg-overlay-img-light'} ${theme === 'dark' ?  `bg-dark-1` : `bg-light-1` } bg-dark-1 flex justify-center h-screen pb-8`}>
-      <div className="container">
-        <section className={`${theme === 'dark'?'bg-dark-1  ':'' } pl-4 md:pl-8 pr-4 md:pr-12 mt-12`}>
+    <main className="dark:bg-overlay-img bg-overlay-img-light dark:bg-dark-1 bg-light-1 flex justify-center h-screen pb-8">
+        <section className="container dark:bg-dark-1 pl-4 md:pl-8 pr-4 md:pr-12 mt-12">
           <div className="flex justify-between pt-4 md:pt-12">
-            <p className={`font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg ${theme === 'dark'?'text-white-1' :'text-dark-1' } `}>
+            <h1 className="font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg dark:text-white-1 text-dark-1">
               Thrift Purses
-            </p>
+            </h1>
             <button
               className="border-purple-1 text-purple-1 cursor-pointer outline outline-offset-2 outline-1 rounded-lg px-6 py-1"
               type="button"
@@ -33,61 +29,48 @@ const Purses = ({theme}) => {
               Create New +
             </button>
           </div>
-          <div className={`flex w-full mt-6 border-b-2 ${theme ==='dark'? 'border-b-white': 'border-b-dark-1' } `}>
-            <div className="flex">
-              <div
-                className={
-                  category === "myPurses"
-                    ? `flex items-center border-b-4 ${theme === 'dark'? 'border-b-white': 'border-b-dark-1'} border-b-white cursor-pointer lg:mr-12`
-                    : "flex items-center cursor-pointer md:mr-12"
-                }
-                onClick={() => setCategory("myPurses")}
-              >
-                <img
-                  src="/assets/purse.svg"
-                  alt="coin"
-                  className="img-responsive"
-                />
-                <p className={`Poppins font-medium ${theme === 'dark'?'text-white-1' :'text-dark-1' } text-base text-white-1`}>
-                  My Purses
-                </p>
-              </div>
-              <div
-                className={
-                  category === "explorePurses"
-                    ? `flex lg:w-64 items-center cursor-pointer lg:ml-12 border-b-4 ${theme === 'dark'? 'border-b-white' : 'border-b-dark-1'}`
-                    : "flex lg:w-64 items-center cursor-pointer lg:ml-12"
-                }
-                onClick={() => setCategory("explorePurses")}
-              >
-                <img src="/assets/explore.svg" alt="coin" className="w-8 h-8" />
-                <p className={`Poppins font-medium text-base ${theme === 'dark'?'text-white-1' :'text-dark-1' }`}>
-                  Expolore Purses
-                </p>
-              </div>
+          <div className="flex w-full mt-8 border-b-2 dark:border-b-white border-b-dark-1">
+            <div
+              className={clsx({"flex items-center cursor-pointer": true, "border-b-4 dark:border-b-white border-b-dark-1 border-b-white lg:mr-12": category === "myPurses", "md:mr-12": category !== "myPurses"})}
+              onClick={() => setCategory("myPurses")}
+            >
+              <img
+                src="/assets/purse.svg"
+                alt="coin"
+                className="img-responsive"
+              />
+              <p className="Poppins font-medium dark:text-white-1text-dark-1 text-base text-white-1">
+                My Purses
+              </p>
+            </div>
+            <div
+              className={clsx({"flex lg:w-64 items-center cursor-pointer lg:ml-12": true, "border-b-4 dark:border-b-white border-b-dark-1": category === "explorePurses"})}
+              onClick={() => setCategory("explorePurses")}
+            >
+              <img src="/assets/explore.svg" alt="coin" className="w-8 h-8" />
+              <p className="Poppins font-medium text-base dark:text-white-1 text-dark-1">
+                Expolore Purses
+              </p>
             </div>
           </div>
           <div className="mt-8 pb-8">
             {category === "myPurses" && (
-              <PurseList theme={theme} list={purseData.myPurses} onAction={handleClick} />
+              <PurseList  list={purseData.myPurses} onAction={handleClick} />
             )}
             {category === "explorePurses" && (
               <PurseList
-              theme={theme}
                 list={purseData.explorePurses}
                 onAction={handleClick}
               />
             )}
             {category === "noPurse" && (
               <NoPurse
-              theme={theme}
                 openCreatePurse={setCreatePurseModal}
                 openJoinPurse={setPurseDetailModal}
               />
             )}
           </div>
         </section>
-      </div>
       {/* <!-- Create Purse Modal --> */}
       {createPurseModal ? (
         <>
@@ -196,32 +179,32 @@ const Purses = ({theme}) => {
           <div className="justify-center items-center backdrop-blur-sm shadow-lg flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">
               {/*content*/}
-              <div className={`border-0 rounded-lg ${theme === 'dark'? `bg-dark-4` : `bg-blue-7` }  shadow-lg relative flex flex-col w-full outline-none focus:outline-none`}>
+              <div className="border-0 rounded-lg dark:bg-dark-4 bg-blue-7 shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between pt-5 pb-2 px-4 rounded-t">
-                  <h3 className={`Poppins text-base font-semibold ${theme === 'dark'? 'text-white-1': 'text-dark-1' }`}>
+                  <h3 className="Poppins text-base font-semibold dark:text-white-1 text-dark-1">
                     Account
                   </h3>
                   <button
-                    className={`p-1 ml-auto border-0 ${theme === 'dark'? 'text-white-1': 'text-dark-1' } opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none`}
+                    className="p-1 ml-auto border-0 dark:text-white-1 text-dark-1 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setPurseDetailModal(false)}
                   >
-                    <span className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } opacity-100 h-6 w-6 text-2xl block outline-none focus:outline-none`}>
+                    <span className="dark:text-white-1 text-dark-1 opacity-100 h-6 w-6 text-2xl block outline-none focus:outline-none">
                       ×
                     </span>
                   </button>
                 </div>
                 {/*body*/}
                 <div className="pl-4 pr-8 pt-4 pb-12">
-                  <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } text-xl font-extrabold`}>
+                  <p className="Poppins dark:text-white-1 text-dark-1 text-xl font-extrabold">
                     0xBBB6...e96e
                   </p>
                   <div className="flex justify-between pt-4">
                     <div>
-                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
+                      <p className="Poppins dark:text-white-1 text-dark-1 font-thin text-sm">
                         Created
                       </p>
-                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>
+                      <p className="Poppins dark:text-white-1 text-dark-1 font-bold">
                         23 Sep. 2021
                       </p>
                     </div>
@@ -235,44 +218,44 @@ const Purses = ({theme}) => {
                   </div>
                   <div className="flex justify-between pt-4">
                     <div>
-                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
+                      <p className="Poppins dark:text-white-1 text-dark-1 font-thin text-sm">
                         Frequency
                       </p>
-                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>5 Days</p>
+                      <p className="dark:text-white-1 text-dark-1 font-bold">5 Days</p>
                     </div>
                     <div>
-                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
+                      <p className="Poppins dark:text-white-1 text-dark-1 font-thin text-sm">
                         Amount(TVL)
                       </p>
-                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>1000 USDC</p>
+                      <p className="dark:text-white-1 text-dark-1 font-bold">1000 USDC</p>
                     </div>
                   </div>
                   <div className="flex justify-between pt-4">
                     <div>
-                      <p className={` ${theme === 'dark'? 'text-white-1': 'text-dark-1' } Poppins  font-thin text-sm`}>
+                      <p className="dark:text-white-1 text-dark-1 Poppins  font-thin text-sm">
                         Current Members
                       </p>
-                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>2</p>
+                      <p className="dark:text-white-1 text-dark-1 font-bold">2</p>
                     </div>
                     <div>
-                      <p className={`Poppins ${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
+                      <p className="Poppins text-white-1 text-dark-1 font-thin text-sm">
                         Max Members
                       </p>
-                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-bold`}>2</p>
+                      <p className="dark:text-white-1 text-dark-1 font-bold">2</p>
                     </div>
                   </div>
                   <div className="flex pt-4">
                     <div>
-                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } Poppins  font-bold`}>Note:</p>
+                      <p className="dark:text-white-1 text-dark-1 Poppins font-bold">Note:</p>
                     </div>
                     <div className="ml-2">
-                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm`}>
+                      <p className="dark:text-white-1 text-dark-1 font-thin text-sm">
                         You are to deposit a collateral of 10.0 DAI which will
                         be put in yield farming. You can withdraw this
                         collateral plus the yield to your wallet immediately
                         after everyone have gotten their funds from the purse
                       </p>
-                      <p className={`${theme === 'dark'? 'text-white-1': 'text-dark-1' } font-thin text-sm pt-4`}>
+                      <p className="dark:text-white-1 text-dark-1 font-thin text-sm pt-4">
                         By clicking the "JOIN PURSE" button, you are sending
                         10.0 DAI as collateral and 10.0 DAI for the purse amount
                         which makes it total of 20 DAI
@@ -294,7 +277,7 @@ const Purses = ({theme}) => {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
-    </section>
+    </main>
   );
 };
 

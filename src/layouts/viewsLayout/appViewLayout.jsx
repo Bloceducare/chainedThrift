@@ -8,7 +8,7 @@ import {ModalWrapper} from "../../common/modalWrapper";
 import {useSelector, useDispatch} from "react-redux"
 import { Web3ReactProvider} from '@web3-react/core'
 import { getLibrary } from '../../web3'
-import HeaderButton from "../../common/appHeader/appHeader";
+import AppHeader from "../../common/appHeader/appHeader";
 import { innerNav } from "../../static/data";
 import { useEagerConnect } from "../../web3";
 const Swap = lazy(() => import("../../pages/swap/swap"));
@@ -17,9 +17,9 @@ const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
 
 
 const AppViewLayout = () => {
-  const {theme, changeTheme} = useTheme()
   const ConnectWalletModalState = useSelector(state => state.ConnectWalletModal);
   const dispatch = useDispatch()
+
   const handleWalletModalClose = () => {
     dispatch(closeWalletModal());
   }
@@ -33,28 +33,26 @@ const AppViewLayout = () => {
   
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <HeaderButton
-        theme={theme}
-        changeTheme={changeTheme}
+      <AppHeader
         data={innerNav}
         displayWalletModal = {handleWalletModalOpen}
       />
-      <main>
-        <Suspense fallback={<Fallback />}>
-          <Routes>
-            <Route path={appRoutes.swap} element={<Swap />} />
-            <Route path={appRoutes.purses} element={<Purses theme={theme} changeTheme={changeTheme} />} />
-            <Route path={appRoutes.purse} element={<PurseLayout />} />
-            <Route path="*" element={<Navigate to={absoluteRoutes.purses} />} />
-          </Routes>
-        </Suspense>
-      </main>
+      <Suspense fallback={<Fallback />}>
+        <Routes>
+          <Route path={appRoutes.swap} element={<Swap />} />
+          <Route path={appRoutes.purses} element={<Purses />} />
+          <Route path={appRoutes.purse} element={<PurseLayout />} />
+          <Route path="*" element={<Navigate to={absoluteRoutes.purses} />} />
+        </Routes>
+      </Suspense>
       <ModalWrapper
         open = {ConnectWalletModalState.open}
         onClose = {handleWalletModalClose}
         label = "Connect wallet modal"
       >
-        <ConnectWalletModal theme={theme} onClose={handleWalletModalClose} />
+        <ConnectWalletModal
+          onClose={handleWalletModalClose} 
+        />
       </ModalWrapper>
     </Web3ReactProvider>
   );
