@@ -58,8 +58,8 @@ const AppHeader = ({ displayWalletModal, data = [] }) => {
                   key={index}
                   className={
                     activeTab === item.value
-                      ? `font-Poppins  text-base dark:text-white-1 text-dark-1 font-extrabold text-white-1 mr-24 cursor-pointer border-b-4 border-b-white lg:px-6 mb-2 lg:mb-0`
-                      : `font-Poppins  text-base dark:text-white-1 text-dark-1 font-extrabold text-white-1 mr-24 cursor-pointer mb-2 lg:mb-0`
+                      ? `font-Poppins  text-base dark:text-white-1 text-dark-1 font-extrabold mr-24 cursor-pointer border-b-4 border-b-dark-1 dark:border-b-white-1 lg:px-6 mb-2 lg:mb-0`
+                      : `font-Poppins  text-base dark:text-white-1 text-dark-1 font-extrabold mr-24 cursor-pointer mb-2 lg:mb-0`
                   }
                   onClick={() => {
                     handleRedirect(item.link);
