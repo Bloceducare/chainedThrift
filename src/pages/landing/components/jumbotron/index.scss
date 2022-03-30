@@ -1,0 +1,35 @@
+.jumbo-section {
+    background-image: url("../../../../../public/assets/coin.svg");
+    background-repeat: no-repeat;
+    background-position: right 50px bottom 0px;
+}
+.jumbo-heading {
+    max-width: 60%;
+}
+
+.jumbo-text {
+    max-width: 45%;
+}
+
+@media only screen and (max-width: 1280px) {
+    .jumbo-heading {
+        max-width: 75%;
+    }
+    .jumbo-text {
+        max-width: 55%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .jumbo-section {
+        background-position: right 50% top -150px;
+    }
+    .jumbo-heading {
+        max-width: 100%;
+        text-align: center;
+    }
+    .jumbo-text {
+        max-width: 100%;
+        text-align: center;
+    }
+}

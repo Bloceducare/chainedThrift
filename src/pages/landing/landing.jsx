@@ -4,7 +4,7 @@ import Footer from "../../common/footer/footer";
 import Header from "../../common/header/header";
 import Features from "./components/Features";
 import Actions from "./components/Actions";
-import Jumbotron from "./components/Jumbotron";
+import Jumbotron from "./components/jumbotron";
 
 const Landing = () => {
   return (
