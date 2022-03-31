@@ -7,7 +7,7 @@ const PurseChat = ({theme, activeTab, setActiveTab}) => {
     <div className="w-full">
       <LisplayBox />
       <MobileBar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <p className="md:text-8xl mt-8 text-2xl text-white-1">Comming soon...</p>
+      <p className="md:text-8xl mt-8 text-2xl text-dark-1 dark:text-white-1">Comming soon...</p>
     </div>
   );
 };
