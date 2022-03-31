@@ -8,25 +8,28 @@ import { IoWalletOutline } from "react-icons/io5";
 import { MdOutlineExplore } from "react-icons/md";
 
 const Purses = () => {
+  const tabs = {
+    MY_PURSES: "myPurses",
+    MEXPLORE_PURSES: "explorePurses"
+  }
   const navigate = useNavigate();
-  const [category, setCategory] = useState("noPurse");
-  const [createPurseModal, setCreatePurseModal] = React.useState(false);
-  const [purseDetailModal, setPurseDetailModal] = React.useState(false);
-  const handleClick = (purseId) => {
-    setPurseDetailModal(true);
-  };
+  const [category, setCategory] = useState(tabs.MY_PURSES);
+
+  // const handleClick = (purseId) => {
+  //   setPurseDetailModal(true);
+  // };
   useEffect(() => {}, [category]);
   return (
-    <main className="dark:bg-overlay-img bg-overlay-img-light dark:bg-dark-1 bg-light-1 flex justify-center h-screen pb-8">
-      <section className="container dark:bg-dark-1 pl-4 md:pl-8 pr-4 md:pr-8 mt-12">
-        <div className="flex justify-between pt-4 md:pt-12">
+    <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover min-h-screen">
+      <section className="container mx-auto px-4 sm:px-6 md:px-0">
+        <div className="flex justify-between mt-4 md:mt-12">
           <h1 className="font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg dark:text-white-1 text-dark-1">
             Thrift Purses
           </h1>
           <button
             className="border-purple-1 text-purple-1 cursor-pointer outline outline-offset-2 outline-1 rounded-lg px-6 py-1"
             type="button"
-            onClick={() => setCreatePurseModal(true)}
+            // onClick={() => setCreatePurseModal(true)}
           >
             Create New +
           </button>
@@ -34,8 +37,8 @@ const Purses = () => {
         <div className="flex w-full mt-8 border-b-2 dark:border-b-white border-b-dark-1">
           <button
             className={clsx({
-              "flex items-center cursor-pointer": true,
-              "border-b-4 dark:border-b-white border-b-dark-1 lg:mr-12":
+              "flex items-center cursor-pointer mr-4 md:mr-12": true,
+              "border-b-4 dark:border-b-white border-b-dark-1":
                 category === "myPurses",
               "md:mr-12": category !== "myPurses",
             })}
@@ -62,17 +65,17 @@ const Purses = () => {
         </div>
         <div className="mt-8 pb-8">
           {category === "myPurses" && (
-            <PurseList list={purseData.myPurses} onAction={handleClick} />
+            <PurseList list={purseData.myPurses} />
           )}
           {category === "explorePurses" && (
-            <PurseList list={purseData.explorePurses} onAction={handleClick} />
+            <PurseList list={purseData.explorePurses} />
           )}
-          {category === "noPurse" && (
+          {/* {category === "noPurse" && (
             <NoPurse
               openCreatePurse={setCreatePurseModal}
               openJoinPurse={setPurseDetailModal}
             />
-          )}
+          )} */}
         </div>
       </section>
     </main>
