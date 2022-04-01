@@ -14,6 +14,7 @@ import { useEagerConnect } from "../../web3";
 const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
+const CreatePurse = lazy(() => import("../../pages/createPurse/createPurse"))
 
 
 const AppViewLayout = () => {
@@ -41,6 +42,7 @@ const AppViewLayout = () => {
         <Routes>
           <Route path={appRoutes.swap} element={<Swap />} />
           <Route path={appRoutes.purses} element={<Purses />} />
+          <Route path={appRoutes.new_purse} element={<CreatePurse />} />
           <Route path={appRoutes.purse} element={<PurseLayout />} />
           <Route path="*" element={<Navigate to={absoluteRoutes.purses} />} />
         </Routes>

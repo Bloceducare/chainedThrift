@@ -75,6 +75,8 @@ module.exports = {
         box:" 0 3px 10px rgba(75,155,210,0.2)"
       },
       width: {
+        mini_large: "40rem",
+        semi_large: "50rem",
         large: "78rem",
       },
       spacing: {
