@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useState, useEffect } from "react";
 import useTheme from "../../hooks/useTheme";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Fallback from "../fallback";
@@ -11,6 +11,7 @@ import { getLibrary } from '../../web3'
 import AppHeader from "../../common/appHeader/appHeader";
 import { innerNav } from "../../static/data";
 import { useEagerConnect } from "../../web3";
+import AppSideDrawer from "../../common/appSideDrawer/appSideDrawer";
 const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
@@ -28,6 +29,30 @@ const AppViewLayout = () => {
     dispatch(openWalletModal());
   }
 
+  const [openSidebar, setOpenSidebar] = useState(false)
+  const [renderSideDrawer, setRenderSideDrawer] = useState(window.innerWidth < 1024)
+
+  const toggleDrawer = () => {
+    setOpenSidebar((prevState) => !prevState)
+  }
+  const mql = window.matchMedia(`(max-width: 1023px)`);
+
+  const mediaQueryChanged = () => {
+    setRenderSideDrawer(mql.matches);
+    // if not rendered, set show to false so it will not open automatically next time we get on small screen
+    if(!mql.matches)
+      setOpenSidebar(mql.matches);
+    
+  }
+
+  useEffect(() => {
+    mql.addEventListener("change", mediaQueryChanged)
+  
+    return () => {
+      mql.removeEventListener("change", mediaQueryChanged);
+    }
+  }, [])
+
 
   useEagerConnect()
 
@@ -37,6 +62,7 @@ const AppViewLayout = () => {
       <AppHeader
         data={innerNav}
         displayWalletModal = {handleWalletModalOpen}
+        toggleDrawer = {toggleDrawer}
       />
       <Suspense fallback={<Fallback />}>
         <Routes>
@@ -47,6 +73,13 @@ const AppViewLayout = () => {
           <Route path="*" element={<Navigate to={absoluteRoutes.purses} />} />
         </Routes>
       </Suspense>
+      {renderSideDrawer &&
+        <AppSideDrawer
+          navData={innerNav}
+          open = {openSidebar}
+          toggleDrawer = {toggleDrawer}
+        />
+      }
       <ModalWrapper
         open = {ConnectWalletModalState.open}
         onClose = {handleWalletModalClose}
