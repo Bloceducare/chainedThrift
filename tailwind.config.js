@@ -63,11 +63,8 @@ module.exports = {
         "blue-gradient-2":
           "linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)",
           "light-gradient": "linear-gradient(to right top, #e5e5e5, #e5e5e7, #e5e5e9, #e5e5ec, #e5e5ee);",
-         "members-gradient": "conic-gradient(#004EA5 0deg, #004EA5 130deg, #7195BD 130deg, #7195BD 220deg, #2E81DF 220deg, #2E81DF 310deg, #B3D2F5 310deg)"
-      },
-      fontFamily: {
-        Poppins: ["Poppins", "sans-serif"],
-        Monserat: ["Montserrat", "sans-serif"],
+         "members-gradient": "conic-gradient(#004EA5 0deg, #004EA5 130deg, #7195BD 130deg, #7195BD 220deg, #2E81DF 220deg, #2E81DF 310deg, #B3D2F5 310deg)",
+         "purple-gradient": "linear-gradient(180deg, #833EF1 0%, #491CB5 100%)",
         Inter: ["Inter", "sans-serif"],
       },
       boxShadow: {
@@ -86,7 +83,7 @@ module.exports = {
         400:"400px"
       },
       height: {
-        screenfit: 'calc(100vh - 70px)',
+        screenfit: 'calc(100vh - 75px)',
       }
     },
   },
