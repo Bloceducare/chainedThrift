@@ -1,7 +1,6 @@
 import React from 'react'
 import { shortenAddress } from '../../utils'
 import { createIcon } from '@download/blockies';
-import clsx from 'clsx'
 
 const generateIdenticon = (address) => {
     let Identicon = createIcon({
@@ -21,7 +20,7 @@ const Connected = ({balance, address}) => {
             <span className="mr-2">
                 {shortenAddress(address)}
             </span>
-            <img src = {generateIdenticon(address).toDataURL()} className = "rounded-full w-6" />
+            <img alt = "wallet jazicon" src = {generateIdenticon(address).toDataURL()} className = "rounded-full w-6" />
         </div>
     </div>
   )

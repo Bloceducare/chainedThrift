@@ -12,7 +12,7 @@ const ModalWrapper = ({open, children, onClose, label}) => {
       onRequestClose = {onClose}
       contentLabel = {label}
       overlayClassName = "fixed inset-0 backdrop-blur-sm z-10"
-      className = {clsx({"absolute top-1/2 left-1/2 w-72 md:w-96  -translate-x-1/2 -translate-y-full opacity-0 bg-blue-7 dark:bg-gray-4 p-6 rounded-3xl -z-20 modal":true, "show-modal": open, })}
+      className = {clsx({"absolute top-1/2 left-1/2 w-80 md:w-96  -translate-x-1/2 -translate-y-full opacity-0 bg-blue-7 dark:bg-gray-4 p-6 rounded-xl md:rounded-2xl -z-20 modal":true, "show-modal": open, })}
     >
       {children}
     </Modal>

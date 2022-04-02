@@ -54,6 +54,8 @@ module.exports = {
         btn: "linear-gradient(180deg, #833EF1 0%, #491CB5 100%)",
         "nav-dark":
           "linear-gradient(90.18deg, rgba(61, 61, 61, 0.2052) 0%, rgba(29, 29, 29, 0.285) 100%)", //used for navbar in dark mode
+        "nav-light":
+          "linear-gradient(90.22deg, rgba(61, 61, 61, 0.2052) 0%, rgba(29, 29, 29, 0.285) 99.19%)", //used for navbar in dark mode
         "blue-gradient":
           "linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)", // dashbord side nav bg color
         "pink-gradient":
@@ -62,12 +64,7 @@ module.exports = {
           "linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)",
           "light-gradient": "linear-gradient(to right top, #e5e5e5, #e5e5e7, #e5e5e9, #e5e5ec, #e5e5ee);",
          "members-gradient": "conic-gradient(#004EA5 0deg, #004EA5 130deg, #7195BD 130deg, #7195BD 220deg, #2E81DF 220deg, #2E81DF 310deg, #B3D2F5 310deg)"
-        },
-//       Linear Gradient
-// #3D3D3D
-// 20.52%
-// #1D1D1D
-// 28.5%
+      },
       fontFamily: {
         Poppins: ["Poppins", "sans-serif"],
         Monserat: ["Montserrat", "sans-serif"],
@@ -78,6 +75,8 @@ module.exports = {
         box:" 0 3px 10px rgba(75,155,210,0.2)"
       },
       width: {
+        mini_large: "40rem",
+        semi_large: "50rem",
         large: "78rem",
       },
       spacing: {
@@ -85,6 +84,9 @@ module.exports = {
       },
       minWidth:{
         400:"400px"
+      },
+      height: {
+        screenfit: 'calc(100vh - 70px)',
       }
     },
   },

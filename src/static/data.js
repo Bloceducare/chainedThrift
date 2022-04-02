@@ -50,40 +50,31 @@ export const purseSideBar = [
   },
 ];
 
-export const footer = [
+export const footerLinks = [
   {
-    value: "About Chained Thrift",
+    text: "About Chained Thrift",
     link: "!#",
   },
 
   {
-    value: "Onhovered / Active",
+    text: " We are hiring!",
     link: "!#",
   },
 
   {
-    value: " We are hiring!",
-    link: "!#",
-  },
-
-  {
-    value: "Get in Touch",
+    text: "Get in Touch",
     link: "!#",
   },
   {
-    value: "Privacy Policy",
+    text: "Privacy Policy",
     link: "!#",
   },
   {
-    value: " Resources",
+    text: " Resources",
     link: "!#",
   },
   {
-    value: "  Developers",
-    link: "!#",
-  },
-  {
-    value: "Terms of Service",
+    text: "Terms of Service",
     link: "!#",
   },
 ];

@@ -14,7 +14,7 @@ export const useEagerConnect = () => {
         }).finally(() => {
             setTriedEagerConnect(true);
         })
-    }, [])
+    }, [activate])
 
     useEffect(() => {
         if(!triedEagerConnect && active)

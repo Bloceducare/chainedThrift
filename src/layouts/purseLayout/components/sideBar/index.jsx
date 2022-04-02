@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { purseSideBar } from "../../../../static/data";
+import {BsArrowLeftShort} from "react-icons/bs"
 
 const SideBar = () => {
   const [activeTab, setActiveTab] = useState(purseSideBar[0].name);
+
   const navigate = useNavigate();
   return (
-    <div className="bg-blue-gradient w-48 hidden md:block">
+    <div className="bg-blue-gradient h-screenfit w-48 hidden md:block">
       <div className="w-48 h-40 flex justify-center items-center">
-        <img
-          src="/assets/arrowLeft.svg"
-          alt="arrow"
-          className="w-6 h-6 cursor-pointer"
+        <BsArrowLeftShort 
+          className="text-white-1 text-2xl cursor-pointer"
           onClick={() => navigate("/app/purses")}
         />
       </div>
@@ -29,7 +29,7 @@ const SideBar = () => {
               setActiveTab(item.name);
             }}
           >
-            <img src={item.icon} alt="arrow" className="w-6 h-6 mr-2" />
+            <img src={item.icon} alt="link icon" className="w-6 h-6 mr-2" />
             {item.name}
           </div>
         ))}
