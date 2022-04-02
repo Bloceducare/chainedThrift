@@ -1,3 +1,4 @@
+import { absoluteRoutes } from "../utils";
 
 export const landingNav = [
   {
@@ -13,18 +14,22 @@ export const landingNav = [
     link: "!#",
   },
 ];
-export const innerNav = [
+export const appNav = [
   {
     value: "Home",
-    link: "/",
+    link: absoluteRoutes.landing
   },
   {
     value: "Swap",
-    link: "/app/swap",
+    link: absoluteRoutes.swap,
   },
   {
     value: "Purses",
-    link: "/app/purses",
+    link: absoluteRoutes.purses
+  },
+  {
+    value: "new purse",
+    link: absoluteRoutes.new_purse
   },
 ];
 export const purseSideBar = [
