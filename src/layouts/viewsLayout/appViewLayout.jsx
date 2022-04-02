@@ -8,7 +8,7 @@ import {useSelector, useDispatch} from "react-redux"
 import { Web3ReactProvider} from '@web3-react/core'
 import { getLibrary } from '../../web3'
 import AppHeader from "../../common/appHeader/appHeader";
-import { innerNav } from "../../static/data";
+import { appNav } from "../../static/data";
 import { useEagerConnect } from "../../web3";
 import AppSideDrawer from "../../common/appSideDrawer/appSideDrawer";
 const Swap = lazy(() => import("../../pages/swap/swap"));
@@ -62,7 +62,7 @@ const AppViewLayout = () => {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <AppHeader
-        data={innerNav}
+        data={appNav}
         displayWalletModal = {handleWalletModalOpen}
         toggleDrawer = {toggleDrawer}
       />
@@ -77,7 +77,7 @@ const AppViewLayout = () => {
       </Suspense>
       {renderSideDrawer &&
         <AppSideDrawer
-          navData={innerNav}
+          navData={appNav}
           open = {openSidebar}
           toggleDrawer = {toggleDrawer}
         />

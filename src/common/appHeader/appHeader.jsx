@@ -40,7 +40,7 @@ const AppHeader = ({ displayWalletModal, data = [], toggleDrawer }) => {
                 return (
                   <NavLink
                     key={index}
-                    className={({isActive}) => `font-Poppins text-base font-extrabold dark:text-white-1 text-dark-1 mr-24 cursor-pointer ${isActive && " border-b-4 border-b-dark-1 dark:border-b-white-1"}`}
+                    className={({isActive}) => `font-Poppins text-base font-extrabold dark:text-white-1 text-dark-1 mr-16 cursor-pointer ${isActive && " border-b-4 border-b-dark-1 dark:border-b-white-1"}`}
                     to = {item.link}
                   >
                     {item.value}

@@ -4,8 +4,11 @@ import PurseList from "./components/purseList";
 import clsx from "clsx";
 import { IoWalletOutline } from "react-icons/io5";
 import { MdOutlineExplore } from "react-icons/md";
+import {absoluteRoutes} from '../../utils'
+import { useNavigate } from "react-router-dom";
 
 const Purses = () => {
+  const navigate = useNavigate();
   const tabs = {
     MY_PURSES: "myPurses",
     MEXPLORE_PURSES: "explorePurses"
@@ -23,6 +26,7 @@ const Purses = () => {
           <button
             className="border-purple-1 text-purple-1 cursor-pointer outline outline-offset-2 outline-1 rounded-lg px-6 py-1"
             type="button"
+            onClick={() => navigate(absoluteRoutes.new_purse)}
           >
             Create New +
           </button>
