@@ -62,7 +62,7 @@ const Purses = () => {
         </div>
         <div className="mt-8 pb-8">
           <PurseList 
-            purseList={category === "myPurses" ? purseData.myPurses : purseData.explorePurses}
+            purseList={category === "myPurses" ? purseData.myPurses : purseData.allPurses}
             isMyPurses = {category === "myPurses"}
           />
         </div>
