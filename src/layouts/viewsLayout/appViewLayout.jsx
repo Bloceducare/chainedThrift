@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useState, useEffect, useCallback } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Fallback from "../fallback";
-import { appRoutes, absoluteRoutes } from "../../utils/routes";
+import { appRoutes } from "../../utils/routes";
 import {ConnectWalletModal, openWalletModal, closeWalletModal} from '../../common/connectWalletModal';
 import {ModalWrapper} from "../../common/modalWrapper";
 import {useSelector, useDispatch} from "react-redux"
@@ -15,6 +15,7 @@ const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
 const CreatePurse = lazy(() => import("../../pages/createPurse/createPurse"))
+const NotFound = lazy(()=> import("../notFound"))
 
 
 const AppViewLayout = () => {
@@ -72,7 +73,7 @@ const AppViewLayout = () => {
           <Route path={appRoutes.purses} element={<Purses />} />
           <Route path={appRoutes.new_purse} element={<CreatePurse />} />
           <Route path={appRoutes.purse} element={<PurseLayout />} />
-          <Route path="*" element={<Navigate to={absoluteRoutes.purses} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       {renderSideDrawer &&
