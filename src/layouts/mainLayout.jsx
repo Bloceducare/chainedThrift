@@ -7,8 +7,8 @@ import NotFound from "./notFound";
 const MainLayout = () => {
   return (
     <Routes>
-      <Route path="/" element={<LandingViewLayout />} />
       <Route path="/app/*" element={<AppViewLayout />} />
+      <Route path="/*" element={<LandingViewLayout />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

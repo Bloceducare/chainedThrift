@@ -5,14 +5,13 @@ import { footerLinks } from "../../static/data";
 import { MdOutlineEmail } from "react-icons/md";
 import Switch from "../switch/Switch";
 import { BsPencilSquare } from "react-icons/bs";
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Button from "../buttons/button";
 
 const Footer = () => {
   useEffect(() =>{
    window.scroll(0,0)
   })
-  const navigate = useNavigate();
   return (
     <footer className="bg-gray-8 p-6 lg:p-8">
       <div className="container mx-auto lg:flex lg:justify-between items-center">
@@ -22,16 +21,16 @@ const Footer = () => {
             Follow us
           </h3>
           <div className="flex mb-6">
-            <a className="mr-12 cursor-pointer" href="#">
+            <a className="mr-12 cursor-pointer" href="#!">
               <FiFacebook className="text-purple-2 hover:text-yellow-dark text-lg lg:text-2xl" />
             </a>
-            <a className="mr-12 cursor-pointer" href="#">
+            <a className="mr-12 cursor-pointer" href="#!">
               <FiLinkedin className="text-purple-2 hover:text-yellow-dark text-lg lg:text-2xl" />
             </a>
-            <a className="mr-12 cursor-pointer" href="#">
+            <a className="mr-12 cursor-pointer" href="#!">
               <FiSlack className="text-purple-2 hover:text-yellow-dark text-lg lg:text-2xl" />
             </a>
-            <a className="mr-12 cursor-pointer" href="#">
+            <a className="mr-12 cursor-pointer" href="#!">
               <FiTwitter className="text-purple-2 hover:text-yellow-dark text-lg lg:text-2xl" />
             </a>
           </div>
@@ -57,7 +56,7 @@ const Footer = () => {
         <div className="md:w-full lg:w-3/6 mt-32">
           <div className="mb-8">
             <h3 className="block font-Inter font-extrabold text-gray-9">REACH OUT TO US</h3>
-            <a className="text-purple-2 text-xl md:text-3xl font-extrabold">hello@chainedthrift.com</a>
+            <a className="text-purple-2 text-xl md:text-3xl font-extrabold" href="#!">hello@chainedthrift.com</a>
           </div>
           <p className="font-Poppins text-white-1 text-base font-normal">
             Subscribe to our newsletter and be the first to know about

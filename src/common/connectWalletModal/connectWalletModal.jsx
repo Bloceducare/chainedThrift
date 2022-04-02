@@ -1,32 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { CgCloseR } from "react-icons/cg";
-import { BsFillCheckSquareFill } from "react-icons/bs";
 import { connectorsData, useEagerConnect } from "../../web3";
 import { useWeb3React } from "@web3-react/core";
 import { getConnectionError } from "../../web3";
 import clsx from "clsx";
 
 const ConnectWalletModal = ({ onClose }) => {
-  // console.log(theme)
 
-  // const {active, activate, connector, account, error} = useWeb3React();
-  const { activate, connector, error } = useWeb3React();
+  const { activate } = useWeb3React();
 
   // helps to connect quickly incase the user previusly has browser wallet connected
-  const triedEagerConnect = useEagerConnect();
+  useEagerConnect();
 
   // handle logic to recognize the connector currently being activated
-  const [activatingConnector, setActivatingConnector] = useState(undefined);
+  // const [activatingConnector, setActivatingConnector] = useState(undefined);
 
   const connectWallet = (connector) => {
-    setActivatingConnector(JSON.stringify(connector));
+    // setActivatingConnector(JSON.stringify(connector));
     activate(connector, handleError);
   };
 
   const handleError = (err) => {
     const errorString = getConnectionError(err);
     // the errorString will be used to triger error snackbar
-    console.log("Yay: ", errorString);
+    console.log("web3React Error: ", errorString);
   };
 
   return (
@@ -42,7 +39,7 @@ const ConnectWalletModal = ({ onClose }) => {
           <span className="text-base md:text-base">
             <span>By connecting a wallet, you have agreed to chained thrift </span>
             <span>
-              <a href="#" className="text-blue-1">
+              <a href="#!" className="text-blue-1">
                 terms of service
               </a>
             </span>

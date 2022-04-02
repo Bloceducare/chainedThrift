@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { purseData } from "../../static/data";
-import PurseList from "../../layouts/purseLayout/components/purseList";
-import NoPurse from "./components/noPurse";
+import PurseList from "./components/purseList";
 import clsx from "clsx";
 import { IoWalletOutline } from "react-icons/io5";
 import { MdOutlineExplore } from "react-icons/md";
@@ -12,12 +10,8 @@ const Purses = () => {
     MY_PURSES: "myPurses",
     MEXPLORE_PURSES: "explorePurses"
   }
-  const navigate = useNavigate();
   const [category, setCategory] = useState(tabs.MY_PURSES);
 
-  // const handleClick = (purseId) => {
-  //   setPurseDetailModal(true);
-  // };
   useEffect(() => {}, [category]);
   return (
     <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover min-h-screen">
@@ -29,7 +23,6 @@ const Purses = () => {
           <button
             className="border-purple-1 text-purple-1 cursor-pointer outline outline-offset-2 outline-1 rounded-lg px-6 py-1"
             type="button"
-            // onClick={() => setCreatePurseModal(true)}
           >
             Create New +
           </button>
@@ -64,18 +57,10 @@ const Purses = () => {
           </button>
         </div>
         <div className="mt-8 pb-8">
-          {category === "myPurses" && (
-            <PurseList list={purseData.myPurses} />
-          )}
-          {category === "explorePurses" && (
-            <PurseList list={purseData.explorePurses} />
-          )}
-          {/* {category === "noPurse" && (
-            <NoPurse
-              openCreatePurse={setCreatePurseModal}
-              openJoinPurse={setPurseDetailModal}
-            />
-          )} */}
+          <PurseList 
+            purseList={category === "myPurses" ? purseData.myPurses : purseData.explorePurses}
+            isMyPurses = {category === "myPurses"}
+          />
         </div>
       </section>
     </main>

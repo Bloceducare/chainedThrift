@@ -1,18 +1,25 @@
 import React from "react";
 import Purse from "../purse";
+import NoPurse from "../noPurse"
 
-const PurseList = ({ list = [], onAction, theme}) => {
+
+const PurseList = ({ purseList = [], isMyPurses}) => {
+
+  if(isMyPurses && purseList.length === 0 ) {
+    return (
+      <NoPurse />
+    )
+  }
+  
   return (
     <div className="grid lg:grid-cols-2 gap-8">
-      {list.map((item, idx) => (
+      {purseList.map((item, idx) => (
         <Purse
-          theme={theme}
           key={idx}
           purseId={idx}
           created={item.created}
           member={item.member}
           tvl={item.tvl}
-          onClick={onAction}
         />
       ))}
     </div>

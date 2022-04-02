@@ -6,7 +6,7 @@ import Button from "../../common/themeingToggle/Button";
 import useTheme from "../../hooks/useTheme";
 
 const Header = ({ data = [], toggleDrawer}) => {
-  const {theme, changeTheme} = useTheme();
+  const {changeTheme} = useTheme();
   const navigate = useNavigate();
   const redirectToApp = () => {
     navigate("/app/purses");

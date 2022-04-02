@@ -1,5 +1,4 @@
-import React, { Suspense, lazy, useState, useEffect } from "react";
-import useTheme from "../../hooks/useTheme";
+import React, { Suspense, lazy, useState, useEffect, useCallback } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Fallback from "../fallback";
 import { appRoutes, absoluteRoutes } from "../../utils/routes";
@@ -37,13 +36,16 @@ const AppViewLayout = () => {
   }
   const mql = window.matchMedia(`(max-width: 1023px)`);
 
-  const mediaQueryChanged = () => {
-    setRenderSideDrawer(mql.matches);
-    // if not rendered, set show to false so it will not open automatically next time we get on small screen
-    if(!mql.matches)
-      setOpenSidebar(mql.matches);
-    
-  }
+  const mediaQueryChanged = useCallback(() => {
+      setRenderSideDrawer(mql.matches);
+      // if not rendered, set show to false so it will not open automatically next time we get on small screen
+      if(!mql.matches)
+        setOpenSidebar(mql.matches);
+  },[mql]);
+  
+
+  
+  
 
   useEffect(() => {
     mql.addEventListener("change", mediaQueryChanged)
@@ -51,7 +53,7 @@ const AppViewLayout = () => {
     return () => {
       mql.removeEventListener("change", mediaQueryChanged);
     }
-  }, [])
+  }, [mediaQueryChanged, mql])
 
 
   useEagerConnect()

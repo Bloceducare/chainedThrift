@@ -12,12 +12,12 @@ const PurseSettings = lazy(() => import("../../pages/purseSettings/purseSettings
 
 const PurseLayout = () => {
 
-  const purseTabs = {
-    OVERVIEW: "overview",
-    ACTIONS: "actions",
-    CHAT: "chat",
-    SETTINGS: "settings",
-  }
+  // const purseTabs = {
+  //   OVERVIEW: "overview",
+  //   ACTIONS: "actions",
+  //   CHAT: "chat",
+  //   SETTINGS: "settings",
+  // }
 
   const [activeTab, setActiveTab] = useState('Overview');
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import HeaderButton from "../buttons/headerButton";
@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 
 const AppHeader = ({ displayWalletModal, data = [], toggleDrawer }) => {
 
-  const {theme, changeTheme} = useTheme()
+  const {changeTheme} = useTheme()
 
   const navigate = useNavigate();
   const { active, account } = useWeb3React()
