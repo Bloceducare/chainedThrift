@@ -24,11 +24,11 @@ const Purses = () => {
             Thrift Purses
           </h1>
           <button
-            className="border-purple-1 text-purple-1 cursor-pointer outline outline-offset-2 outline-1 rounded-lg px-6 py-1"
+            className="border-purple-1 text-purple-1 cursor-pointer outline outline-offset-2 outline-1 rounded-lg px-6 py-1 after:content-['+'] after:px-2 after:py-1 after:rounded-full after:text-white-1 after:bg-black dark:after:bg-transparent"
             type="button"
             onClick={() => navigate(absoluteRoutes.new_purse)}
           >
-            Create New +
+            Create New {" "}
           </button>
         </div>
         <div className="flex w-full mt-8 border-b-2 dark:border-b-white border-b-dark-1">
