@@ -11,7 +11,7 @@ const Purse = ({purse}) => {
       <div className="flex justify-between">
         <span className="Poppins text-xl font-extrabold text-purple-1">{shortenAddress(purse.address)}</span>
         <div>
-          <img src={open ? "/assets/lock_open.png" : "/assets/lock.png"} alt="purse state" className={open ? "" : "invert"} />
+          <img src={open ? "/assets/lock_open.png" : "/assets/lock.png"} alt="purse state" className={open ? "" : ""} />
         </div>
       </div>
       <div className="flex justify-between mt-6">

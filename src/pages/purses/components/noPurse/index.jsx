@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../../../common/buttons/button";
 
-const NoPurse = () => {
+const NoPurse = ({gotToExplorePursesTab, gotToCreateNewPurse}) => {
   return (
     <div className="flex flex-col items-center">
       <div className="h-32 w-32 text-indigo rounded-3xl text-white-1 flex justify-center items-center">
@@ -18,13 +18,16 @@ const NoPurse = () => {
       <div className="text-white-1 mt-6 flex flex-col md:flex-row justify-between lg:w-2/5">
         <Button
           className="font-medium md:mr-4"
+          action = {gotToCreateNewPurse}
         >
           Create a Purse
         </Button>
         <Button
           className="font-medium md:ml-4"
+          action = {gotToExplorePursesTab}
         >
           Join a Purse
+          
         </Button>
       </div>
     </div>

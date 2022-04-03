@@ -114,32 +114,32 @@ export const tokenData = [
 ]
 export const purseData = {
   myPurses: [
-    {
-      address: "0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD",
-      createdOn: "06 Sep. 2021",
-      members: ["0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD", "0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD"],
-      maxMember: 3,
-      amount: 100,
-      collateral: 300,
-      totalContrbution: 400,
-      open: true,
-      frequency: 7,
-      bentoBoxBal: 0,
-      chatId: 434
-    },
-    {
-      address: "0x67dBAF6D282E42F1374300284d439222C08D8dd2",
-      createdOn: "06 Sep. 2021",
-      members: ["0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD", "0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD"],
-      maxMember: 3,
-      amount: 100,
-      collateral: 300,
-      totalContrbution: 400,
-      open: true,
-      frequency: 7,
-      bentoBoxBal: 0,
-      chatId: 434
-    }
+    // {
+    //   address: "0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD",
+    //   createdOn: "06 Sep. 2021",
+    //   members: ["0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD", "0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD"],
+    //   maxMember: 3,
+    //   amount: 100,
+    //   collateral: 300,
+    //   totalContrbution: 400,
+    //   open: true,
+    //   frequency: 7,
+    //   bentoBoxBal: 0,
+    //   chatId: 434
+    // },
+    // {
+    //   address: "0x67dBAF6D282E42F1374300284d439222C08D8dd2",
+    //   createdOn: "06 Sep. 2021",
+    //   members: ["0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD", "0xb4baf6C1f1B5c63fE4eEB3BDc3Fc93570424aBBD"],
+    //   maxMember: 3,
+    //   amount: 100,
+    //   collateral: 300,
+    //   totalContrbution: 400,
+    //   open: true,
+    //   frequency: 7,
+    //   bentoBoxBal: 0,
+    //   chatId: 434
+    // }
   ],
   allPurses: [
     {
