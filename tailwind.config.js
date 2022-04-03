@@ -82,6 +82,9 @@ module.exports = {
       minWidth:{
         400:"400px"
       },
+      maxWidth:{
+        tooltip: "15rem"
+      },
       height: {
         screenfit: 'calc(100vh - 75px)',
         "screen-fit-80": "80vh",
