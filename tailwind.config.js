@@ -84,6 +84,17 @@ module.exports = {
       },
       height: {
         screenfit: 'calc(100vh - 75px)',
+        "screen-fit-80": "80vh",
+        "screen-fit-70": "70vh",
+        "screen-fit-60": "60vh",
+        "screen-fit-50": "50vh"
+      },
+      minHeight: {
+        screenfit: 'calc(100vh - 75px)',
+        "screen-fit-80": "80vh",
+        "screen-fit-70": "70vh",
+        "screen-fit-60": "60vh",
+        "screen-fit-50": "50vh"
       }
     },
   },

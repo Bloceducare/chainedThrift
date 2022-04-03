@@ -16,10 +16,7 @@ const PurseList = ({ purseList = [], isMyPurses}) => {
       {purseList.map((item, idx) => (
         <Purse
           key={idx}
-          purseId={idx}
-          created={item.created}
-          member={item.member}
-          tvl={item.tvl}
+          purse = {item}
         />
       ))}
     </div>
