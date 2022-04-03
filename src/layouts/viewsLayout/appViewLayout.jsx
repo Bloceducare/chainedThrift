@@ -1,21 +1,19 @@
-import React, { Suspense, lazy, useState, useEffect, useCallback } from "react";
+import React, { Suspense, lazy, useState, useEffect, useCallback, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
 import Fallback from "../fallback";
 import { appRoutes } from "../../utils/routes";
 import {ConnectWalletModal, openWalletModal, closeWalletModal} from '../../common/connectWalletModal';
 import {ModalWrapper} from "../../common/modalWrapper";
-import {useSelector, useDispatch} from "react-redux"
-import { Web3ReactProvider} from '@web3-react/core'
-import { getLibrary } from '../../web3'
+import {useSelector, useDispatch} from "react-redux";
 import AppHeader from "../../common/appHeader/appHeader";
 import { appNav } from "../../static/data";
-import { useEagerConnect } from "../../web3";
 import AppSideDrawer from "../../common/appSideDrawer/appSideDrawer";
+import { useEagerConnect } from "../../web3";
 const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
-const CreatePurse = lazy(() => import("../../pages/createPurse/createPurse"))
-const NotFound = lazy(()=> import("../notFound"))
+const CreatePurse = lazy(() => import("../../pages/createPurse/createPurse"));
+const NotFound = lazy(()=> import("../notFound"));
 
 
 const AppViewLayout = () => {
@@ -28,6 +26,9 @@ const AppViewLayout = () => {
   const handleWalletModalOpen = () => {
     dispatch(openWalletModal());
   }
+
+  // connecting eagerly
+    useEagerConnect();
 
   const [openSidebar, setOpenSidebar] = useState(false)
   const [renderSideDrawer, setRenderSideDrawer] = useState(window.innerWidth < 1024)
@@ -54,11 +55,9 @@ const AppViewLayout = () => {
   }, [mediaQueryChanged, mql])
 
 
-  useEagerConnect()
-
   
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
+    <Fragment>
       <AppHeader
         data={appNav}
         displayWalletModal = {handleWalletModalOpen}
@@ -89,7 +88,7 @@ const AppViewLayout = () => {
           onClose={handleWalletModalClose} 
         />
       </ModalWrapper>
-    </Web3ReactProvider>
+    </Fragment>
   );
 };
 
