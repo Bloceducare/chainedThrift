@@ -2,6 +2,7 @@ import React from "react";
 import { IoIosArrowBack, IoIosHelpCircleOutline } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
 
 const CreatePurse = () => {
   const navigate = useNavigate();
@@ -29,7 +30,11 @@ const CreatePurse = () => {
             <div className="grid gap-2 grid-cols-3 mb-6">
               <div className="col-span-1">
                 <span className="block text-xs">
-                  <IoIosHelpCircleOutline className="inline text-xl" /> token
+                  <IoIosHelpCircleOutline
+                    data-tip="token to be used"
+                    className="inline text-xl"
+                  />{" "}
+                  token
                 </span>
                 <button
                   className="block align-middle text-sm bg-gray-2 text-white-1 py-2 px-4 rounded"
@@ -41,7 +46,11 @@ const CreatePurse = () => {
               </div>
               <div className="col-span-2">
                 <label htmlFor="amount" className="block text-xs">
-                  <IoIosHelpCircleOutline className="inline text-xl" /> Amount
+                  <IoIosHelpCircleOutline
+                    data-tip="amount to be contributed by each member for each round"
+                    className="inline text-xl"
+                  />{" "}
+                  Amount
                 </label>
                 <input
                   type="text"
@@ -53,8 +62,11 @@ const CreatePurse = () => {
             <div className="grid gap-2 grid-cols-2 mb-6">
               <div className="col-span-1">
                 <label htmlFor="members" className="block text-xs">
-                  <IoIosHelpCircleOutline className="inline text-xl" /> Members
-                  count
+                  <IoIosHelpCircleOutline
+                    data-tip="Maximum number of members allowed in the purse"
+                    className="inline text-xl"
+                  />{" "}
+                  Members count
                 </label>
                 <input
                   type="number"
@@ -66,7 +78,10 @@ const CreatePurse = () => {
               </div>
               <div className="col-span-1">
                 <label htmlFor="frequncy" className="block text-xs">
-                  <IoIosHelpCircleOutline className="inline text-xl" />{" "}
+                  <IoIosHelpCircleOutline
+                    data-tip="Days interval between contribution rounds"
+                    className="inline text-xl"
+                  />{" "}
                   Frequency in days
                 </label>
                 <input
@@ -79,7 +94,10 @@ const CreatePurse = () => {
             <div className="grid gap-2 grid-cols-2 mb-6">
               <div className="col-span-1">
                 <label htmlFor="collateral" className="block text-xs">
-                  <IoIosHelpCircleOutline className="inline text-xl" />{" "}
+                  <IoIosHelpCircleOutline
+                    data-tip="the total amount required to be locked by every member of the purse, this will be deposited in a pool so you can get yields on them at the end of the purse contributions"
+                    className="inline text-xl"
+                  />{" "}
                   Collateral
                 </label>
                 <input
@@ -90,8 +108,11 @@ const CreatePurse = () => {
               </div>
               <div className="col-span-1">
                 <label htmlFor="total" className="block text-xs">
-                  <IoIosHelpCircleOutline className="inline text-xl" /> Total
-                  amount
+                  <IoIosHelpCircleOutline
+                    data-tip="Contribution amount plus collateral amount. this is the total amount you are spending to create this purse"
+                    className="inline text-xl"
+                  />{" "}
+                  Total amount
                 </label>
                 <input
                   type="text"
@@ -108,6 +129,7 @@ const CreatePurse = () => {
                 Connect wallet
               </button>
             </div>
+            <ReactTooltip className="max-w-tooltip" />
           </form>
         </div>
       </section>

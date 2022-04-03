@@ -45,9 +45,6 @@ const AppViewLayout = () => {
   },[mql]);
   
 
-  
-  
-
   useEffect(() => {
     mql.addEventListener("change", mediaQueryChanged)
   
