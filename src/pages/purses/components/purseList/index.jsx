@@ -3,11 +3,14 @@ import Purse from "../purse";
 import NoPurse from "../noPurse"
 
 
-const PurseList = ({ purseList = [], isMyPurses}) => {
+const PurseList = ({ purseList = [], isMyPurses, gotToExplorePursesTab, gotToCreateNewPurse }) => {
 
   if(isMyPurses && purseList.length === 0 ) {
     return (
-      <NoPurse />
+      <NoPurse
+        gotToExplorePursesTab = {gotToExplorePursesTab}
+        gotToCreateNewPurse = {gotToCreateNewPurse}
+      />
     )
   }
   

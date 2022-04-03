@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
 import { purseData } from "../../static/data";
 import PurseList from "./components/purseList";
 import clsx from "clsx";
 import { IoWalletOutline } from "react-icons/io5";
 import { MdOutlineExplore } from "react-icons/md";
 import {absoluteRoutes} from '../../utils'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Purses = () => {
-  const navigate = useNavigate();
-  const tabs = {
-    MY_PURSES: "myPurses",
-    MEXPLORE_PURSES: "explorePurses"
-  }
-  const [category, setCategory] = useState(tabs.MY_PURSES);
 
-  useEffect(() => {}, [category]);
+  const navigate = useNavigate();
+  const TABS = {
+    ALL: "all",
+    OWNED: "owned",
+  }
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tab = searchParams.get("tab")
+
   return (
     <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover">
       <section className="container mx-auto px-4 sm:px-6 md:px-0">
@@ -36,10 +36,9 @@ const Purses = () => {
             className={clsx({
               "flex items-center cursor-pointer mr-4 md:mr-12": true,
               "border-b-4 dark:border-b-white border-b-dark-1":
-                category === "myPurses",
-              "md:mr-12": category !== "myPurses",
+              tab === TABS.OWNED
             })}
-            onClick={() => setCategory("myPurses")}
+            onClick={() => setSearchParams({tab: TABS.OWNED})}
           >
             <IoWalletOutline className="text-dark-1 dark:text-light-1 text-2xl md:text-3xl mr-2" />
             <span className="Poppins font-medium text-base dark:text-white-1 text-dark-1">
@@ -50,9 +49,9 @@ const Purses = () => {
             className={clsx({
               "flex items-center cursor-pointer": true,
               "border-b-4 dark:border-b-white border-b-dark-1":
-                category === "explorePurses",
+              tab !== TABS.OWNED,
             })}
-            onClick={() => setCategory("explorePurses")}
+            onClick={() => setSearchParams({tab: TABS.ALL})}
           >
             <MdOutlineExplore className="text-dark-1 dark:text-light-1 text-2xl md:text-3xl mr-2" />
             <span className="Poppins font-medium text-base dark:text-white-1 text-dark-1">
@@ -60,10 +59,12 @@ const Purses = () => {
             </span>
           </button>
         </div>
-        <div className="mt-8 pb-8 h-screen-fit-70 overflow-y-scroll">
+        <div className="mt-8 pb-8 h-screen-fit-70 overflow-y-auto">
           <PurseList 
-            purseList={category === "myPurses" ? purseData.myPurses : purseData.allPurses}
-            isMyPurses = {category === "myPurses"}
+            purseList={tab === TABS.OWNED ? purseData.myPurses : purseData.allPurses}
+            isMyPurses = {tab === TABS.OWNED}
+            gotToExplorePursesTab = {() => setSearchParams({tab: TABS.ALL})}
+            gotToCreateNewPurse = {() => navigate(absoluteRoutes.new_purse)}
           />
         </div>
       </section>
