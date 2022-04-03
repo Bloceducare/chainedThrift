@@ -17,7 +17,7 @@ const Purses = () => {
 
   useEffect(() => {}, [category]);
   return (
-    <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover min-h-screen">
+    <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover">
       <section className="container mx-auto px-4 sm:px-6 md:px-0">
         <div className="flex justify-between mt-4 md:mt-12">
           <h1 className="font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg dark:text-white-1 text-dark-1">
@@ -60,7 +60,7 @@ const Purses = () => {
             </span>
           </button>
         </div>
-        <div className="mt-8 pb-8">
+        <div className="mt-8 pb-8 h-screen-fit-70 overflow-y-scroll">
           <PurseList 
             purseList={category === "myPurses" ? purseData.myPurses : purseData.allPurses}
             isMyPurses = {category === "myPurses"}
