@@ -59,7 +59,7 @@ const Purses = () => {
             </span>
           </button>
         </div>
-        <div className="mt-8 pb-8 h-screen-fit-70 overflow-y-auto">
+        <div className="mt-8 pb-8 h-screen-fit-70 overflow-y-auto mb-20 sm:mb-0">
           <PurseList 
             purseList={tab === TABS.OWNED ? purseData.myPurses : purseData.allPurses}
             isMyPurses = {tab === TABS.OWNED}
