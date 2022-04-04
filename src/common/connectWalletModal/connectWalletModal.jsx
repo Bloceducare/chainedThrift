@@ -1,6 +1,6 @@
 import React from "react";
 import { CgCloseR } from "react-icons/cg";
-import { connectorsData, useEagerConnect } from "../../web3";
+import { connectorsData } from "../../web3";
 import { useWeb3React } from "@web3-react/core";
 import { getConnectionError } from "../../web3";
 import clsx from "clsx";
@@ -8,9 +8,6 @@ import clsx from "clsx";
 const ConnectWalletModal = ({ onClose }) => {
 
   const { activate } = useWeb3React();
-
-  // helps to connect quickly incase the user previusly has browser wallet connected
-  useEagerConnect();
 
   // handle logic to recognize the connector currently being activated
   // const [activatingConnector, setActivatingConnector] = useState(undefined);
@@ -34,7 +31,7 @@ const ConnectWalletModal = ({ onClose }) => {
       </div>
       <div className="">
         <div
-          className={`text-gray-6 p-2 rounded md:rounded-xl w-full mt-6 mb-4 text-left`}
+          className={`text-gray-6 p-2 rounded md:rounded-xl w-full mt-2 mb-4 text-left`}
         >
           <span className="text-base md:text-base">
             <span>By connecting a wallet, you have agreed to chained thrift </span>
