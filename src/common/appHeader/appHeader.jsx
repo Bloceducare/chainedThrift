@@ -11,13 +11,13 @@ import { NavLink } from "react-router-dom";
 const AppHeader = ({ displayWalletModal, data = [], toggleDrawer }) => {
 
   const {changeTheme} = useTheme()
-
   const navigate = useNavigate();
-  const { active, account } = useWeb3React()
-  // console.log({ activeTab });
+  const { active, account } = useWeb3React();
+
   const handleRedirect = (link) => {
     navigate(link);
   };
+
   return (
     <header className="relative dark:bg-dark-1 bg-light-1 flex flex-wrap items-center justify-between px-2 py-0">
       <div className="container px-4 py-2 dark:bg-nav-dark bg-nav-light mx-auto flex flex-wrap rounded-br rounded-bl items-center justify-between">
