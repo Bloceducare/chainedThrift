@@ -5,7 +5,7 @@ const Purse = ({purse}) => {
   const open = purse.members.length < purse.maxMember ? true : false;
   return (
     <div
-      className="h-44   dark:bg-dark-2 bg-blue-7 p-4 rounded-2xl cursor-pointer"
+      className="h-44 dark:bg-dark-2 bg-blue-7 p-4 rounded-2xl cursor-pointer"
       // onClick={() => onClick(purseId)}
     >
       <div className="flex justify-between">

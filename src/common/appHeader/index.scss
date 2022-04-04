@@ -1,0 +1,14 @@
+.account-component {
+    @apply ml-auto lg:ml-0 mr-4;
+}
+
+
+@media only screen and (max-width: 620px) {
+    .account-component {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        @apply w-full m-0 dark:bg-dark-2 bg-white-3 p-4 border-t-2 border-purple-3;
+    }
+}
