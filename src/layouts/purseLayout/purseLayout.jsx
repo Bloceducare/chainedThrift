@@ -15,7 +15,7 @@ const PurseSettings = lazy(() =>
 );
 
 const PurseLayout = () => {
-    const { pathname } = useLocation();
+    let { pathname } = useLocation();
     const [currentTab, setCurrentTab] = useState(null);
 
     const purseTabs = {
@@ -26,6 +26,8 @@ const PurseLayout = () => {
     };
 
     useEffect(() => {
+        // remove trailing slash if any
+        pathname = pathname.replace(/\/$/, "");
         const pathArr = pathname.split("/");
         if (pathArr.length === 5) {
             const path = pathArr[pathArr.length - 1];
