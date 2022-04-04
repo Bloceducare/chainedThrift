@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Notification from "./Notification";
 import { FiBell } from "react-icons/fi";
-import LisplayBox from "../listDisplayBox";
+import PurseInfo from "../purseInfo";
 import MobileBar from "../MobileBar";
 
 const PurseHeader = ({ currentTab }) => {
@@ -41,7 +41,7 @@ const PurseHeader = ({ currentTab }) => {
                     {show && <Notification />}
                 </div>
             </div>
-            <LisplayBox />
+            <PurseInfo />
             <MobileBar currentTab={currentTab} />
         </div>
     );
