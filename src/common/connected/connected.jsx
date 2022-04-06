@@ -12,15 +12,15 @@ const generateIdenticon = (address) => {
 
 const Connected = ({balance, address}) => {
   return (
-    <div className='text-white flex border-purple-1 border-2 rounded-xl font-bold text-md cursor-pointer'>
-        <div className="bg-purple-1 py-2 px-4 rounded-tl-xl rounded-bl-xl">
-            2.25ETH
+    <div className='w-72 text-white flex border-purple-3 border-2 rounded-lg font-black text-md cursor-pointer'>
+        <div className="w-2/6 bg-purple-3 py-2 px-4 rounded-tl-md rounded-bl-md">
+            {0} <span className="text-xs">ETH</span>
         </div>
-        <div className="p-2 flex items-center">
-            <span className="mr-2">
+        <div className="w-4/6 p-2 flex items-center justify-between">
+            <span className="text-purple-3 dark:text-white-1">
                 {shortenAddress(address)}
             </span>
-            <img alt = "wallet jazicon" src = {generateIdenticon(address).toDataURL()} className = "rounded-full w-6" />
+            <img alt = "wallet jazicon" src = {generateIdenticon(address).toDataURL()} className = "rounded-full w-8 border-2 border-purple-3" />
         </div>
     </div>
   )
