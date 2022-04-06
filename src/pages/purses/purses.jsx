@@ -18,7 +18,7 @@ const Purses = () => {
 
   return (
     <main className="bg-overlay-img-light dark:bg-dark dark:bg-overlay-img bg-cover">
-      <section className="container mx-auto px-4 sm:px-6 md:px-0">
+      <section className="container mx-auto px-4 sm:px-6 md:p-10">
         <div className="flex justify-between mt-4 md:mt-12">
           <h1 className="font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg dark:text-white-1 text-dark-1">
             Thrift Purses
