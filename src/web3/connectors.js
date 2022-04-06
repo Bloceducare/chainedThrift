@@ -1,49 +1,53 @@
-import { InjectedConnector } from '@web3-react/injected-connector';
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
-import { MathWallet, Metamask, SafePal, TrustWallet, WalletConnect } from '../common/svgIcons';
-
-
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import {
+    MathWallet,
+    Metamask,
+    SafePal,
+    TrustWallet,
+    WalletConnect,
+} from "../common/svgIcons";
 
 const rpcUrls = {
-    4: 'https://speedy-nodes-nyc.moralis.io/9d1f9e8f5fbf596688e88840/eth/rinkeby'
-}
+    4: "https://speedy-nodes-nyc.moralis.io/9d1f9e8f5fbf596688e88840/eth/rinkeby",
+};
 
 export const injected = new InjectedConnector({
-    supportedChainIds: [4]
+    supportedChainIds: [4],
 });
 
 const walletConnect = new WalletConnectConnector({
     rpc: {
         4: rpcUrls[4],
         qrcode: true,
-        pollingInterval: 8000
-    }
-})
+        pollingInterval: 8000,
+    },
+});
 
 export const connectorsData = [
     {
-        name: 'Metamask',
+        name: "Metamask",
         connector: injected,
-        icon: Metamask
+        icon: Metamask,
     },
     {
-        name: 'Trust Wallet',
+        name: "Trust Wallet",
+        connector: injected,
+        icon: TrustWallet,
+    },
+    {
+        name: "Wallet Connect",
         connector: walletConnect,
-        icon: TrustWallet
+        icon: WalletConnect,
     },
     {
-        name: 'Wallet Connect',
-        connector: walletConnect,
-        icon: WalletConnect
-    },
-    {
-        name: 'SafePal',
+        name: "SafePal",
         connector: injected,
-        icon: SafePal
+        icon: SafePal,
     },
     {
-        name: 'MathWallet',
+        name: "MathWallet",
         connector: injected,
-        icon: MathWallet
+        icon: MathWallet,
     },
-]
+];

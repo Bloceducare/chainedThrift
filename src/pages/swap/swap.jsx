@@ -33,7 +33,7 @@ const Swap = () => {
         {showSwap && (
           <div className="justify-center items-center backdrop-blur-sm  flex lg:mt-16">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">
-              <div className={`border-0 rounded-lg dark:bg-dark-4 bg-blue-10 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none`}>
+              <div className={`border-0 rounded-lg dark:bg-dark-4 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none`}>
                 <div className="flex justify-center py-12 pb-2 px-4 rounded-t">
                   <h3 className={`Poppins text-base font-semibold dark:text-white text-dark`}>
                     Swap
