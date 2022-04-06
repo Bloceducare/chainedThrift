@@ -31,7 +31,6 @@ export const fallbackCopyToClipBoard = (text) => {
 
 export const copyToClipBoard = (text) => {
     if (!navigator.clipboard) return fallbackCopyToClipBoard(text);
-
     return navigator.clipboard
         .writeText(text)
         .then(() => {
