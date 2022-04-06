@@ -37,6 +37,7 @@ const PurseLayout = () => {
         } else if (pathArr.length === 4) {
             setCurrentTab(purseTabs.OVERVIEW);
         }
+        // eslint-disable-next-line
     }, [pathname]);
 
     return (
