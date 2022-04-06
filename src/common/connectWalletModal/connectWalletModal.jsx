@@ -52,7 +52,7 @@ const ConnectWalletModal = ({ onClose }) => {
                     <span className="text-base md:text-base">
                         <span>
                             By connecting a wallet, you have agreed to chained
-                            thrift{" "}
+                            thrift's{" "}
                         </span>
                         <span>
                             <a href="#!" className="text-blue-1">
