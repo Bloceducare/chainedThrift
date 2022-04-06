@@ -9,6 +9,7 @@ import AppHeader from "../../common/appHeader/appHeader";
 import { appNav } from "../../static/data";
 import AppSideDrawer from "../../common/appSideDrawer/appSideDrawer";
 import { useEagerConnect } from "../../web3";
+import AccountDetails from "../../common/accountDetails/accountDetails";
 const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
@@ -25,6 +26,12 @@ const AppViewLayout = () => {
   }
   const handleWalletModalOpen = () => {
     dispatch(openWalletModal());
+  }
+
+  const [accountDetails, setAccountDetails] = useState(false)
+
+  const accountDetailsHandler = () =>{
+    setAccountDetails(!accountDetails)
   }
 
   // connecting eagerly
@@ -59,6 +66,7 @@ const AppViewLayout = () => {
   return (
     <Fragment>
       <AppHeader
+        onClose={accountDetailsHandler}
         data={appNav}
         displayWalletModal = {handleWalletModalOpen}
         toggleDrawer = {toggleDrawer}
@@ -87,6 +95,13 @@ const AppViewLayout = () => {
         <ConnectWalletModal
           onClose={handleWalletModalClose} 
         />
+      </ModalWrapper>
+      <ModalWrapper
+        open = {accountDetails}
+        onClose = {accountDetailsHandler}
+        label = "AccountDetails"
+      >
+       <AccountDetails onClose={accountDetailsHandler}/>
       </ModalWrapper>
     </Fragment>
   );

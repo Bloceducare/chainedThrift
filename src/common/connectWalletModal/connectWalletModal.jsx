@@ -7,7 +7,7 @@ import { useToasts } from "react-toast-notifications";
 import clsx from "clsx";
 
 const ConnectWalletModal = ({ onClose }) => {
-    const { active, activate, connector } = useWeb3React();
+    const { active, activate} = useWeb3React();
     const { addToast } = useToasts();
 
     // handle logic to recognize the connector currently being activated
@@ -31,6 +31,7 @@ const ConnectWalletModal = ({ onClose }) => {
             });
             onClose();
         }
+        // eslint-disable-next-line
     }, [active]);
 
     return (

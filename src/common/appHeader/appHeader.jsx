@@ -9,7 +9,7 @@ import useTheme from "../../hooks/useTheme";
 import { NavLink } from "react-router-dom";
 import "./index.scss";
 
-const AppHeader = ({ displayWalletModal, data = [], toggleDrawer }) => {
+const AppHeader = ({ displayWalletModal, data = [], toggleDrawer, onClose }) => {
     const { changeTheme } = useTheme();
     const navigate = useNavigate();
     const { active, account } = useWeb3React();
@@ -55,7 +55,7 @@ const AppHeader = ({ displayWalletModal, data = [], toggleDrawer }) => {
                 </nav>
                 <div className="account-component">
                   {active ? (
-                        <Connected address={account} balance={0} />
+                        <Connected onClose={onClose} address={account} balance={0} />
                     ) : (
                         <HeaderButton className = "mx-auto" action={displayWalletModal}>
                             Connect wallet

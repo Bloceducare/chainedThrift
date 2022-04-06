@@ -10,9 +10,9 @@ const generateIdenticon = (address) => {
 
 }
 
-const Connected = ({balance, address}) => {
+const Connected = ({balance, address,onClose}) => {
   return (
-    <div className='w-72 text-white flex border-purple-3 border-2 rounded-lg font-black text-md cursor-pointer'>
+    <div onClick={onClose} className='w-72 text-white flex border-purple-3 border-2 rounded-lg font-black text-md cursor-pointer'>
         <div className="w-2/6 bg-purple-3 py-2 px-4 rounded-tl-md rounded-bl-md">
             {0} <span className="text-xs">ETH</span>
         </div>
