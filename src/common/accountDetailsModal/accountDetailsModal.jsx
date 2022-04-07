@@ -8,7 +8,7 @@ import { useToasts } from "react-toast-notifications";
 import { BiLinkExternal } from "react-icons/bi";
 import { IoCopyOutline } from "react-icons/io5";
 
-function AccountDetails({ onClose }) {
+export function AccountDetailsModal({ onClose }) {
     const { account } = useWeb3React();
     const { addToast } = useToasts();
 
@@ -118,4 +118,4 @@ function AccountDetails({ onClose }) {
     );
 }
 
-export default AccountDetails;
+export default AccountDetailsModal;

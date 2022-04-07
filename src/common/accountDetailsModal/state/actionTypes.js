@@ -1,0 +1,2 @@
+export const OPEN = "OPEN_ACCOUNT_DETAILS_MODAL";
+export const CLOSE = "CLOSE_ACCOUNT_DETAILS_MODAL";

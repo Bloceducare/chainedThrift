@@ -11,16 +11,16 @@ import Fallback from "../fallback";
 import { appRoutes } from "../../utils/routes";
 import {
     ConnectWalletModal,
-    openWalletModal,
-    closeWalletModal,
+    OPEN_WALLET_MODAL,
+    CLOSE_WALLET_MODAL,
 } from "../../common/connectWalletModal";
+import {OPEN_ACCOUNT_DETAILS_MODAL, CLOSE_ACCOUNT_DETAILS_MODAL, AccountDetailsModal} from '../../common/accountDetailsModal'
 import { ModalWrapper } from "../../common/modalWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import AppHeader from "../../common/appHeader/appHeader";
 import { appNav } from "../../static/data";
 import AppSideDrawer from "../../common/appSideDrawer/appSideDrawer";
 import { useEagerConnect } from "../../web3";
-import AccountDetails from "../../common/accountDetails/accountDetails";
 const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
@@ -28,24 +28,30 @@ const CreatePurse = lazy(() => import("../../pages/createPurse/createPurse"));
 const NotFound = lazy(() => import("../notFound"));
 
 const AppViewLayout = () => {
-    const ConnectWalletModalState = useSelector(
-        (state) => state.ConnectWalletModal
+    
+    const connectWalletModalState = useSelector(
+        (state) => state.connectWalletModal
+    );
+
+    const accountDetailsModalstate = useSelector(
+        (state) => state.accountDetailsModal
     );
     const dispatch = useDispatch();
 
-    const handleWalletModalClose = () => {
-        dispatch(closeWalletModal());
-    };
-    const handleWalletModalOpen = () => {
-        dispatch(openWalletModal());
-    };
+    const toggleWalletModalDisplay = () => {
+        if(connectWalletModalState.open)
+        return dispatch(CLOSE_WALLET_MODAL())
 
-    const [accountDetailsModalState, setAccountDetailsModalState] =
-        useState(false);
+        return dispatch(OPEN_WALLET_MODAL())
+    }
 
-    const handleAccountDetailsModalOpen = () => {
-        setAccountDetailsModalState((prev) => !prev);
-    };
+    const toggleAccountDetailsModalDisplay = () => {
+        if(accountDetailsModalstate.open)
+        return dispatch(CLOSE_ACCOUNT_DETAILS_MODAL())
+
+        return dispatch(OPEN_ACCOUNT_DETAILS_MODAL())
+    }
+
 
     // connecting eagerly
     useEagerConnect();
@@ -77,9 +83,9 @@ const AppViewLayout = () => {
     return (
         <Fragment>
             <AppHeader
-                onClose={handleAccountDetailsModalOpen}
+                onClose={toggleAccountDetailsModalDisplay}
                 data={appNav}
-                displayWalletModal={handleWalletModalOpen}
+                displayWalletModal={toggleWalletModalDisplay}
                 toggleDrawer={toggleDrawer}
             />
             <Suspense fallback={<Fallback />}>
@@ -102,18 +108,18 @@ const AppViewLayout = () => {
                 />
             )}
             <ModalWrapper
-                open={ConnectWalletModalState.open}
-                onClose={handleWalletModalClose}
+                open={connectWalletModalState.open}
+                onClose={toggleWalletModalDisplay}
                 label="Connect wallet"
             >
-                <ConnectWalletModal onClose={handleWalletModalClose} />
+                <ConnectWalletModal onClose={toggleWalletModalDisplay} />
             </ModalWrapper>
             <ModalWrapper
-                open={accountDetailsModalState}
-                onClose={handleAccountDetailsModalOpen}
+                open={accountDetailsModalstate.open}
+                onClose={toggleAccountDetailsModalDisplay}
                 label="Account Details"
             >
-                <AccountDetails onClose={handleAccountDetailsModalOpen} />
+                <AccountDetailsModal onClose={toggleAccountDetailsModalDisplay} />
             </ModalWrapper>
         </Fragment>
     );
