@@ -3,16 +3,6 @@ module.exports = {
     content: ["./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
         extend: {
-            // container: {
-            //     screens: {
-            //         none: "100%",
-            //         sm: "640px",
-            //         md: "768px",
-            //         lg: "1024px",
-            //         xl: "1180px",
-            //         "2xl": "1536px",
-            //     },
-            // },
             colors: {
                 "dark-1": "#000",
                 "dark-2": "#131118",
