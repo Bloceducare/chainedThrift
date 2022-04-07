@@ -27,8 +27,8 @@ const PurseLayout = () => {
 
     useEffect(() => {
         // remove trailing slash if any
-        pathname = pathname.replace(/\/$/, "");
-        const pathArr = pathname.split("/");
+        const pathString = pathname.replace(/\/$/, "");
+        const pathArr = pathString.split("/");
         if (pathArr.length === 5) {
             const path = pathArr[pathArr.length - 1];
             const tab = purseTabs[path.toUpperCase()];

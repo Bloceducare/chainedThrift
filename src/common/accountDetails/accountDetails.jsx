@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { shortenAddress } from "../../utils/helpers";
 import { useWeb3React } from "@web3-react/core";
 import { CgCloseR } from "react-icons/cg";
