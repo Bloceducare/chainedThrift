@@ -4,13 +4,13 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import HeaderButton from "../buttons/headerButton";
 import { useWeb3React } from "@web3-react/core";
 import Connected from "../connected/connected";
-import Button from "../../common/themeingToggle/Button";
+import ThemeSwitch from "../themeSwitch/themeSwitch";
 import useTheme from "../../hooks/useTheme";
 import { NavLink } from "react-router-dom";
 import "./index.scss";
 
 const AppHeader = ({ displayWalletModal, data = [], toggleDrawer, onClose }) => {
-    const { changeTheme } = useTheme();
+    const { theme, changeTheme } = useTheme();
     const navigate = useNavigate();
     const { active, account } = useWeb3React();
 
@@ -63,9 +63,10 @@ const AppHeader = ({ displayWalletModal, data = [], toggleDrawer, onClose }) => 
                     )}
                 </div>
                 <div className="flex items-center">
-                    <Button
+                    <ThemeSwitch
                         className="dark:transform-none transform translate-x-6 dark:translate-none"
                         action={changeTheme}
+                        theme = {theme}
                     />
                     <button
                         className="block lg:hidden text-white cursor-pointer outline-none ml-4"

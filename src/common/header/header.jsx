@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi"
 import HeaderButton from "../buttons/headerButton";
-import Button from "../../common/themeingToggle/Button";
+import ThemeSwitch from "../themeSwitch/themeSwitch";
 import useTheme from "../../hooks/useTheme";
 
 const Header = ({ data = [], toggleDrawer}) => {
-  const {changeTheme} = useTheme();
+  const {theme, changeTheme} = useTheme();
   const navigate = useNavigate();
   const redirectToApp = () => {
     navigate("/app/purses");
@@ -47,7 +47,7 @@ const Header = ({ data = [], toggleDrawer}) => {
         </nav>
 
         <div className="flex items-center">
-          <Button  className= "dark:transform-none transform translate-x-6 dark:translate-none" action={changeTheme}/>
+          <ThemeSwitch  className= "dark:transform-none transform translate-x-6 dark:translate-none" action={changeTheme} theme = {theme}/>
           <button
             className="block lg:hidden text-white cursor-pointer outline-none ml-4"
             type="button"
