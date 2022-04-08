@@ -68,6 +68,8 @@ module.exports = {
                     "conic-gradient(#004EA5 0deg, #004EA5 130deg, #7195BD 130deg, #7195BD 220deg, #2E81DF 220deg, #2E81DF 310deg, #B3D2F5 310deg)",
                 "purple-gradient":
                     "linear-gradient(180deg, #833EF1 0%, #491CB5 100%)",
+                "purple-gradient-1":
+                    "linear-gradient(180deg, #833EF1 100%, #491CB5 100%)",
                 Inter: ["Inter", "sans-serif"],
             },
             boxShadow: {
