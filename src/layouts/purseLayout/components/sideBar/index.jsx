@@ -19,7 +19,7 @@ const SideBar = ({ currentTab }) => {
                     <div
                         key={item.name}
                         className={clsx({
-                            "Poppins text-sm cursor-pointer text-white-1 hover:text-purple-2 flex items-center h-12 hover:bg-gray-3 pl-8 hover:border-l-2 border-l-white-1": true,
+                            "Poppins text-sm  cursor-pointer text-white-1 hover:text-purple-2 flex items-center h-12 hover:bg-gray-3 pl-8 hover:border-l-2 border-l-white-1": true,
                             "text-gray-15 bg-purple-3":
                                 item.name.toLocaleLowerCase() === currentTab,
                         })}

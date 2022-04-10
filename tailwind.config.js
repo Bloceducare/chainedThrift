@@ -46,11 +46,13 @@ module.exports = {
                 "green-1": "#42FF00",
                 "light-1": "#FAFAFA",
                 "blue-10": "#D4E5F1",
+                "pallet-3":"#1f1b58"
             },
             backgroundImage: {
                 "overlay-img": "url('../public/assets/bg.svg')",
                 "overlay-img-light": "url('../public/assets/lightbg.svg')",
                 "overlay-img-2": "url('../public/assets/coin.svg')",
+                "overlay-purse":"url('../public/assets/overlay2.svg')",
                 btn: "linear-gradient(180deg, #833EF1 0%, #491CB5 100%)",
                 "nav-dark":
                     "linear-gradient(90.18deg, rgba(61, 61, 61, 0.2052) 0%, rgba(29, 29, 29, 0.285) 100%)", //used for navbar in dark mode
