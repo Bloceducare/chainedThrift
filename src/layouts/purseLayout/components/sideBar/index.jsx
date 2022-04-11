@@ -4,6 +4,11 @@ import { purseTabsLink } from "../../../../static/data";
 import { BsArrowLeftShort } from "react-icons/bs";
 import clsx from "clsx";
 
+// width: 10px;
+// height: 10px;
+// position: relative;
+// border-radius: 20px;
+
 const SideBar = ({ currentTab }) => {
     const navigate = useNavigate();
     return (
@@ -15,11 +20,13 @@ const SideBar = ({ currentTab }) => {
                 />
             </div>
             <div className="">
+                {/* <div className="w-2.5 h-2.5 rounded-lg relative bg-red-500"></div> */}
                 {purseTabsLink.map((item) => (
+                
                     <div
                         key={item.name}
                         className={clsx({
-                            "Poppins text-sm cursor-pointer text-white-1 hover:text-purple-2 flex items-center h-12 hover:bg-gray-3 pl-8 hover:border-l-2 border-l-white-1": true,
+                            "Poppins text-sm relative cursor-pointer text-white-1 hover:text-purple-2 flex items-center h-12 hover:bg-gray-3 pl-8 hover:border-l-2 border-l-white-1": true,
                             "text-gray-15 bg-purple-3":
                                 item.name.toLocaleLowerCase() === currentTab,
                         })}
@@ -27,6 +34,7 @@ const SideBar = ({ currentTab }) => {
                             navigate(item.link);
                         }}
                     >
+                       {item.name.toLocaleLowerCase() === currentTab && <div className="w-2.5 h-2.5 rounded-lg absolute bg-pallet-4 right-12"></div> }  
                         <img
                             src={item.icon}
                             alt="link icon"
