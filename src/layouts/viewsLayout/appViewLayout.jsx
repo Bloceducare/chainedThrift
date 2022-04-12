@@ -54,8 +54,11 @@ const AppViewLayout = () => {
     }
 
 
+
     // connecting eagerly
     useEagerConnect();
+
+
 
     const [openSidebar, setOpenSidebar] = useState(false);
     const [renderSideDrawer, setRenderSideDrawer] = useState(

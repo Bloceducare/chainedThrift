@@ -12,6 +12,7 @@
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "^6.2.13",
     "clsx": "^1.1.1",
+    "ethers": "^5.6.2",
     "install": "^0.13.0",
     "process": "^0.11.10",
     "react": "^17.0.2",
@@ -31,6 +32,10 @@
   },
   "scripts": {
     "start": "GENERATE_SOURCEMAP=false react-app-rewired start",
+    "dev:local": "REACT_APP_ENV=local npm start",
+    "dev:local:windows": "set REACT_APP_ENV=local && npm start",
+    "dev:testnet": "REACT_APP_ENV=testnet npm start",
+    "dev:testnet:windows": "set REACT_APP_ENV=testnet && npm start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
