@@ -1,1 +1,1 @@
-export const SAVE = "SAVE_PURSES"
+export const SAVE = "SAVE";

@@ -1,20 +1,12 @@
 import { SAVE } from ".";
 
-const initialState = {
-    allPurses: [
+const initialState = [];
 
-    ],
-    myPurses: [
-
-    ]
-}
-
-export const connectWalletModalReducer = (state = initialState, {type, payload}) => {
+export const pursesReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case SAVE:
-            return {...state, ...payload};
-        case CLOSE:
+            return { ...state, ...payload };
         default:
             return state;
     }
-}
+};

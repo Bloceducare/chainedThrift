@@ -10,3 +10,20 @@ input[type=number] {
     -moz-appearance: textfield;
     /* Firefox */
 }
+
+.token_menu_class {
+    border: none !important;
+    & .rc-dropdown-menu-item-selected {
+        @apply bg-gray-2 dark:bg-white-1 text-white-1 dark:text-gray-2 #{!important};
+    }
+}
+
+.token_menu_item_class {
+    @apply bg-white-1 dark:bg-dark-1;
+    &:hover {
+        @apply bg-gray-2 dark:bg-white-1 text-white-1 dark:text-gray-2 #{!important};
+    }
+    &:after {
+        display: none;
+    }
+}

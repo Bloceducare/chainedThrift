@@ -84,6 +84,7 @@ const AppViewLayout = () => {
         };
     }, [mediaQueryChanged, mql]);
 
+
     return (
         <Fragment>
             <AppHeader

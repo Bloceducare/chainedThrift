@@ -7,7 +7,7 @@ export const getTokenContract = (address, signerOrProvider) => {
     return new Contract(address, erc20abi, signerOrProvider);
 };
 
-export const getPurseFactory = (address, signerOrProvider) => {
+export const getPurseFactoryContract = (address, signerOrProvider) => {
     return new Contract(address, purseFactoryAbi, signerOrProvider);
 };
 

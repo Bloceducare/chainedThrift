@@ -15,6 +15,8 @@
     "ethers": "^5.6.2",
     "install": "^0.13.0",
     "process": "^0.11.10",
+    "rc-dropdown": "^3.4.1",
+    "rc-menu": "^9.5.5",
     "react": "^17.0.2",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^17.0.2",
@@ -32,10 +34,8 @@
   },
   "scripts": {
     "start": "GENERATE_SOURCEMAP=false react-app-rewired start",
-    "dev:local": "REACT_APP_ENV=local npm start",
-    "dev:local:windows": "set REACT_APP_ENV=local && npm start",
-    "dev:testnet": "REACT_APP_ENV=testnet npm start",
-    "dev:testnet:windows": "set REACT_APP_ENV=testnet && npm start",
+    "start:testnet": "REACT_APP_ENV=testnet npm start",
+    "start:testnet:windows": "set REACT_APP_ENV=testnet && npm start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
