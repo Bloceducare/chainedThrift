@@ -1,5 +1,5 @@
 import { useWeb3React } from "@web3-react/core";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { IoIosArrowBack, IoIosHelpCircleOutline } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -8,14 +8,25 @@ import ReactTooltip from "react-tooltip";
 import { isValidAmountValue, isPositiveInt } from "../../utils/helpers";
 import "./index.scss";
 import { OPEN_WALLET_MODAL } from "../../common/connectWalletModal";
+import Dropdown from "rc-dropdown";
+import Menu, { Item as MenuItem } from "rc-menu";
+import 'rc-dropdown/assets/index.css';
+import { tokensConfig } from "../../web3";
+import useToken from "../../web3/hooks/useToken";
+import { addresses } from "../../web3/constants";
+import { formatUnits, parseUnits } from "ethers/lib/utils";
+import usePurseFactory from "../../web3/hooks/usePurseFactory";
+import { BigNumber } from "ethers";
+import { useToasts } from "react-toast-notifications";
 
 const CreatePurse = () => {
     const navigate = useNavigate();
-    const {active} = useWeb3React()
+    const {active, chainId, library} = useWeb3React()
     const dispatch = useDispatch()
+    const { addToast } = useToasts();
 
     const [data, setData] = useState({
-        // token: null,
+        token: null,
         amount: "",
         membersCount: "",
         frequency: "",
@@ -23,7 +34,17 @@ const CreatePurse = () => {
         total: 0,
     });
 
-    const { amount, membersCount, frequency, collateral, total } = data;
+    const { token, amount, membersCount, frequency, collateral, total } = data;
+
+    const {balance, name:tokenName, symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
+
+    const {createPurse} = usePurseFactory()
+
+    
+    useEffect(() => {
+        // if(token) return;
+        setData(prev => ({...prev, token: !!tokensConfig[chainId] ? tokensConfig[chainId][0] : null}))
+    }, [chainId])
 
     useEffect(() => {
         if (Number(collateral) > 0 && Number(amount) > 0) {
@@ -44,7 +65,7 @@ const CreatePurse = () => {
             }));
 
         return setData((prev) => ({ ...prev, collateral: 0 }));
-    }, [amount, membersCount]);
+    }, [amount, membersCount, collateral]);
 
     const onInputChange = ({ target }) => {
         const elementName = target.name;
@@ -88,9 +109,69 @@ const CreatePurse = () => {
         }
     };
 
-    const HandleCreatePurse = () => {
-      
+    
+    const onselectToken = useCallback(({key}) => {
+        const tokenData = tokensConfig[chainId].find(token => token.address === key)
+        setData(prev => ({...prev, token: tokenData}));
+    },[setData, chainId])
+
+    const handleCreatePurse = async () => {
+        const allowance = await getAllowance();
+        const totalBN = parseUnits(total.toString(), decimals);
+
+        if(allowance.lt(totalBN)) {
+           await approve(...[,], totalBN, async (res) => {
+               if(!res.hash)
+               return addToast(res.message, {appearance: "error"});
+               await res.wait()
+               addToast(`${total} ${tokenSymbol} token approval successfull!`, {appearance: "success"});
+
+               await createPurse(
+                    parseUnits(amount.toString(), decimals),
+                    parseUnits(collateral.toString(), decimals),
+                    Number(membersCount),
+                    Number(frequency),
+                    Math.ceil(Math.random() * 1000),
+                    token.address,
+                    async (res) => {
+                        if(!res.hash)
+                        return addToast(res.message, {appearance: "error"});
+                        await res.wait()
+                        addToast("Purse created successfully!", {appearance: "success"});
+                    }
+                );
+           }).catch(err => {
+                return addToast("something went wrong!", {appearance: "error"});
+           })
+
+        } else {
+            await createPurse(
+                parseUnits(amount.toString(), decimals),
+                parseUnits(collateral.toString(), decimals),
+                Number(membersCount),
+                Number(frequency),
+                Math.ceil(Math.random() * 1000),
+                token.address,
+                async (res) => {
+                    if(!res.hash)
+                    return addToast(res.message, {appearance: "error"});
+                    await res.wait()
+                    addToast("Purse created successfully!", {appearance: "success"});
+                }
+            );
+        }
+        
+
     }
+
+
+    const tokenMenu = (
+        <Menu className="token_menu_class pointer" onSelect={onselectToken}>
+            {tokensConfig[chainId]?.map(token => <MenuItem key={token.address}className="token_menu_item_class pointer">
+                <img src={token.logoSrc} alt="token logo" className="w-4 h-4 inline mr-2" /> <span>{token.symbol}</span>
+            </MenuItem>)}
+        </Menu>
+      );
 
     return (
         <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover min-h-screen">
@@ -122,14 +203,28 @@ const CreatePurse = () => {
                                     />{" "}
                                     token
                                 </span>
-                                <button
-                                    className="text-sm bg-gray-2 text-white-1 py-2 px-4 rounded flex items-center"
-                                    type="button"
+                                <Dropdown
+                                    trigger={['click']}
+                                    overlay={tokenMenu}
+                                    animation="slide-up"
+                                    overlayClassName = "bg-white-1 dark:bg-dark-1"
+                                    openClassName = "bg-white-1 dark:bg-dark-1"
                                 >
-                                    <img src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png" alt="token icon" className="w-4 h-4 mr-2" />
-                                    <span>DAI</span>
-                                    <RiArrowDropDownLine className="inline text-xl" />
-                                </button>
+                                    <button
+                                        className="text-sm bg-gray-2 text-white-1 py-2 px-4 rounded flex items-center"
+                                        type="button"
+                                    >
+                                        {token ?
+                                        <>
+                                            <img src={token.logoSrc} alt="token icon" className="w-4 h-4 mr-2" />
+                                            <span>{token.symbol}</span>
+                                        </> :
+                                        <span>Select token</span>
+                                            
+                                        }
+                                        <RiArrowDropDownLine className="inline text-xl" />
+                                    </button>
+                                </Dropdown>
                             </div>
                             <div className="col-span-2">
                                 <label
@@ -239,9 +334,10 @@ const CreatePurse = () => {
                             <button
                                 className="w-full block align-middle text-sm bg-gray-2 text-white-1 py-2 px-4 rounded"
                                 type="button"
-                                onClick={() => dispatch(OPEN_WALLET_MODAL())}
+                                onClick={!active ? () => dispatch(OPEN_WALLET_MODAL()) : handleCreatePurse}
                             >
-                                 {active ? "Create purse" : "Connect wallet"}
+                                 
+                                 {!active ? "Connect wallet" : "Create purse"}
                             </button>
                         </div>
                         <ReactTooltip className="max-w-tooltip" />

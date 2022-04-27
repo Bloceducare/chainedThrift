@@ -7,21 +7,23 @@ import {
     TrustWallet,
     WalletConnect,
 } from "../common/svgIcons";
+import { RPC_URL } from "./rpc_urls";
 
-const rpcUrls = {
-    4: "https://speedy-nodes-nyc.moralis.io/9d1f9e8f5fbf596688e88840/eth/rinkeby",
-};
+export const pollingInterval = 12000;
+export const supportedChains = [137, 80001, 1337];
 
 export const injected = new InjectedConnector({
-    supportedChainIds: [4],
+    supportedChainIds: supportedChains,
 });
 
 const walletConnect = new WalletConnectConnector({
     rpc: {
-        4: rpcUrls[4],
-        qrcode: true,
-        pollingInterval: 8000,
+        137: RPC_URL[137],
+        80001: RPC_URL[80001],
+        1337: RPC_URL[1337],
     },
+    qrcode: true,
+    pollingInterval: pollingInterval,
 });
 
 export const connectorsData = [

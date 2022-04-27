@@ -54,8 +54,11 @@ const AppViewLayout = () => {
     }
 
 
+
     // connecting eagerly
     useEagerConnect();
+
+
 
     const [openSidebar, setOpenSidebar] = useState(false);
     const [renderSideDrawer, setRenderSideDrawer] = useState(
@@ -80,6 +83,7 @@ const AppViewLayout = () => {
             mql.removeEventListener("change", mediaQueryChanged);
         };
     }, [mediaQueryChanged, mql]);
+
 
     return (
         <Fragment>
