@@ -5,6 +5,8 @@ import { IoWalletOutline } from "react-icons/io5";
 import { MdOutlineExplore } from "react-icons/md";
 import {absoluteRoutes} from '../../utils'
 import { useNavigate, useSearchParams } from "react-router-dom";
+import usePurseFactory from "../../web3/hooks/usePurseFactory";
+import { useSelector } from "react-redux";
 
 const Purses = () => {
 
@@ -15,6 +17,11 @@ const Purses = () => {
   }
   const [searchParams, setSearchParams] = useSearchParams();
   const tab = searchParams.get("tab")
+  const purses = useSelector(store => store.purses);
+
+  usePurseFactory()
+
+  console.log("all purses: ", purses);
 
   return (
     <main className="bg-overlay-img-light dark:bg-dark dark:bg-overlay-img bg-cover">

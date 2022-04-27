@@ -15,11 +15,15 @@ import { tokensConfig } from "../../web3";
 import useToken from "../../web3/hooks/useToken";
 import { addresses } from "../../web3/constants";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
+import usePurseFactory from "../../web3/hooks/usePurseFactory";
+import { BigNumber } from "ethers";
+import { useToasts } from "react-toast-notifications";
 
 const CreatePurse = () => {
     const navigate = useNavigate();
     const {active, chainId, library} = useWeb3React()
     const dispatch = useDispatch()
+    const { addToast } = useToasts();
 
     const [data, setData] = useState({
         token: null,
@@ -32,16 +36,15 @@ const CreatePurse = () => {
 
     const { token, amount, membersCount, frequency, collateral, total } = data;
 
-    const {balance, name, symbol, decimals, getAllowance, approve} = useToken(token?.address);
+    const {balance, name:tokenName, symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
+
+    const {createPurse} = usePurseFactory()
 
     
     useEffect(() => {
         // if(token) return;
         setData(prev => ({...prev, token: !!tokensConfig[chainId] ? tokensConfig[chainId][0] : null}))
     }, [chainId])
-    
-
-    console.log(balance, name, symbol);
 
     useEffect(() => {
         if (Number(collateral) > 0 && Number(amount) > 0) {
@@ -112,8 +115,53 @@ const CreatePurse = () => {
         setData(prev => ({...prev, token: tokenData}));
     },[setData, chainId])
 
-    const handleCreatePurse = () => {
-        console.log("creating purse......");
+    const handleCreatePurse = async () => {
+        const allowance = await getAllowance();
+        const totalBN = parseUnits(total.toString(), decimals);
+
+        if(allowance.lt(totalBN)) {
+           await approve(...[,], totalBN, async (res) => {
+               if(!res.hash)
+               return addToast(res.message, {appearance: "error"});
+               await res.wait()
+               addToast(`${total} ${tokenSymbol} token approval successfull!`, {appearance: "success"});
+
+               await createPurse(
+                    parseUnits(amount.toString(), decimals),
+                    parseUnits(collateral.toString(), decimals),
+                    Number(membersCount),
+                    Number(frequency),
+                    Math.ceil(Math.random() * 1000),
+                    token.address,
+                    async (res) => {
+                        if(!res.hash)
+                        return addToast(res.message, {appearance: "error"});
+                        await res.wait()
+                        addToast("Purse created successfully!", {appearance: "success"});
+                    }
+                );
+           }).catch(err => {
+                return addToast("something went wrong!", {appearance: "error"});
+           })
+
+        } else {
+            await createPurse(
+                parseUnits(amount.toString(), decimals),
+                parseUnits(collateral.toString(), decimals),
+                Number(membersCount),
+                Number(frequency),
+                Math.ceil(Math.random() * 1000),
+                token.address,
+                async (res) => {
+                    if(!res.hash)
+                    return addToast(res.message, {appearance: "error"});
+                    await res.wait()
+                    addToast("Purse created successfully!", {appearance: "success"});
+                }
+            );
+        }
+        
+
     }
 
 

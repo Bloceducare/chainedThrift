@@ -2,12 +2,12 @@ import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { formatUnits } from "ethers/lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ADDRESS_ZERO } from "../constants";
+import { addresses } from "../constants";
 import { getTokenContract } from "../contractFactory";
-import { getRpcUrl } from "../helpers";
+import { getChainID, getRpcUrl } from "../helpers";
 
 const useToken = (tokenAddress) => {
-    const { active, account, library } = useWeb3React();
+    const { active, account, library, chainId } = useWeb3React();
     const [symbol, setSymbol] = useState();
     const [name, setName] = useState();
     const [decimals, setDecimals] = useState();
@@ -61,8 +61,8 @@ const useToken = (tokenAddress) => {
     }, [tokenAddress, active, account, tokenContract]);
 
     const getAllowance = useCallback(
-        async (spender) => {
-            if (!tokenAddress || !tokenContract.current) return;
+        async (spender = addresses[chainId].purseFactoryAddress) => {
+            if (!tokenContract.current) return;
             if (!active) throw new Error("you are not connected");
             try {
                 return await tokenContract.current.allowance(account, spender);
@@ -74,11 +74,20 @@ const useToken = (tokenAddress) => {
     );
 
     const approve = useCallback(
-        (spender, amount) => {
-            if (!tokenAddress || !tokenContract.current) return;
+        async (
+            spender = addresses[chainId].purseFactoryAddress,
+            amount,
+            callback
+        ) => {
+            if (!tokenContract.current) return;
             if (!active) throw new Error("you are not connected");
             try {
-                return tokenContract.current.approve(spender, amount);
+                tokenContract.current
+                    .approve(spender, amount)
+                    .then((hash) => callback(hash))
+                    .catch((err) => {
+                        callback(err);
+                    });
             } catch (err) {
                 throw new Error("something went wrong");
             }

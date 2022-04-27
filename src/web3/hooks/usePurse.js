@@ -1,11 +1,11 @@
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { getPurseContract } from "../contractFactory";
 import { getRpcUrl } from "../helpers";
 
-const usePurse = (purseAddress) => {
-    const { active, account, library } = useWeb3React();
+const usePurse = () => {
+    const { active, library } = useWeb3React();
     let signer = useRef();
     let provider = useRef();
     let purseContract = useRef();
@@ -18,11 +18,30 @@ const usePurse = (purseAddress) => {
                 getRpcUrl()
             );
         }
+    }, [active]);
+
+    const init = (purseAddress) => {
         purseContract.current = getPurseContract(
             purseAddress,
-            signer || provider
+            signer.current || provider.current
         );
-    }, [active]);
+    };
+
+    const getPurseData = useCallback(
+        async (purseAddress) => {
+            init(purseAddress);
+            try {
+                const purseDetails =
+                    await purseContract.current.purse_details();
+                return purseDetails;
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        [init, purseContract]
+    );
+
+    return { getPurseData };
 };
 
 export default usePurse;

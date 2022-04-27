@@ -63,3 +63,13 @@ export const getRpcUrl = () => {
             return RPC_URL[137];
     }
 };
+
+export const getChainID = () => {
+    const env = process.env.REACT_APP_ENV;
+    switch (env) {
+        case "testnet":
+            return 80001;
+        default:
+            return 137;
+    }
+};
