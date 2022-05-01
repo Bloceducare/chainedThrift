@@ -1,8 +1,11 @@
 import React from "react";
 import Button from "../../../../common/buttons/button";
+import NoPurseSkeleton from "../../../../common/skeleton/noPurse";
 
-const NoPurse = ({gotToExplorePursesTab, gotToCreateNewPurse}) => {
+const NoPurse = ({gotToExplorePursesTab, gotToCreateNewPurse,loading}) => {
   return (
+    <>
+    {loading? <NoPurseSkeleton/> :
     <div className="flex flex-col items-center">
       <div className="h-32 w-32 text-indigo rounded-3xl text-white-1 flex justify-center items-center">
         <img src="/assets/purse_wallet.svg" alt="wallet"/>
@@ -31,6 +34,8 @@ const NoPurse = ({gotToExplorePursesTab, gotToCreateNewPurse}) => {
         </Button>
       </div>
     </div>
+}
+    </>
   
   );
 }

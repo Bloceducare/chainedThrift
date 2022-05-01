@@ -1,25 +1,25 @@
 import React from "react";
 import { DisplayCard } from "../DisplayCard";
 
-export const CardList = () => {
+export const CardList = ({purseDetail}) => {
     return (
         <div className="flex flex-col md:flex-row md:gap-4 mb-8 w-full">
             <DisplayCard
                 frequencyTitle="Frequency"
-                frequency="5 Days"
+                frequency={ `${purseDetail.time_interval} Days`}
                 createdTitle="Created"
-                created="23 Sep. 2021"
+                created={purseDetail.timeCreated}
             />
             <DisplayCard
                 frequencyTitle="Current Members"
-                frequency="2"
+                frequency={purseDetail.members}
                 createdTitle="Max Members"
-                created="3"
+                created={purseDetail.max_member}
             />
             <DisplayCard
                 frequencyTitle="Amount(TVL)"
-                frequency="1000 USDC"
-                icon="/assets/lock_open.png'"
+                frequency={`${purseDetail.deposit_amount} USDC`}
+                icon="/assets/lock_open.png"
             />
         </div>
     );
