@@ -1,3 +1,4 @@
+import React,{useState,useEffect} from 'react';
 import { purseData } from "../../static/data";
 import PurseList from "./components/purseList";
 import clsx from "clsx";
@@ -7,23 +8,46 @@ import {absoluteRoutes} from '../../utils'
 import { useNavigate, useSearchParams } from "react-router-dom";
 import usePurseFactory from "../../web3/hooks/usePurseFactory";
 import { useSelector } from "react-redux";
+import { useWeb3React } from "@web3-react/core";
+
 
 const Purses = () => {
-
+  const {active ,account} = useWeb3React();
   const navigate = useNavigate();
   const TABS = {
     ALL: "all",
     OWNED: "owned",
   }
+  
+  usePurseFactory()
   const [searchParams, setSearchParams] = useSearchParams();
   const tab = searchParams.get("tab")
   const purses = useSelector(store => store.purses);
+  const [ownedPurses,setOwnedPurses] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  usePurseFactory()
 
-  console.log("all purses: ", purses);
+
+useEffect(() =>{
+if(!active) return setOwnedPurses([])
+if(!purses?.purses?.length)return{}
+const myPurses = purses.purses.filter((purse) => purse.members.includes(account))
+  setOwnedPurses(myPurses)
+  setLoading(false)
+},[active, purses])
+
+
+
+  
+
+
+
+
+
+
 
   return (
+    <>
     <main className="bg-overlay-img-light dark:bg-dark dark:bg-overlay-img bg-cover">
       <section className="container mx-auto px-4 sm:px-6 md:px-10 xl:px-0">
         <div className="flex justify-between mt-4 md:mt-12">
@@ -62,20 +86,22 @@ const Purses = () => {
           >
             <MdOutlineExplore className="text-dark-1 dark:text-light-1 text-2xl md:text-3xl mr-2" />
             <span className="Poppins font-medium text-base dark:text-white-1 text-dark-1">
-              Expolore Purses
+              Explore Purses
             </span>
           </button>
         </div>
         <div className="mt-8 pb-8 h-screen-fit-70 overflow-y-auto mb-20 sm:mb-0">
           <PurseList 
-            purseList={tab === TABS.OWNED ? purseData.myPurses : purseData.allPurses}
+            loading={loading}
+            purseList={tab === TABS.OWNED ?  ownedPurses : purses.purses}
             isMyPurses = {tab === TABS.OWNED}
             gotToExplorePursesTab = {() => setSearchParams({tab: TABS.ALL})}
             gotToCreateNewPurse = {() => navigate(absoluteRoutes.new_purse)}
           />
         </div>
       </section>
-    </main>
+    </main> 
+    </>
   );
 };
 

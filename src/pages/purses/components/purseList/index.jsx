@@ -3,11 +3,13 @@ import Purse from "../purse";
 import NoPurse from "../noPurse"
 
 
-const PurseList = ({ purseList = [], isMyPurses, gotToExplorePursesTab, gotToCreateNewPurse }) => {
 
+
+const PurseList = ({ purseList = [], isMyPurses, gotToExplorePursesTab,loading, gotToCreateNewPurse }) => {
   if(isMyPurses && purseList.length === 0 ) {
     return (
       <NoPurse
+        loading={loading}
         gotToExplorePursesTab = {gotToExplorePursesTab}
         gotToCreateNewPurse = {gotToCreateNewPurse}
       />
@@ -18,6 +20,7 @@ const PurseList = ({ purseList = [], isMyPurses, gotToExplorePursesTab, gotToCre
     <div className="grid lg:grid-cols-2 gap-8">
       {purseList.map((item, idx) => (
         <Purse
+          loading={loading}
           key={idx}
           purse = {item}
         />

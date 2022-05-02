@@ -46,3 +46,10 @@ export const isValidAmountValue = (value) =>
     /^\d{1,5}$|(?=^.{1,5}$)^\d+\.\d{0,2}$/.test(value);
 
 export const isPositiveInt = (value) => /^\+?([1-9]\d*)$/.test(value);
+
+export const formatDate = (epochTime) => {
+    const date = new Date(epochTime * 1000);
+    const dateArray = date.toString().split(" ");
+
+    return `${dateArray[1]} ${dateArray[2]}, ${dateArray[3]}`
+}
