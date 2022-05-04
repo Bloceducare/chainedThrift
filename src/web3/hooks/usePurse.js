@@ -55,19 +55,6 @@ const usePurse = () => {
         [init, purseContract]
     );
 
-    // const joinPurses = useCallback(
-    //     async (purseAddress,collateral) => {
-    //         init(purseAddress);
-    //         try {
-    //             const purses =
-    //                 await purseContract.current.joinPurse(collateral);
-    //             return purses;
-    //         } catch (err) {
-    //             console.error(err);
-    //         }
-    //     },
-    //     [init, purseContract]
-    // );
     const joinPurses = useCallback(
         async (
             collateral,
@@ -89,8 +76,29 @@ const usePurse = () => {
         [account]
     );
 
+    const donateFunds = useCallback(
+        async (
+            address,
+            callback,
+        ) => {
+            if (!active) throw new Error("you are not connected");
+            if (!purseContract.current) return;
+            try {
+                purseContract.current
+                    .depositDonation(
+                        address
+                    )
+                    .then(callback)
+                    .catch(callback);
+            } catch (err) {
+                throw new Error("something went wrong");
+            }
+        },
+        [account]
+    );
 
-    return { getPurseData, getPurseMembers,joinPurses };
+
+    return { getPurseData, getPurseMembers,joinPurses, donateFunds };
 };
 
 export default usePurse;

@@ -7,7 +7,6 @@ import PurseSkeleton from "../../../../common/skeleton/purseSkeleton";
 
 
 const Purse = ({purse,loading}) => {
-  console.log(loading)
   const {account} = useWeb3React();
   let navigate = useNavigate()
   const purseRouteHandler = () =>{

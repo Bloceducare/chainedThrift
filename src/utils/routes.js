@@ -13,6 +13,29 @@ export const purseRoutes = {
     settings: "/settings",
 };
 
+export const purseTabsLinks = [
+    {
+        name: "Overview",
+        link: "/",
+        icon: "/assets/overView.svg",
+    },
+    {
+        name: "Actions",
+        link: "/actions",
+        icon: "/assets/hash.svg",
+    },
+    {
+        name: "Chat",
+        link: "/chats",
+        icon: "/assets/chatroom.svg",
+    },
+    {
+        name: "Settings",
+        link: "settings",
+        icon: "/assets/settings.svg",
+    },
+];
+
 export const absoluteRoutes = {
     landing: "/",
     purses: "/app/purses",

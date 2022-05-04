@@ -1,33 +1,48 @@
 import React from 'react';
 import Button from '../../../common/buttons/button';
 
-function Deposit() {
+function Deposit({inputField,donateToMemberHandler}) {
     const [depositHistModal, setDepositHistModal] = React.useState(false);
     const openDepositHistoryModal = () => {
       setDepositHistModal(true);
     };
     return (
         <React.Fragment>
-        <div className={`h-auto lg:w-1/2 dark:bg-gray-16 bg-blue-7  p-6 rounded-xl mt-8`}>
+        <div className={`h-auto lg:w-1/2 dark:bg-gray-16 bg-blue-7 mr-8  p-6 rounded-xl mt-8`}>
         <p className="Poppins text-xl font-extrabold text-purple-1">
           Deposit for the next round
         </p>
         <p className={`Poppins dark:text-white-1 text-dark-1 text-xs`}>
           It is time for another round of deposit
         </p>
-        <div className="Poppins text-white-1 mt-4 flex flex-col md:flex-row gap-4">
+        <div className="Poppins text-white-1 mt-4 flex flex-col  gap-4">
+        <div className="Poppins mt-6 flex w-full">
+                    <div className="grow">
+                        <input
+                            ref={inputField}
+                            className="Poppins w-full rounded-md h-10 p-4 text-gray-7"
+                            placeholder="Member wallet address"
+                        />
+                    </div>
+                    {/* <div className="Poppins bg-btn ml-4 cursor-pointer rounded-md h-10 flex items-center justify-center p-4 text-white-1 text-sm">
+                        Vote
+                    </div> */}
+                </div>
+                <div className='flex'>
           <Button
             className="Poppins text-white-1 font-medium lg:mr-8  cursor-pointer px-12"
-            action={() => {}}
+            action={donateToMemberHandler}
           >
             Deposit Now
           </Button>
+         
           <Button
             className="Poppins text-white-1 font-medium  cursor-pointer px-12"
             action={openDepositHistoryModal}
           >
             Deposit History
           </Button>
+          </div>
         </div>
 
         {/* Deposit History modal */}

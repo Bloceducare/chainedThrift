@@ -9,7 +9,7 @@ import clsx from "clsx";
 // position: relative;
 // border-radius: 20px;
 
-const SideBar = ({ currentTab }) => {
+const SideBar = ({ currentTab, id }) => {
     const navigate = useNavigate();
     return (
         <div className="bg-blue-gradient h-screenfit w-48 hidden md:block">
@@ -31,7 +31,7 @@ const SideBar = ({ currentTab }) => {
                                 item.name.toLocaleLowerCase() === currentTab,
                         })}
                         onClick={() => {
-                            navigate(item.link);
+                            navigate(item.link === '/'? `/app/purse/${id}`: item.link);
                         }}
                     >
                        {item.name.toLocaleLowerCase() === currentTab && <div className="w-2.5 h-2.5 rounded-lg absolute bg-pallet-4 right-12"></div> }  
