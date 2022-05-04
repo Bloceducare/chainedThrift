@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useState, useEffect } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import SideBar from "./components/sideBar";
 import Fallback from "../fallback";
 import { purseRoutes, absoluteRoutes } from "../../utils/routes";
@@ -15,6 +15,8 @@ const PurseSettings = lazy(() =>
 );
 
 const PurseLayout = () => {
+    const {id} = useParams()
+    console.log(id)
     let { pathname } = useLocation();
     const [currentTab, setCurrentTab] = useState(null);
 
@@ -43,7 +45,7 @@ const PurseLayout = () => {
     return (
         <div className="bg-overlay-img-light dark:bg-overlay-img bg-cover h-screen lg:h-screenfit">
             <div className="container h-full mx-auto flex bg-dark-4">
-                <SideBar currentTab={currentTab} />
+                <SideBar id={id} currentTab={currentTab} />
                 <div className="w-full h-full dark:bg-dark-1 bg-white-1 text-white-1 px-8">
                     <PurseHeader currentTab={currentTab} />
                     <Suspense fallback={<Fallback />}>

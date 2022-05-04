@@ -26,7 +26,10 @@ const PurseHeader = ({ currentTab }) => {
     const showHandler = () => {
         setShow(!show);
     };
-
+    useEffect(() =>{
+        if(!active)return;
+        getSinglePurseDetail()
+        },[active,account])
 
 
     const getSinglePurseDetail = async () =>{
@@ -34,7 +37,7 @@ const PurseHeader = ({ currentTab }) => {
             const purseData = await getPurseData(id)
             const pursemember = await getPurseMembers(id)
     setPurseDetail({
-        address: purseData.purseAddress,
+        address: purseData?.purseAddress,
         time_interval: purseData.time_interval.toString(),
         timeCreated:formatDate(purseData.timeCreated),
         deposit_amount: formatUnits(purseData.deposit_amount),
@@ -53,10 +56,7 @@ const PurseHeader = ({ currentTab }) => {
 
     }
 
-    useEffect(() =>{
-    if(!active)return;
-    getSinglePurseDetail()
-    },[active,account])
+  
 
     return (
         <div>

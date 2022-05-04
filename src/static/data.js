@@ -35,22 +35,22 @@ export const appNav = [
 export const purseTabsLink = [
     {
         name: "Overview",
-        link: "/app/purse/1234",
+        link: "/",
         icon: "/assets/overView.svg",
     },
     {
         name: "Actions",
-        link: "/app/purse/1234/actions",
+        link: "actions",
         icon: "/assets/hash.svg",
     },
     {
         name: "Chat",
-        link: "/app/purse/1234/chat",
+        link: "chat",
         icon: "/assets/chatroom.svg",
     },
     {
         name: "Settings",
-        link: "/app/purse/1234/settings",
+        link: "settings",
         icon: "/assets/settings.svg",
     },
 ];

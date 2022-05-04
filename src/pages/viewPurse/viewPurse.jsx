@@ -38,12 +38,11 @@ const ViewPurse = () => {
                 const purseData = await getPurseData(id)
                 const pursemember = await getPurseMembers(id)
                 // To calculate the expiring date of a purse
-                const time = formatDate(purseData.timeCreated)
-                const max_member =  purseData.max_member_num.toString()
+                const time = Number(purseData.timeCreated.toString())
                 const frequency = purseData.time_interval.toString()
-                const mulmember = Number(frequency * max_member)
-                console.log(mulmember)
-                // console.log(time);
+                const mulmember = Number(frequency * 86400)
+                const d = time + mulmember
+                const endTime = new Date(d * 1000).toDateString();
         setPurseDetail({
             address: purseData.purseAddress,
             time_interval: purseData.time_interval.toString(),
@@ -53,7 +52,9 @@ const ViewPurse = () => {
             members: pursemember.length,
             collateral: formatUnits(purseData.required_collateral),
             contract_total_collateral_balance:formatUnits(purseData.contract_total_collateral_balance),
-            token_address: purseData._address_of_token
+            token_address: purseData._address_of_token,
+            endTime: endTime
+            
         })
         setLoading(false)
                 
@@ -153,7 +154,7 @@ const ViewPurse = () => {
                         <div className="flex gap-4">
                             <p className="Poppins text-xs">Due Date</p>
                             <div>
-                                <p className="Poppins text-xs">25/12/2021</p>
+                                <p className="Poppins text-xs">{purseDetail.endTime}</p>
                             </div>
                         </div>
                     </div>
