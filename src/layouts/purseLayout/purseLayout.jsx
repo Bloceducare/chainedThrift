@@ -16,7 +16,6 @@ const PurseSettings = lazy(() =>
 
 const PurseLayout = () => {
     const {id} = useParams()
-    console.log(id)
     let { pathname } = useLocation();
     const [currentTab, setCurrentTab] = useState(null);
 

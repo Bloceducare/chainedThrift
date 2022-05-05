@@ -40,9 +40,9 @@ const ViewPurse = () => {
                 // To calculate the expiring date of a purse
                 const time = Number(purseData.timeCreated.toString())
                 const frequency = purseData.time_interval.toString()
-                const mulmember = Number(frequency * 86400)
-                const d = time + mulmember
-                const endTime = new Date(d * 1000).toDateString();
+                const frequencyMulSeconds = Number(frequency * 86400)
+                const sumSecondsTotal = time + frequencyMulSeconds
+                const endTime = new Date(sumSecondsTotal * 1000).toDateString();
         setPurseDetail({
             address: purseData.purseAddress,
             time_interval: purseData.time_interval.toString(),
