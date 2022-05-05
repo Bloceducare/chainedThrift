@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Vote() {
+function Vote({voteField,vote}) {
     return (
         <React.Fragment>
             <div className={`h-auto lg:w-1/2  dark:bg-gray-16 bg-blue-7 p-6 rounded-xl mt-8`}>
@@ -13,13 +13,14 @@ function Vote() {
                 <div className="Poppins mt-6 flex w-full">
                     <div className="grow">
                         <input
+                            ref={voteField}
                             className="Poppins w-full rounded-md h-10 p-4 text-gray-7"
                             placeholder="Member wallet address"
                         />
                     </div>
-                    <div className="Poppins bg-btn ml-4 cursor-pointer rounded-md h-10 flex items-center justify-center p-4 text-white-1 text-sm">
+                    <button onClick={vote} className="Poppins bg-btn ml-4 cursor-pointer rounded-md h-10 flex items-center justify-center p-4 text-white-1 text-sm">
                         Vote
-                    </div>
+                    </button>
                 </div>
             </div>
         </React.Fragment>

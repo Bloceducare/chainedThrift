@@ -10,10 +10,11 @@ import useToken from "../../web3/hooks/useToken"
 import { useToasts } from 'react-toast-notifications';
 const PurseActions = () => {
   
-   const {donateFunds,getPurseData} =   usePurse();
+   const {donateFunds,getPurseData,voteToDisburseFundsToMember} =   usePurse();
    const {active,account} = useWeb3React()
    const id = useParams()
    const inputField = useRef()
+   const voteField = useRef()
    const [purseDetail, setPurseDetail] = useState([])
    const {addToast} = useToasts()
 
@@ -93,13 +94,27 @@ const PurseActions = () => {
 
     }
 
-  //  }
+    const vote = async() =>{
+    const inputData = voteField.current.value;
+    // if(!active) return;
+    console.log(inputData)
+    await voteToDisburseFundsToMember(inputData, async(res) =>{
+      if(!res.hash)
+      return addToast(res.data.message, {appearance: "error"})
+      await res.wait()
+      addToast("Successfully Voted !", {appearance: "success"});
+    }).catch(err =>{
+      return addToast("something went wrong!", {appearance: "error"});
+  })
+    }
   return (
     <div className="w-full flex ">
       <Deposit 
       donateToMemberHandler={donateToMemberHandler} 
       inputField={inputField}/>
-      <Vote  />
+      <Vote 
+      vote={vote}
+      voteField={voteField} />
     </div>
   );
 };

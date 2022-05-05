@@ -97,8 +97,29 @@ const usePurse = () => {
         [account]
     );
 
+    const voteToDisburseFundsToMember = useCallback(
+        async (
+            address,
+            callback,
+        ) => {
+            if (!active) throw new Error("you are not connected");
+            if (!purseContract.current) return;
+            try {
+                purseContract.current
+                    .approveToClaimWithoutCompleteVotes(
+                        address
+                    )
+                    .then(callback)
+                    .catch(callback);
+            } catch (err) {
+                throw new Error("something went wrong");
+            }
+        },
+        [account]
+    );
+    // approveToClaimWithoutCompleteVotes
 
-    return { getPurseData, getPurseMembers,joinPurses, donateFunds };
+    return { getPurseData, getPurseMembers,joinPurses, donateFunds,voteToDisburseFundsToMember };
 };
 
 export default usePurse;
