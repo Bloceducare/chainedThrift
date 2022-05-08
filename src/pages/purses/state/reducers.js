@@ -5,7 +5,7 @@ const initialState = [];
 export const pursesReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case SAVE:
-            return { ...state, purses:[ ...payload] };
+            return [...payload];
         default:
             return state;
     }

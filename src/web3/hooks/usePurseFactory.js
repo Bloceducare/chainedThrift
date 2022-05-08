@@ -18,7 +18,6 @@ const usePurseFactory = () => {
     const { getPurseData, getPurseMembers } = usePurse();
 
     useEffect(() => {
-        
         if (active) {
             signer.current = library.getSigner();
         } else {
@@ -42,25 +41,25 @@ const usePurseFactory = () => {
         //             })
         //         ).then((results) => {
         //             const purseArr = [];
-                    // results.forEach((result, index) => {
-                    //     console.log("result: ", result);
-                    //     purseArr.push({
-                    //         address: purses[index],
-                    //         // members: result.members,
-                    //         purseState: result.purseState,
-                    //         time_interval: result.time_interval,
-                    //         timeCreated: result.timeCreated,
-                    //         total_deposit_balance: result.contract_total_deposit_balance,
-                    //         total_collateral_balance: result.contract_total_collateral_balance,
-                    //         deposite_amount: result.deposit_amount,
-                    //         max_member: result.max_member_num,
-                    //         required_collateral: result.required_collateral,
-                    //         purseId: result.purseId,
-                    //         increment_in_membership: result.increment_in_membership,
-                    //         num_of_members_who_has_recieved_funds: result.num_of_members_who_has_recieved_funds,
-                    //         token_address: result._address_of_token,
-                    //     });
-                    // });
+        // results.forEach((result, index) => {
+        //     console.log("result: ", result);
+        //     purseArr.push({
+        //         address: purses[index],
+        //         // members: result.members,
+        //         purseState: result.purseState,
+        //         time_interval: result.time_interval,
+        //         timeCreated: result.timeCreated,
+        //         total_deposit_balance: result.contract_total_deposit_balance,
+        //         total_collateral_balance: result.contract_total_collateral_balance,
+        //         deposite_amount: result.deposit_amount,
+        //         max_member: result.max_member_num,
+        //         required_collateral: result.required_collateral,
+        //         purseId: result.purseId,
+        //         increment_in_membership: result.increment_in_membership,
+        //         num_of_members_who_has_recieved_funds: result.num_of_members_who_has_recieved_funds,
+        //         token_address: result._address_of_token,
+        //     });
+        // });
 
         //             console.log("log : ",purseArr);
 
@@ -69,44 +68,53 @@ const usePurseFactory = () => {
         //     })
         //     .catch((err) => console.error(err));
         const exec = async () => {
-            const allPurses = await purseFactory.current.allPurse()
+            const allPurses = await purseFactory.current.allPurse();
 
-        const pursesDetails = await Promise.all(
-            allPurses.map((purseAddress) => {
-                return getPurseData(purseAddress);
-        }))
+            const pursesDetails = await Promise.all(
+                allPurses.map((purseAddress) => {
+                    return getPurseData(purseAddress);
+                })
+            );
 
-        const purseMembers = await Promise.all(
-            allPurses.map((purseAddress) => {
-                return getPurseMembers(purseAddress);
-        }))
+            const purseMembers = await Promise.all(
+                allPurses.map((purseAddress) => {
+                    return getPurseMembers(purseAddress);
+                })
+            );
 
-        const allpursesData = allPurses.map((address, index) => {
-            return {
-                address: address,
-                // members: result.members,
-                purseState: pursesDetails[index].purseState,
-                time_interval: pursesDetails[index].time_interval,
-                timeCreated:formatDate(pursesDetails[index].timeCreated),
-                total_deposit_balance: pursesDetails[index].contract_total_deposit_balance,
-                total_collateral_balance: utils.formatUnits(pursesDetails[index].contract_total_collateral_balance),
-                deposite_amount: utils.formatUnits(pursesDetails[index].deposit_amount),
-                max_member: pursesDetails[index].max_member_num,
-                required_collateral: pursesDetails[index].required_collateral,
-                purseId: pursesDetails[index].purseId,
-                increment_in_membership: pursesDetails[index].increment_in_membership,
-                num_of_members_who_has_recieved_funds: pursesDetails[index].num_of_members_who_has_recieved_funds,
-                token_address: pursesDetails[index]._address_of_token,
-                members: purseMembers[index]
-            }
-        })
+            const allpursesData = allPurses.map((address, index) => {
+                return {
+                    address: address,
+                    // members: result.members,
+                    purseState: pursesDetails[index].purseState,
+                    time_interval: pursesDetails[index].time_interval,
+                    timeCreated: formatDate(pursesDetails[index].timeCreated),
+                    total_deposit_balance:
+                        pursesDetails[index].contract_total_deposit_balance,
+                    total_collateral_balance: utils.formatUnits(
+                        pursesDetails[index].contract_total_collateral_balance
+                    ),
+                    deposite_amount: utils.formatUnits(
+                        pursesDetails[index].deposit_amount
+                    ),
+                    max_member: pursesDetails[index].max_member_num,
+                    required_collateral:
+                        pursesDetails[index].required_collateral,
+                    purseId: pursesDetails[index].purseId,
+                    increment_in_membership:
+                        pursesDetails[index].increment_in_membership,
+                    num_of_members_who_has_recieved_funds:
+                        pursesDetails[index]
+                            .num_of_members_who_has_recieved_funds,
+                    token_address: pursesDetails[index]._address_of_token,
+                    members: purseMembers[index],
+                };
+            });
 
-   dispatch(SAVE_PURSES_TO_STORE(allpursesData));
-        }
+            dispatch(SAVE_PURSES_TO_STORE(allpursesData));
+        };
 
         exec();
-        
-
     }, [active]);
 
     const createPurse = useCallback(

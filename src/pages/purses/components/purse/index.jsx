@@ -1,6 +1,6 @@
 import React from "react";
 import { shortenAddress } from "../../../../utils";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
 import PurseSkeleton from "../../../../common/skeleton/purseSkeleton";
 
@@ -19,7 +19,7 @@ const Purse = ({purse,loading}) => {
   return (
 
     <>
-    {loading? <PurseSkeleton/> :
+    {loading ? <PurseSkeleton/> :
     <div
       className="h-44 dark:bg-dark-2 bg-blue-7 p-4 rounded-2xl cursor-pointer"
       onClick={purseRouteHandler}
