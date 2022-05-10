@@ -91,7 +91,7 @@ const PurseHeader = ({ currentTab }) => {
                 </div>
             </div>
             <PurseInfo purseDetail={purseDetail} tokenSymbol={tokenSymbol} />
-            <MobileBar currentTab={currentTab} />
+            <MobileBar id={id} currentTab={currentTab} />
         </div>
     );
 };

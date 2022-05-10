@@ -8,7 +8,7 @@ function Deposit({inputField,donateToMemberHandler}) {
     };
     return (
         <React.Fragment>
-        <div className={`h-auto lg:w-1/2 dark:bg-gray-16 bg-blue-7 mr-8  p-6 rounded-xl mt-8`}>
+        <div className={`h-auto lg:w-1/2 dark:bg-gray-16 bg-blue-7 lg:mr-8  p-6 rounded-xl mt-8`}>
         <p className="Poppins text-xl font-extrabold text-purple-1">
           Deposit for the next round
         </p>
@@ -28,9 +28,9 @@ function Deposit({inputField,donateToMemberHandler}) {
                         Vote
                     </div> */}
                 </div>
-                <div className='flex'>
+                <div className='flex justify-center'>
           <Button
-            className="Poppins text-white-1 font-medium lg:mr-8  cursor-pointer px-12"
+            className="Poppins text-white-1 font-medium mr-2 lg:mr-8  cursor-pointer px-12"
             action={donateToMemberHandler}
           >
             Deposit Now

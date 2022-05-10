@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { purseTabsLink } from "../../../../static/data";
 
-const MobileBar = ({currentTab}) => {
+const MobileBar = ({currentTab,id}) => {
   const navigate = useNavigate();
   return (
     <div className="flex w-full pt-8 border-b-2 dark:border-b-white border-b-dark-1 md:hidden text-dark-1 dark:text-white-1">
@@ -15,7 +15,7 @@ const MobileBar = ({currentTab}) => {
             "border-b-4 dark:border-b-none dark:border-b-white border-b-dark-1": currentTab === item.name.toLowerCase(),
           })}
           onClick={() => {
-            navigate(item.link);
+            navigate(item.link === '/'?`/app/purse/${id}`:item.link );
           }}
         >
           {item.name}

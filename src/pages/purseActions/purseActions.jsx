@@ -108,7 +108,7 @@ const PurseActions = () => {
   })
     }
   return (
-    <div className="w-full flex ">
+    <div className="w-full   lg:flex ">
       <Deposit 
       donateToMemberHandler={donateToMemberHandler} 
       inputField={inputField}/>
