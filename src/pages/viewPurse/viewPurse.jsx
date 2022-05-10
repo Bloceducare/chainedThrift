@@ -64,6 +64,14 @@ const ViewPurse = () => {
             }
 
         }
+        // @condition:check if currentMember equals max_memeber, if true disable from joining purse else yunno
+        const currentMember = purseDetail.members;
+        const maxMembers = purseDetail.max_member;
+
+        const endTime = new Date(purseDetail.endTime)
+        const endTimeSeconds = Math.floor(endTime.getTime());
+        const purseExpire = Date.now() >= endTimeSeconds
+
         // console.log("col ", purseDetail?.collateral);
         // const collateral = (purseDetail.collateral)
         // console.log('i am a string',collateral);
@@ -150,11 +158,11 @@ const ViewPurse = () => {
                         amount which makes it total of { `${purseDetail.contract_total_collateral_balance} USDC`}
                     </p>
                     <div className="mt-6 flex justify-between mb-12 items-center">
-                        <button onClick={joinPurseHandler} className="bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1">Join Purse</button>
-                        <div className="flex gap-4">
+                        <button onClick={joinPurseHandler} disabled={currentMember === maxMembers || purseExpire}  className={`${currentMember === maxMembers || purseExpire? 'bg-slate-400': ''} bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1`}>Join Purse</button>
+                        <div className="flex gap-4 items-baseline">
                             <p className="Poppins text-xs">Due Date</p>
                             <div>
-                                <p className="Poppins text-xs">{purseDetail.endTime}</p>
+                            {currentMember === maxMembers || purseExpire? <p className="Poppins text-rose-500 text-xs">Purse is closed!</p> :<p className="Poppins text-xs">{purseDetail.endTime}</p>}
                             </div>
                         </div>
                     </div>
