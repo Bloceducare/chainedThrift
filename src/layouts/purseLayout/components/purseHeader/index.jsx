@@ -20,7 +20,7 @@ const PurseHeader = ({ currentTab }) => {
 
 
     const {id} = useParams();
-    const {getPurseData, getPurseMembers} = usePurse();
+    const {getPurseData, getPurseMembers,getBentoBalance} = usePurse();
     const [loading, setLoading] = useState(false);
 
     const showHandler = () => {
@@ -36,6 +36,9 @@ const PurseHeader = ({ currentTab }) => {
         try {
             const purseData = await getPurseData(id)
             const pursemember = await getPurseMembers(id)
+            const res = await getBentoBalance()
+            
+        
     setPurseDetail({
         address: purseData?.purseAddress,
         time_interval: purseData.time_interval.toString(),
@@ -45,7 +48,9 @@ const PurseHeader = ({ currentTab }) => {
         members: pursemember.length,
         collateral: formatUnits(purseData.required_collateral),
         contract_total_collateral_balance:formatUnits(purseData.contract_total_collateral_balance),
-        token_address: purseData._address_of_token
+        token_address: purseData._address_of_token,
+        bento_balance: formatUnits(res),
+
     })
     setLoading(false)
             
@@ -56,7 +61,6 @@ const PurseHeader = ({ currentTab }) => {
 
     }
 
-  
 
     return (
         <div>
@@ -74,7 +78,7 @@ const PurseHeader = ({ currentTab }) => {
                 <div className="flex flex-col mt-7 md:mr-0">
                     <div>
                         <div className="Poppins text-xs md:text-base dark:text-white-1 text-dark-1 font-medium">
-                            Bal. of BentoBox: 0.0 DAI
+                            Bal. of BentoBox: {`${purseDetail.bento_balance} ${tokenSymbol}`}
                         </div>
                     </div>
                 </div>
