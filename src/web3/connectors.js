@@ -10,7 +10,7 @@ import {
 import { RPC_URL } from "./rpc_urls";
 
 export const pollingInterval = 12000;
-export const supportedChains = [137, 80001, 1337];
+export const supportedChains = [80001];
 
 export const injected = new InjectedConnector({
     supportedChainIds: supportedChains,
@@ -18,9 +18,9 @@ export const injected = new InjectedConnector({
 
 const walletConnect = new WalletConnectConnector({
     rpc: {
-        137: RPC_URL[137],
+        // 137: RPC_URL[137],
         80001: RPC_URL[80001],
-        1337: RPC_URL[1337],
+        // 1337: RPC_URL[1337],
     },
     qrcode: true,
     pollingInterval: pollingInterval,
