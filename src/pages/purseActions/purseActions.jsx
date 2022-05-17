@@ -10,8 +10,8 @@ import useToken from "../../web3/hooks/useToken"
 import { useToasts } from 'react-toast-notifications';
 const PurseActions = () => {
   
-   const {donateFunds,getPurseData,voteToDisburseFundsToMember} =   usePurse();
-   const {active} = useWeb3React()
+   const {donateFunds,getPurseData,voteToDisburseFundsToMember,depositToBentoBox,withdrawFromBentoBox,claimDonation} =   usePurse();
+   const {active,account} = useWeb3React()
    const id = useParams()
    const inputField = useRef()
    const voteField = useRef()
@@ -96,27 +96,62 @@ const PurseActions = () => {
 
     }
 
-    const vote = async() =>{
-    const inputData = voteField.current.value;
-    // if(!active) return;
-    console.log(inputData)
-    await voteToDisburseFundsToMember(inputData, async(res) =>{
-      if(!res.hash)
-      return addToast(res.data.message, {appearance: "error"})
-      await res.wait()
-      addToast("Successfully Voted !", {appearance: "success"});
-    }).catch(err =>{
-      return addToast("something went wrong!", {appearance: "error"});
-  })
+    const depositFundsToBentoBox = async () =>{
+      await  depositToBentoBox( async(res) =>{
+        if(!res.hash) return addToast(res.data.message, {appearance:"error"})
+        addToast("successfully deposit funds", {appearance: 'success'})
+      }).catch(err =>{
+        return addToast("something went wrong!", {appearance: "error"});
+      })
+    
     }
+
+    const withdrawFundsFromBentoBox = async() =>{
+      await  withdrawFromBentoBox( async(res) =>{
+        if(!res.hash) return addToast(res.data.message, {appearance:"error"})
+        addToast("successfully withdraw funds", {appearance: 'success'})
+      }).catch(err =>{
+        return addToast("something went wrong!", {appearance: "error"});
+      })
+    }
+
+    const claimDonationHandler = async() =>{
+      await  claimDonation( async(res) =>{
+        if(!res.hash) return addToast(res.data.message, {appearance:"error"})
+
+        addToast("successfully withdraw funds", {appearance: 'success'})
+      }).catch(err =>{
+        return addToast("something went wrong!", {appearance: "error"});
+      })
+    }
+
+    // @notice: function to disburse funds to member
+
+  //   const vote = async() =>{
+  //   const inputData = voteField.current.value;
+  //   // if(!active) return;
+  //   console.log(inputData)
+  //   await voteToDisburseFundsToMember(inputData, async(res) =>{
+  //     if(!res.hash)
+  //     return addToast(res.data.message, {appearance: "error"})
+  //     await res.wait()
+  //     addToast("Successfully Voted !", {appearance: "success"});
+  //   }).catch(err =>{
+  //     return addToast("something went wrong!", {appearance: "error"});
+  // })
+  //   }
+
   return (
     <div className="w-full   lg:flex ">
       <Deposit 
+      claimDonationHandler={claimDonationHandler}
       donateToMemberHandler={donateToMemberHandler} 
       inputField={inputField}/>
+      {/* This component has been updated to claim bentoBox functionality i.e buttons to move funs to bentobox && withdraw from bentobox */}
       <Vote 
-      vote={vote}
-      voteField={voteField} />
+       depositFundsToBentoBox={depositFundsToBentoBox}
+       withdrawFundsFromBentoBox={withdrawFundsFromBentoBox}
+       />
     </div>
   );
 };

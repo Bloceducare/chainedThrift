@@ -89,7 +89,7 @@ const ViewPurse = () => {
 
                 await joinPurses(collateralWei, async(res) =>{
                     if(!res.hash)
-                    return addToast(res.message, {appearance: "error"});
+                    return addToast(res.data.message, {appearance: "error"});
                             await res.wait()
                             addToast("Successfully Joined Purse!", {appearance: "success"});
                 }).catch(err =>{

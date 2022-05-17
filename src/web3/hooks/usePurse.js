@@ -55,6 +55,14 @@ const usePurse = () => {
         [init, purseContract]
     );
 
+const getBentoBalance = async() =>{
+if(!active)return;
+const result = await purseContract.current.bentoBox_balance();
+return result;
+}
+
+    
+
     const joinPurses = useCallback(
         async (
             collateral,
@@ -67,6 +75,75 @@ const usePurse = () => {
                     .joinPurse(
                         collateral
                     )
+                    .then(callback)
+                    .catch(callback);
+            } catch (err) {
+                throw new Error("something went wrong");
+            }
+        },
+        [account]
+    );
+
+    //     const depositToBentoBox = useCallback(
+    //     async (callback) =>{
+    //     if(!active) throw new Error("you are not connected");
+    //     if(!purseContract.current) return;
+    //     try {
+    //         purseContract.current.deposit_funds_to_bentoBox()
+    //         .then(callback)
+    //         .catch(callback);
+    //     } catch (error) {
+    //         throw new Error("something went wrong")
+    //     }
+    //     }, [account]
+
+    // )
+    const depositToBentoBox = useCallback(
+        async (
+            callback,
+        ) => {
+            if (!active) throw new Error("you are not connected");
+            if (!purseContract.current) return;
+            try {
+                purseContract.current
+                    .deposit_funds_to_bentoBox()
+                    .then(callback)
+                    .catch(callback);
+            } catch (err) {
+                throw new Error("something went wrong");
+            }
+        },
+        [account]
+    );
+
+    const withdrawFromBentoBox = useCallback(
+        async (
+            callback,
+        ) => {
+            if (!active) throw new Error("you are not connected");
+            if (!purseContract.current) return;
+            try {
+                purseContract.current
+                    .withdraw_funds_from_bentoBox()
+                    .then(callback)
+                    .catch(callback);
+            } catch (err) {
+                throw new Error("something went wrong");
+            }
+        },
+        [account]
+    );
+
+
+    const claimDonation = useCallback(
+        async (
+            callback,
+        ) => {
+            if (!active) throw new Error("you are not connected");
+            if (!purseContract.current) return;
+            try {
+                purseContract.current
+                    .claimDonations()
                     .then(callback)
                     .catch(callback);
             } catch (err) {
@@ -119,7 +196,7 @@ const usePurse = () => {
     );
     // approveToClaimWithoutCompleteVotes
 
-    return { getPurseData, getPurseMembers,joinPurses, donateFunds,voteToDisburseFundsToMember };
+    return { getPurseData, getPurseMembers,joinPurses, donateFunds,voteToDisburseFundsToMember,depositToBentoBox ,withdrawFromBentoBox,claimDonation,getBentoBalance};
 };
 
 export default usePurse;

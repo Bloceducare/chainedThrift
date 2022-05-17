@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../../../common/buttons/button';
 
-function Deposit({inputField,donateToMemberHandler}) {
+function Deposit({inputField,donateToMemberHandler,claimDonationHandler}) {
     const [depositHistModal, setDepositHistModal] = React.useState(false);
     const openDepositHistoryModal = () => {
       setDepositHistModal(true);
@@ -37,10 +37,11 @@ function Deposit({inputField,donateToMemberHandler}) {
           </Button>
          
           <Button
-            className="Poppins text-white-1 font-medium  cursor-pointer px-12"
-            action={openDepositHistoryModal}
+            className="Poppins text-white-1 capitalize font-medium  cursor-pointer px-12"
+            action={claimDonationHandler}
+            // action={openDepositHistoryModal}
           >
-            Deposit History
+            claim donation
           </Button>
           </div>
         </div>
