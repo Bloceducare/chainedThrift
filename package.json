@@ -34,7 +34,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "REACT_APP_ENV=testnet && GENERATE_SOURCEMAP=false react-app-rewired start",
+    "start": "GENERATE_SOURCEMAP=false react-app-rewired start",
     "start:testnet": "REACT_APP_ENV=testnet npm start",
     "start:testnet:windows": "set REACT_APP_ENV=testnet && npm start",
     "build": "react-app-rewired build",
