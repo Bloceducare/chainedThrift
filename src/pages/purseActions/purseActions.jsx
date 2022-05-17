@@ -11,7 +11,7 @@ import { useToasts } from 'react-toast-notifications';
 const PurseActions = () => {
   
    const {donateFunds,getPurseData,voteToDisburseFundsToMember} =   usePurse();
-   const {active,account} = useWeb3React()
+   const {active} = useWeb3React()
    const id = useParams()
    const inputField = useRef()
    const voteField = useRef()
@@ -20,10 +20,11 @@ const PurseActions = () => {
 
 
 
-    const {getAllowance, approve,name:tokenName, symbol:tokenSymbol,decimals} = useToken(purseDetail?.token_address);
+    const {getAllowance, approve, symbol:tokenSymbol,decimals} = useToken(purseDetail?.token_address);
 
 
     // loading will be used for skeleton loader
+    // eslint-disable-next-line
     const [loading, setLoading] =useState(true)
 
     const getSinglePurseDetail = async () =>{
@@ -53,6 +54,7 @@ const PurseActions = () => {
   useEffect(() =>{
     if(!active)return;
     getSinglePurseDetail()
+    // eslint-disable-next-line
   },[id.id])
 
 

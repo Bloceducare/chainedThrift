@@ -10,53 +10,50 @@ import { formatDate, shortenAddress } from "../../../../utils";
 import { useWeb3React } from "@web3-react/core";
 import useToken from "../../../../web3/hooks/useToken";
 
-
-
 const PurseHeader = ({ currentTab }) => {
-    const {active,account} = useWeb3React();
+    const { active, account } = useWeb3React();
     const [show, setShow] = useState(false);
-    const[purseDetail, setPurseDetail]= useState([]);
-    const { symbol:tokenSymbol} = useToken(purseDetail?.token_address);
+    const [purseDetail, setPurseDetail] = useState([]);
+    const { symbol: tokenSymbol } = useToken(purseDetail?.token_address);
 
-
-    const {id} = useParams();
-    const {getPurseData, getPurseMembers} = usePurse();
+    const { id } = useParams();
+    const { getPurseData, getPurseMembers } = usePurse();
+    // eslint-disable-next-line
     const [loading, setLoading] = useState(false);
 
     const showHandler = () => {
         setShow(!show);
     };
-    useEffect(() =>{
-        if(!active)return;
-        getSinglePurseDetail()
-        },[active,account])
 
-
-    const getSinglePurseDetail = async () =>{
+    const getSinglePurseDetail = async () => {
         try {
-            const purseData = await getPurseData(id)
-            const pursemember = await getPurseMembers(id)
-    setPurseDetail({
-        address: purseData?.purseAddress,
-        time_interval: purseData.time_interval.toString(),
-        timeCreated:formatDate(purseData.timeCreated),
-        deposit_amount: formatUnits(purseData.deposit_amount),
-        max_member: Number(purseData.max_member_num),
-        members: pursemember.length,
-        collateral: formatUnits(purseData.required_collateral),
-        contract_total_collateral_balance:formatUnits(purseData.contract_total_collateral_balance),
-        token_address: purseData._address_of_token
-    })
-    setLoading(false)
-            
+            const purseData = await getPurseData(id);
+            const pursemember = await getPurseMembers(id);
+            setPurseDetail({
+                address: purseData?.purseAddress,
+                time_interval: purseData.time_interval.toString(),
+                timeCreated: formatDate(purseData.timeCreated),
+                deposit_amount: formatUnits(purseData.deposit_amount),
+                max_member: Number(purseData.max_member_num),
+                members: pursemember.length,
+                collateral: formatUnits(purseData.required_collateral),
+                contract_total_collateral_balance: formatUnits(
+                    purseData.contract_total_collateral_balance
+                ),
+                token_address: purseData._address_of_token,
+            });
+            setLoading(false);
         } catch (error) {
-            setLoading(false)
-            throw error
+            setLoading(false);
+            throw error;
         }
+    };
 
-    }
-
-  
+    useEffect(() => {
+        if (!active) return;
+        getSinglePurseDetail();
+        // eslint-disable-next-line
+    }, [active, account]);
 
     return (
         <div>
