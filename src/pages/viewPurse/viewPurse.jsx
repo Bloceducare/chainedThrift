@@ -5,7 +5,7 @@ import { ImNotification } from "react-icons/im";
 import { CardList } from "./component/CardList";
 import usePurse from "../../web3/hooks/usePurse"
 import { useParams } from "react-router-dom";
-import { parseUnits,formatUnits, parseEther } from "ethers/lib/utils";
+import { parseUnits,formatUnits } from "ethers/lib/utils";
 import { formatDate, shortenAddress } from "../../utils";
 import { useWeb3React } from "@web3-react/core";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ const ViewPurse = () => {
     const [purseDetail, setPurseDetail] = useState([])
 
 
-    const {getAllowance, approve,name:tokenName, symbol:tokenSymbol,decimals} = useToken(purseDetail?.token_address);
+    const {getAllowance, approve, symbol:tokenSymbol,decimals} = useToken(purseDetail?.token_address);
 
 
     // loading will be used for skeleton loader
@@ -111,6 +111,7 @@ const ViewPurse = () => {
 
         useEffect(() =>{ 
         getSinglePurseDetail()
+        // eslint-disable-next-line
         },[id])
 
     // import usePurse
