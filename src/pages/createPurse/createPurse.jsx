@@ -13,15 +13,13 @@ import Menu, { Item as MenuItem } from "rc-menu";
 import 'rc-dropdown/assets/index.css';
 import { tokensConfig } from "../../web3";
 import useToken from "../../web3/hooks/useToken";
-import { addresses } from "../../web3/constants";
-import { formatUnits, parseUnits } from "ethers/lib/utils";
+import { parseUnits } from "ethers/lib/utils";
 import usePurseFactory from "../../web3/hooks/usePurseFactory";
-import { BigNumber } from "ethers";
 import { useToasts } from "react-toast-notifications";
 
 const CreatePurse = () => {
     const navigate = useNavigate();
-    const {active, chainId, library} = useWeb3React()
+    const {active, chainId} = useWeb3React()
     const dispatch = useDispatch()
     const { addToast } = useToasts();
 
@@ -36,7 +34,7 @@ const CreatePurse = () => {
 
     const { token, amount, membersCount, frequency, collateral, total } = data;
 
-    const {balance, name:tokenName, symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
+    const { symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
 
     const {createPurse} = usePurseFactory()
 
@@ -120,7 +118,7 @@ const CreatePurse = () => {
         const totalBN = parseUnits(total.toString(), decimals);
 
         if(allowance.lt(totalBN)) {
-           await approve(...[,], totalBN, async (res) => {
+           await approve(undefined, totalBN, async (res) => {
                if(!res.hash)
                return addToast(res.message, {appearance: "error"});
                await res.wait()

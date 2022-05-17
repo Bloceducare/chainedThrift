@@ -18,21 +18,20 @@ const usePurse = () => {
                 getRpcUrl()
             );
         }
+        // eslint-disable-next-line
     }, [active]);
-    const init = (purseAddress) => {
+    const init = useCallback((purseAddress) => {
         purseContract.current = getPurseContract(
             purseAddress,
             signer.current || provider.current
         );
-
-    };
+    }, []);
 
     const getPurseData = useCallback(
         async (purseAddress) => {
             init(purseAddress);
             try {
-                const purseDetails =
-                    await purseContract.current.purse();
+                const purseDetails = await purseContract.current.purse();
                 return purseDetails;
             } catch (err) {
                 console.error(err);
@@ -55,32 +54,26 @@ const usePurse = () => {
         [init, purseContract]
     );
 
-const getBentoBalance = async() =>{
-if(!active)return;
-const result = await purseContract.current.bentoBox_balance();
-return result;
-}
-
-    
+    const getBentoBalance = async () => {
+        if (!active) return;
+        const result = await purseContract.current.bentoBox_balance();
+        return result;
+    };
 
     const joinPurses = useCallback(
-        async (
-            collateral,
-            callback,
-        ) => {
+        async (collateral, callback) => {
             if (!active) throw new Error("you are not connected");
             if (!purseContract.current) return;
             try {
                 purseContract.current
-                    .joinPurse(
-                        collateral
-                    )
+                    .joinPurse(collateral)
                     .then(callback)
                     .catch(callback);
             } catch (err) {
                 throw new Error("something went wrong");
             }
         },
+        // eslint-disable-next-line
         [account]
     );
 
@@ -99,9 +92,7 @@ return result;
 
     // )
     const depositToBentoBox = useCallback(
-        async (
-            callback,
-        ) => {
+        async (callback) => {
             if (!active) throw new Error("you are not connected");
             if (!purseContract.current) return;
             try {
@@ -113,13 +104,12 @@ return result;
                 throw new Error("something went wrong");
             }
         },
+        // eslint-disable-next-line
         [account]
     );
 
     const withdrawFromBentoBox = useCallback(
-        async (
-            callback,
-        ) => {
+        async (callback) => {
             if (!active) throw new Error("you are not connected");
             if (!purseContract.current) return;
             try {
@@ -131,14 +121,12 @@ return result;
                 throw new Error("something went wrong");
             }
         },
+        // eslint-disable-next-line
         [account]
     );
 
-
     const claimDonation = useCallback(
-        async (
-            callback,
-        ) => {
+        async (callback) => {
             if (!active) throw new Error("you are not connected");
             if (!purseContract.current) return;
             try {
@@ -150,53 +138,56 @@ return result;
                 throw new Error("something went wrong");
             }
         },
+        // eslint-disable-next-line
         [account]
     );
 
     const donateFunds = useCallback(
-        async (
-            address,
-            callback,
-        ) => {
+        async (address, callback) => {
             if (!active) throw new Error("you are not connected");
             if (!purseContract.current) return;
             try {
                 purseContract.current
-                    .depositDonation(
-                        address
-                    )
+                    .depositDonation(address)
                     .then(callback)
                     .catch(callback);
             } catch (err) {
                 throw new Error("something went wrong");
             }
         },
+        // eslint-disable-next-line
         [account]
     );
 
     const voteToDisburseFundsToMember = useCallback(
-        async (
-            address,
-            callback,
-        ) => {
+        async (address, callback) => {
             if (!active) throw new Error("you are not connected");
             if (!purseContract.current) return;
             try {
                 purseContract.current
-                    .approveToClaimWithoutCompleteVotes(
-                        address
-                    )
+                    .approveToClaimWithoutCompleteVotes(address)
                     .then(callback)
                     .catch(callback);
             } catch (err) {
                 throw new Error("something went wrong");
             }
         },
+        // eslint-disable-next-line
         [account]
     );
     // approveToClaimWithoutCompleteVotes
 
-    return { getPurseData, getPurseMembers,joinPurses, donateFunds,voteToDisburseFundsToMember,depositToBentoBox ,withdrawFromBentoBox,claimDonation,getBentoBalance};
+    return {
+        getPurseData,
+        getPurseMembers,
+        joinPurses,
+        donateFunds,
+        voteToDisburseFundsToMember,
+        depositToBentoBox,
+        withdrawFromBentoBox,
+        claimDonation,
+        getBentoBalance,
+    };
 };
 
 export default usePurse;

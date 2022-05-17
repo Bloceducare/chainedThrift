@@ -10,11 +10,11 @@ import useToken from "../../web3/hooks/useToken"
 import { useToasts } from 'react-toast-notifications';
 const PurseActions = () => {
   
-   const {donateFunds,getPurseData,voteToDisburseFundsToMember,depositToBentoBox,withdrawFromBentoBox,claimDonation} =   usePurse();
-   const {active,account} = useWeb3React()
+   const {donateFunds,getPurseData,depositToBentoBox,withdrawFromBentoBox,claimDonation} =   usePurse();
+   const {active} = useWeb3React()
    const id = useParams()
    const inputField = useRef()
-   const voteField = useRef()
+  //  const voteField = useRef()
    const [purseDetail, setPurseDetail] = useState([])
    const {addToast} = useToasts()
 

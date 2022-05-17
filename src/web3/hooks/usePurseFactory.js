@@ -10,7 +10,7 @@ import usePurse from "./usePurse";
 import { formatDate } from "../../utils";
 
 const usePurseFactory = () => {
-    const { active, account, library, chainId } = useWeb3React();
+    const { active, library, chainId } = useWeb3React();
     let signer = useRef();
     let provider = useRef();
     let purseFactory = useRef();
@@ -115,7 +115,8 @@ const usePurseFactory = () => {
         };
 
         exec();
-    }, [active]);
+        // eslint-disable-next-line
+    }, [active, chainId]);
 
     const createPurse = useCallback(
         async (
@@ -145,7 +146,7 @@ const usePurseFactory = () => {
                 throw new Error("something went wrong");
             }
         },
-        [account]
+        [active]
     );
     return { createPurse };
 };
