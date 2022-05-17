@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { purseData } from "../../static/data";
 import PurseList from "./components/purseList";
 import clsx from "clsx";
 import { IoWalletOutline } from "react-icons/io5";
@@ -36,6 +35,7 @@ const Purses = () => {
         
         setOwnedPurses(myPurses);
         setLoading(false);
+        // eslint-disable-next-line
     }, [active, purses]);
 
     return (

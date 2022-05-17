@@ -4,7 +4,7 @@ import { formatUnits } from "ethers/lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { addresses } from "../constants";
 import { getTokenContract } from "../contractFactory";
-import { getChainID, getRpcUrl } from "../helpers";
+import { getRpcUrl } from "../helpers";
 
 const useToken = (tokenAddress) => {
     const { active, account, library, chainId } = useWeb3React();
@@ -70,7 +70,7 @@ const useToken = (tokenAddress) => {
                 throw new Error("something went wrong");
             }
         },
-        [active, account, tokenContract]
+        [active, account, tokenContract, chainId]
     );
 
     const approve = useCallback(
@@ -92,7 +92,7 @@ const useToken = (tokenAddress) => {
                 throw new Error("something went wrong");
             }
         },
-        [active, tokenContract]
+        [active, tokenContract, chainId]
     );
 
     return { balance, name, symbol, decimals, getAllowance, approve };
