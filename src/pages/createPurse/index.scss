@@ -1,0 +1,29 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    /* Firefox */
+}
+
+.token_menu_class {
+    border: none !important;
+    & .rc-dropdown-menu-item-selected {
+        @apply bg-gray-2 dark:bg-white-1 text-white-1 dark:text-gray-2 #{!important};
+    }
+}
+
+.token_menu_item_class {
+    @apply bg-white-1 dark:bg-dark-1;
+    &:hover {
+        @apply bg-gray-2 dark:bg-white-1 text-white-1 dark:text-gray-2 #{!important};
+    }
+    &:after {
+        display: none;
+    }
+}

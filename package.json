@@ -1,23 +1,68 @@
 {
-  "name": "chainedthrift",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.4",
-    "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "chai": "^4.3.4",
-    "ethereum-waffle": "^3.4.0",
-    "ethers": "^5.5.3",
-    "hardhat": "^2.8.1"
-  },
+  "name": "chained-thrift",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "web3modal": "^1.9.5"
+    "@download/blockies": "^1.0.3",
+    "@ethersproject/providers": "^5.5.3",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
+    "@web3-react/walletconnect-connector": "^6.2.13",
+    "clsx": "^1.1.1",
+    "ethers": "^5.6.2",
+    "install": "^0.13.0",
+    "process": "^0.11.10",
+    "rc-dropdown": "^3.4.1",
+    "rc-menu": "^9.5.5",
+    "react": "^17.0.2",
+    "react-app-rewired": "^2.2.1",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-loading-skeleton": "^3.1.0",
+    "react-modal": "^3.14.4",
+    "react-modern-drawer": "^1.1.0",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "^5.0.0",
+    "react-toast-notifications": "^2.5.1",
+    "react-tooltip": "^4.2.21",
+    "redux": "^4.1.2",
+    "util": "^0.12.4",
+    "web-vitals": "^2.1.2"
+  },
+  "scripts": {
+    "start": "GENERATE_SOURCEMAP=false react-app-rewired start",
+    "start:testnet": "REACT_APP_ENV=testnet npm start",
+    "start:testnet:windows": "set REACT_APP_ENV=testnet && npm start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.1",
+    "postcss": "^8.4.5",
+    "sass": "^1.45.2",
+    "tailwindcss": "^3.0.8"
   }
 }
