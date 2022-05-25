@@ -3,7 +3,7 @@ import { FiTwitter, FiFacebook, FiLinkedin, FiSlack } from "react-icons/fi";
 import { BiUser } from "react-icons/bi";
 import { footerLinks } from "../../static/data";
 import { MdOutlineEmail } from "react-icons/md";
-import Switch from "../switch/Switch";
+// import Switch from "../switch/Switch";
 import { BsPencilSquare } from "react-icons/bs";
 import {Link} from 'react-router-dom';
 import Button from "../buttons/button";
@@ -51,7 +51,7 @@ const Footer = () => {
               );
             })}
           </ul>
-          <Switch />
+          {/* <Switch /> */}
         </div>
         <div className="md:w-full lg:w-3/6 mt-32">
           <div className="mb-8">

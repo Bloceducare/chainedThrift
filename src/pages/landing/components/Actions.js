@@ -45,7 +45,7 @@ const Actions = () => {
                                 Deposit
                             </p>
                             <p className="text-center font-Montserrat font-normal text-white-1">
-                                Use the depsit function to start saving
+                                Use the deposit function to start saving
                             </p>
                         </div>
                     </div>
