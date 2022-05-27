@@ -7,7 +7,7 @@ import MainLayout from './layouts/mainLayout'
 function App() {
   return (
     <Router>
-      <MainLayout />
+      <MainLayout/>
     </Router>
   );
 }
