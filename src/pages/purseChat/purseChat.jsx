@@ -1,16 +1,19 @@
 
+import { useWeb3React } from "@web3-react/core";
 import { ChatEngine } from 'react-chat-engine';
-
-const PurseChat = ({id, walletID}) => {
+import './style.css'
+import './all.css'
+const PurseChat = ({}) => {
+ const  { active, account } = useWeb3React();
+ const member  = account;
   return (
-    <div className="w-full">
-      {/* <p className="md:text-8xl mt-8 text-2xl text-dark-1 dark:text-white-1">Coming soon...</p> */}
+    <div className="chat-container">
+      <span className='chatPic'><i className='fas fa-users'></i></span>
       <ChatEngine
-       height='100vh'
-			 projectID={process.env.REACT_APP_PROJECT_ID}
-			 userName={walletID}
-		 	 userSecret={walletID}
-		/>
+      projectID='21f51b31-abf1-4e3e-9ed4-00a1b0215871'
+      userName={account}
+      userSecret={account}
+     />
     </div>
   );
 };

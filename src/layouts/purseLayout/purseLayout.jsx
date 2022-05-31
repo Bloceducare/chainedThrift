@@ -55,7 +55,7 @@ const PurseLayout = () => {
                             />
                             <Route
                                 path={purseRoutes.chat}
-                                element={<PurseChat purseId={id} />}
+                                element={<PurseChat/>}
                             />
                             <Route
                                 path={purseRoutes.actions}

@@ -4,7 +4,7 @@ import './index.scss';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './state/store';
-
+import './pages/createPurse/interceptors/axios';
 
 ReactDOM.render(
   <React.StrictMode>
