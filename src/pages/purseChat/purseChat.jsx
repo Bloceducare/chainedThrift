@@ -1,10 +1,10 @@
 
 import { useWeb3React } from "@web3-react/core";
-import { ChatEngine } from 'react-chat-engine';
+import { ChatEngine, Socket } from 'react-chat-engine';
 import './style.css'
 import './all.css'
-const PurseChat = ({}) => {
- const  { active, account } = useWeb3React();
+const PurseChat = ({chatId}) => {
+ const  {account} = useWeb3React();
  const member  = account;
   return (
     <div className="chat-container">

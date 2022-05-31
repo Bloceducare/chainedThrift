@@ -108,27 +108,27 @@ const ViewPurse = () => {
         }else {
 
             // add user to chart
-            console.log(chatID)
-            axios.post('http://localhost/phpApi/addToChat.php', {chatID, username, admin})
-            .then(
-              res =>{
-                  console.log(res)
-              }
-            )
-            
+            var user = {
+                "username":account
+              };
+              const addUser = {
+                method: 'post',
+                url: `https://api.chatengine.io/chats/${chatID}/people/`,
+                headers: {
+                    'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
+                    'User-Name': admin,
+                    'User-Secret': admin
+                },
+                data : user
+             }
+             axios(addUser)
             await joinPurses(collateralWei, async(res) =>{
                 if(!res.hash)
                 return addToast(res.message, {appearance: "error"});
                         await res.wait()
                         addToast("Successfully Joined Purse!", {appearance: "success"});
             }).catch(err =>{
-                return addToast("something went wrong!", {appearance: "error"});
-                axios.post('http://localhost/phpApi/removeMem.php', {chatID, username, admin})
-                .then(
-                  res =>{
-                      console.log(res)
-                  }
-                )
+            //   hsjhdsj
             })
         }
         }
