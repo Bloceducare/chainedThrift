@@ -4,6 +4,8 @@ import SideBar from "./components/sideBar";
 import Fallback from "../fallback";
 import { purseRoutes, absoluteRoutes } from "../../utils/routes";
 import PurseHeader from "./components/purseHeader";
+import { useWeb3React } from "@web3-react/core";
+import usePurse from "../../web3/hooks/usePurse";
 
 const Purse = lazy(() => import("../../pages/purse/purse"));
 const PurseChat = lazy(() => import("../../pages/purseChat/purseChat"));
@@ -16,8 +18,18 @@ const PurseSettings = lazy(() =>
 
 const PurseLayout = () => {
     const {id} = useParams()
+    const {account} = useWeb3React();
     let { pathname } = useLocation();
     const [currentTab, setCurrentTab] = useState(null);
+    const { getPurseData } = usePurse()
+    try{
+        const purseDtail = getPurseData(id)
+        // const chatId = purseDtail.chatId;
+        console.log(purseDtail);
+    }catch{
+
+    }
+    // const purseData = getPurseData(id);
 
     const purseTabs = {
         OVERVIEW: "overview",
@@ -55,7 +67,7 @@ const PurseLayout = () => {
                             />
                             <Route
                                 path={purseRoutes.chat}
-                                element={<PurseChat />}
+                                element={<PurseChat address={account}/>}
                             />
                             <Route
                                 path={purseRoutes.actions}

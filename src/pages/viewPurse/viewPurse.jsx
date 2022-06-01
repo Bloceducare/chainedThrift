@@ -12,10 +12,11 @@ import { useNavigate } from "react-router-dom";
 import useToken from "../../web3/hooks/useToken";
 import { useToasts } from "react-toast-notifications";
 import ViewPurseSkeleton from "../../common/skeleton/viewPurse";
+import axios from 'axios';
 
 const ViewPurse = () => {
     const { addToast } = useToasts();
-    const {active} = useWeb3React()
+    const {active, account} = useWeb3React()
     const {id} = useParams()
     const {getPurseData, getPurseMembers,joinPurses} = usePurse()
     const [purseDetail, setPurseDetail] = useState([])
@@ -43,7 +44,8 @@ const ViewPurse = () => {
                 const frequencyMulSeconds = Number(frequency * 86400)
                 const sumSecondsTotal = time + frequencyMulSeconds
                 const endTime = new Date(sumSecondsTotal * 1000).toDateString();
-        setPurseDetail({
+                
+         setPurseDetail({
             address: purseData.purseAddress,
             time_interval: purseData.time_interval.toString(),
             timeCreated:formatDate(purseData.timeCreated),
@@ -54,6 +56,7 @@ const ViewPurse = () => {
             contract_total_collateral_balance:formatUnits(purseData.contract_total_collateral_balance),
             token_address: purseData._address_of_token,
             endTime: endTime
+           
             
         })
         setLoading(false)
@@ -71,11 +74,16 @@ const ViewPurse = () => {
         const endTime = new Date(purseDetail.endTime)
         const endTimeSeconds = Math.floor(endTime.getTime());
         const purseExpire = Date.now() >= endTimeSeconds
-
+        const purseData = getPurseData(id)
+        const chatID = purseData.chatId;
+        const username = account;
+        const admin = purseData.address;
+        
         // console.log("col ", purseDetail?.collateral);
         // const collateral = (purseDetail.collateral)
         // console.log('i am a string',collateral);
         // const address = purseDetail?.token_address
+
         const joinPurseHandler = async() =>{
         if(!active)return;
         const allowance = await getAllowance()
@@ -98,13 +106,29 @@ const ViewPurse = () => {
             })
             
         }else {
+
+            // add user to chart
+            var user = {
+                "username":account
+              };
+              const addUser = {
+                method: 'post',
+                url: `https://api.chatengine.io/chats/${chatID}/people/`,
+                headers: {
+                    'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
+                    'User-Name': admin,
+                    'User-Secret': admin
+                },
+                data : user
+             }
+             axios(addUser)
             await joinPurses(collateralWei, async(res) =>{
                 if(!res.hash)
                 return addToast(res.message, {appearance: "error"});
                         await res.wait()
                         addToast("Successfully Joined Purse!", {appearance: "success"});
             }).catch(err =>{
-                return addToast("something went wrong!", {appearance: "error"});
+            //   hsjhdsj
             })
         }
         }

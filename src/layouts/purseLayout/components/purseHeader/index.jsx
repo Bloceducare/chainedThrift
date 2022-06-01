@@ -44,7 +44,7 @@ const PurseHeader = ({ currentTab }) => {
                     purseData.contract_total_collateral_balance
                 ),
                 token_address: purseData._address_of_token,
-                bento_balance: formatUnits(res),
+                bento_balance: formatUnits(res), 
             });
             setLoading(false);
         } catch (error) {
