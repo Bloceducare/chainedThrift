@@ -33,9 +33,10 @@ const CreatePurse = () => {
         frequency: "",
         collateral: 0,
         total: 0,
+        pos:1
     });
 
-    const { token, amount, membersCount, frequency, collateral, total } = data;
+    const { token, amount, membersCount, frequency, collateral, total,pos } = data;
 
     const { symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
 
@@ -104,12 +105,19 @@ const CreatePurse = () => {
                 else if (isPositiveInt(value))
                     return setData((prev) => ({ ...prev, frequency: value }));
                 break;
+                case "pos":
+                    if(value === "")
+                    return setData((prev) => ({...prev, pos:""}))
+                    else if (isPositiveInt(value))
+                    return setData((prev) => ({...prev, pos:value}))
+                    break;
 
             default:
                 break;
         }
     };
 
+    console.log(data)
     
     const onselectToken = useCallback(({key}) => {
         const tokenData = tokensConfig[chainId].find(token => token.address === key)
@@ -187,6 +195,7 @@ const CreatePurse = () => {
                         return addToast(res.message, {appearance: "error"});
                         await res.wait()
                         addToast("Purse created successfully!", {appearance: "success"});
+                        navigate(-1)
                     }
                 );
            }).catch(err => {
@@ -265,6 +274,7 @@ const CreatePurse = () => {
                     return addToast(res.message, {appearance: "error"});
                     await res.wait()
                     addToast("Purse created successfully!", {appearance: "success"});
+                    navigate(-1)
                 }
             );
         }
@@ -438,6 +448,33 @@ const CreatePurse = () => {
                                 />
                             </div>
                         </div>
+                        <div className="grid gap-2 grid-cols-2 mb-6">
+                        <div className="col-span-1">
+                        <label
+                                   htmlFor="position"
+                                   className="block text-xs"
+                               >
+                                     <IoIosHelpCircleOutline
+                                       data-tip="Contribution amount plus collateral amount. this is the total amount you are spending to create this purse"
+                                       className="inline text-xl"
+                                   />{" "}
+                                   Position
+                               </label>
+                               <select value={pos} onChange={onInputChange} name="pos" className="bg-dark outline-none py-1 px-2 border border-gray-10 rounded w-full">
+                               {
+                                Array(membersCount - 1 + 1).fill().map((_, idx) => 1 + idx).map((num,idx) =>{
+                                    return(
+                                        <option key={idx}>{num}</option>
+                                    )
+                                })
+ 
+                               }
+ 
+                           </select>
+
+                        </div>
+                        </div>
+
                         <div className="w-full">
                             <button
                                 className="w-full block align-middle text-sm bg-gray-2 text-white-1 py-2 px-4 rounded"
