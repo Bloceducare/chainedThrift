@@ -25,12 +25,12 @@ function Vote({voteField,vote,depositFundsToBentoBox,withdrawFundsFromBentoBox})
             {/* voting implementation  */}
             <div className='mt-4'>
                 <p className="Poppins text-xl font-extrabold capitalize text-purple-1">
-                    Vote to disburse fund to a member
+                    Approve to disburse funds without complete deposit
                 </p>
-                <p className={`Poppins dark:text-white capitalize text-dark-1 text-xs`}>
+                {/* <p className={`Poppins dark:text-white capitalize text-dark-1 text-xs`}>
                     It is time for another round of disbursement
                     
-                </p>
+                </p> */}
                 <div className="Poppins mt-4 flex w-full">
                     <div className="grow">
                         <input
