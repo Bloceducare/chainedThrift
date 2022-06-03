@@ -117,7 +117,6 @@ const CreatePurse = () => {
         }
     };
 
-    console.log(data)
     
     const onselectToken = useCallback(({key}) => {
         const tokenData = tokensConfig[chainId].find(token => token.address === key)
@@ -188,14 +187,15 @@ const CreatePurse = () => {
                     parseUnits(collateral.toString(), decimals),
                     Number(membersCount),
                     Number(frequency),
-                    chatId,
+                    Number(chatId),
                     token.address,
                     async (res) => {
                         if(!res.hash)
                         return addToast(res.message, {appearance: "error"});
-                        await res.wait()
+                        const result =    await res.wait()
+                        const address = await result.events[0].address
                         addToast("Purse created successfully!", {appearance: "success"});
-                        navigate(-1)
+                        navigate(`/app/purse/${address}`)
                     }
                 );
            }).catch(err => {
@@ -267,14 +267,15 @@ const CreatePurse = () => {
                 parseUnits(collateral.toString(), decimals),
                 Number(membersCount),
                 Number(frequency),
-                chatId,
+                Number(chatId),
                 token.address,
                 async (res) => {
                     if(!res.hash)
                     return addToast(res.message, {appearance: "error"});
-                    await res.wait()
+                const result =    await res.wait()
+                const address = await result.events[0].address
                     addToast("Purse created successfully!", {appearance: "success"});
-                    navigate(-1)
+                    navigate(`/app/purse/${address}`)
                 }
             );
         }
@@ -460,7 +461,7 @@ const CreatePurse = () => {
                                    />{" "}
                                    Position
                                </label>
-                               <select value={pos} onChange={onInputChange} name="pos" className="bg-dark outline-none py-1 px-2 border border-gray-10 rounded w-full">
+                               <select value={pos} onChange={onInputChange} name="pos" className="bg-transparent outline-none py-1 px-2 border border-gray-10 rounded w-full ">
                                {
                                 Array(membersCount - 1 + 1).fill().map((_, idx) => 1 + idx).map((num,idx) =>{
                                     return(

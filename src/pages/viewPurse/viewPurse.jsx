@@ -183,7 +183,13 @@ const ViewPurse = () => {
                         amount which makes it total of { `${purseDetail.contract_total_collateral_balance} USDC`}
                     </p>
                     <div className="mt-6 flex justify-between mb-12 items-center">
+                       <div className="flex items-center gap-x-2">
                         <button onClick={joinPurseHandler} disabled={currentMember === maxMembers || purseExpire}  className={`${currentMember === maxMembers || purseExpire? 'bg-slate-400': ''} bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1`}>Join Purse</button>
+                       <select className="bg-transparent  rounded-sm">
+                           <option value="">1</option>
+                           <option value="">2</option>
+                       </select>
+                       </div>
                         <div className="flex gap-4 items-baseline">
                             <p className="Poppins text-xs">Due Date</p>
                             <div>
