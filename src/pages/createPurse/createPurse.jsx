@@ -189,6 +189,7 @@ const CreatePurse = () => {
                     Number(frequency),
                     Number(chatId),
                     token.address,
+                    pos,
                     async (res) => {
                         if(!res.hash)
                         return addToast(res.message, {appearance: "error"});
@@ -269,6 +270,7 @@ const CreatePurse = () => {
                 Number(frequency),
                 Number(chatId),
                 token.address,
+                pos,
                 async (res) => {
                     if(!res.hash)
                     return addToast(res.message, {appearance: "error"});
@@ -465,7 +467,7 @@ const CreatePurse = () => {
                                {
                                 Array(membersCount - 1 + 1).fill().map((_, idx) => 1 + idx).map((num,idx) =>{
                                     return(
-                                        <option key={idx}>{num}</option>
+                                        <option className="bg-transparent" key={idx}>{num}</option>
                                     )
                                 })
  

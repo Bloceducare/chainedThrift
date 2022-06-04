@@ -126,6 +126,7 @@ const usePurseFactory = () => {
             time_interval,
             chatId,
             tokenAddress,
+            pos,
             callback
         ) => {
             if (!active) throw new Error("you are not connected");
@@ -138,7 +139,8 @@ const usePurseFactory = () => {
                         max_member,
                         time_interval,
                         chatId,
-                        tokenAddress
+                        tokenAddress,
+                        pos
                     )
                     .then(callback)
                     .catch(callback);
