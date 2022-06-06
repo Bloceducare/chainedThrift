@@ -21,15 +21,15 @@ const PurseLayout = () => {
     const {account} = useWeb3React();
     let { pathname } = useLocation();
     const [currentTab, setCurrentTab] = useState(null);
-    const { getPurseData } = usePurse()
-    try{
-        const purseDtail = getPurseData(id)
-        // const chatId = purseDtail.chatId;
-        console.log(purseDtail);
-    }catch{
-
-    }
+    const { getPurseData,getCurrentRound} = usePurse()
     // const purseData = getPurseData(id);
+console.log(id);
+
+    const f = async() =>{
+        
+        const result = await getCurrentRound(id)
+        console.log('currentRounds',result)
+    }
 
     const purseTabs = {
         OVERVIEW: "overview",
@@ -40,6 +40,7 @@ const PurseLayout = () => {
 
     useEffect(() => {
         // remove trailing slash if any
+        f()
         const pathString = pathname.replace(/\/$/, "");
         const pathArr = pathString.split("/");
         if (pathArr.length === 5) {

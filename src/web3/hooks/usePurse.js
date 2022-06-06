@@ -40,6 +40,19 @@ const usePurse = () => {
         [init, purseContract]
     );
 
+    const getCurrentRound = useCallback(
+        async (purseAddress) => {
+            init(purseAddress);
+            try {
+                const current = await purseContract.current.currentRoundDetails();
+                return current;
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        [init, purseContract]
+    );
+
     const getPurseMembers = useCallback(
         async (purseAddress) => {
             init(purseAddress);
@@ -187,6 +200,7 @@ const usePurse = () => {
         withdrawFromBentoBox,
         claimDonation,
         getBentoBalance,
+        getCurrentRound
     };
 };
 

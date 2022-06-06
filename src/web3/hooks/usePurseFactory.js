@@ -121,7 +121,7 @@ const usePurseFactory = () => {
     const createPurse = useCallback(
         async (
             contribution_amount,
-            collateral,
+            // collateral,
             max_member,
             time_interval,
             chatId,
@@ -135,7 +135,7 @@ const usePurseFactory = () => {
                 purseFactory.current
                     .createPurse(
                         contribution_amount,
-                        collateral,
+                        // collateral,
                         max_member,
                         time_interval,
                         chatId,

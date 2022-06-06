@@ -13,11 +13,6 @@
       },
       {
         "internalType": "uint256",
-        "name": "_collateral",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
         "name": "_max_member",
         "type": "uint256"
       },
@@ -603,6 +598,11 @@
       },
       {
         "internalType": "uint256",
+        "name": "timeStarted",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
         "name": "contract_total_deposit_balance",
         "type": "uint256"
       },
@@ -629,11 +629,6 @@
       {
         "internalType": "uint256",
         "name": "purseId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "increment_in_membership",
         "type": "uint256"
       },
       {
@@ -717,25 +712,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_incrementInMember",
-        "type": "uint256"
-      }
-    ],
-    "name": "voteToReOpenPurse",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

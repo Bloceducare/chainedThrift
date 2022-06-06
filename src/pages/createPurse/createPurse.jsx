@@ -36,6 +36,8 @@ const CreatePurse = () => {
         pos:1
     });
 
+    console.log(data)
+
     const { token, amount, membersCount, frequency, collateral, total,pos } = data;
 
     const { symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
@@ -184,7 +186,7 @@ const CreatePurse = () => {
            
                await createPurse(
                     parseUnits(amount.toString(), decimals),
-                    parseUnits(collateral.toString(), decimals),
+                    // parseUnits(collateral.toString(), decimals),
                     Number(membersCount),
                     Number(frequency),
                     Number(chatId),
@@ -265,7 +267,7 @@ const CreatePurse = () => {
 
             await createPurse(
                 parseUnits(amount.toString(), decimals),
-                parseUnits(collateral.toString(), decimals),
+                // parseUnits(collateral.toString(), decimals),
                 Number(membersCount),
                 Number(frequency),
                 Number(chatId),
