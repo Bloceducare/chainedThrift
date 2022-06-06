@@ -86,6 +86,11 @@
         "internalType": "address",
         "name": "_tokenAddress",
         "type": "address"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_position",
+        "type": "uint8"
       }
     ],
     "name": "createPurse",

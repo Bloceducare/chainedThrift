@@ -61,12 +61,12 @@ const usePurse = () => {
     };
 
     const joinPurses = useCallback(
-        async (collateral, callback) => {
+        async (position, callback) => {
             if (!active) throw new Error("you are not connected");
             if (!purseContract.current) return;
             try {
                 purseContract.current
-                    .joinPurse(collateral)
+                    .joinPurse(position)
                     .then(callback)
                     .catch(callback);
             } catch (err) {
