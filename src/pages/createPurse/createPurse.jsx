@@ -23,7 +23,7 @@ const CreatePurse = () => {
     const {active, chainId,  account} = useWeb3React()
     const dispatch = useDispatch()
     const { addToast } = useToasts();
-    const [admin, setAdmin] = useState(null)
+    // const [admin, setAdmin] = useState(null)
     const [chatId, setChatId] = useState(null)
 
     const [data, setData] = useState({

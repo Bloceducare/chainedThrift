@@ -21,15 +21,21 @@ const PurseLayout = () => {
     const {account} = useWeb3React();
     let { pathname } = useLocation();
     const [currentTab, setCurrentTab] = useState(null);
-    const { getPurseData,getCurrentRound} = usePurse()
+    const { getCurrentRound} = usePurse()
+    const [currentRound, setCurrentRound] = useState([])
     // const purseData = getPurseData(id);
-console.log(id);
 
-    const f = async() =>{
+    const fetchCurrentRoundDetails = async() =>{
         
         const result = await getCurrentRound(id)
-        console.log('currentRounds',result)
+        setCurrentRound({
+            member:result[0],
+            round:Number(result[1].toString()),
+            timer:result[2].toString()
+
+        })
     }
+
 
     const purseTabs = {
         OVERVIEW: "overview",
@@ -40,7 +46,7 @@ console.log(id);
 
     useEffect(() => {
         // remove trailing slash if any
-        f()
+        fetchCurrentRoundDetails()
         const pathString = pathname.replace(/\/$/, "");
         const pathArr = pathString.split("/");
         if (pathArr.length === 5) {
@@ -59,7 +65,7 @@ console.log(id);
             <div className="container h-full mx-auto flex bg-dark-4">
                 <SideBar id={id} currentTab={currentTab} />
                 <div className="w-full h-full dark:bg-dark-1 bg-white-1 text-white-1 px-8">
-                    <PurseHeader currentTab={currentTab} />
+                    <PurseHeader currentTab={currentTab} currentRound={currentRound} />
                     <Suspense fallback={<Fallback />}>
                         <Routes>
                             <Route
@@ -72,7 +78,7 @@ console.log(id);
                             />
                             <Route
                                 path={purseRoutes.actions}
-                                element={<PurseActions />}
+                                element={<PurseActions currentRound={currentRound} />}
                             />
                             <Route
                                 path={purseRoutes.settings}

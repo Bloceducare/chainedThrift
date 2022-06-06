@@ -1,4 +1,4 @@
-import React,{useEffect, useRef,useState} from 'react';
+import React,{useEffect,useState} from 'react';
 import Deposit from "./components/Deposit";
 import Vote from "./components/Vote";
 import usePurse from ".././../web3/hooks/usePurse";
@@ -8,12 +8,12 @@ import { formatUnits,parseUnits } from 'ethers/lib/utils';
 import {formatDate} from "../../utils/helpers";
 import useToken from "../../web3/hooks/useToken"
 import { useToasts } from 'react-toast-notifications';
-const PurseActions = () => {
+const PurseActions = ({currentRound}) => {
   
    const {donateFunds,getPurseData,depositToBentoBox,withdrawFromBentoBox,claimDonation} =   usePurse();
    const {active} = useWeb3React()
    const id = useParams()
-   const inputField = useRef()
+  //  const inputField = useRef()
   //  const voteField = useRef()
    const [purseDetail, setPurseDetail] = useState([])
    const {addToast} = useToasts()
@@ -57,9 +57,9 @@ const PurseActions = () => {
     // eslint-disable-next-line
   },[id.id])
 
-
+const member = currentRound.member;
    const donateToMemberHandler = async() =>{
-     const inputData = inputField.current.value;
+    //  const inputData = inputField.current.value;
      const depositAmount = parseUnits(purseDetail?.deposit_amount.toString(), decimals);
      if(!active) return;
      const allowance = await getAllowance()
@@ -70,7 +70,7 @@ const PurseActions = () => {
           await res.wait()
           addToast(`${purseDetail?.deposit_amount} ${tokenSymbol} token approval successfull!`, {appearance: "success"});
 
-          await donateFunds(inputData, async(res) =>{
+          await donateFunds(member, async(res) =>{
               if(!res.hash)
               return addToast(res.data.message, {appearance: "error"});
                       await res.wait()
@@ -81,7 +81,7 @@ const PurseActions = () => {
       })
       
   }else {
-      await donateFunds(inputData, async(res) =>{
+      await donateFunds(member, async(res) =>{
           if(!res.hash)
           return addToast(res.data.message, {appearance: "error"});
                   await res.wait()
@@ -146,7 +146,7 @@ const PurseActions = () => {
       <Deposit 
       claimDonationHandler={claimDonationHandler}
       donateToMemberHandler={donateToMemberHandler} 
-      inputField={inputField}/>
+      currentRound={currentRound}/>
       {/* This component has been updated to claim bentoBox functionality i.e buttons to move funs to bentobox && withdraw from bentobox */}
       <Vote 
        depositFundsToBentoBox={depositFundsToBentoBox}
