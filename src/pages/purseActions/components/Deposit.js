@@ -1,11 +1,14 @@
 import React from "react";
 import Button from "../../../common/buttons/button";
 
-function Deposit({ inputField, donateToMemberHandler, claimDonationHandler }) {
+function Deposit({donateToMemberHandler, claimDonationHandler,currentRound }) {
     const [depositHistModal, setDepositHistModal] = React.useState(false);
     // const openDepositHistoryModal = () => {
     //   setDepositHistModal(true);
     // };
+    const address = currentRound.member;
+    const presentTime = Date.now() /1000;
+    const timeForNextRound = currentRound.timer;
     return (
         <React.Fragment>
             <div
@@ -21,9 +24,10 @@ function Deposit({ inputField, donateToMemberHandler, claimDonationHandler }) {
                     <div className="Poppins mt-6 flex w-full">
                         <div className="grow">
                             <input
-                                ref={inputField}
+                                value={address}
                                 className="Poppins w-full rounded-md h-10 p-4 text-gray-7"
                                 placeholder="Member wallet address"
+                                readOnly
                             />
                         </div>
                         {/* <div className="Poppins bg-btn ml-4 cursor-pointer rounded-md h-10 flex items-center justify-center p-4 text-white-1 text-sm">
@@ -32,8 +36,10 @@ function Deposit({ inputField, donateToMemberHandler, claimDonationHandler }) {
                     </div>
                     <div className="flex justify-center">
                         <Button
-                            className="Poppins text-white-1 font-medium mr-2 lg:mr-8  cursor-pointer px-12"
+                            className={`Poppins text-white-1 ${presentTime < timeForNextRound? 'bg-gray-300': ''} font-medium mr-2 lg:mr-8  cursor-pointer px-12`}
                             action={donateToMemberHandler}
+                            disabled={presentTime < timeForNextRound}
+                            
                         >
                             Deposit Now
                         </Button>

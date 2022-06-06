@@ -64,11 +64,6 @@
       },
       {
         "internalType": "uint256",
-        "name": "_collateral",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
         "name": "_max_member",
         "type": "uint256"
       },

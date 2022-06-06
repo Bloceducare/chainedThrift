@@ -44,7 +44,7 @@ const ViewPurse = () => {
             // To calculate the expiring date of a purse
             const time = Number(purseData.timeCreated.toString());
             const frequency = purseData.time_interval.toString();
-            const frequencyMulSeconds = Number(frequency * 86400);
+            const frequencyMulSeconds = Number(frequency);
             const sumSecondsTotal = time + frequencyMulSeconds;
             const endTime = new Date(sumSecondsTotal * 1000).toDateString();
 
@@ -77,7 +77,7 @@ const ViewPurse = () => {
     const purseExpire = Date.now() >= endTimeSeconds;
     const purseData = getPurseData(id);
     const chatID = purseData.chatId;
-    const username = account;
+    // const username = account;
     const admin = purseData.address;
 
     // console.log("col ", purseDetail?.collateral);
@@ -90,8 +90,7 @@ const ViewPurse = () => {
         const value = target.value;
         switch (elementName) {
             case "pos":
-                return setPosition(value);
-                break;
+                return setPosition(value)
 
             default:
                 break;

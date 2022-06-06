@@ -23,7 +23,7 @@ const CreatePurse = () => {
     const {active, chainId,  account} = useWeb3React()
     const dispatch = useDispatch()
     const { addToast } = useToasts();
-    const [admin, setAdmin] = useState(null)
+    // const [admin, setAdmin] = useState(null)
     const [chatId, setChatId] = useState(null)
 
     const [data, setData] = useState({
@@ -35,6 +35,8 @@ const CreatePurse = () => {
         total: 0,
         pos:1
     });
+
+    console.log(data)
 
     const { token, amount, membersCount, frequency, collateral, total,pos } = data;
 
@@ -184,7 +186,7 @@ const CreatePurse = () => {
            
                await createPurse(
                     parseUnits(amount.toString(), decimals),
-                    parseUnits(collateral.toString(), decimals),
+                    // parseUnits(collateral.toString(), decimals),
                     Number(membersCount),
                     Number(frequency),
                     Number(chatId),
@@ -265,7 +267,7 @@ const CreatePurse = () => {
 
             await createPurse(
                 parseUnits(amount.toString(), decimals),
-                parseUnits(collateral.toString(), decimals),
+                // parseUnits(collateral.toString(), decimals),
                 Number(membersCount),
                 Number(frequency),
                 Number(chatId),

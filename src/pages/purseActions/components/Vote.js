@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Vote({voteField,vote,depositFundsToBentoBox,withdrawFundsFromBentoBox}) {
+function Vote({voteField,vote,depositFundsToBentoBox,withdrawFundsFromBentoBox,currentRound}) {
     return (
         <React.Fragment>
             <div className='h-auto lg:w-1/2  dark:bg-gray-16 bg-blue-7 p-6 rounded-xl mt-8'>
@@ -24,7 +24,7 @@ function Vote({voteField,vote,depositFundsToBentoBox,withdrawFundsFromBentoBox})
             </div>
             {/* voting implementation  */}
             <div className='mt-4'>
-                <p className="Poppins text-xl font-extrabold capitalize text-purple-1">
+                <p className="Poppins text-sm font-extrabold capitalize text-purple-1">
                     Approve to disburse funds without complete deposit
                 </p>
                 {/* <p className={`Poppins dark:text-white capitalize text-dark-1 text-xs`}>
