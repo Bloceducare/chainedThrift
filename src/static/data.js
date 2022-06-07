@@ -61,10 +61,10 @@ export const footerLinks = [
         link: "!#",
     },
 
-    {
-        text: " We are hiring!",
-        link: "!#",
-    },
+    // {
+    //     text: " We are hiring!",
+    //     link: "!#",
+    // },
 
     {
         text: "Get in Touch",

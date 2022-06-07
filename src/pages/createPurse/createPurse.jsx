@@ -465,7 +465,7 @@ const CreatePurse = () => {
                                    />{" "}
                                    Position
                                </label>
-                               <select value={pos} onChange={onInputChange} name="pos" className="bg-transparent outline-none py-1 px-2 border border-gray-10 rounded w-full ">
+                               <select value={pos} onChange={onInputChange} name="pos" className="dark:bg-zinc-900  outline-none py-1 px-2 border border-gray-10 rounded w-full ">
                                {
                                 Array(membersCount - 1 + 1).fill().map((_, idx) => 1 + idx).map((num,idx) =>{
                                     return(
