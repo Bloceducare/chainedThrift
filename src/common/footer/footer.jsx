@@ -16,7 +16,7 @@ const Footer = () => {
     <footer className="bg-gray-8 p-6 lg:p-8">
       <div className="container mx-auto lg:flex lg:justify-between items-center">
         <div className=" md:w-full lg:w-3/6">
-         <Link to="https://docs.google.com/forms/d/1aNbxba_d3cnIS4gy7aJI2I_TBSNl7XCfIdvRiuDT1qg/viewform?ts=629f27c6&edit_requested=true">Reviews <Button className="mb-6">Launch App</Button></Link>
+         <a href="https://docs.google.com/forms/d/1aNbxba_d3cnIS4gy7aJI2I_TBSNl7XCfIdvRiuDT1qg/viewform?ts=629f27c6&edit_requested=true"> <Button className="mb-6">Reviews</Button></a>
           <h3 className="block uppercase mb-4 font-Inter font-extrabold text-gray-9">
             Follow us
           </h3>
