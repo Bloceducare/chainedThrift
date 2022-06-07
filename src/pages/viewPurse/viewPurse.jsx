@@ -245,7 +245,7 @@ const ViewPurse = () => {
                                         value={position}
                                         onChange={onInputChange}
                                         name="pos"
-                                        className="bg-transparent outline-none py-1 px-2 border border-gray-10 rounded w-full "
+                                        className="dark:bg-zinc-900  outline-none py-1 px-2 border border-gray-10 rounded w-full "
                                     >
                                         {Array(purseDetail.max_member - 1 + 1)
                                             .fill()
