@@ -137,7 +137,7 @@ const CreatePurse = () => {
                addToast(`${total} ${tokenSymbol} token approval successfull!`, {appearance: "success"});
             // make server request to get or create user with username = account
               const username = account;
-              const title = 'Thrift'+" "+amount+'DAI' + " "+'Members';
+              const title = `Thrift ${amount} ${tokenSymbol} Members`;
               var details = {
                 "username": username,
                 "secret": username
@@ -153,7 +153,7 @@ const CreatePurse = () => {
              axios(config)
              .then(
               res=>{
-                  if(res.status == '200'){
+                  if(res.status === '200'){
                        //  begin create pursChart
                       const chatadmin = res.data.username;
                       var Chatdetails = {
@@ -173,7 +173,7 @@ const CreatePurse = () => {
                      axios(Chatconfig)
                      .then(
                        res=>{
-                           if(res.status == '200'){
+                           if(res.status === '200'){
                              const chatId = res.data.id;
                              setChatId(chatId);
                          }
@@ -203,22 +203,22 @@ const CreatePurse = () => {
                 );
            }).catch(err => {
              return addToast("something went wrong!", {appearance: "error"});
-             const deleteConfig = {
-                method: 'delete',
-                url: `https://api.chatengine.io/chats/${chatId}/`,
-                headers: {
-                    'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-                    'User-Name': account,
-                    'User-Secret': account
-                },
-             }
-             axios(deleteConfig);
+            //  const deleteConfig = {
+            //     method: 'delete',
+            //     url: `https://api.chatengine.io/chats/${chatId}/`,
+            //     headers: {
+            //         'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
+            //         'User-Name': account,
+            //         'User-Secret': account
+            //     },
+            //  }
+            //  axios(deleteConfig);
            })
         }else{
 
     //    create user and chatgroup   
     const username = account;
-    const title = 'Thrift'+" "+amount+'DAI' + " "+'Members';
+    const title = `Thrift ${amount} ${tokenSymbol} Members`;
     var details = {
       "username": username,
       "secret": username
@@ -234,7 +234,7 @@ const CreatePurse = () => {
    axios(config)
    .then(
     res=>{
-        if(res.status == '200'){
+        if(res.status === '200'){
              //  begin create pursChart
             const chatadmin = res.data.username;
             var Chatdetails = {
@@ -254,7 +254,7 @@ const CreatePurse = () => {
            axios(Chatconfig)
            .then(
              res=>{
-                 if(res.status == '201'){
+                 if(res.status === '201'){
                    const chatId = res.data.id;
                    setChatId(chatId);
                }
