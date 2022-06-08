@@ -22,15 +22,6 @@ const PurseLayout = () => {
     let { pathname } = useLocation();
     const [currentTab, setCurrentTab] = useState(null);
     const { getPurseData } = usePurse()
-    try{
-        const purseDtail = getPurseData(id)
-        // const chatId = purseDtail.chatId;
-        console.log(purseDtail);
-    }catch{
-
-    }
-    // const purseData = getPurseData(id);
-
     const purseTabs = {
         OVERVIEW: "overview",
         ACTIONS: "actions",
@@ -67,7 +58,7 @@ const PurseLayout = () => {
                             />
                             <Route
                                 path={purseRoutes.chat}
-                                element={<PurseChat address={account}/>}
+                                element={<PurseChat address={account} purseId={id}/>}
                             />
                             <Route
                                 path={purseRoutes.actions}

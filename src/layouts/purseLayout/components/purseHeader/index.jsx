@@ -9,11 +9,18 @@ import { formatUnits } from "ethers/lib/utils";
 import { formatDate, shortenAddress } from "../../../../utils";
 import { useWeb3React } from "@web3-react/core";
 import useToken from "../../../../web3/hooks/useToken";
+import axios from "axios";
+import PurseChat from "../../../../pages/purseChat/purseChat";
+import { PeopleSettings } from "react-chat-engine";
 
 const PurseHeader = ({ currentTab }) => {
     const { active, account } = useWeb3React();
     const [show, setShow] = useState(false);
     const [purseDetail, setPurseDetail] = useState([]);
+    const [members, setMembers] = useState([])
+    const [NewMembers, setNewMembers] = useState([]);
+    const [accessKey, setAccessKey] = useState()
+    const [chatId, setChatId] = useState()
     const { symbol: tokenSymbol } = useToken(purseDetail?.token_address);
 
     const { id } = useParams();
@@ -31,7 +38,7 @@ const PurseHeader = ({ currentTab }) => {
             const purseData = await getPurseData(id);
             const pursemember = await getPurseMembers(id);
             const res = await getBentoBalance();
-
+            setMembers(pursemember)
             setPurseDetail({
                 address: purseData?.purseAddress,
                 time_interval: purseData.time_interval.toString(),
@@ -52,12 +59,90 @@ const PurseHeader = ({ currentTab }) => {
             throw error;
         }
     };
-
+    
     useEffect(() => {
         if (!active) return;
         getSinglePurseDetail();
         // eslint-disable-next-line
     }, [active, account]);
+    // get or create user in chart engine
+    const a = id
+    const elem = a.slice(0, 6);
+    const title = 'Purse'+" "+elem+ " " + 'Discussion'
+    var details = {
+      "username": account,
+       "secret": account
+    };
+    const getOrCreateUser = {
+     method: 'put',
+     url: 'https://api.chatengine.io/users/',
+     headers: {
+     'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+     },
+     data:details
+    }
+    axios(getOrCreateUser)
+    .then(
+        res=>{
+            if(res.status == '200'){
+            // get or create chat
+             var chatdetails = {
+                "usernames":members,
+                "title": title,
+                "is_direct_chat": false
+              };
+              const getOrCreateChat = {
+              method: 'put',
+              url: 'https://api.chatengine.io/chats/',
+              headers: {
+               'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1',
+               'User-Name': account,
+               'User-Secret': account
+              },
+             data:chatdetails
+             } 
+             axios(getOrCreateChat)
+             .then(
+               result=>{
+                 localStorage.setItem(`${id}`, `${result.data.id}`)
+                 localStorage.setItem(`${id + 'KEY'}`, `${result.data.access_key}`)
+               }
+             ) 
+          }
+        }
+    )
+
+    
+    // add members to chat
+    // const cid = localStorage.getItem(`${id}`);
+    // for(var i = 0; i< (members.length)-1; i++){
+    //   var person = {
+    //      "username":members[i + 1]
+    //    };
+    //    const addmembers = {
+    //      method: 'post',
+    //      url:`https://api.chatengine.io/chats/${cid}/people/`,
+    //      headers: {
+    //       'Project-ID':'21f51b31-abf1-4e3e-9ed4-00a1b0215871',
+    //       'User-Name': account,
+    //       'User-Secret': account
+    //      },
+    //     data:person
+    //  } 
+    //  console.log(person)
+    //  axios(addmembers)
+    //  .then (
+    //      resu =>{
+    //       console.log(resu)
+    //      }
+    //  ).catch(
+    //      error=>{
+    //          console.log(error)
+    //      }
+    //  )
+    // }
+
+ 
 
     return (
         <div>
@@ -71,7 +156,7 @@ const PurseHeader = ({ currentTab }) => {
                             Purse ID: {shortenAddress(purseDetail.address)}
                         </div>
                     </div>
-                </div>
+                </div> 
                 <div className="flex flex-col mt-7 md:mr-0">
                     <div>
                         <div className="Poppins text-xs md:text-base dark:text-white-1 text-dark-1 font-medium">

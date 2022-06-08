@@ -19,6 +19,7 @@ body{
     margin-top: 71px;
     z-index: 1;
     position: absolute;
+    background-image: url(./images/us.jpg) !important;
     background-color: #fff;
 }
 .ce-wrapper{
@@ -46,7 +47,7 @@ body{
     /* width: 100% !important; */
     /* width:80% !important;
      */
-     width:100% !important;
+     /* width:100% !important; */
     /* margin-left: 10% !important; */
     box-sizing:unset !important;
     border: unset !important;
@@ -86,7 +87,7 @@ body{
    color:#aaa !important;
   }
   .ce-my-message-bubble  {
-   background-color:#F90000 !important;
+   background-color:#40A9FF !important;
    font-size: 13px !important;
    max-width: 350px !important;
    padding: 10px !important;
@@ -118,6 +119,10 @@ body{
  }
  .ce-message-form-container{
    background-color:#1C1B3C !important;
+   /* width: 50% !important; */
+   /* position:relative !important;
+   margin-left:-10px !important;
+   margin-top: -170px !important; */
  }
  .ql-container{
    display: relative !important;
@@ -128,7 +133,6 @@ body{
    color: white !important;
    margin-top: 10px !important;
    border-radius: 20px;
- 
  }
  .ql-toolbar{
    border: unset !important;
@@ -167,31 +171,55 @@ body{
    color:#DCE7EF !important;
    font-size: 13px !important;
  
+ } 
+ @media(min-width: 900px){
+  .hidden-lg{
+    display: none !important;
+  }
  }
-
-
-
-
-
-
- 
  @media(max-width: 898px){
+   .hidden-xs{
+     display:  none !important;
+   }
+   .chat-container{
+     width:100% !important;
+     height:100vh;
+     top:0 !important;
+     margin-top: 0 !important;
+     position: fixed !important;
+   }
+   .ce-chat-title-container {
+     margin-top: 0px !important;
+   }
+   .ce-chat-title-text{
+     margin-top: -15px !important;
+   }
+   .chatPic{
+     /* display:none !important; */
+     top: 0 !important;
+     margin-top:16px !important;
+     margin-left: 20px !important;
+   }
    .ql-container{
-     display: relative !important;
-     width: 100% !important;
+     /* display: relative !important; */
+     position:  relative !important;
+     width: 70% !important;
      border: unset !important;
-     /* margin-left: 10% !important; */
+     margin-left: 10% !important;
      color: white !important;
      margin-top: 13px !important;
      border-radius: 20px;
-   
-   }
+   } 
+   /* .ce-chat-feed-column{
+     height: 100vh !important;
+   } */
    .ce-send-button-container{
      position:absolute !important;
      top: 0 !important;
      right: 0;
-     margin-top: 18px !important;
-     margin-right: 10px  !important;
+     transform: unset !important;
+     margin-top: 17px !important;
+     margin-right: 20px  !important;
    }
    .ql-toolbar button:first-child {
      display: inline-block !important;
@@ -208,5 +236,8 @@ body{
     }
     .anticon-menu {
       display: none !important;
+    }
+    .ce-my-message-bubble{
+      max-width: 300px !important;
     }
  }

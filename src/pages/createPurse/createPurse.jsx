@@ -44,7 +44,7 @@ const CreatePurse = () => {
     
     useEffect(() => {
         // if(token) return;
-        setData(prev => ({...prev, token: !!tokensConfig[chainId] ? tokensConfig[chainId][0] : null}))
+        setData(prev => ({...prev, token: !! tokensConfig[chainId] ? tokensConfig[chainId][0] : null}))
     }, [chainId])
 
     useEffect(() => {
@@ -115,6 +115,7 @@ const CreatePurse = () => {
         const tokenData = tokensConfig[chainId].find(token => token.address === key)
         setData(prev => ({...prev, token: tokenData}));
     },[setData, chainId])
+   
 
     const handleCreatePurse = async () => {
         const allowance = await getAllowance();
@@ -127,54 +128,6 @@ const CreatePurse = () => {
                await res.wait()
                addToast(`${total} ${tokenSymbol} token approval successfull!`, {appearance: "success"});
             // make server request to get or create user with username = account
-              const username = account;
-              const title = 'Thrift'+" "+amount+'DAI' + " "+'Members';
-              var details = {
-                "username": username,
-                "secret": username
-              };
-              const config = {
-                method: 'put',
-                url: 'https://api.chatengine.io/users/',
-                headers: {
-                    'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
-                },
-                data : details
-             }
-             axios(config)
-             .then(
-              res=>{
-                  if(res.status == '200'){
-                       //  begin create pursChart
-                      const chatadmin = res.data.username;
-                      var Chatdetails = {
-                        "title": title,
-                        "is_direct_chat": false
-                      };
-                      const Chatconfig = {
-                        method: 'post',
-                        url: 'https://api.chatengine.io/chats/',
-                        headers: {
-                            'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-                            'User-Name': chatadmin,
-                            'User-Secret': chatadmin
-                        },
-                        data : Chatdetails
-                     }
-                     axios(Chatconfig)
-                     .then(
-                       res=>{
-                           if(res.status == '200'){
-                             const chatId = res.data.id;
-                             setChatId(chatId);
-                         }
-                       }  
-                     )
-                  }
-                //   end cteate pulse chat
-              }
-             )
-           
                await createPurse(
                     parseUnits(amount.toString(), decimals),
                     parseUnits(collateral.toString(), decimals),
@@ -190,69 +143,9 @@ const CreatePurse = () => {
                     }
                 );
            }).catch(err => {
-             return addToast("something went wrong!", {appearance: "error"});
-             const deleteConfig = {
-                method: 'delete',
-                url: `https://api.chatengine.io/chats/${chatId}/`,
-                headers: {
-                    'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-                    'User-Name': account,
-                    'User-Secret': account
-                },
-             }
-             axios(deleteConfig);
+               return addToast("something went wrong!", {appearance: "error"});
            })
-        }else{
-
-    //    create user and chatgroup   
-    const username = account;
-    const title = 'Thrift'+" "+amount+'DAI' + " "+'Members';
-    var details = {
-      "username": username,
-      "secret": username
-    };
-    const config = {
-      method: 'put',
-      url: 'https://api.chatengine.io/users/',
-      headers: {
-          'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
-      },
-      data : details
-   }
-   axios(config)
-   .then(
-    res=>{
-        if(res.status == '200'){
-             //  begin create pursChart
-            const chatadmin = res.data.username;
-            var Chatdetails = {
-              "title": title,
-              "is_direct_chat": false
-            };
-            const Chatconfig = {
-              method: 'post',
-              url: 'https://api.chatengine.io/chats/',
-              headers: {
-                  'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-                  'User-Name': chatadmin,
-                  'User-Secret': chatadmin
-              },
-              data : Chatdetails
-           }
-           axios(Chatconfig)
-           .then(
-             res=>{
-                 if(res.status == '201'){
-                   const chatId = res.data.id;
-                   setChatId(chatId);
-               }
-             }  
-           )
-        }
-      //   end cteate pulse chat
-    }
-   )
-
+         }else{
             await createPurse(
                 parseUnits(amount.toString(), decimals),
                 parseUnits(collateral.toString(), decimals),
@@ -268,11 +161,7 @@ const CreatePurse = () => {
                 }
             );
         }
-        
-
     }
-
-
     const tokenMenu = (
         <Menu className="token_menu_class pointer" onSelect={onselectToken}>
             {tokensConfig[chainId]?.map(token => <MenuItem key={token.address}className="token_menu_item_class pointer">

@@ -20,10 +20,7 @@ const ViewPurse = () => {
     const {id} = useParams()
     const {getPurseData, getPurseMembers,joinPurses} = usePurse()
     const [purseDetail, setPurseDetail] = useState([])
-
-
     const {getAllowance, approve, symbol:tokenSymbol,decimals} = useToken(purseDetail?.token_address);
-
 
     // loading will be used for skeleton loader
     const [loading, setLoading] =useState(true)
@@ -59,24 +56,19 @@ const ViewPurse = () => {
            
             
         })
-        setLoading(false)
-                
-            } catch (error) {
-                setLoading(false)
-                throw error
-            }
-
-        }
-        // @condition:check if currentMember equals max_memeber, if true disable from joining purse else yunno
+        setLoading(false)   
+         } catch (error) {
+           setLoading(false)
+            throw error
+         }
+      }  
+    // @condition:check if currentMember equals max_memeber, if true disable from joining purse else yunno
         const currentMember = purseDetail.members;
         const maxMembers = purseDetail.max_member;
-
         const endTime = new Date(purseDetail.endTime)
         const endTimeSeconds = Math.floor(endTime.getTime());
         const purseExpire = Date.now() >= endTimeSeconds
         const purseData = getPurseData(id)
-        const chatID = purseData.chatId;
-        const username = account;
         const admin = purseData.address;
         
         // console.log("col ", purseDetail?.collateral);
@@ -94,7 +86,20 @@ const ViewPurse = () => {
                 return addToast(res.message, {appearance: "error"});
                 await res.wait()
                 addToast(`${purseDetail?.collateral} ${tokenSymbol} token approval successfull!`, {appearance: "success"});
-
+                // create user
+                 var details = {
+                    "username": account,
+                     "secret": account
+                  };
+                  const getOrCreateUser = {
+                   method: 'put',
+                   url: 'https://api.chatengine.io/users/',
+                   headers: {
+                   'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+                   },
+                   data:details
+                  }
+                axios(getOrCreateUser)
                 await joinPurses(collateralWei, async(res) =>{
                     if(!res.hash)
                     return addToast(res.data.message, {appearance: "error"});
@@ -106,31 +111,28 @@ const ViewPurse = () => {
             })
             
         }else {
-
-            // add user to chart
-            var user = {
-                "username":account
+            // create user
+            var details = {
+                "username": account,
+                 "secret": account
               };
-              const addUser = {
-                method: 'post',
-                url: `https://api.chatengine.io/chats/${chatID}/people/`,
-                headers: {
-                    'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-                    'User-Name': admin,
-                    'User-Secret': admin
-                },
-                data : user
-             }
-             axios(addUser)
+              const getOrCreateUser = {
+               method: 'put',
+               url: 'https://api.chatengine.io/users/',
+               headers: {
+               'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+               },
+               data:details
+              }
+            axios(getOrCreateUser)
             await joinPurses(collateralWei, async(res) =>{
                 if(!res.hash)
                 return addToast(res.message, {appearance: "error"});
                         await res.wait()
                         addToast("Successfully Joined Purse!", {appearance: "success"});
             }).catch(err =>{
-            //   hsjhdsj
             })
-        }
+          }
         }
 
         useEffect(() =>{ 
@@ -198,5 +200,6 @@ const ViewPurse = () => {
     </>
     );
 };
+
 
 export default ViewPurse;
