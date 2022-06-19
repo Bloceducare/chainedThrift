@@ -203,7 +203,7 @@ const ViewPurse = () => {
                                 </span>
                                 <ImNotification className="text-white/80 -ml-1" />
                             </div>
-                            <CardList purseDetail={purseDetail} />
+                            <CardList purseDetail={purseDetail} purseExpire={purseExpire} />
                             <p className="font-bold Poppins text-xl sm:text-base">
                                 Note:
                             </p>
