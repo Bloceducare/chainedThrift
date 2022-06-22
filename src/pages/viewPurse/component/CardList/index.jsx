@@ -1,9 +1,8 @@
 import React from "react";
 import { DisplayCard } from "../DisplayCard";
 
-export const CardList = ({purseDetail, purseExpire}) => {
-    console.log(purseExpire
-        )
+export const CardList = ({purseDetail}) => {
+   
     const secondsInADay = 86400;
     const days = Number(purseDetail.time_interval) /secondsInADay;
     return (
@@ -23,7 +22,7 @@ export const CardList = ({purseDetail, purseExpire}) => {
             <DisplayCard
                 frequencyTitle="Amount(TVL)"
                 frequency={`${purseDetail.deposit_amount} USDC`}
-                icon={purseExpire === true? `/assets/lock1.png` : `/assets/lock_open.png`}
+                icon={purseDetail.members === purseDetail.max_member? `/assets/lock1.png` : `/assets/lock_open.png`}
             />
         </div>
     );

@@ -21,7 +21,7 @@ import AppHeader from "../../common/appHeader/appHeader";
 import { appNav } from "../../static/data";
 import AppSideDrawer from "../../common/appSideDrawer/appSideDrawer";
 import { useEagerConnect } from "../../web3";
-const Swap = lazy(() => import("../../pages/swap/swap"));
+// const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
 const CreatePurse = lazy(() => import("../../pages/createPurse/createPurse"));
@@ -95,7 +95,7 @@ const AppViewLayout = () => {
             />
             <Suspense fallback={<Fallback />}>
                 <Routes>
-                    <Route path={appRoutes.swap} element={<Swap />} />
+                    {/* <Route path={appRoutes.swap} element={<Swap />} /> */}
                     <Route path={appRoutes.purses} element={<Purses />} />
                     <Route path={appRoutes.view_purse} element={<ViewPurse />} />
                     <Route

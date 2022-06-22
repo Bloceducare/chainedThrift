@@ -19,16 +19,16 @@ export const appNav = [
         value: "Home",
         link: absoluteRoutes.landing,
     },
-    {
-        value: "Swap",
-        link: absoluteRoutes.swap,
-    },
+    // {
+    //     value: "Swap",
+    //     link: absoluteRoutes.swap,
+    // },
     {
         value: "Purses",
         link: absoluteRoutes.purses,
     },
     {
-        value: "new purse",
+        value: "New Purse",
         link: absoluteRoutes.new_purse,
     },
 ];

@@ -7,8 +7,8 @@ function Deposit({donateToMemberHandler, claimDonationHandler,currentRound }) {
     //   setDepositHistModal(true);
     // };
     const address = currentRound.member;
-    const presentTime = Date.now() /1000;
-    const timeForNextRound = currentRound.timer;
+    // const presentTime = Date.now() /1000;
+    // const timeForNextRound = currentRound.timer;
     return (
         <React.Fragment>
             <div
@@ -36,9 +36,9 @@ function Deposit({donateToMemberHandler, claimDonationHandler,currentRound }) {
                     </div>
                     <div className="flex justify-center">
                         <Button
-                            className={`Poppins text-white-1 ${presentTime < timeForNextRound? 'bg-gray-300': ''} font-medium mr-2 lg:mr-8  cursor-pointer px-12`}
+                            className={`Poppins text-white-1  font-medium mr-2 lg:mr-8  cursor-pointer px-12`}
                             action={donateToMemberHandler}
-                            disabled={presentTime < timeForNextRound}
+                            // disabled={presentTime < timeForNextRound}
                             
                         >
                             Deposit Now
