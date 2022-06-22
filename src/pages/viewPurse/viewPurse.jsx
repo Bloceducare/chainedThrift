@@ -72,9 +72,9 @@ const ViewPurse = () => {
     const currentMember = purseDetail.members;
     const maxMembers = purseDetail.max_member;
 
-    const endTime = new Date(purseDetail.endTime);
-    const endTimeSeconds = Math.floor(endTime.getTime());
-    const purseExpire = Date.now() >= endTimeSeconds;
+    // const endTime = new Date(purseDetail.endTime);
+    // const endTimeSeconds = Math.floor(endTime.getTime());
+    // const purseExpire = Date.now() >= endTimeSeconds;
     const purseData = getPurseData(id);
     const chatID = purseData.chatId;
     // const username = account;
@@ -203,13 +203,13 @@ const ViewPurse = () => {
                                 </span>
                                 <ImNotification className="text-white/80 -ml-1" />
                             </div>
-                            <CardList purseDetail={purseDetail} purseExpire={purseExpire} />
+                            <CardList purseDetail={purseDetail}  />
                             <p className="font-bold Poppins text-xl sm:text-base">
                                 Note:
                             </p>
                             <p className="Poppins font-light">
                                 You are to deposit a collateral of{" "}
-                                {`${purseDetail.collateral} USDC`} which will be
+                                {`${purseDetail.collateral} CTT`} which will be
                                 put in yield farming. You can withdraw this
                                 collateral plus the yield to your wallet
                                 immediately after everyone have gotten their
@@ -218,29 +218,31 @@ const ViewPurse = () => {
                             <p className="Poppins font-light mt-5">
                                 By clicking the "JOIN PURSE" button, you are
                                 sending
-                                {`${purseDetail.deposit_amount} USDC`} as
+                                {`${purseDetail.deposit_amount} CTT`} as
                                 collateral and{" "}
-                                {`${purseDetail.deposit_amount} USDC`} for the
+                                {`${purseDetail.deposit_amount} CTT`} for the
                                 purse amount which makes it total of{" "}
-                                {`${purseDetail.contract_total_collateral_balance} USDC`}
+                                {`${purseDetail.contract_total_collateral_balance} CTT`}
                             </p>
                             <div className="mt-6 flex justify-between mb-12 items-center">
-                                <div className="flex items-center gap-x-2">
+                                <div className="flex items-end gap-x-2">
                                     <button
                                         onClick={joinPurseHandler}
                                         disabled={
-                                            currentMember === maxMembers ||
-                                            purseExpire
+                                            currentMember === maxMembers 
+                                            // purseExpire
                                         }
                                         className={`${
-                                            currentMember === maxMembers ||
-                                            purseExpire
+                                            currentMember === maxMembers 
+                                            // purseExpire
                                                 ? "bg-slate-400"
                                                 : ""
                                         } bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1`}
                                     >
                                         Join Purse
                                     </button>
+                                    <div>
+                                    <span className="block text-xs">Choose position</span>
                                     <select
                                         value={position}
                                         onChange={onInputChange}
@@ -261,12 +263,13 @@ const ViewPurse = () => {
                                                 );
                                             })}
                                     </select>
+                                    </div>
                                 </div>
                                 <div className="flex gap-4 items-baseline">
                                     <p className="Poppins text-xs">Due Date</p>
                                     <div>
-                                        {currentMember === maxMembers ||
-                                        purseExpire ? (
+                                        {currentMember === maxMembers 
+                                         ? (
                                             <p className="Poppins text-rose-500 text-xs">
                                                 Purse is closed!
                                             </p>

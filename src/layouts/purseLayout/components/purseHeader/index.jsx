@@ -75,12 +75,12 @@ const readableTimer = moment.unix(currentRound.timer).toString()
                     </div>
                 </div>
                 <div className="flex flex-col mt-7 md:mr-0">
-                <div className="Poppins text-xs mb-2 md:text-base dark:text-white-1 text-dark-1 font-medium">
+                <div className="Poppins text-xs mb-2 md:text-base font-bold dark:text-white-1 text-dark-1 font-medium">
                         {readableTimer === 'Invalid date'? <p>Members not complete</p> : <p>Next Round: {readableTimer} </p>}
                     </div>
 
                     <div className="Poppins text-xs md:text-base dark:text-white-1 text-dark-1 font-medium">
-                        <p>Current Round: {currentRound.round || 0}</p>
+                        <p className="font-bold">Current Round: {currentRound.round || 0}</p>
                     </div>
                     <div>
                         <div className="Poppins text-xs md:text-base dark:text-white-1 text-dark-1 font-medium">
