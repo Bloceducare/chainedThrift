@@ -73,6 +73,18 @@ const usePurse = () => {
         return result;
     };
 
+    const getUserClaimableDeposit =useCallback(async (address,purseAddress) => {
+        init(purseAddress)
+        try {
+            if(!active)return;
+            const result = await purseContract.current.userClaimableDeposit(address);
+            return result;
+        } catch (error) {
+         console.error(error)   
+        }
+       
+    },[active,init]);
+
     const joinPurses = useCallback(
         async (position, callback) => {
             if (!active) throw new Error("you are not connected");
@@ -200,7 +212,8 @@ const usePurse = () => {
         withdrawFromBentoBox,
         claimDonation,
         getBentoBalance,
-        getCurrentRound
+        getCurrentRound,
+        getUserClaimableDeposit
     };
 };
 
