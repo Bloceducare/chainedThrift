@@ -266,7 +266,7 @@ const ViewPurse = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4 items-baseline">
-                                    <p className="Poppins text-xs">Due Date</p>
+                                    {/* <p className="Poppins text-xs">Due Date</p> */}
                                     <div>
                                         {currentMember === maxMembers 
                                          ? (
@@ -274,9 +274,10 @@ const ViewPurse = () => {
                                                 Purse is closed!
                                             </p>
                                         ) : (
-                                            <p className="Poppins text-xs">
-                                                {purseDetail.endTime}
-                                            </p>
+                                            null
+                                            // <p className="Poppins text-xs">
+                                                // {purseDetail.endTime}
+                                            // </p>
                                         )}
                                     </div>
                                 </div>

@@ -6,6 +6,7 @@ import { purseRoutes, absoluteRoutes } from "../../utils/routes";
 import PurseHeader from "./components/purseHeader";
 import { useWeb3React } from "@web3-react/core";
 import usePurse from "../../web3/hooks/usePurse";
+import { ethers } from "ethers";
 
 const Purse = lazy(() => import("../../pages/purse/purse"));
 const PurseChat = lazy(() => import("../../pages/purseChat/purseChat"));
@@ -18,11 +19,12 @@ const PurseSettings = lazy(() =>
 
 const PurseLayout = () => {
     const {id} = useParams()
-    const {account} = useWeb3React();
+    const {active,account} = useWeb3React();
     let { pathname } = useLocation();
     const [currentTab, setCurrentTab] = useState(null);
-    const { getCurrentRound} = usePurse()
+    const { getCurrentRound, getUserClaimableDeposit} = usePurse()
     const [currentRound, setCurrentRound] = useState([])
+    const [amount, setAmount] = useState(null)
     // const purseData = getPurseData(id);
 
     const fetchCurrentRoundDetails = async() =>{
@@ -36,6 +38,12 @@ const PurseLayout = () => {
         })
     }
 
+    const fetchClaimableReward = async() =>{
+        const result = await getUserClaimableDeposit(account,id)
+        const format = ethers.utils.formatUnits(result)
+        setAmount(format)
+    }
+
 
     const purseTabs = {
         OVERVIEW: "overview",
@@ -43,6 +51,15 @@ const PurseLayout = () => {
         CHAT: "chat",
         SETTINGS: "settings",
     };
+
+
+
+    useEffect(() =>{
+        fetchClaimableReward()
+        
+    },
+     /* eslint-disable */
+    [active,account])
 
     useEffect(() => {
         // remove trailing slash if any
@@ -65,7 +82,7 @@ const PurseLayout = () => {
             <div className="container h-full mx-auto flex bg-dark-4">
                 <SideBar id={id} currentTab={currentTab} />
                 <div className="w-full h-full dark:bg-dark-1 bg-white-1 text-white-1 px-8">
-                    <PurseHeader currentTab={currentTab} currentRound={currentRound} />
+                    <PurseHeader currentTab={currentTab} currentRound={currentRound} amount={amount} />
                     <Suspense fallback={<Fallback />}>
                         <Routes>
                             <Route

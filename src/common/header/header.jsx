@@ -43,6 +43,10 @@ const Header = ({ data = [], toggleDrawer}) => {
               </NavLink>
             );
           })}
+          <a href="https://mumbai.polygonscan.com/address/0xeae9911b42bf966f038d2ef49563012e31a2b409#writeContract"
+           className={ `font-Poppins text-base font-extrabold dark:text-white-1 text-dark-1 mr-24 cursor-pointer`}
+           target="_blank" rel="noopener noreferrer"
+          >Claim CTT Token</a>
           <HeaderButton action={redirectToApp}>Launch App</HeaderButton>
         </nav>
 

@@ -11,7 +11,7 @@ import { useWeb3React } from "@web3-react/core";
 import moment from "moment"
 import useToken from "../../../../web3/hooks/useToken";
 
-const PurseHeader = ({ currentTab,currentRound }) => {
+const PurseHeader = ({ currentTab,currentRound,amount }) => {
     const { active, account } = useWeb3React();
     const [show, setShow] = useState(false);
     const [purseDetail, setPurseDetail] = useState([]);
@@ -71,6 +71,9 @@ const readableTimer = moment.unix(currentRound.timer).toString()
                         </p>
                         <div className="Poppins font-medium text-xs md:text-base dark:text-white-1 text-dark-1">
                             Purse ID: {shortenAddress(purseDetail.address)}
+                        </div>
+                        <div className="Poppins mt-1 font-medium text-xs md:text-base dark:text-white-1 text-dark-1">
+                            Claimable Deposit: {amount} {tokenSymbol}
                         </div>
                     </div>
                 </div>

@@ -98,7 +98,7 @@ const member = currentRound.member;
 
     const depositFundsToBentoBox = async () =>{
       await  depositToBentoBox( async(res) =>{
-        if(!res.hash) return addToast(res.data.message, {appearance:"error"})
+        if(!res.hash) return addToast(res.error.data.message, {appearance:"error"})
         addToast("successfully deposit funds", {appearance: 'success'})
       }).catch(err =>{
         return addToast("something went wrong!", {appearance: "error"});
@@ -108,7 +108,7 @@ const member = currentRound.member;
 
     const withdrawFundsFromBentoBox = async() =>{
       await  withdrawFromBentoBox( async(res) =>{
-        if(!res.hash) return addToast(res.data.message, {appearance:"error"})
+        if(!res.hash) return addToast(res.error.data.message, {appearance:"error"})
         addToast("successfully withdraw funds", {appearance: 'success'})
       }).catch(err =>{
         return addToast("something went wrong!", {appearance: "error"});
@@ -117,7 +117,8 @@ const member = currentRound.member;
 
     const claimDonationHandler = async() =>{
       await  claimDonation( async(res) =>{
-        if(!res.hash) return addToast(res.data.message, {appearance:"error"})
+        console.log(res)
+        if(!res.hash) return addToast(res.error.data.message, {appearance:"error"})
 
         addToast("successfully withdraw funds", {appearance: 'success'})
       }).catch(err =>{
