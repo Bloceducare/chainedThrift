@@ -116,7 +116,7 @@ const ViewPurse = () => {
 
                 await joinPurses(position, async (res) => {
                     if (!res.hash)
-                        return addToast(res.data.message, {
+                        return addToast(res.error.data.message, {
                             appearance: "error",
                         });
                     const result = await res.wait();
@@ -149,7 +149,7 @@ const ViewPurse = () => {
             axios(addUser);
             await joinPurses(position, async (res) => {
                 if (!res.hash)
-                    return addToast(res.message, { appearance: "error" });
+                    return addToast(res.error.data.message, { appearance: "error" });
                 const result = await res.wait();
                 const address = await result.to;
                 addToast("Successfully Joined Purse!", {
