@@ -22,10 +22,9 @@ const PurseLayout = () => {
     const {active,account} = useWeb3React();
     let { pathname } = useLocation();
     const [currentTab, setCurrentTab] = useState(null);
-    const { getCurrentRound, getUserClaimableDeposit} = usePurse()
+    const { getCurrentRound, getUserClaimableDeposit } = usePurse()
     const [currentRound, setCurrentRound] = useState([])
     const [amount, setAmount] = useState(null)
-    // const purseData = getPurseData(id);
 
     const fetchCurrentRoundDetails = async() =>{
         
@@ -55,8 +54,7 @@ const PurseLayout = () => {
 
 
     useEffect(() =>{
-        fetchClaimableReward()
-        
+        fetchClaimableReward();
     },
      /* eslint-disable */
     [active,account])
@@ -91,7 +89,7 @@ const PurseLayout = () => {
                             />
                             <Route
                                 path={purseRoutes.chat}
-                                element={<PurseChat address={account}/>}
+                                element={<PurseChat/>}
                             />
                             <Route
                                 path={purseRoutes.actions}
@@ -104,8 +102,8 @@ const PurseLayout = () => {
                             <Route
                                 path="*"
                                 element={
-                                    <Navigate to={absoluteRoutes.purses} />
-                                }
+                                 <Navigate to={absoluteRoutes.purses} />
+                            }
                             />
                         </Routes>
                     </Suspense>

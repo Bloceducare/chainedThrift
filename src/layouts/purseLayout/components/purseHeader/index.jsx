@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { formatUnits } from "ethers/lib/utils";
 import { formatDate, shortenAddress } from "../../../../utils";
 import { useWeb3React } from "@web3-react/core";
-import moment from "moment"
+import moment from "moment";
 import useToken from "../../../../web3/hooks/useToken";
 
 const PurseHeader = ({ currentTab,currentRound,amount }) => {
@@ -27,8 +27,9 @@ const PurseHeader = ({ currentTab,currentRound,amount }) => {
         setShow(!show);
     };
 
-const readableTimer = moment.unix(currentRound.timer).toString()
-    const getSinglePurseDetail = async () => {
+const readableTimer = moment.unix(currentRound.timer).toString() 
+
+    const getSinglePurseDetail = async () => { 
         try {
             const purseData = await getPurseData(id);
             const pursemember = await getPurseMembers(id);
