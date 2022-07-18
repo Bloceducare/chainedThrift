@@ -15,7 +15,7 @@ const Purse = ({purse,loading}) => {
     }
     navigate(`/app/view/purse/${purse.address}`)
   } 
-  const open = purse.members.length < purse.maxMember ? true : false;
+  const open = purse.members.length < purse.max_member ? true : false;
   return (
 
     <>

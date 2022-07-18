@@ -7,7 +7,7 @@ import './all.css'
 import usePurse from "../../web3/hooks/usePurse";
 import axios from "axios";
 const PurseChat = () => {
-const {getChatId, getPurseMembers, getPurseData } = usePurse()
+const {getChatId } = usePurse()
 const  {account, active} = useWeb3React();
 const [chatId, setChatId] = useState(null);
 const [key, setKey] = useState(null) 

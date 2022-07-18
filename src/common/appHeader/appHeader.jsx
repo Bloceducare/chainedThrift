@@ -26,9 +26,9 @@ const AppHeader = ({ displayWalletModal, data = [], toggleDrawer, onClose }) => 
                     onClick={() => handleRedirect("/")}
                 >
                     <img
-                        className="w-10 md:w-10 lg:w-14 -rotate-12"
-                        src="/assets/Vector.svg"
-                        alt="web3brigde-logo"
+                        className="w-10 md:w-10 lg:w-14 mr-2 "
+                        src="/assets/ellipse.svg"
+                        alt="chainedThrift-logo"
                     />
                     <span className="font-Montserrat font-extrabold lg:text-base sm:text-xs uppercase dark:text-white-1 text-dark-1">
                         Chained thrift

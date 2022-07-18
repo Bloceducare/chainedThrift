@@ -34,7 +34,7 @@ const readableTimer = moment.unix(currentRound.timer).toString()
             const purseData = await getPurseData(id);
             const pursemember = await getPurseMembers(id);
             const res = await getBentoBalance();
-            console.log(purseData)
+            // console.log(purseData)
             setPurseDetail({
                 address: purseData?.purseAddress,
                 time_interval: purseData.time_interval.toString(),
