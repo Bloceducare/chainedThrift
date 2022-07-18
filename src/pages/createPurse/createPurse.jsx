@@ -17,7 +17,6 @@ import { parseUnits } from "ethers/lib/utils";
 import usePurseFactory from "../../web3/hooks/usePurseFactory";
 import { useToasts } from "react-toast-notifications";
 import axios from 'axios';
-import usePurse from "../../web3/hooks/usePurse";
 
 
 
@@ -26,7 +25,6 @@ const CreatePurse = () => {
     const {active, chainId,  account} = useWeb3React()
     const dispatch = useDispatch()
     const { addToast } = useToasts();
-    const { getPurseData, getPurseMembers} = usePurse();
 
     const [data, setData] = useState({
         token: null,
@@ -312,7 +310,7 @@ const CreatePurse = () => {
                         <span>Go back</span>
                     </button>
                 </div>
-                <div className="md:w-mini_large lg:w-semi_large mx-auto mt-8">
+                <div className="md:w-mini_large lg:w-semi_large purse_mobile mx-auto mt-8">
                     <h1 className="text-3xl font-black mb-4">Create Purse</h1>
                     <p className="">
                         As the purse creator, you automatically become the first
@@ -464,7 +462,7 @@ const CreatePurse = () => {
                                    className="block text-xs"
                                >
                                      <IoIosHelpCircleOutline
-                                       data-tip="Contribution amount plus collateral amount. this is the total amount you are spending to create this purse"
+                                       data-tip="Order in which you want to receive thrift contribution"
                                        className="inline text-xl"
                                    />{" "}
                                    Position

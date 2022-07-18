@@ -1,6 +1,7 @@
 import React from 'react'
 
-function Details({theme}) {
+function Details({member}) {
+    
     return (
         <React.Fragment>
             <div className="flex flex-col items-center">
@@ -8,8 +9,8 @@ function Details({theme}) {
                     <div className="h-28 w-28 bg-gray-16 rounded-full"></div>
                 </div>
                 <div className="text-white-1 mt-12 flex justify-between w-full lg:w-2/5">
-                    <p className={`Poppins ${theme === 'dark'? 'text-white-1' : 'text-dark-1'} font-medium text-xs md:text-sm`}>Available Members</p>
-                    <p className={`Poppins ${theme === 'dark'? 'text-white-1' : 'text-dark-1'} font-medium text-xs md:text-sm`}>Members Expected</p>
+                    <p className={`Poppins dark:text-white text-dark-1 font-medium text-xs md:text-sm`}>Available Members <span className='ml-2'>{member.availableMember}</span></p>
+                    <p className={`Poppins dark:text-white  text-dark-1 font-medium text-xs md:text-sm`}>Members Expected <span className='ml-2'>{member.memberExpected}</span></p>
                 </div>
                 <div className="mt-8">
                     <p className="Poppins dark:text-white-1 text-dark-1 font-semibold text-lg text-center">

@@ -1,10 +1,10 @@
 import React from "react";
 import Details from "./components/Details";
 
-const Purse = () => {
+const Purse = ({member}) => {
   return (
     <div className="w-full">
-      <Details />
+      <Details member={member} />
     </div>
   );
 };
