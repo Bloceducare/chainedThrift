@@ -1,14 +1,16 @@
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useRef } from "react";
-import { getPurseContract } from "../contractFactory";
-import { getRpcUrl } from "../helpers";
+import { getPurseContract, getPurseFactoryContract } from "../contractFactory";
+import { getRpcUrl, getChainID } from "../helpers";
+import { addresses } from "../constants";
 
 const usePurse = () => {
-    const { active, library, account } = useWeb3React();
+    const { active, library, account, chainId } = useWeb3React();
     let signer = useRef();
     let provider = useRef();
     let purseContract = useRef();
+    let purseFactory = useRef();
 
     useEffect(() => {
         if (active) {
@@ -26,6 +28,15 @@ const usePurse = () => {
             signer.current || provider.current
         );
     }, []);
+
+    const Finit = useCallback((purseAddress) =>{
+        purseFactory.current = getPurseFactoryContract(
+            active
+                ? addresses[chainId].purseFactoryAddress
+                : addresses[getChainID()].purseFactoryAddress,
+            signer.current || provider.current
+        );
+    }, [])
 
     const getPurseData = useCallback(
         async (purseAddress) => {
@@ -60,6 +71,20 @@ const usePurse = () => {
                 const purseMemebers =
                     await purseContract.current.purseMembers();
                 return purseMemebers;
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        [init, purseContract]
+    );
+
+    const getChatId = useCallback(
+        async (purseAddress) => {
+            Finit(purseAddress);
+            try {
+                const chatId =
+                    await  purseFactory.current.purseToChatId(purseAddress);
+                return Number(chatId);
             } catch (err) {
                 console.error(err);
             }
@@ -206,6 +231,7 @@ const usePurse = () => {
         getPurseData,
         getPurseMembers,
         joinPurses,
+        getChatId,
         donateFunds,
         voteToDisburseFundsToMember,
         depositToBentoBox,

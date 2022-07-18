@@ -1,5 +1,5 @@
 import { useWeb3React } from "@web3-react/core";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState} from "react";
 import { useDispatch } from "react-redux";
 import { IoIosArrowBack, IoIosHelpCircleOutline } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -17,14 +17,16 @@ import { parseUnits } from "ethers/lib/utils";
 import usePurseFactory from "../../web3/hooks/usePurseFactory";
 import { useToasts } from "react-toast-notifications";
 import axios from 'axios';
+import usePurse from "../../web3/hooks/usePurse";
+
+
 
 const CreatePurse = () => {
     const navigate = useNavigate();
     const {active, chainId,  account} = useWeb3React()
     const dispatch = useDispatch()
     const { addToast } = useToasts();
-    // const [admin, setAdmin] = useState(null)
-    const [chatId, setChatId] = useState(null)
+    const { getPurseData, getPurseMembers} = usePurse();
 
     const [data, setData] = useState({
         token: null,
@@ -35,8 +37,7 @@ const CreatePurse = () => {
         total: 0,
         pos:1
     });
-
-    console.log(data)
+   
 
     const { token, amount, membersCount, frequency, collateral, total,pos } = data;
 
@@ -128,6 +129,7 @@ const CreatePurse = () => {
     const handleCreatePurse = async () => {
         const allowance = await getAllowance();
         const totalBN = parseUnits(total.toString(), decimals);
+        let  chatId;
 
         if(allowance.lt(totalBN)) {
            await approve(undefined, totalBN, async (res) => {
@@ -150,57 +152,48 @@ const CreatePurse = () => {
                 },
                 data : details
              }
-             axios(config)
-             .then(
-              res=>{
-                  if(res.status === '200'){
-                       //  begin create pursChart
-                      const chatadmin = res.data.username;
-                      var Chatdetails = {
-                        "title": title,
-                        "is_direct_chat": false
-                      };
-                      const Chatconfig = {
-                        method: 'post',
-                        url: 'https://api.chatengine.io/chats/',
-                        headers: {
-                            'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-                            'User-Name': chatadmin,
-                            'User-Secret': chatadmin
-                        },
-                        data : Chatdetails
-                     }
-                     axios(Chatconfig)
-                     .then(
-                       res=>{
-                           if(res.status === '200'){
-                             const chatId = res.data.id;
-                             setChatId(chatId);
-                         }
-                       }  
-                     )
-                  }
-                //   end cteate pulse chat
-              }
-             )
-           
-               await createPurse(
-                    parseUnits(amount.toString(), decimals),
-                    // parseUnits(collateral.toString(), decimals),
-                    Number(membersCount),
-                    Number(frequency),
-                    Number(chatId),
-                    token.address,
-                    pos,
-                    async (res) => {
-                        if(!res.hash)
-                        return addToast(res.message, {appearance: "error"});
-                        const result =    await res.wait()
-                        const address = await result.events[0].address
-                        addToast("Purse created successfully!", {appearance: "success"});
-                        navigate(`/app/purse/${address}`)
-                    }
-                );
+             const user = await axios(config)
+             const userData = await user.data;
+             const userName = userData.username;
+            //  console.log(userName)
+            //  create chat
+             var Chatdetails = {
+              "title": title,
+              "is_direct_chat": false
+            };   
+            const Chatconfig = {
+              method: 'post',
+              url: 'https://api.chatengine.io/chats/',
+              headers: {  
+             'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
+             'User-Name': userName,                 
+             'User-Secret': userName
+            },
+            data : Chatdetails
+           }
+          const chat = await axios(Chatconfig)
+          const chatData = await chat.data;
+          chatId = chatData.id;
+         if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
+            console.log("chatId", chatId);
+            await createPurse(
+                 parseUnits(amount.toString(), decimals),
+                 // parseUnits(collateral.toString(), decimals),
+                 Number(membersCount),
+                 Number(frequency),
+                 chatId,
+                 token.address,
+                 pos,
+                 async (res) => {
+                     if(!res.hash)
+                     return addToast(res.message, {appearance: "error"});
+                     const result =    await res.wait()
+                     const address = await result.events[0].address
+                     addToast("Purse created successfully!", {appearance: "success"});
+                     navigate(`/app/purse/${address}`)
+                 }
+             );
+         }
            }).catch(err => {
              return addToast("something went wrong!", {appearance: "error"});
             //  const deleteConfig = {
@@ -217,74 +210,85 @@ const CreatePurse = () => {
         }else{
 
     //    create user and chatgroup   
-    const username = account;
-    const title = `Thrift ${amount} ${tokenSymbol} Members`;
-    var details = {
-      "username": username,
-      "secret": username
-    };
-    const config = {
-      method: 'put',
-      url: 'https://api.chatengine.io/users/',
-      headers: {
-          'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
-      },
-      data : details
-   }
-   axios(config)
-   .then(
-    res=>{
-        if(res.status === '200'){
-             //  begin create pursChart
-            const chatadmin = res.data.username;
-            var Chatdetails = {
+           const username = account;
+              const title = `Thrift ${amount} ${tokenSymbol} Members`;
+              var details = {
+                "username": username,
+                "secret": username
+              };
+              const config = {
+                method: 'put',
+                url: 'https://api.chatengine.io/users/',
+                headers: {
+                    'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+                },
+                data: details
+             }
+             const user = await axios(config)
+             const userData = await user.data;
+             const userName = userData.username;
+             console.log(userName)
+            //  create chat
+             var Chatdetails = {
               "title": title,
               "is_direct_chat": false
-            };
+            };   
             const Chatconfig = {
               method: 'post',
               url: 'https://api.chatengine.io/chats/',
-              headers: {
-                  'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-                  'User-Name': chatadmin,
-                  'User-Secret': chatadmin
-              },
-              data : Chatdetails
+              headers: {  
+             'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
+             'User-Name': userName,                 
+             'User-Secret': userName
+            },
+            data: Chatdetails
            }
-           axios(Chatconfig)
-           .then(
-             res=>{
-                 if(res.status === '201'){
-                   const chatId = res.data.id;
-                   setChatId(chatId);
-               }
-             }  
-           )
-        }
-      //   end cteate pulse chat
-    }
-   )
+          const chat = await axios(Chatconfig)
+          const chatData = await chat.data;
+          chatId = chatData.id;
 
+          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
+            console.log("chatId", chatId);
             await createPurse(
-                parseUnits(amount.toString(), decimals),
-                // parseUnits(collateral.toString(), decimals),
-                Number(membersCount),
-                Number(frequency),
-                Number(chatId),
-                token.address,
-                pos,
-                async (res) => {
-                    if(!res.hash)
-                    return addToast(res.message, {appearance: "error"});
-                const result =    await res.wait()
-                const address = await result.events[0].address
-                    addToast("Purse created successfully!", {appearance: "success"});
-                    navigate(`/app/purse/${address}`)
-                }
-            );
+                 parseUnits(amount.toString(), decimals),
+                 // parseUnits(collateral.toString(), decimals),
+                 Number(membersCount),
+                 Number(frequency),
+                 chatId,
+                 token.address,
+                 pos,
+                 async (res) => {
+                     if(!res.hash)
+                     return addToast(res.message, {appearance: "error"});
+                     const result =    await res.wait()
+                     const address = await result.events[0].address
+                     addToast("Purse created successfully!", {appearance: "success"});
+                     navigate(`/app/purse/${address}`)
+                 }
+             );
+         }     
+         
+         if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
+            console.log("chatId", chatId);
+            await createPurse(
+                 parseUnits(amount.toString(), decimals),
+                 // parseUnits(collateral.toString(), decimals),
+                 Number(membersCount),
+                 Number(frequency),
+                 chatId,
+                 token.address,
+                 pos,
+                 async (res) => {
+                     if(!res.hash)
+                     return addToast(res.message, {appearance: "error"});
+                     const result =    await res.wait()
+                     const address = await result.events[0].address
+                     addToast("Purse created successfully!", {appearance: "success"});
+                     navigate(`/app/purse/${address}`)
+                 }
+             );
+         }
         }
-        
-
     }
 
 

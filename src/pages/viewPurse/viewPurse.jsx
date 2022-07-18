@@ -18,9 +18,10 @@ const ViewPurse = () => {
     const { addToast } = useToasts();
     const { active, account } = useWeb3React();
     const { id } = useParams();
-    const { getPurseData, getPurseMembers, joinPurses } = usePurse();
+    const { getPurseData, getPurseMembers, joinPurses, getChatId } = usePurse();
     const [purseDetail, setPurseDetail] = useState([]);
     const [position, setPosition] = useState(1);
+    const [chatId, setChatId] = useState(null) 
 
     const {
         getAllowance,
@@ -40,6 +41,7 @@ const ViewPurse = () => {
     const getSinglePurseDetail = async () => {
         try {
             const purseData = await getPurseData(id);
+            const chatId = await getChatId(id)
             const pursemember = await getPurseMembers(id);
             // To calculate the expiring date of a purse
             const time = Number(purseData.timeCreated.toString());
@@ -47,6 +49,8 @@ const ViewPurse = () => {
             const frequencyMulSeconds = Number(frequency);
             const sumSecondsTotal = time + frequencyMulSeconds;
             const endTime = new Date(sumSecondsTotal * 1000).toDateString();
+            
+            setChatId(chatId)
 
             setPurseDetail({
                 address: purseData.purseAddress,
@@ -55,6 +59,7 @@ const ViewPurse = () => {
                 deposit_amount: formatUnits(purseData.deposit_amount),
                 max_member: Number(purseData.max_member_num),
                 members: pursemember.length,
+                admin: pursemember[0],
                 collateral: formatUnits(purseData.required_collateral),
                 contract_total_collateral_balance: formatUnits(
                     purseData.contract_total_collateral_balance
@@ -71,19 +76,7 @@ const ViewPurse = () => {
     // @condition:check if currentMember equals max_memeber, if true disable from joining purse else yunno
     const currentMember = purseDetail.members;
     const maxMembers = purseDetail.max_member;
-
-    // const endTime = new Date(purseDetail.endTime);
-    // const endTimeSeconds = Math.floor(endTime.getTime());
-    // const purseExpire = Date.now() >= endTimeSeconds;
-    const purseData = getPurseData(id);
-    const chatID = purseData.chatId;
-    // const username = account;
-    const admin = purseData.address;
-
-    // console.log("col ", purseDetail?.collateral);
-    // const collateral = (purseDetail.collateral)
-    // console.log('i am a string',collateral);
-    // const address = purseDetail?.token_address
+    const admin = purseDetail.admin
 
     const onInputChange = ({ target }) => {
         const elementName = target.name;
@@ -108,15 +101,53 @@ const ViewPurse = () => {
             await approve(purseDetail?.address, collateralWei, async (res) => {
                 if (!res.hash)
                     return addToast(res.message, { appearance: "error" });
-                await res.wait();
-                addToast(
+                   await res.wait();
+                 addToast(
                     `${purseDetail?.collateral} ${tokenSymbol} token approval successfull!`,
                     { appearance: "success" }
                 );
 
+                //  get or create this user
+
+                var details = {
+                    "username": account,
+                    "secret": account
+                  };
+                  const config = {
+                    method: 'put',
+                    url: 'https://api.chatengine.io/users/',
+                    headers: {
+                        'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+                    },
+                    data: details
+                 }
+                 const User = await axios(config)
+                 const userData = await User.data;
+                 const userName = userData.username;
+                //  console.log(userName)
+
+            //  add this member to the chat
+                var user = {
+                    username: userName
+                };
+                const addUser = {
+                    method: "post",
+                    url: `https://api.chatengine.io/chats/${chatId}/people/`,
+                    headers: {
+                        "Project-ID": "21f51b31-abf1-4e3e-9ed4-00a1b0215871",
+                        "User-Name":admin,
+                        "User-Secret":admin,
+                    },
+                    data: user
+                };
+               const addmember = await axios(addUser);
+               const usedata = await addmember.data;
+               console.log(usedata)
+
+
                 await joinPurses(position, async (res) => {
                     if (!res.hash)
-                        return addToast(res.error.data.message, {
+                        return addToast(res.message, {
                             appearance: "error",
                         });
                     const result = await res.wait();
@@ -132,24 +163,45 @@ const ViewPurse = () => {
                 });
             });
         } else {
-            // add user to chart
+
+            var details = {
+                "username": account,
+                "secret": account
+              };
+              const config = {
+                method: 'put',
+                url: 'https://api.chatengine.io/users/',
+                headers: {
+                    'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+                },
+                data: details
+             }
+             const User = await axios(config)
+             const userData = await User.data;
+             const userName = userData.username;
+             console.log(userName)
+     
+            //  add this member to the chat
             var user = {
-                username: account,
+             username: userName,
             };
             const addUser = {
-                method: "post",
-                url: `https://api.chatengine.io/chats/${chatID}/people/`,
-                headers: {
-                    "Project-ID": "21f51b31-abf1-4e3e-9ed4-00a1b0215871",
-                    "User-Name": admin,
-                    "User-Secret": admin,
-                },
-                data: user,
+             method: "post",
+             url: `https://api.chatengine.io/chats/${chatId}/people/`,
+             headers: {
+              "Project-ID": "21f51b31-abf1-4e3e-9ed4-00a1b0215871",
+              "User-Name":admin,
+              "User-Secret":admin
+             },
+              data: user
             };
-            axios(addUser);
+           const addmember = await axios(addUser);
+           const usedata = await addmember.data;
+        //    console.log(usedata)
+
             await joinPurses(position, async (res) => {
                 if (!res.hash)
-                    return addToast(res.error.data.message, { appearance: "error" });
+                    return addToast(res.message, { appearance: "error" });
                 const result = await res.wait();
                 const address = await result.to;
                 addToast("Successfully Joined Purse!", {
@@ -157,7 +209,9 @@ const ViewPurse = () => {
                 });
                 navigate(`/app/purse/${address}`);
             }).catch((err) => {
-                //   hsjhdsj
+                // return addToast("something went wrong!", {
+                //     appearance: "error",
+                // });
             });
         }
     };
@@ -167,8 +221,7 @@ const ViewPurse = () => {
         // eslint-disable-next-line
     }, [id]);
 
-    // import usePurse
-    // use react-router to get purseId
+
     return (
         <>
             {loading ? (

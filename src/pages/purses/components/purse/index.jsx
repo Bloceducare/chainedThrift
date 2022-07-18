@@ -49,6 +49,4 @@ const Purse = ({purse,loading}) => {
     </>
   );
 };
-
-// 07065328380
 export default Purse;
