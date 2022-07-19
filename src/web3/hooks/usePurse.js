@@ -36,7 +36,7 @@ const usePurse = () => {
                 : addresses[getChainID()].purseFactoryAddress,
             signer.current || provider.current
         );
-    }, [])
+    }, [active,chainId])
 
     const getPurseData = useCallback(
         async (purseAddress) => {
@@ -89,7 +89,7 @@ const usePurse = () => {
                 console.error(err);
             }
         },
-        [init, purseContract]
+        [Finit]
     );
 
     const getBentoBalance = async () => {

@@ -41,7 +41,7 @@ const exec = async() =>{
 useEffect(() => {
   if (!active) return;
   exec();
-}, [id]);
+}, );
  return(
    <>
   {
