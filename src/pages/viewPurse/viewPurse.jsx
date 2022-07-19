@@ -108,7 +108,6 @@ const ViewPurse = () => {
 
 
 
-
     // @condition:check if currentMember equals max_memeber, if true disable from joining purse else yunno
     const currentMember = purseDetail.members;
     const maxMembers = purseDetail.max_member;
@@ -353,6 +352,7 @@ const ViewPurse = () => {
                                                         </option>
                                                     );
                                                 })} */}
+                                                <option>Select position </option>
                                                 {
                                                     filteredResult.map((num, idx) =>{
                                                         return (
