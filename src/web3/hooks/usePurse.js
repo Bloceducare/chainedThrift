@@ -36,6 +36,7 @@ const usePurse = () => {
                 : addresses[getChainID()].purseFactoryAddress,
             signer.current || provider.current
         );
+        // eslint-disable-next-line
     }, [])
 
     const getPurseData = useCallback(
@@ -89,6 +90,7 @@ const usePurse = () => {
                 console.error(err);
             }
         },
+        // eslint-disable-next-line
         [init, purseContract]
     );
 
@@ -247,7 +249,6 @@ const usePurse = () => {
 
 
     const getPositionInfo =useCallback(async (purseAddress) =>{
-        console.log('i am purse contract',purseContract.current)
         init(purseAddress);
         const members = await getPurseMembers(purseAddress)
         const positions = await Promise.all(members?.map(async(item) =>{
@@ -260,6 +261,7 @@ const usePurse = () => {
             return item.toString()
         })
         return result
+        // eslint-disable-next-line
     },[init, purseContract])
 
     return {
