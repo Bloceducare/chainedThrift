@@ -18,10 +18,17 @@ const ViewPurse = () => {
     const { addToast } = useToasts();
     const { active, account } = useWeb3React();
     const { id } = useParams();
-    const { getPurseData, getPurseMembers, joinPurses, getChatId } = usePurse();
+    const {
+        getPurseData,
+        getPurseMembers,
+        joinPurses,
+        getChatId,
+        getPositionInfo,
+    } = usePurse();
     const [purseDetail, setPurseDetail] = useState([]);
     const [position, setPosition] = useState(1);
-    const [chatId, setChatId] = useState(null) 
+    const [chatId, setChatId] = useState(null);
+    const [availPos, setAvailPos] = useState([]);
 
     const {
         getAllowance,
@@ -41,7 +48,7 @@ const ViewPurse = () => {
     const getSinglePurseDetail = async () => {
         try {
             const purseData = await getPurseData(id);
-            const chatId = await getChatId(id)
+            const chatId = await getChatId(id);
             const pursemember = await getPurseMembers(id);
             // To calculate the expiring date of a purse
             const time = Number(purseData.timeCreated.toString());
@@ -49,8 +56,8 @@ const ViewPurse = () => {
             const frequencyMulSeconds = Number(frequency);
             const sumSecondsTotal = time + frequencyMulSeconds;
             const endTime = new Date(sumSecondsTotal * 1000).toDateString();
-            
-            setChatId(chatId)
+
+            setChatId(chatId);
 
             setPurseDetail({
                 address: purseData.purseAddress,
@@ -73,17 +80,46 @@ const ViewPurse = () => {
             throw error;
         }
     };
+
+    const positionDetail = async () => {
+        const data = await getPositionInfo(id);
+        const formatData = data.map((num) => { return Number(num)})
+        setAvailPos(formatData);
+    };
+
+
+
+    function range() {
+        let result = [];
+        for(let i=1; i <= purseDetail?.max_member; i++){
+            result.push(i)
+        }
+        return result
+      }
+    const result = range()
+    const filterArray = (arr1, arr2) => {
+        const filtered = arr1.filter(el => {
+           return arr2.indexOf(el) === -1;
+        });
+        return filtered;
+     };
+     const filteredResult = filterArray(result,availPos)
+     
+
+
+
+
     // @condition:check if currentMember equals max_memeber, if true disable from joining purse else yunno
     const currentMember = purseDetail.members;
     const maxMembers = purseDetail.max_member;
-    const admin = purseDetail.admin
+    const admin = purseDetail.admin;
 
     const onInputChange = ({ target }) => {
         const elementName = target.name;
         const value = target.value;
         switch (elementName) {
             case "pos":
-                return setPosition(value)
+                return setPosition(value);
 
             default:
                 break;
@@ -101,8 +137,8 @@ const ViewPurse = () => {
             await approve(purseDetail?.address, collateralWei, async (res) => {
                 if (!res.hash)
                     return addToast(res.message, { appearance: "error" });
-                   await res.wait();
-                 addToast(
+                await res.wait();
+                addToast(
                     `${purseDetail?.collateral} ${tokenSymbol} token approval successfull!`,
                     { appearance: "success" }
                 );
@@ -110,40 +146,39 @@ const ViewPurse = () => {
                 //  get or create this user
 
                 var details = {
-                    "username": account,
-                    "secret": account
-                  };
-                  const config = {
-                    method: 'put',
-                    url: 'https://api.chatengine.io/users/',
+                    username: account,
+                    secret: account,
+                };
+                const config = {
+                    method: "put",
+                    url: "https://api.chatengine.io/users/",
                     headers: {
-                        'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+                        "PRIVATE-KEY": "19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1",
                     },
-                    data: details
-                 }
-                 const User = await axios(config)
-                 const userData = await User.data;
-                 const userName = userData.username;
+                    data: details,
+                };
+                const User = await axios(config);
+                const userData = await User.data;
+                const userName = userData.username;
                 //  console.log(userName)
 
-            //  add this member to the chat
+                //  add this member to the chat
                 var user = {
-                    username: userName
+                    username: userName,
                 };
                 const addUser = {
                     method: "post",
                     url: `https://api.chatengine.io/chats/${chatId}/people/`,
                     headers: {
                         "Project-ID": "21f51b31-abf1-4e3e-9ed4-00a1b0215871",
-                        "User-Name":admin,
-                        "User-Secret":admin,
+                        "User-Name": admin,
+                        "User-Secret": admin,
                     },
-                    data: user
+                    data: user,
                 };
-               const addmember = await axios(addUser);
-               const usedata = await addmember.data;
-               console.log(usedata)
-
+                const addmember = await axios(addUser);
+                const usedata = await addmember.data;
+                console.log(usedata);
 
                 await joinPurses(position, async (res) => {
                     if (!res.hash)
@@ -163,41 +198,40 @@ const ViewPurse = () => {
                 });
             });
         } else {
-
             var details = {
-                "username": account,
-                "secret": account
-              };
-              const config = {
-                method: 'put',
-                url: 'https://api.chatengine.io/users/',
+                username: account,
+                secret: account,
+            };
+            const config = {
+                method: "put",
+                url: "https://api.chatengine.io/users/",
                 headers: {
-                    'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+                    "PRIVATE-KEY": "19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1",
                 },
-                data: details
-             }
-             const User = await axios(config)
-             const userData = await User.data;
-             const userName = userData.username;
-             console.log(userName)
-     
+                data: details,
+            };
+            const User = await axios(config);
+            const userData = await User.data;
+            const userName = userData.username;
+            console.log(userName);
+
             //  add this member to the chat
             var user = {
-             username: userName,
+                username: userName,
             };
             const addUser = {
-             method: "post",
-             url: `https://api.chatengine.io/chats/${chatId}/people/`,
-             headers: {
-              "Project-ID": "21f51b31-abf1-4e3e-9ed4-00a1b0215871",
-              "User-Name":admin,
-              "User-Secret":admin
-             },
-              data: user
+                method: "post",
+                url: `https://api.chatengine.io/chats/${chatId}/people/`,
+                headers: {
+                    "Project-ID": "21f51b31-abf1-4e3e-9ed4-00a1b0215871",
+                    "User-Name": admin,
+                    "User-Secret": admin,
+                },
+                data: user,
             };
-           const addmember = await axios(addUser);
-           const usedata = await addmember.data;
-        //    console.log(usedata)
+            const addmember = await axios(addUser);
+            const usedata = await addmember.data;
+            //    console.log(usedata)
 
             await joinPurses(position, async (res) => {
                 if (!res.hash)
@@ -218,9 +252,9 @@ const ViewPurse = () => {
 
     useEffect(() => {
         getSinglePurseDetail();
+        positionDetail();
         // eslint-disable-next-line
-    }, [id]);
-
+    }, [id,active]);
 
     return (
         <>
@@ -256,7 +290,7 @@ const ViewPurse = () => {
                                 </span>
                                 <ImNotification className="text-white/80 -ml-1" />
                             </div>
-                            <CardList purseDetail={purseDetail}  />
+                            <CardList purseDetail={purseDetail} />
                             <p className="font-bold Poppins text-xl sm:text-base">
                                 Note:
                             </p>
@@ -282,56 +316,70 @@ const ViewPurse = () => {
                                     <button
                                         onClick={joinPurseHandler}
                                         disabled={
-                                            currentMember === maxMembers 
+                                            currentMember === maxMembers
                                             // purseExpire
                                         }
                                         className={`${
-                                            currentMember === maxMembers 
-                                            // purseExpire
-                                                ? "bg-slate-400"
+                                            currentMember === maxMembers
+                                                ? // purseExpire
+                                                  "bg-slate-400"
                                                 : ""
                                         } bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1`}
                                     >
                                         Join Purse
                                     </button>
                                     <div>
-                                    <span className="block text-xs">Choose position</span>
-                                    <select
-                                        value={position}
-                                        onChange={onInputChange}
-                                        name="pos"
-                                        className="dark:bg-zinc-900  outline-none py-1 px-2 border border-gray-10 rounded w-full "
-                                    >
-                                        {Array(purseDetail.max_member - 1 + 1)
-                                            .fill()
-                                            .map((_, idx) => 1 + idx)
-                                            .map((num, idx) => {
-                                                return (
-                                                    <option
-                                                        className="bg-transparent"
-                                                        key={idx}
-                                                    >
-                                                        {num}
-                                                    </option>
-                                                );
-                                            })}
-                                    </select>
+                                        <span className="block text-xs">
+                                            Choose position
+                                        </span>
+                                        <select
+                                            value={position}
+                                            onChange={onInputChange}
+                                            name="pos"
+                                            className="dark:bg-zinc-900  outline-none py-1 px-2 border border-gray-10 rounded w-full "
+                                        >
+                                            {/* {Array(
+                                                purseDetail?.max_member - 1 + 1
+                                            )
+                                                .fill()
+                                                .map((_, idx) => 1 + idx)
+                                                .map((num, idx) => {
+                                                    return (
+                                                        <option
+                                                            className="bg-transparent"
+                                                            key={idx}
+                                                        >
+                                                            {num}
+                                                        </option>
+                                                    );
+                                                })} */}
+                                                {
+                                                    filteredResult.map((num, idx) =>{
+                                                        return (
+                                                            <option
+                                                            className="bg-transparent"
+                                                            key={idx}
+                                                        >
+                                                            {num}
+                                                        </option>
+                                                        )
+                                                    })
+                                                }
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="flex gap-4 items-baseline">
                                     {/* <p className="Poppins text-xs">Due Date</p> */}
                                     <div>
-                                        {currentMember === maxMembers 
-                                         ? (
+                                        {currentMember === maxMembers ? (
                                             <p className="Poppins text-rose-500 text-xs">
                                                 Purse is closed!
                                             </p>
-                                        ) : (
-                                            null
-                                            // <p className="Poppins text-xs">
-                                                // {purseDetail.endTime}
-                                            // </p>
-                                        )}
+                                        ) : null
+                                        // <p className="Poppins text-xs">
+                                        // {purseDetail.endTime}
+                                        // </p>
+                                        }
                                     </div>
                                 </div>
                             </div>
