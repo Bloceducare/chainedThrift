@@ -25,6 +25,7 @@ const usePurseFactory = () => {
                 getRpcUrl()
             );
         }
+        console.log(getRpcUrl())
         purseFactory.current = getPurseFactoryContract(
             active
                 ? addresses[chainId].purseFactoryAddress
@@ -86,8 +87,8 @@ const usePurseFactory = () => {
         };
 
         exec();
-        // eslint-disable-next-line
-    }, [active, chainId]);
+
+    }, [active, chainId, dispatch, getPurseData, getPurseMembers, library]);
 
     const createPurse = useCallback(
         async (
