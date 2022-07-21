@@ -24,7 +24,10 @@ const CreatePurse = () => {
     const navigate = useNavigate();
     const {active, chainId,  account} = useWeb3React()
     const dispatch = useDispatch()
+    const [approving, setapproving] = useState(false)
+    const [creating, setCreating] = useState(false)
     const { addToast } = useToasts();
+
 
     const [data, setData] = useState({
         token: null,
@@ -42,6 +45,7 @@ const CreatePurse = () => {
     const { symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
 
     const {createPurse} = usePurseFactory()
+    let error;
 
     
     useEffect(() => {
@@ -130,11 +134,16 @@ const CreatePurse = () => {
         let  chatId;
 
         if(allowance.lt(totalBN)) {
+            setapproving(true)
            await approve(undefined, totalBN, async (res) => {
-               if(!res.hash)
-               return addToast(res.message, {appearance: "error"});
+               if(!res.hash){
+                setapproving(false)
+                return addToast(res.message, {appearance: "error"});
+               }
                await res.wait()
+               setapproving(false)
                addToast(`${total} ${tokenSymbol} token approval successfull!`, {appearance: "success"});
+              
             // make server request to get or create user with username = account
               const username = account;
               const title = `Thrift ${amount} ${tokenSymbol} Members`;
@@ -174,6 +183,7 @@ const CreatePurse = () => {
           chatId = chatData.id;
          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
+            setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
                  // parseUnits(collateral.toString(), decimals),
@@ -183,8 +193,11 @@ const CreatePurse = () => {
                  token.address,
                  pos,
                  async (res) => {
-                     if(!res.hash)
-                     return addToast(res.message, {appearance: "error"});
+                     if(!res.hash){
+                        setCreating(false)
+                        return addToast(res.message, {appearance: "error"});
+                     }
+                     
                      const result =    await res.wait()
                      const address = await result.events[0].address
                      addToast("Purse created successfully!", {appearance: "success"});
@@ -193,7 +206,10 @@ const CreatePurse = () => {
              );
          }
            }).catch(err => {
+            setapproving(false)
+            setCreating(false)
              return addToast("something went wrong!", {appearance: "error"});
+             
             //  const deleteConfig = {
             //     method: 'delete',
             //     url: `https://api.chatengine.io/chats/${chatId}/`,
@@ -247,6 +263,7 @@ const CreatePurse = () => {
 
           if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
+            setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
                  // parseUnits(collateral.toString(), decimals),
@@ -256,10 +273,14 @@ const CreatePurse = () => {
                  token.address,
                  pos,
                  async (res) => {
-                     if(!res.hash)
-                     return addToast(res.message, {appearance: "error"});
+                     if(!res.hash){
+                        setCreating(false)
+                        return addToast(res.message, {appearance: "error"});
+                     }
+                     
                      const result =    await res.wait()
                      const address = await result.events[0].address
+                     setCreating(false)
                      addToast("Purse created successfully!", {appearance: "success"});
                      navigate(`/app/purse/${address}`)
                  }
@@ -268,6 +289,7 @@ const CreatePurse = () => {
          
          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
+            setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
                  // parseUnits(collateral.toString(), decimals),
@@ -277,10 +299,14 @@ const CreatePurse = () => {
                  token.address,
                  pos,
                  async (res) => {
-                     if(!res.hash)
-                     return addToast(res.message, {appearance: "error"});
+                     if(!res.hash){
+                        setCreating(false)
+                        return addToast(res.message, {appearance: "error"});
+                     }
+                     
                      const result =    await res.wait()
                      const address = await result.events[0].address
+                     setCreating(false )
                      addToast("Purse created successfully!", {appearance: "success"});
                      navigate(`/app/purse/${address}`)
                  }
@@ -293,33 +319,33 @@ const CreatePurse = () => {
     const tokenMenu = (
         <Menu className="token_menu_class pointer" onSelect={onselectToken}>
             {tokensConfig[chainId]?.map(token => <MenuItem key={token.address}className="token_menu_item_class pointer">
-                <img src={token.logoSrc} alt="token logo" className="w-4 h-4 inline mr-2" /> <span>{token.symbol}</span>
+                <img src={token.logoSrc} alt="token logo" className="inline w-4 h-4 mr-2" /> <span>{token.symbol}</span>
             </MenuItem>)}
         </Menu>
       );
 
     return (
-        <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover min-h-screen">
-            <section className="container mx-auto px-4 sm:px-6 md:px-0 mt-12 dark:text-white-1">
+        <main className="min-h-screen bg-cover bg-overlay-img-light dark:bg-overlay-img">
+            <section className="container px-4 mx-auto mt-12 sm:px-6 md:px-0 dark:text-white-1">
                 <div className="mb-2">
                     <button
-                        className="align-middle font-black"
+                        className="font-black align-middle"
                         onClick={() => navigate(-1)}
                     >
                         <IoIosArrowBack className="inline" />
                         <span>Go back</span>
                     </button>
                 </div>
-                <div className="md:w-mini_large lg:w-semi_large purse_mobile mx-auto mt-8">
-                    <h1 className="text-3xl font-black mb-4">Create Purse</h1>
+                <div className="mx-auto mt-8 md:w-mini_large lg:w-semi_large purse_mobile">
+                    <h1 className="mb-4 text-3xl font-black">Create Purse</h1>
                     <p className="">
                         As the purse creator, you automatically become the first
                         member of the purse, and you get to decide the amount to
                         be contributed, the frequency of the contribution, and
                         the number of members allowed in the purse
                     </p>
-                    <form className="bg-white-1 dark:bg-dark-1 p-4 rounded mt-4">
-                        <div className="grid gap-2 grid-cols-3 mb-6">
+                    <form className="p-4 mt-4 rounded bg-white-1 dark:bg-dark-1">
+                        <div className="grid grid-cols-3 gap-2 mb-6">
                             <div className="col-span-1">
                                 <span className="block text-xs">
                                     <IoIosHelpCircleOutline
@@ -336,7 +362,7 @@ const CreatePurse = () => {
                                     openClassName = "bg-white-1 dark:bg-dark-1"
                                 >
                                     <button
-                                        className="text-sm bg-gray-2 text-white-1 py-2 px-4 rounded flex items-center"
+                                        className="flex items-center px-4 py-2 text-sm rounded bg-gray-2 text-white-1"
                                         type="button"
                                     >
                                         {token ?
@@ -368,11 +394,11 @@ const CreatePurse = () => {
                                     value={amount}
                                     min={0}
                                     onChange={onInputChange}
-                                    className="bg-transparent px-2 py-1 border border-gray-10 rounded w-full"
+                                    className="w-full px-2 py-1 bg-transparent border rounded border-gray-10"
                                 />
                             </div>
                         </div>
-                        <div className="grid gap-2 grid-cols-2 mb-6">
+                        <div className="grid grid-cols-2 gap-2 mb-6">
                             <div className="col-span-1">
                                 <label
                                     htmlFor="members"
@@ -391,7 +417,7 @@ const CreatePurse = () => {
                                     value={membersCount}
                                     name="members"
                                     onChange={onInputChange}
-                                    className="bg-transparent px-2 py-1 border border-gray-10 rounded w-full"
+                                    className="w-full px-2 py-1 bg-transparent border rounded border-gray-10"
                                 />
                             </div>
                             <div className="col-span-1">
@@ -411,11 +437,11 @@ const CreatePurse = () => {
                                     min={0}
                                     value={frequency}
                                     onChange={onInputChange}
-                                    className="bg-transparent px-2 py-1 border border-gray-10 rounded w-full"
+                                    className="w-full px-2 py-1 bg-transparent border rounded border-gray-10"
                                 />
                             </div>
                         </div>
-                        <div className="grid gap-2 grid-cols-2 mb-6">
+                        <div className="grid grid-cols-2 gap-2 mb-6">
                             <div className="col-span-1">
                                 <label
                                     htmlFor="collateral"
@@ -432,7 +458,7 @@ const CreatePurse = () => {
                                     name="collateral"
                                     value={collateral}
                                     readOnly
-                                    className="bg-transparent px-2 py-1 border border-gray-10 rounded w-full"
+                                    className="w-full px-2 py-1 bg-transparent border rounded border-gray-10"
                                 />
                             </div>
                             <div className="col-span-1">
@@ -451,11 +477,11 @@ const CreatePurse = () => {
                                     name="total"
                                     value={total}
                                     readOnly
-                                    className="bg-transparent px-2 py-1 border border-gray-10 rounded w-full"
+                                    className="w-full px-2 py-1 bg-transparent border rounded border-gray-10"
                                 />
                             </div>
                         </div>
-                        <div className="grid gap-2 grid-cols-2 mb-6">
+                        <div className="grid grid-cols-2 gap-2 mb-6">
                         <div className="col-span-1">
                         <label
                                    htmlFor="position"
@@ -467,7 +493,7 @@ const CreatePurse = () => {
                                    />{" "}
                                    Position
                                </label>
-                               <select value={pos} onChange={onInputChange} name="pos" className="dark:bg-zinc-900  outline-none py-1 px-2 border border-gray-10 rounded w-full ">
+                               <select value={pos} onChange={onInputChange} name="pos" className="w-full px-2 py-1 border rounded outline-none dark:bg-zinc-900 border-gray-10 ">
                                {
                                 Array(membersCount - 1 + 1).fill().map((_, idx) => 1 + idx).map((num,idx) =>{
                                     return(
@@ -484,12 +510,14 @@ const CreatePurse = () => {
 
                         <div className="w-full">
                             <button
-                                className="w-full block align-middle text-sm bg-gray-2 text-white-1 py-2 px-4 rounded"
+                                className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
                                 type="button"
                                 onClick={!active ? () => dispatch(OPEN_WALLET_MODAL()) : handleCreatePurse}
                             >
-                                 
-                                 {!active ? "Connect wallet" : "Create purse"}
+                                {approving || creating ? <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>: ""}
+                                {!active ? "Connect wallet" : approving ? "approving.." : "Create purse"}
                             </button>
                         </div>
                         <ReactTooltip className="max-w-tooltip" />

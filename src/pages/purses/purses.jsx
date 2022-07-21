@@ -37,12 +37,13 @@ const Purses = () => {
         setLoading(false);
         // eslint-disable-next-line
     }, [active, purses]);
+    console.log(purses, "purses")
 
     return (
-        <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover min-h-screen">
-            <section className="container mx-auto px-4 sm:px-6 md:px-10 xl:px-0">
+        <main className="min-h-screen bg-cover bg-overlay-img-light dark:bg-overlay-img">
+            <section className="container px-4 mx-auto sm:px-6 md:px-10 xl:px-0">
                 <div className="flex justify-between mt-4 md:mt-12">
-                    <h1 className="font-Montserrat leading-tight font-bold lg:text-3xl md:text-lg dark:text-white-1 text-dark-1">
+                    <h1 className="font-bold leading-tight font-Montserrat lg:text-3xl md:text-lg dark:text-white-1 text-dark-1">
                         Thrift Purses
                     </h1>
                     <button
@@ -62,8 +63,8 @@ const Purses = () => {
                         })}
                         onClick={() => setSearchParams({ tab: TABS.OWNED })}
                     >
-                        <IoWalletOutline className="text-dark-1 dark:text-light-1 text-2xl md:text-3xl mr-2" />
-                        <span className="Poppins font-medium text-base dark:text-white-1 text-dark-1">
+                        <IoWalletOutline className="mr-2 text-2xl text-dark-1 dark:text-light-1 md:text-3xl" />
+                        <span className="text-base font-medium Poppins dark:text-white-1 text-dark-1">
                             My Purses
                         </span>
                     </button>
@@ -75,13 +76,13 @@ const Purses = () => {
                         })}
                         onClick={() => setSearchParams({ tab: TABS.ALL })}
                     >
-                        <MdOutlineExplore className="text-dark-1 dark:text-light-1 text-2xl md:text-3xl mr-2" />
-                        <span className="Poppins font-medium text-base dark:text-white-1 text-dark-1">
+                        <MdOutlineExplore className="mr-2 text-2xl text-dark-1 dark:text-light-1 md:text-3xl" />
+                        <span className="text-base font-medium Poppins dark:text-white-1 text-dark-1">
                             Explore Purses
                         </span>
                     </button>
                 </div>
-                <div className="mt-8 pb-8 h-screen-fit-70 overflow-y-auto mb-20 sm:mb-0">
+                <div className="pb-8 mt-8 mb-20 overflow-y-auto h-screen-fit-70 sm:mb-0">
                     <PurseList
                         loading={loading}
                         purseList={

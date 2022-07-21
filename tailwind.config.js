@@ -106,7 +106,7 @@ module.exports = {
                 "screen-fit-70": "70vh",
                 "screen-fit-60": "60vh",
                 "screen-fit-50": "50vh",
-            },
+            }
         },
     },
     plugins: [],
