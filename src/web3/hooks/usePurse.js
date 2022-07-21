@@ -89,7 +89,8 @@ const usePurse = () => {
                 console.error(err);
             }
         },
-        [Finit]
+        // eslint-disable-next-line
+        [init, purseContract]
     );
 
     const getBentoBalance = async () => {
@@ -227,6 +228,41 @@ const usePurse = () => {
     );
     // approveToClaimWithoutCompleteVotes
 
+
+
+
+
+    const getPositionDetail = useCallback(
+        async (purseAddress,address) => {
+            init(purseAddress);
+            try {
+                const purseMemeberPosition =
+                    await purseContract.current.userPosition(address);
+                return purseMemeberPosition;
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        [init, purseContract]
+    );
+
+
+    const getPositionInfo =useCallback(async (purseAddress) =>{
+        init(purseAddress);
+        const members = await getPurseMembers(purseAddress)
+        const positions = await Promise.all(members?.map(async(item) =>{
+            const pos = await getPositionDetail(purseAddress,item)
+            return pos
+        }))
+
+        
+        const result = positions?.map((item) =>{
+            return item.toString()
+        })
+        return result
+        // eslint-disable-next-line
+    },[init, purseContract])
+
     return {
         getPurseData,
         getPurseMembers,
@@ -239,7 +275,8 @@ const usePurse = () => {
         claimDonation,
         getBentoBalance,
         getCurrentRound,
-        getUserClaimableDeposit
+        getUserClaimableDeposit,
+        getPositionInfo
     };
 };
 

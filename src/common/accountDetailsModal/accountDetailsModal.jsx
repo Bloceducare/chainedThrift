@@ -7,10 +7,12 @@ import { copyToClipBoard } from "../../utils/helpers";
 import { useToasts } from "react-toast-notifications";
 import { BiLinkExternal } from "react-icons/bi";
 import { IoCopyOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 export function AccountDetailsModal({ onClose }) {
-    const { account } = useWeb3React();
+    const { account,deactivate } = useWeb3React();
     const { addToast } = useToasts();
+    const navigate = useNavigate();
 
     const copyToClipBoardHandler = async () => {
         const success = await copyToClipBoard(account);
@@ -24,6 +26,12 @@ export function AccountDetailsModal({ onClose }) {
             });
         }
     };
+
+    const deactivateModalAccount = () =>{
+        deactivate()
+        onClose()
+        navigate("/")
+    }
 
     return (
         <div>
@@ -56,7 +64,7 @@ export function AccountDetailsModal({ onClose }) {
             </div>
 
             <div className="flex justify-center mb-10">
-                <button className="dark:text-white bg-blue-600 p-2 font-bold font-Poppins rounded-lg">
+                <button onClick={deactivateModalAccount } className="dark:text-white bg-blue-600 p-2 font-bold font-Poppins rounded-lg">
                     Disconnect Wallet
                 </button>
             </div>
