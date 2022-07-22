@@ -45,7 +45,6 @@ const CreatePurse = () => {
     const { symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
 
     const {createPurse} = usePurseFactory()
-    let error;
 
     
     useEffect(() => {
