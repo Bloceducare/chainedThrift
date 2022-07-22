@@ -4,7 +4,7 @@ import { AiOutlineShareAlt } from "react-icons/ai";
 import { ImNotification } from "react-icons/im";
 import { CardList } from "./component/CardList";
 import usePurse from "../../web3/hooks/usePurse";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { parseUnits, formatUnits } from "ethers/lib/utils";
 import { formatDate, shortenAddress } from "../../utils";
 import { useWeb3React } from "@web3-react/core";
@@ -13,6 +13,8 @@ import useToken from "../../web3/hooks/useToken";
 import { useToasts } from "react-toast-notifications";
 import ViewPurseSkeleton from "../../common/skeleton/viewPurse";
 import axios from "axios";
+import { copyToClipBoard } from "../../utils";
+import "./index.scss";
 
 const ViewPurse = () => {
     const { addToast } = useToasts();
@@ -122,6 +124,20 @@ const ViewPurse = () => {
 
             default:
                 break;
+        }
+    };
+
+    const copyToClipBoardHandler = async () => {
+        let path = window.location.href;
+        const success = await copyToClipBoard(path);
+        if (success) {
+            addToast("Copied to clipboard", {
+                appearance: "success",
+            });
+        } else {
+            addToast("Not Copied", {
+                appearance: "error",
+            });
         }
     };
 
@@ -261,7 +277,7 @@ const ViewPurse = () => {
                 <ViewPurseSkeleton />
             ) : (
                 <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover min-h-screen">
-                    <section className="container flex flex-col mx-auto h-auto px-8 md:px-0 mt-12 dark:text-white-1">
+                    <section className="container flex flex-col mx-auto h-auto px-8 md:px-0 mt-12 view_purse_mobile dark:text-white-1">
                         <div className="lg:mx-36 md:mx-24 mt-2 md:mt-6">
                             <div className="flex items-center mb-2">
                                 <IoIosArrowBack className="dark:text-white/80 -ml-1" />
@@ -278,9 +294,9 @@ const ViewPurse = () => {
                                 </p>
                                 <div className="flex gap-2 items-center mb-2 mt-1">
                                     <AiOutlineShareAlt className="dark:text-white/80 -ml-1" />
-                                    <p className="text-xs font-light">
+                                    <button className="text-xs font-light cursor-pointer" onClick={copyToClipBoardHandler}>
                                         Invite new member
-                                    </p>
+                                    </button>
                                 </div>
                             </div>
                             <div className="flex gap-3 items-center mb-2">
