@@ -5,7 +5,7 @@ const Actions = () => {
         <React.Fragment>
             <section className="bg-gray-8 p-10">
                 <div className= "container mx-auto">
-                     <h4 className="text-center text-white-1 mb-10 text-Poppins font-bold text-xl">
+                     <h4 className="text-center text-white-1 mb-10 font-Poppins font-bold text-xl">
                         How it works
                     </h4>
                     <div className="grid gap-8 lg:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  ">

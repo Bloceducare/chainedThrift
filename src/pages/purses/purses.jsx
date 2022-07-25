@@ -37,7 +37,6 @@ const Purses = () => {
         setLoading(false);
         // eslint-disable-next-line
     }, [active, purses]);
-    console.log(purses, "purses")
 
     return (
         <main className="min-h-screen bg-cover bg-overlay-img-light dark:bg-overlay-img">
