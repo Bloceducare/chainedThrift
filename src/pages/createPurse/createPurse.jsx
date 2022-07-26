@@ -42,10 +42,25 @@ const CreatePurse = () => {
 
     const { token, amount, membersCount, frequency, collateral, total,pos } = data;
 
-    const { symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
+    const { symbol:tokenSymbol, decimals, getAllowance, approve, balance} = useToken(token?.address);
 
     const {createPurse} = usePurseFactory()
-    let error;
+    const PurseInfo = (amount, frequency,membersCount, balance ) => {
+        let error;
+        if(!amount){
+            error = addToast("Enter an amount", {appearance: "error"})
+        }
+        if(amount > balance){
+            error =  addToast("amount exceed your balance", {appearance: "error"})
+        }
+        if(!membersCount){
+            error =  addToast("Enter member count", {appearance: "error"})
+        }
+        if(frequency < 0){
+            error = addToast("Enter Frequency in days", {appearance: "error"})
+        }
+        return {error}
+    }
 
     
     useEffect(() => {
@@ -183,6 +198,11 @@ const CreatePurse = () => {
           chatId = chatData.id;
          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
+            
+            const {error} = PurseInfo(amount,frequency,membersCount,balance);
+            if(error){
+                return
+            }
             setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
@@ -263,6 +283,10 @@ const CreatePurse = () => {
 
           if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
+            const {error} = PurseInfo(amount,frequency,membersCount,balance);
+            if(error){
+                return
+            }
             setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
@@ -277,7 +301,6 @@ const CreatePurse = () => {
                         setCreating(false)
                         return addToast(res.message, {appearance: "error"});
                      }
-                     
                      const result =    await res.wait()
                      const address = await result.events[0].address
                      setCreating(false)
@@ -289,6 +312,10 @@ const CreatePurse = () => {
          
          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
+            const {error} = PurseInfo(amount,frequency,membersCount,balance);
+            if(error){
+                return
+            }
             setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
