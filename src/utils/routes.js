@@ -3,7 +3,7 @@ export const appRoutes = {
     purses: "/purses",
     new_purse: "/create-new",
     view_purse: "/view/purse/:id",
-    // about: "/about",
+    about: "/about",
     purse: "/purse/:id/*", //this is a nested route hence the asterisk character
 };
 
@@ -40,7 +40,7 @@ export const purseTabsLinks = [
 export const absoluteRoutes = {
     landing: "/",
     purses: "/app/purses",
-    // about:"/app/about",
+    about:"/app/about",
     new_purse: "/app/create-new",
     swap: "/app/swap",
     purse: "/app/purse/:id",

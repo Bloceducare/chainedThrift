@@ -3,7 +3,7 @@ import { absoluteRoutes } from "../utils";
 export const landingNav = [
     {
         value: "About",
-        link: "#",
+        link: absoluteRoutes.about,
     },
     {
         value: "Help",

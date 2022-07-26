@@ -104,7 +104,7 @@ const AppViewLayout = () => {
                         element={<CreatePurse />}
                     />
                     <Route path={appRoutes.purse} element={<PurseLayout />} />
-                    {/* <Route path={appRoutes.about} element={<About/>} /> */}
+                    <Route path={appRoutes.about} element={<About/>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Suspense>
