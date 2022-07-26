@@ -64,40 +64,39 @@ const readableTimer = moment.unix(currentRound.timer).toString()
 
     return (
         <div>
-            <div className="dark:bg-dark-1 bg-white-1 w-full h-40 pl-8 pr-8 flex justify-between items-center">
+            <div className="flex flex-col items-center justify-between w-full h-40 pl-8 pr-8 mb-6 md:mb-2 md:flex-row dark:bg-dark-1 bg-white-1">
                 <div className="flex flex-col">
                     <div>
-                        <p className="Montserrat font-extrabold text-lg md:text-3xl dark:text-white-1 text-dark-1">
+                        <p className="text-lg font-extrabold Montserrat md:text-3xl dark:text-white-1 text-dark-1">
                             Dashboard
                         </p>
-                        <div className="Poppins font-medium text-xs md:text-base dark:text-white-1 text-dark-1">
+                        <div className="text-xs font-medium Poppins md:text-base dark:text-white-1 text-dark-1">
                             Purse ID: {shortenAddress(purseDetail.address)}
                         </div>
-                        <div className="Poppins mt-1 font-medium text-xs md:text-base dark:text-white-1 text-dark-1">
+                        <div className="mt-1 text-xs font-medium Poppins md:text-base dark:text-white-1 text-dark-1">
                             Claimable Deposit: {amount} {tokenSymbol}
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col mt-7 md:mr-0">
-                <div className="Poppins text-xs mb-2 md:text-base font-bold dark:text-white-1 text-dark-1 font-medium">
+                <div className="flex flex-col mb2 mt-7 md:mr-0 ">
+                    <div className="mb-2 text-xs font-medium Poppins md:text-base dark:text-white-1 text-dark-1">
                         {readableTimer === 'Invalid date'? <p>Members not complete</p> : <p>Next Round: {readableTimer} </p>}
                     </div>
-
-                    <div className="Poppins text-xs md:text-base dark:text-white-1 text-dark-1 font-medium">
+                    <div className="text-xs font-medium Poppins md:text-base dark:text-white-1 text-dark-1">
                         <p className="font-bold">Current Round: {currentRound.round || 0}</p>
                     </div>
                     <div>
-                        <div className="Poppins text-xs md:text-base dark:text-white-1 text-dark-1 font-medium">
+                        <div className="text-xs font-bold Poppins md:text-base dark:text-white-1 text-dark-1">
                             Bal. of BentoBox:{" "}
                             {`${purseDetail.bento_balance} ${tokenSymbol}`}
                         </div>
                     </div>
                 </div>
-                <div className="relative hidden md:block mt-7">
+                <div className="relative hidden lg:block mt-7">
                     <div onClick={showHandler} className="">
-                        <div className="flex cursor-pointer relative items-center bg-pink-gradient rounded-3xl p-1">
-                            <FiBell className="w-8  text-white" />
-                            <p className="Poppins text-white-1 text-xs font-thin">
+                        <div className="relative flex items-center p-1 cursor-pointer bg-pink-gradient rounded-3xl">
+                            <FiBell className="w-8 text-white" />
+                            <p className="text-xs font-thin Poppins text-white-1">
                                 15
                             </p>
                         </div>

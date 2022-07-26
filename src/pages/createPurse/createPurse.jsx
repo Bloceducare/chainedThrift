@@ -42,9 +42,25 @@ const CreatePurse = () => {
 
     const { token, amount, membersCount, frequency, collateral, total,pos } = data;
 
-    const { symbol:tokenSymbol, decimals, getAllowance, approve} = useToken(token?.address);
+    const { symbol:tokenSymbol, decimals, getAllowance, approve, balance} = useToken(token?.address);
 
     const {createPurse} = usePurseFactory()
+    const PurseInfo = (amount, frequency,membersCount, balance ) => {
+        let error;
+        if(!amount){
+            error = addToast("Enter an amount", {appearance: "error"})
+        }
+        if(amount > balance){
+            error =  addToast("amount exceed your balance", {appearance: "error"})
+        }
+        if(!membersCount){
+            error =  addToast("Enter member count", {appearance: "error"})
+        }
+        if(frequency < 0){
+            error = addToast("Enter Frequency in days", {appearance: "error"})
+        }
+        return {error}
+    }
 
     
     useEffect(() => {
@@ -182,6 +198,11 @@ const CreatePurse = () => {
           chatId = chatData.id;
          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
+            
+            const {error} = PurseInfo(amount,frequency,membersCount,balance);
+            if(error){
+                return
+            }
             setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
@@ -262,6 +283,10 @@ const CreatePurse = () => {
 
           if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
+            const {error} = PurseInfo(amount,frequency,membersCount,balance);
+            if(error){
+                return
+            }
             setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
@@ -276,7 +301,6 @@ const CreatePurse = () => {
                         setCreating(false)
                         return addToast(res.message, {appearance: "error"});
                      }
-                     
                      const result =    await res.wait()
                      const address = await result.events[0].address
                      setCreating(false)
@@ -288,6 +312,10 @@ const CreatePurse = () => {
          
          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
+            const {error} = PurseInfo(amount,frequency,membersCount,balance);
+            if(error){
+                return
+            }
             setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
@@ -512,6 +540,7 @@ const CreatePurse = () => {
                                 className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
                                 type="button"
                                 onClick={!active ? () => dispatch(OPEN_WALLET_MODAL()) : handleCreatePurse}
+                                disabled={approving || creating}
                             >
                                 {approving || creating ? <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />

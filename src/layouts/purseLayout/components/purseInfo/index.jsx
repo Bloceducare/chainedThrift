@@ -7,7 +7,7 @@ import {GiMoneyStack} from "react-icons/gi"
 function PurseInfo({purseDetail,tokenSymbol}) {
 
   return (
-    <div className="grid grid-cols-3 gap-2 md:gap-8">
+    <div className="grid gap-2 sm:grid-cols-1 md:gap-2 md:grid md:grid-cols-3 lg:grid-cols-3">
       <PurseInfoBox
         icon = {BsCalendarEvent}
         dataKey="Created on"
