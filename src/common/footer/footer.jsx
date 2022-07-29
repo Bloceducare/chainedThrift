@@ -18,7 +18,7 @@ const Footer = () => {
       <div className="container items-center mx-auto lg:flex lg:justify-between">
         <div className=" md:w-full lg:w-3/6">
          <a href="https://docs.google.com/forms/d/1aNbxba_d3cnIS4gy7aJI2I_TBSNl7XCfIdvRiuDT1qg/viewform?ts=629f27c6&edit_requested=true" target="_blank" rel="noopener noreferrer"> <Button className="mb-6">Reviews</Button></a>
-          <h3 className="block mb-4 font-extrabold uppercase font-Inter text-gray-9">
+          <h3 className="block mb-4 font-extrabold uppercase font-Montserrat text-gray-9">
             Follow us
           </h3>
           <div className="flex mb-6">
@@ -35,7 +35,7 @@ const Footer = () => {
               <FiTwitter className="text-lg text-purple-2 hover:text-yellow-dark lg:text-2xl" />
             </a>
           </div>
-          <h3 className="block mb-6 font-extrabold uppercase font-Inter text-gray-9">
+          <h3 className="block mb-6 font-extrabold uppercase font-Montserrat text-gray-9">
             Information
           </h3>
           <ul className="grid grid-cols-2 gap-2 mb-8">
@@ -57,7 +57,7 @@ const Footer = () => {
         <div className="mt-32 md:w-full lg:w-3/6">
           <div className="mb-8">
             <h3 className="block font-extrabold font-Inter text-gray-9">REACH OUT TO US</h3>
-            <a className="text-xl font-extrabold text-purple-2 md:text-3xl" href="#!">hello@chainedthrift.com</a>
+            <a className="text-xl font-extrabold text-purple-2 font-Poppins md:text-3xl" href="#!">hello@chainedthrift.com</a>
           </div>
           <p className="text-base font-normal font-Poppins text-white-1">
             Subscribe to our newsletter and be the first to know about

@@ -49,6 +49,10 @@ module.exports = {
                 "pallet-3": "#1f1b58",
                 "pallet-4": "#59B7E6",
             },
+            fontFamily: {
+                'Montserrat': ["Montserrat", "sans-serif"],
+                'Poppins': ["Poppins", "sans-serif"],
+            },
             backgroundImage: {
                 "overlay-img": "url('../public/assets/bg.svg')",
                 "overlay-img-light": "url('../public/assets/lightbg.svg')",
@@ -58,7 +62,7 @@ module.exports = {
                 "nav-dark":
                     "linear-gradient(90.18deg, rgba(61, 61, 61, 0.2052) 0%, rgba(29, 29, 29, 0.285) 100%)", //used for navbar in dark mode
                 "nav-light":
-                    "linear-gradient(90.22deg, rgba(61, 61, 61, 0.2052) 0%, rgba(29, 29, 29, 0.285) 99.19%)", //used for navbar in dark mode
+                    "linear-gradient(90.22deg, rgba(61, 61, 61, 0.285) 0%, rgba(61, 61, 61, 0.285) 99.19%)", //used for navbar in light mode
                 "blue-gradient":
                     "linear-gradient(180deg, rgba(38, 34, 80, 0.65) 0%, rgba(27, 25, 66, 0.85) 57.44%, #17163B 100%)", // dashbord side nav bg color
                 "pink-gradient":
@@ -73,7 +77,11 @@ module.exports = {
                     "linear-gradient(180deg, #833EF1 0%, #491CB5 100%)",
                 "purple-gradient-1":
                     "linear-gradient(180deg, #833EF1 100%, #491CB5 100%)",
-                Inter: ["Inter", "sans-serif"],
+                    "purple-gradient-2":"linear-gradient(180.52deg, #833EF1 4.24%, #491CB5 138.66%)"
+
+
+
+                // Inter: ["Inter", "sans-serif"],
             },
             boxShadow: {
                 card: "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
@@ -106,7 +114,7 @@ module.exports = {
                 "screen-fit-70": "70vh",
                 "screen-fit-60": "60vh",
                 "screen-fit-50": "50vh",
-            }
+            },
         },
     },
     plugins: [],

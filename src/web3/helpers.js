@@ -7,6 +7,7 @@ import {
 import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from "@web3-react/walletconnect-connector";
 import { addresses } from "./constants";
 import { RPC_URL } from "./rpc_urls";
+import sample from "lodash/sample";
 
 export const getLibrary = (provider) => {
     return new Web3Provider(provider);
@@ -71,5 +72,30 @@ export const getChainID = () => {
             return 80001;
         default:
             return 137;
+    }
+};
+
+if (
+    process.env.REACT_APP_ENV !== "testnet" &&
+    (!process.env.REACT_APP_NODE1 ||
+        !process.env.REACT_APP_NODE2 ||
+        !process.env.REACT_APP_NODE3)
+) {
+    throw Error("one base URL is undefined");
+}
+
+export const nodes = [
+    process.env.REACT_APP_NODE1,
+    process.env.REACT_APP_NODE2,
+    process.env.REACT_APP_NODE3,
+];
+
+export const getNodeUrl = () => {
+    const env = process.env.REACT_APP_ENV;
+    switch (env) {
+        case "testnet":
+            return sample(nodes);
+        default:
+            return RPC_URL[137];
     }
 };
