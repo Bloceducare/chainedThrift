@@ -25,7 +25,7 @@ const usePurseFactory = () => {
                 getRpcUrl()
             );
         }
-        console.log(getRpcUrl())
+        console.log('purseFactory',getRpcUrl())
         purseFactory.current = getPurseFactoryContract(
             active
                 ? addresses[chainId].purseFactoryAddress
