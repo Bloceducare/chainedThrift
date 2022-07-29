@@ -27,7 +27,7 @@ const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
 const CreatePurse = lazy(() => import("../../pages/createPurse/createPurse"));
 const NotFound = lazy(() => import("../notFound"));
 const ViewPurse = lazy(() => import("../../pages/viewPurse/viewPurse"))
-const About = lazy(() => import("../../pages/about/about"))
+
 
 const AppViewLayout = () => {
     
@@ -104,7 +104,6 @@ const AppViewLayout = () => {
                         element={<CreatePurse />}
                     />
                     <Route path={appRoutes.purse} element={<PurseLayout />} />
-                    <Route path={appRoutes.about} element={<About/>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Suspense>
