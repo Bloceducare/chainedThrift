@@ -64,10 +64,10 @@ const readableTimer = moment.unix(currentRound.timer).toString()
 
     return (
         <div>
-            <div className="flex flex-col items-center justify-between w-full h-40 pl-8 pr-8 mb-6 md:mb-2 md:flex-row dark:bg-dark-1 bg-white-1">
+            <div className="flex flex-col items-center justify-between w-full h-40 pl-8 pr-8 md:mb-2 md:flex-row dark:bg-dark-1 bg-white-1 lg:flex-row">
                 <div className="flex flex-col">
                     <div>
-                        <p className="text-lg font-extrabold Montserrat md:text-3xl dark:text-white-1 text-dark-1">
+                        <p className="font-extrabold Montserrat md:text-xl dark:text-white-1 text-dark-1">
                             Dashboard
                         </p>
                         <div className="text-xs font-medium Poppins md:text-base dark:text-white-1 text-dark-1">
@@ -78,9 +78,13 @@ const readableTimer = moment.unix(currentRound.timer).toString()
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col mb2 mt-7 md:mr-0 ">
-                    <div className="mb-2 text-xs font-medium Poppins md:text-base dark:text-white-1 text-dark-1">
-                        {readableTimer === 'Invalid date'? <p>Members not complete</p> : <p>Next Round: {readableTimer} </p>}
+                <div className="flex flex-col md:mr-0 ">
+                    <div className="text-xs font-medium Poppins md:text-base dark:text-white-1 text-dark-1">
+                        {readableTimer === 'Invalid date'? <p>Members not complete</p> : 
+                        <div>
+                            <p>Next Round: </p>
+                            <p>{readableTimer}</p>
+                        </div>}
                     </div>
                     <div className="text-xs font-medium Poppins md:text-base dark:text-white-1 text-dark-1">
                         <p className="font-bold">Current Round: {currentRound.round || 0}</p>

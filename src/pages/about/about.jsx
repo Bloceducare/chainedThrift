@@ -1,10 +1,12 @@
 import React from 'react'
+import Footer from '../../common/footer/footer'
 
 function About() {
   return (
-    <section className='flex flex-col items-center justify-center dark:text-white'> 
+    <>
+    <section className='flex flex-col items-center justify-center mb-10 dark:text-white'> 
       <div>
-        <h1 className='m-5 text-4xl'>About</h1>
+        <h1 className='m-5 text-4xl font-bold'>About Chained Thrift</h1>
       </div>
       <p className="w-1/2 m-2 text-lg">
         ChainedThrift is a secure DeFi application built on the Polygon Chain focused on providing
@@ -20,7 +22,10 @@ function About() {
       <p className="w-1/2 m-2 text-lg">Chainedthrift Dapp offers its users the opportunity to attain their financial realities
         with a trustless decentralized cooperative system all in one DApp. 
       </p>
+     
     </section>
+    <Footer />
+    </>
   )
 }
 

@@ -8,7 +8,7 @@ import { landingNav } from "../../static/data";
 
 const Landing = lazy(() => import("../../pages/landing/landing"));
 const NotFound = lazy(()=> import("../notFound"))
-const ContactUs = lazy(() => import("../../pages/contactUs/contactUs"))
+// const ContactUs = lazy(() => import("../../pages/contactUs/contactUs"))
 const About = lazy(() => import("../../pages/about/about"))
 
 const LandingViewLayout = () => {
