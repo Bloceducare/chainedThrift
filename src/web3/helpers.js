@@ -45,11 +45,41 @@ export const getUserBalances = async (address, library) => {
     }
 };
 
+// export const tokensConfig = {
+//     80001: [
+//         {
+//             symbol: "CTT",
+//             address: addresses[80001].CTTAddress,
+//             logoSrc: "/assets/Vector.svg",
+//         },
+//     ],
+// };
+// default setup
+// export const getRpcUrl = () => {
+//     const env = process.env.REACT_APP_ENV;
+//     switch (env) {
+//         case "testnet":
+//             return RPC_URL[80001];
+//         default:
+//             return RPC_URL[137];
+//     }
+// };
+
+// default setup
+// export const getChainID = () => {
+//     const env = process.env.REACT_APP_ENV;
+//     switch (env) {
+//         case "testnet":
+//             return 80001;
+//         default:
+//             return 137;
+//     }
+// };
 export const tokensConfig = {
-    80001: [
+    4: [
         {
             symbol: "CTT",
-            address: addresses[80001].CTTAddress,
+            address: addresses[4].CTTAddress,
             logoSrc: "/assets/Vector.svg",
         },
     ],
@@ -59,7 +89,7 @@ export const getRpcUrl = () => {
     const env = process.env.REACT_APP_ENV;
     switch (env) {
         case "testnet":
-            return RPC_URL[80001];
+            return RPC_URL[4];
         default:
             return RPC_URL[137];
     }
@@ -69,7 +99,7 @@ export const getChainID = () => {
     const env = process.env.REACT_APP_ENV;
     switch (env) {
         case "testnet":
-            return 80001;
+            return 4;
         default:
             return 137;
     }
