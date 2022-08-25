@@ -45,7 +45,7 @@ const CreatePurse = () => {
     const { symbol:tokenSymbol, decimals, getAllowance, approve, balance} = useToken(token?.address);
 
     const {createPurse} = usePurseFactory()
-    const PurseInfo = (amount, frequency,membersCount, balance ) => {
+    const handleInputError = () => {
         let error;
         if(!amount){
             error = addToast("Enter an amount", {appearance: "error"})
@@ -199,10 +199,10 @@ const CreatePurse = () => {
          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
             
-            const {error} = PurseInfo(amount,frequency,membersCount,balance);
-            if(error){
-                return
-            }
+            // const {error} = PurseInfo(amount,frequency,membersCount,balance);
+            // if(error){
+            //     return
+            // }
             setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
@@ -283,10 +283,10 @@ const CreatePurse = () => {
 
           if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
-            const {error} = PurseInfo(amount,frequency,membersCount,balance);
-            if(error){
-                return
-            }
+            // const {error} = PurseInfo(amount,frequency,membersCount,balance);
+            // if(error){
+            //     return
+            // }
             setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
@@ -312,10 +312,10 @@ const CreatePurse = () => {
          
          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
             console.log("chatId", chatId);
-            const {error} = PurseInfo(amount,frequency,membersCount,balance);
-            if(error){
-                return
-            }
+            // const {error} = PurseInfo(amount,frequency,membersCount,balance);
+            // if(error){
+            //     return
+            // }
             setCreating(true)
             await createPurse(
                  parseUnits(amount.toString(), decimals),
@@ -536,17 +536,26 @@ const CreatePurse = () => {
                         </div>
 
                         <div className="w-full">
-                            <button
+                            {
+                                active ? 
+                                <button
                                 className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
                                 type="button"
-                                onClick={!active ? () => dispatch(OPEN_WALLET_MODAL()) : handleCreatePurse}
+                                onClick={ () => {handleCreatePurse()}}
                                 disabled={approving === true|| creating === true}
                             >
                                 {approving || creating ? <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                 </svg>: ""}
-                                {!active ? "Connect wallet" : approving ? "approving.." : "Create purse"}
+                                {approving ? "approving.." : handleInputError && "Create purse"}
+                            </button> : 
+                            <button type="button"  className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
+                            onClick={() => {
+                                dispatch(OPEN_WALLET_MODAL())
+                            }}>
+                                Connect Wallet
                             </button>
+                            }
                         </div>
                         <ReactTooltip className="max-w-tooltip" />
                     </form>
