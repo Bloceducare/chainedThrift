@@ -1,5 +1,6 @@
 import React,{useEffect} from "react";
 import Footer from "../../common/footer/footer";
+import "./index.scss"
 
 function Policy() {
     useEffect(() =>{
@@ -7,8 +8,11 @@ function Policy() {
        })
     return (
         <section className="dark:bg-overlay-img bg-overlay-img-light dark:bg-dark-1 bg-light-1 bg-unset bg-contain bg-no-repeat h-auto">
-            <div className="container mx-auto md:my-6 lg:my-12 p-6 md-p-0 lg:p-0">
-            <h3 className="font-semibold text-3xl my-8 dark:text-white-1">Privacy Policy</h3>
+            <div className="policy md:my-6 lg:my-12 p-6 md-p-8 lg:p-0">
+                <div>
+                  <h3 className="font-semibold text-3xl my-12 dark:text-white-1">Privacy Policy</h3>
+                  </div>
+ 
 
             <div>
                 <p className="mb-4 dark:text-white-1">
@@ -38,7 +42,7 @@ function Policy() {
                     </span>
                 </p>
 
-                <p className="dark:text-white-1">
+                <p className=" mb-12 dark:text-white-1">
                     Kindly take note that this Privacy Policy is referenced only
                     for this product and not for any of our other products or
                     services. Equally, the policy is in compliance with the
@@ -47,7 +51,7 @@ function Policy() {
 
                 <h4 className="font-semibold my-4 dark:text-white-1">Eligibility</h4>
 
-                <p className="dark:text-white-1">
+                <p className=" mb-12 dark:text-white-1">
                     Our Services are not directed or intended to be attractive
                     to children under the age of 18. We do not knowingly collect
                     Personal Information from children under the age of 18. If
@@ -74,7 +78,7 @@ function Policy() {
                     writing, and evaluating the content shared here.
                 </p>
 
-                <p className="my-5 dark:text-white-1">
+                <p className="mb-12 dark:text-white-1">
                     When registering on our site, you may be asked to enter your
                     wallet address, e-mail address (kindly take note that your
                     e-mail address will be verified by an email containing a
@@ -91,7 +95,7 @@ function Policy() {
                     However, you may visit our site without registering.
                 </p>
 
-                <p className="my-5 dark:text-white-1">
+                <p className="mb-12 dark:text-white-1">
                     When registering and posting, we record the IP address that
                     the post originated from. We also may retain server logs
                     which include the IP address of every request to our server.
@@ -267,7 +271,7 @@ function Policy() {
 
                 <h5 className="font-semibold my-5 dark:text-white-1">Your Consent</h5>
 
-                <p className="my-5 dark:text-white-1">
+                <p className="my-5 dark:text-white-1 mb-32">
                     This online privacy policy applies only to information
                     collected through our site and not to information collected
                     offline or during our conferences, workshops or our other
