@@ -1,7 +1,10 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Footer from "../../common/footer/footer";
 
 function Policy() {
+    useEffect(() =>{
+        window.scroll(0,0)
+       })
     return (
         <section className="dark:bg-overlay-img bg-overlay-img-light dark:bg-dark-1 bg-light-1 bg-unset bg-contain bg-no-repeat h-auto">
             <div className="container mx-auto md:my-6 lg:my-12 p-6 md-p-0 lg:p-0">
@@ -257,14 +260,14 @@ function Policy() {
                 <p className="dark:text-white-1">
                     If you have questions, comments, or concerns regarding this
                     privacy policy kindly contact us at{" "}
-                    <a className="link dark:text-white-1" href="mailto:hello@chainedthrift.com">
-                        hello@chainedthrift.com
+                    <a className=" dark:text-white-1 underline decoration-sky-500" href="mailto:hello@chainedthrift.com">
+                      <span className="">hello@chainedthrift.com</span>
                     </a>
                 </p>
 
                 <h5 className="font-semibold my-5 dark:text-white-1">Your Consent</h5>
 
-                <p>
+                <p className="my-5 dark:text-white-1">
                     This online privacy policy applies only to information
                     collected through our site and not to information collected
                     offline or during our conferences, workshops or our other
