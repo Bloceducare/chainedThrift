@@ -5,6 +5,10 @@ export const landingNav = [
         value: "About",
         link: absoluteRoutes.about,
     },
+    // {
+    //     value: "Privacy Policy",
+    //     link: absoluteRoutes.policy,
+    // },
     {
         value: "Help",
         link: "!#",
@@ -72,7 +76,7 @@ export const footerLinks = [
     },
     {
         text: "Privacy Policy",
-        link: "!#",
+        link: "/privacy-policy",
     },
     {
         text: " Resources",
