@@ -5,6 +5,7 @@ import { absoluteRoutes } from "../../utils/routes";
 import SideDrawer from "../../common/sideDrawer/sideDrawer";
 import Header from '../../common/header/header'
 import { landingNav } from "../../static/data";
+import Policy from "../../pages/policy/policy";
 
 const Landing = lazy(() => import("../../pages/landing/landing"));
 const NotFound = lazy(()=> import("../notFound"))
@@ -44,6 +45,7 @@ const LandingViewLayout = () => {
           <Route path= {absoluteRoutes.landing} element={<Landing />} />
           {/* <Route path={absoluteRoutes.contactUs} element={<ContactUs />} /> */}
           <Route path={absoluteRoutes.about} element={<About/>} />
+          <Route path={absoluteRoutes.policy} element={<Policy/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

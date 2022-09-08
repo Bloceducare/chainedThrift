@@ -41,6 +41,7 @@ export const absoluteRoutes = {
     purses: "/app/purses",
     contactUs: "/contactUs",
     about:"/about",
+    policy:"/privacy-policy",
     new_purse: "/app/create-new",
     swap: "/app/swap",
     purse: "/app/purse/:id",
