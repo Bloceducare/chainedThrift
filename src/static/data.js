@@ -82,10 +82,6 @@ export const footerLinks = [
         text: " Resources",
         link: "!#",
     },
-    {
-        text: "Terms of Service",
-        link: "!#",
-    },
 ];
 
 export const tokenData = [
