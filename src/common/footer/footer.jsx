@@ -52,7 +52,7 @@ const Footer = () => {
               );
             })}
                 <a className="text-base font-normal font-Poppins text-white-1 hover:underline hover:text-yellow-dark" href="https://drive.google.com/file/d/1LH0tX4qrbQyagSFtEcDTrJIE7VqkpmHp/view?usp=sharing" target="_blank" rel="noreferrer">
-                    Terms of Services
+                    Terms of Service
                    </a>
           </ul>
           {/* <Switch /> */}
