@@ -51,13 +51,16 @@ const Footer = () => {
                 </li>
               );
             })}
+                <a className="text-base font-normal font-Poppins text-white-1 hover:underline hover:text-yellow-dark" href="https://drive.google.com/file/d/1LH0tX4qrbQyagSFtEcDTrJIE7VqkpmHp/view?usp=sharing" target="_blank" rel="noreferrer">
+                    Terms of Services
+                   </a>
           </ul>
           {/* <Switch /> */}
         </div>
         <div className="mt-32 md:w-full lg:w-3/6">
           <div className="mb-8">
             <h3 className="block font-extrabold font-Inter text-gray-9">REACH OUT TO US</h3>
-            <a className="text-xl font-extrabold text-purple-2 font-Poppins md:text-3xl" href="#!">hello@chainedthrift.com</a>
+            <a className="text-xl font-extrabold text-purple-2 font-Poppins md:text-3xl" href="mailto:hello@chainedthrift.com">hello@chainedthrift.com</a>
           </div>
           <p className="text-base font-normal font-Poppins text-white-1">
             Subscribe to our newsletter and be the first to know about
