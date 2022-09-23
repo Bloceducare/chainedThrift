@@ -8,11 +8,11 @@ return (
         <div className="w-full px-16 py-16 pt-16 bg-gray-8">
             <div>
                 <div className="pl-36">
-                    <p className="pl-2 font-bold text-md">FAQs</p>
+                    <p className="pl-2 font-bold text-md text-purple-2">FAQs</p>
                 </div>
-                <h1 className="text-2xl font-bold font-Montserrat"><span className="pt-2 border-t-4 border-purple-2"> Frequently</span> asked questions</h1>
-                <p className="font-semibold font-Montserrat">Below you will find some information, but if have any questions,</p>
-                <p className="font-semibold font-Montserrat">please get in touch with us</p>
+                <h1 className="text-2xl font-bold font-Montserrat text-purple-2"><span className="pt-2 border-t-4 border-purple-2"> Frequently</span> asked questions</h1>
+                <p className="font-semibold font-Montserrat text-purple-2">Below you will find some information, but if have any questions,</p>
+                <p className="font-semibold font-Montserrat text-purple-2">please get in touch with us</p>
             </div>
             <div className="container py-4">
                 <Disclosure>
@@ -83,7 +83,7 @@ return (
                     />
                     </Disclosure.Button>
                     <Disclosure.Panel className="px-4 pt-4 pb-2 text-white text-md">
-                        You can send an email to us via <a href='mailto:hello@chainedthrift.com'>hello@chainedthrift.com</a>. You can also reach us on Twitters
+                        You can send an email to us via <a href='mailto:hello@chainedthrift.com'>hello@chainedthrift.com</a>. You can also reach us on Twitter
                     </Disclosure.Panel>
                 </>
                 )}
