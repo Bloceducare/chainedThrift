@@ -66,7 +66,7 @@ return (
                     />
                     </Disclosure.Button>
                     <Disclosure.Panel className="px-4 pt-4 pb-2 text-white text-md">
-                        The whole system is automated by the <italic>Purse</italic> feature which automatically sends your funds and returns it back to your wallet
+                        The whole system is automated by the <italic>Purse</italic> feature which automatically sends your funds and returns back to your wallet
                     </Disclosure.Panel>
                 </>
                 )}

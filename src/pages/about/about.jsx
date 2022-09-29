@@ -8,8 +8,8 @@ function About() {
     <section className=' dark:text-white'> 
       <div className="flex items-center justify-center">
         <div className="flex flex-col items-center justify-center w-1/2 text-center my-28">
-          <h1 className="text-5xl font-bold">Transforming the idea of <span className=" text-purple-2">thrift</span> globally.</h1>
-          <p className="px-16 text-lg">Our goal is to enable easy access to decentralized savings and various rewarding mechanisms for all. We want everyone to equally benefit from a 
+          <h1 className="pb-4 text-5xl font-bold">Transforming the idea of <span className=" text-purple-2">thrift</span> globally.</h1>
+          <p className="text-lg lg:px-16">Our goal is to enable easy access to decentralized savings and various rewarding mechanisms for all. We want everyone to equally benefit from a 
             changing financial landscape and speed up the global advent crypto adoption
           </p>
         </div>
