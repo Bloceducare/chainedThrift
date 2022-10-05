@@ -3,7 +3,7 @@ import React from 'react';
 const Actions = () => {
     return (
         <React.Fragment>
-            <section className="bg-gray-8 p-10">
+            <section className="bg-gray-8 p-10 ">
                 <div className= "container mx-auto">
                      <h4 className="text-center text-white-1 mb-10 font-Poppins font-bold text-xl">
                         How it works
