@@ -1,0 +1,30 @@
+
+.border-linear {
+    // padding: 20px 60px;
+    border: none;
+    outline: none;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(262.71deg, #EA9119 2.72%, #833EF1 70.34%);
+    cursor: pointer;
+  }
+  .border-linear::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    top: 1px;
+    bottom: 1px;
+    border-radius: 55px;
+    // background-color: black;
+    z-index: -1;
+    transition: 200ms
+  }
+  .border-linear::after {
+    content: attr(data);
+    font-size: 16px;
+    background: linear-gradient(262.71deg, #EA9119 2.72%, #833EF1 70.34%);
+    -webkit-background-clip: text;
+    color: transparent;
+    transition: 200ms
+  }

@@ -77,8 +77,8 @@ module.exports = {
                     "linear-gradient(180deg, #833EF1 0%, #491CB5 100%)",
                 "purple-gradient-1":
                     "linear-gradient(180deg, #833EF1 100%, #491CB5 100%)",
-                    "purple-gradient-2":"linear-gradient(180.52deg, #833EF1 4.24%, #491CB5 138.66%)"
-
+                    "purple-gradient-2":"linear-gradient(180.52deg, #833EF1 4.24%, #491CB5 138.66%)",
+                    "pallet-5":" linear-gradient(262.71deg, #EA9119 2.72%, #833EF1 70.34%)"
 
 
                 // Inter: ["Inter", "sans-serif"],
