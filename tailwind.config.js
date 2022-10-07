@@ -107,6 +107,7 @@ module.exports = {
                 "screen-fit-70": "70vh",
                 "screen-fit-60": "60vh",
                 "screen-fit-50": "50vh",
+                "25":"17rem"
             },
             minHeight: {
                 screenfit: "calc(100vh - 75px)",
@@ -115,6 +116,15 @@ module.exports = {
                 "screen-fit-60": "60vh",
                 "screen-fit-50": "50vh",
             },
+            lineHeight:{
+                'sm-height':'30px',
+                "mini":"20px",
+                "medium":"46px"
+            },
+            fontSize:{
+                "mini":"20px",
+                "medium":"24px"
+            }
         },
     },
     plugins: [],

@@ -1,16 +1,16 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi"
-import HeaderButton from "../buttons/headerButton";
+// import HeaderButton from "../buttons/headerButton";
 import ThemeSwitch from "../themeSwitch/themeSwitch";
 import useTheme from "../../hooks/useTheme";
 
 const Header = ({ data = [], toggleDrawer}) => {
   const {theme, changeTheme} = useTheme();
   const navigate = useNavigate();
-  const redirectToApp = () => {
-    navigate("/app/purses");
-  };
+  // const redirectToApp = () => {
+  //   navigate("/app/purses");
+  // };
   const handleRedirect = (link) => {
     navigate(link);
   };
@@ -43,11 +43,11 @@ const Header = ({ data = [], toggleDrawer}) => {
               </NavLink>
             );
           })}
-          <a href="https://mumbai.polygonscan.com/address/0xeae9911b42bf966f038d2ef49563012e31a2b409#writeContract"
+          {/* <a href="https://mumbai.polygonscan.com/address/0xeae9911b42bf966f038d2ef49563012e31a2b409#writeContract"
            className={ `font-Poppins text-base font-extrabold dark:text-white-1 text-dark-1 mr-24 cursor-pointer`}
            target="_blank" rel="noopener noreferrer"
-          >Claim CTT Token</a>
-          <HeaderButton action={redirectToApp}>Launch App</HeaderButton>
+          >Claim CTT Token</a> */}
+          {/* <HeaderButton>Launch App</HeaderButton> */}
         </nav>
 
         <div className="flex items-center">

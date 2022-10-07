@@ -6,19 +6,15 @@ import NotFound from "./notFound";
 import AppProvider from "../providers/appProvider";
 
 const MainLayout = () => {
-  return (
-    <Routes>
-      <Route path="/*" element={<LandingViewLayout />} />
-      <Route path="/app/*"
-        element={
-          <AppProvider>
-            <AppViewLayout />
-          </AppProvider>
-        }
-      />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  )
+    return (
+        <AppProvider>
+            <Routes>
+                <Route path="/*" element={<LandingViewLayout />} />
+                <Route path="/app/*" element={<AppViewLayout />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </AppProvider>
+    );
 };
 
 export default MainLayout;

@@ -9,14 +9,14 @@ export const landingNav = [
     //     value: "Privacy Policy",
     //     link: absoluteRoutes.policy,
     // },
-    {
-        value: "Help",
-        link: "!#",
-    },
-    {
-        value: "Community",
-        link: "!#",
-    },
+    // {
+    //     value: "Help",
+    //     link: "!#",
+    // },
+    // {
+    //     value: "Community",
+    //     link: "!#",
+    // },
 ];
 export const appNav = [
     {
@@ -61,8 +61,13 @@ export const purseTabsLink = [
 
 export const footerLinks = [
     {
-        text: "About Chained Thrift",
+        text: "About ChainedThrift",
         link: "/about",
+    },
+
+    {
+        text: "Privacy Policy",
+        link: "/privacy-policy",
     },
 
     // {
@@ -70,18 +75,15 @@ export const footerLinks = [
     //     link: "!#",
     // },
 
-    {
-        text: "Get in Touch",
-        link: "!#",
-    },
-    {
-        text: "Privacy Policy",
-        link: "/privacy-policy",
-    },
-    {
-        text: " Resources",
-        link: "!#",
-    },
+    // {
+    //     text: "Get in Touch",
+    //     link: "!#",
+    // },
+
+    // {
+    //     text: " Resources",
+    //     link: "!#",
+    // },
 ];
 
 export const tokenData = [
