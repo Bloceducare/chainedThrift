@@ -61,7 +61,7 @@ export const purseTabsLink = [
 
 export const footerLinks = [
     {
-        text: "About Chained Thrift",
+        text: "About ChainedThrift",
         link: "/about",
     },
 

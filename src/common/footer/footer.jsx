@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect,useState, useRef } from "react";
 import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { BiUser } from "react-icons/bi";
 import { SiDiscord, SiTelegram } from "react-icons/si";
@@ -20,6 +20,7 @@ const Footer = () => {
     let email = useRef();
 
     const { addToast } = useToasts();
+    const [loading, setLoading] = useState(false)
 
     const submitNewsLetter = async (event) => {
         event.preventDefault();
@@ -35,6 +36,7 @@ const Footer = () => {
             email: emailInput,
             // message: messageInput,
         });
+        setLoading(true)
         try {
             const response = await axios.post(url, body, {
                 headers: {
@@ -44,6 +46,7 @@ const Footer = () => {
             });
             event.target.reset();
             if (response.status === 201) {
+                setLoading(false)
                 return addToast(
                     "You've successfully subscribe to our newsletter",
                     { appearance: "success" }
@@ -51,6 +54,7 @@ const Footer = () => {
             } 
         } catch (error) {
           let err = error.response.data.message
+          setLoading(false)
           return addToast(err, { appearance: "error" });
         }
     };
@@ -99,15 +103,15 @@ const Footer = () => {
                             <FiTwitter className="text-lg text-purple-2 hover:text-yellow-dark lg:text-2xl" />
                         </a>
                     </div>
-                    <h3 className="block mb-6 font-extrabold uppercase font-Montserrat text-gray-9">
+                    <h3 className="block mb-4 mt-12 font-extrabold uppercase font-Montserrat text-gray-9">
                         Information
                     </h3>
-                    <ul className="grid grid-cols-2 gap-2 mb-8">
+                    <ul className="grid mb-8">
                         {footerLinks.map((item, index) => {
                             return (
-                                <li key={index}>
+                                <li key={index} className="mb-2">
                                     <Link
-                                        className="text-base font-normal font-Poppins text-white-1 hover:underline hover:text-yellow-dark"
+                                        className="text-base font-normal font-Poppins  text-white-1 hover:underline hover:text-yellow-dark"
                                         to={item.link}
                                     >
                                         {item.text}
@@ -116,7 +120,7 @@ const Footer = () => {
                             );
                         })}
                         <a
-                            className="text-base font-normal font-Poppins text-white-1 hover:underline hover:text-yellow-dark"
+                            className="text-base font-normal  font-Poppins text-white-1 hover:underline hover:text-yellow-dark"
                             href="https://drive.google.com/file/d/1--v21F3Y6_fZ4BhAYF430BF9VP-Vv9_P/view?usp=sharing"
                             target="_blank"
                             rel="noreferrer"
@@ -181,7 +185,8 @@ const Footer = () => {
 
                             <button
                                 type="submit"
-                                className="w-full h-12 mt-auto text-white rounded-lg bg-purple-1"
+                                className={`w-full h-12 mt-auto text-white cursor-pointer ${loading? 'cursor-not-allowed' : ''} rounded-lg bg-purple-1`}
+                                disabled={loading}
                             >
                                 Send
                             </button>

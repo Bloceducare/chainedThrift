@@ -1,11 +1,11 @@
 import React from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
-import { NavLink, useNavigate } from 'react-router-dom'
-import HeaderButton from '../buttons/headerButton'
+import { NavLink } from 'react-router-dom'
+// import HeaderButton from '../buttons/headerButton'
 
 const SideDrawer = ({navData, open, toggleDrawer}) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <Drawer
@@ -29,12 +29,12 @@ const SideDrawer = ({navData, open, toggleDrawer}) => {
                 </NavLink>
               );
             })}
-           <a href="https://mumbai.polygonscan.com/address/0xeae9911b42bf966f038d2ef49563012e31a2b409#writeContract"
+           {/* <a href="https://mumbai.polygonscan.com/address/0xeae9911b42bf966f038d2ef49563012e31a2b409#writeContract"
            className={ `font-Poppins text-base font-extrabold dark:text-white-1 text-dark-1 mr-24 cursor-pointer`}
            target="_blank" rel="noopener noreferrer"
-          >Claim CTT Token</a>
+          >Claim CTT Token</a> */}
         </nav>
-        <HeaderButton action={() => navigate("/app/purses")}>Launch App</HeaderButton>
+        {/* <HeaderButton action={() => navigate("/app/purses")}>Launch App</HeaderButton> */}
       </div>
     </Drawer>
   )

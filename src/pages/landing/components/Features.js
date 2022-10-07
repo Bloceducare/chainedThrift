@@ -6,25 +6,25 @@ function Features() {
     return (
         <React.Fragment>
             <section className="container mx-auto dark:bg-dark-1 bg-light-1  p-6  md:p-12 lg:flex lg:justify-between lg:mt-12">
-                <div className="lg:w-3/6 mb-24 lg:mr-24">
+                <div className="lg:w-3/6 mb-24 lg:mr-32">
                     <div className="shadow-box bg-white w-full rounded-lg p-8">
-                        <h5 className = "text-dark-1 font-extrabold font-Poppins">
-                            Safe and open source
+                        <h5 className = "text-dark-1 font-extrabold text-medium mb-12 font-Poppins">
+                            Free and Open source
                         </h5>
                         <img
                             className="block mx-auto"
                             src="/assets/home.svg"
                             alt="home-svg"
                         />
-                        <p className="text-dark-1 font-Montserrat font-light">
-                            Fully transparent and secure purses. Our purse is
-                            <b> open source</b> and trusted by all.
+                        <p className="text-dark-1 font-Montserrat leading-sm-height mt-6 font-light">
+                            Fully transparent and secure purses. Our purse is 
+                            <span className='font-bold ml-1'>open source</span> and trusted by all.
                         </p>
                     </div>
                 </div>
                 <div className="lg:w-3/6 lg:flex lg:justify-center">
                     <div>
-                        <p className="dark:text-white-1 text-dark-1 font-Poppins mb-12 font-bold">
+                        <p className="dark:text-white-1 text-dark-1 text-medium leading-medium font-Poppins mb-12 font-extrabold">
                             What we do to help
                             <br />
                             our users.
@@ -32,19 +32,18 @@ function Features() {
                         <div className="bg-white shadow-box rounded-lg mb-36 lg:mr-11 p-8">
                             <img
                                 className="block mx-auto"
-                                src="/assets/customer.svg"
+                                src="/assets/reminder.svg"
                                 alt="customer-svg"
                             />
-                            <h5 className="text-dark-1 font-extrabold font-Poppins mt-6">
-                                Stake
+                            <h5 className="text-dark-1 text-medium leading-mini mb-4 font-bold font-Poppins mt-6">
+                                Task Reminders
                             </h5>
-                            <p className="text-dark-1 font-Montserrat font-light">
-                                We offer stake function for user to stake and earn rewards on
-                                thier savings.
+                            <p className="text-dark-1 font-Montserrat font-normal leading-sm-height">
+                            The process of managing a task through reminders. It involves planning, testing, tracking.
                             </p>
-                            <p className="flex items-center mt-4 text-purple-400">
-                                <span className="mr-4 font-semibold font-Monserat">
-                                    <button className="cursor-pointer" onClick={() => navigate('#')}> Coming soon ......</button>
+                            <p className="flex items-center mt-4 text-purple-600">
+                                <span className="font-semibold font-Monserat">
+                                    <button className="cursor-pointer" onClick={() => navigate('#')}> Learn more</button>
                                 </span>
                                 <span>
                                     <BsArrowRightShort />
@@ -52,19 +51,19 @@ function Features() {
                             </p>
                         </div>
                     </div>
-                    <div className="bg-white shadow-box rounded-lg mb-48 -translate-y-16 p-6">
+                    <div className="bg-white shadow-box rounded-lg h-25 -translate-y-1 p-6">
                         <img
-                            className="block mx-auto  -translate-y-12"
-                            src="/assets/chat.svg"
+                            className="block mb-4 mx-auto "
+                            src="/assets/check.svg"
                             alt="chat-svg"
                         />
-                        <h5 className="text-dark-1 font-extrabold font-Poppins">Swap</h5>
-                        <p className="text-dark-1 font-Montserrat font-light">
-                            Easily swap Ethereum and other Erc-20 tokens{" "}
+                        <h5 className="text-dark-1 font-extrabold text-medium font-Poppins">Flexible purses</h5>
+                        <p className="text-dark-1 font-Montserrat font-light leading-sm-height">
+                        Create/join purses that meet your money your financial position, for business/personal needs.{" "}
                         </p>
-                        <p className="flex items-center mt-4 text-purple-400">
+                        <p className="flex items-center mt-4 text-purple-600">
                             <span className="font-semibold font-Monserat">
-                                <button className="cursor-pointer" onClick={() => navigate('#')}> Learn more ......</button>
+                                <button className="cursor-pointer" onClick={() => navigate('#')}> Learn more</button>
                             </span>
                             <span>
                                 <BsArrowRightShort />
