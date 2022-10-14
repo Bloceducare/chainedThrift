@@ -1,13 +1,13 @@
 import React from 'react';
-// import { useNavigate } from "react-router-dom";
-// import Button from "../../../../common/buttons/button";
+import { useNavigate } from "react-router-dom";
+import Button from "../../../../common/buttons/button";
 import "./index.scss"
 
 const Jumbotron = () => {
-    // const navigate = useNavigate();
-    // const redirectToApp = () => {
-    //   navigate("/app/purses");
-    // };
+    const navigate = useNavigate();
+    const redirectToApp = () => {
+      navigate("/app/purses");
+    };
     return (
         <section className="jumbo-section container mx-auto mb-0 md:mb-16 lg:mb-16 md:mb-0  pt-40 md:mt-0 md:py-40 lg:py-48">
             <div className="text-center py-8 sm:px-8 xl:px-0 md:text-left lg:text-left">
@@ -18,7 +18,7 @@ const Jumbotron = () => {
                     Create or join already created purses to quickly
                     and easily meet your financial target.
                 </p>
-                {/* <Button action={redirectToApp}>Launch App</Button> */}
+                <Button action={redirectToApp}>Launch App</Button>
             </div>
         </section>
     )

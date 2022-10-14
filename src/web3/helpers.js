@@ -76,10 +76,10 @@ export const getUserBalances = async (address, library) => {
 //     }
 // };
 export const tokensConfig = {
-    4: [
+    5: [
         {
             symbol: "CTT",
-            address: addresses[4].CTTAddress,
+            address: addresses[5].CTTAddress,
             logoSrc: "/assets/Vector.svg",
         },
     ],
@@ -89,7 +89,7 @@ export const getRpcUrl = () => {
     const env = process.env.REACT_APP_ENV;
     switch (env) {
         case "testnet":
-            return RPC_URL[4];
+            return RPC_URL[5];
         default:
             return RPC_URL[137];
     }
@@ -99,7 +99,7 @@ export const getChainID = () => {
     const env = process.env.REACT_APP_ENV;
     switch (env) {
         case "testnet":
-            return 4;
+            return 5;
         default:
             return 137;
     }
