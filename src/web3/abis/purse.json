@@ -119,10 +119,10 @@
         "type": "address"
       },
       {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "_time_created",
-        "type": "uint256"
+        "indexed": false,
+        "internalType": "address",
+        "name": "_recipient",
+        "type": "address"
       }
     ],
     "name": "DonationDeposited",
