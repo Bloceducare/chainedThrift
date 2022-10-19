@@ -39,7 +39,7 @@ import { useWeb3React } from "@web3-react/core";
 import Loader from "../../common/loader/loader";
 import Button from "../../common/buttons/button";
 import { useSignature } from "../../web3/hooks/useSignature";
-import { siginInMessage, siginUpMessage } from "../../web3/constants";
+import { useSignUpMessage, useSignInMessage } from "../../web3/constants";
 import SignInWrapper from "../../common/modalWrapper/signInWrapper";
 import { useToasts } from "react-toast-notifications";
 // const Swap = lazy(() => import("../../pages/swap/swap"));
@@ -67,6 +67,8 @@ const AppViewLayout = () => {
 
     const dispatch = useDispatch();
     const { sign } = useSignature();
+    const {message} = useSignInMessage()
+    const {signupmessage} = useSignUpMessage()
 
     const toggleWalletModalDisplay = () => {
         if (connectWalletModalState.open) return dispatch(CLOSE_WALLET_MODAL());
@@ -103,10 +105,10 @@ const AppViewLayout = () => {
         let url = " http://localhost:8000/api/user/create-user";
         setLoading(true);
         try {
-            let signatureOutput = await sign(siginUpMessage);
+            let signatureOutput = await sign(signupmessage);
             let resData = {
                 signature: signatureOutput,
-                message: siginUpMessage,
+                message: signupmessage,
                 userData: {
                     walletAddress: account,
                     email: email,
@@ -128,7 +130,7 @@ const AppViewLayout = () => {
                 addToast(error.error.message, { appearance: "error" });
             } else {
                 setLoading(false);
-                sessionStorage.setItem("sig", signatureOutput)
+                localStorage.setItem("sig", signatureOutput)
                 addToast("account created successfull", {
                     appearance: "success",
                 });
@@ -145,10 +147,10 @@ const AppViewLayout = () => {
         let url = "http://localhost:8000/api/user/get-user";
         setLoading(true);
         try {
-            let output = await sign(siginInMessage);
+            let output = await sign(message);
             let resData = {
                 signature: output,
-                message: siginInMessage,
+                message: message,
                 address: account,
             };
             
@@ -160,9 +162,8 @@ const AppViewLayout = () => {
                 },
             });
             let result = await response.json();
-            console.log(result)
             dispatch(SAVE_AUTH_DETAILS_TO_STORE(result));
-            sessionStorage.setItem("sig", output);
+            localStorage.setItem("sig", output);
             setOpen(false);
             setLoading(false);
         } catch (error) {
@@ -188,7 +189,7 @@ const AppViewLayout = () => {
         }
     };
 
-    let sig = sessionStorage.getItem("sig");
+    let sig = localStorage.getItem("sig");
 
     const [openSidebar, setOpenSidebar] = useState(false);
     const [renderSideDrawer, setRenderSideDrawer] = useState(
@@ -224,12 +225,12 @@ const AppViewLayout = () => {
         [active, account]
     );
 
-    // check if account change and remove signature in sessionStorage
+    // check if account change and remove signature in localStorage
     useEffect(() => {
         const { ethereum } = window;
 
         const handleAccountsChanged = () => {
-            sessionStorage.removeItem("sig");
+            localStorage.removeItem("sig");
             if (accounts.length > 0) {
                 // eat errors
                 activate(injected, undefined, true).catch((error) => {

@@ -9,7 +9,7 @@ const SignInWrapper = ({ open, children, onClose }) => {
         <Modal
             closeTimeoutMS={300}
             isOpen={open}
-            // onRequestClose={onClose}
+            onRequestClose={onClose}
             overlayClassName="fixed inset-0 backdrop-blur-sm z-10"
             className={clsx({
                 "modal show-modal": true,

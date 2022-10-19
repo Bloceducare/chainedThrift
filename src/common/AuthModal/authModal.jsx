@@ -1,19 +1,34 @@
-import { Fragment, useRef } from "react";
+import { Fragment } from "react";
 import { useToasts } from "react-toast-notifications";
+import useInput from "../../hooks/useInput";
+import { validEmail,validUsername } from "../../utils/helpers";
 import "./auth.scss";
 
 
 export const AuthModal = ({ onClose,createAccountHandler }) => {
-    let {addToast} = useToasts()
-    const email = useRef();
-    const username = useRef();
 
+    const {
+        value:email,
+        valueChangeHandler:emailChangeHandler,
+        isInvalid:emailErr,
+        blurHandler:emailBlurHandler
+    } =  useInput((value) => validEmail.test(value));
+
+    const {
+        value:username,
+        valueChangeHandler:usernameChangeHandler,
+        isInvalid:usernameErr,
+        blurHandler:usernameBlurHandler
+    } =  useInput((value) => validUsername.test(value));
+    
+    let {addToast} = useToasts()
+
+        const emailError = emailErr? 'border-error' : 'border-input';
+        const usernameError = usernameErr? 'border-error' : 'border-input'
 
     const submit = () =>{
-        let emailInput = email.current.value;
-        let usernameInput = username.current.value;
-        if(!emailInput || !usernameInput)return addToast("missing fields!",{appearance:"error"})
-        createAccountHandler(emailInput, usernameInput)
+        if(!email || !username)return addToast("missing fields!",{appearance:"error"})
+        createAccountHandler(email, username)
         onClose()
     }
 
@@ -35,10 +50,13 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
                         Username
                     </label>
                     <input
-                        ref={username}
+                        onChange={usernameChangeHandler}
+                        value={username}
+                        onBlur={usernameBlurHandler}
                         type="text"
-                        className="w-full px-2 py-2 text-black dark:text-white border-input bg-transparent outline-none border rounded border-gray-10"
+                        className={`w-full px-2 py-2 text-black dark:text-white ${usernameError} bg-transparent outline-none border rounded border-gray-10`}
                     />
+                    {usernameErr && <p className="text-red-500 mt-1">username should be greater than 8 characters and can contain alphanumeric characters</p>}
                 </div>
 
                 <div className="mb-6">
@@ -46,10 +64,13 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
                         Email Address
                     </label>
                     <input
-                        ref={email}
+                        onChange={emailChangeHandler}
+                        onBlur={emailBlurHandler}
+                        value={email}
                         type="email"
-                        className="w-full px-2 py-2 text-black dark:text-white  border-input outline-none bg-transparent border rounded border-gray-10"
+                        className={`w-full px-2 py-2 text-black dark:text-white  ${emailError}  outline-none bg-transparent border rounded border-gray-10`}
                     />
+                    {emailErr && <p className="text-red-500 mt-1">Wrong email format. format should be e.g example@gmail.com</p>}
                 </div>
             </form>
 
@@ -94,13 +115,13 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
             </p>
 
             <div className="flex item-center justify-center space-x-2">
-                {/* <button
+                <button
                     onClick={onClose}
                     className=" font-semibold border-linear rounded-full p-4 before:bg-white-1 dark:before:bg-dark-1 w-full text-black dark:text-white-1"
                 >
                     Cancel
-                </button> */}
-                <button onClick={submit} className="bg-pallet-5 font-semibold text-white dark:text-white w-full rounded-full p-4">
+                </button>
+                <button onClick={submit} disabled={emailErr || usernameErr} className="bg-pallet-5 font-semibold text-white dark:text-white w-full rounded-full p-4">
                     Create Account
                 </button>
             </div>

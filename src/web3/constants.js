@@ -1,5 +1,18 @@
+import { useWeb3React } from "@web3-react/core";
 export const ADDRESS_ZERO = "0x0000000000000000000000000000000000000000";
 export const  siginInMessage = "SignIn to use chainedThrift!"
+
+export const useSignInMessage = () =>{
+    const {account} = useWeb3React()
+    const message = ` Welcome to chainedThrift! \n \n Kindly signin with your wallet address to utilize the Dapp. \n \n This request will not trigger a blockchain transaction or cost any gas fees. \n \n Wallet Address: ${account}.`
+    return {message}
+}
+
+export const useSignUpMessage = () =>{
+    const {account} = useWeb3React()
+    const signupmessage = ` Welcome to chainedThrift! \n  \n You're Creating an Account on chainedThrift \n Kindly sign the message  to utilize the Dapp. \n \n This request will not trigger a blockchain transaction or cost any gas fees. \n \n Wallet Address: ${account}.`
+    return {signupmessage}
+}
 export const  siginUpMessage = "Create Account to use chainedThrift!"
 export const addresses = {
     5: {
