@@ -53,3 +53,9 @@ export const formatDate = (epochTime) => {
 
     return `${dateArray[1]} ${dateArray[2]}, ${dateArray[3]}`
 }
+
+export const validEmail = new RegExp(
+    '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
+ );
+
+ export const validUsername = new RegExp('^[A-Za-z][A-Za-z0-9_]{7,29}$');

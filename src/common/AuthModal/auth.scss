@@ -34,6 +34,10 @@ border-image:linear-gradient(262.71deg, #EA9119 2.72%, #833EF1 70.34%);
     border-image-slice:10;
   }
 
+  .border-error{
+    border-image:linear-gradient(262.71deg, #ba1818 2.72%, #ca2828 70.34%);
+        border-image-slice:10;
+      }
   .text-linear{
       background: -webkit-linear-gradient(262.71deg, #EA9119 2.72%, #833EF1 70.34%);
       -webkit-background-clip: text;
