@@ -59,3 +59,5 @@ export const validEmail = new RegExp(
  );
 
  export const validUsername = new RegExp('^[A-Za-z][A-Za-z0-9_]{7,29}$');
+
+ export const baseUrl = "https://chainedthrift-server.herokuapp.com/api/user/"

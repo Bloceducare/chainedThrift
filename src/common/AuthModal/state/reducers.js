@@ -1,4 +1,4 @@
-import { OPEN, CLOSE, SAVE_AUTH} from ".";
+import { OPEN, CLOSE, SAVE_AUTH,SAVE_STATUS} from ".";
 
 export const authModalReducer = (state = { open: true }, { type }) => {
     switch (type) {
@@ -20,6 +20,15 @@ export const authReducer = (state = initial, {type, payload}) =>{
             return {...payload};
         default:
             return state;
+    }
+}
+const init = false
+export const userExistReducer = (state=init, {type, payload}) =>{
+    switch (type){
+        case SAVE_STATUS :
+            return {...payload}
+            default:
+                return state
     }
 }
 
