@@ -117,11 +117,11 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
             <div className="flex item-center justify-center space-x-2">
                 <button
                     onClick={onClose}
-                    className=" font-semibold border-linear rounded-full p-4 before:bg-white-1 dark:before:bg-dark-1 w-full text-black dark:text-white-1"
+                    className=" font-semibold border-linear rounded-full p-1 md:p-4 lg:p-4 before:bg-white-1 dark:before:bg-dark-1 w-full text-black dark:text-white-1"
                 >
                     Cancel
                 </button>
-                <button onClick={submit} disabled={emailErr || usernameErr} className="bg-pallet-5 font-semibold text-white dark:text-white w-full rounded-full p-4">
+                <button onClick={submit} disabled={emailErr || usernameErr} className="bg-pallet-5 font-semibold text-white dark:text-white w-full rounded-full p-1 md:p-4 lg:p-4">
                     Create Account
                 </button>
             </div>

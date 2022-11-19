@@ -24,6 +24,7 @@ import {
     CLOSE_AUTH_MODAL,
     AuthModal,
     SAVE_AUTH_DETAILS_TO_STORE,
+    SAVE_USER_STATUS
 } from "../../common/AuthModal";
 import {
     ModalWrapper,
@@ -42,6 +43,7 @@ import { useSignature } from "../../web3/hooks/useSignature";
 import { useSignUpMessage, useSignInMessage } from "../../web3/constants";
 import SignInWrapper from "../../common/modalWrapper/signInWrapper";
 import { useToasts } from "react-toast-notifications";
+import { baseUrl } from "../../utils";
 // const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
@@ -61,8 +63,11 @@ const AppViewLayout = () => {
     );
 
     const auths = useSelector((store) => store.auth)
-  console.log(auths)
+  const {exist} = useSelector((store) => store.status)
 
+
+        // console.log("status:", status)
+        console.log("auths", auths)
     const authModalState = useSelector((state) => state.authModal);
 
     const dispatch = useDispatch();
@@ -93,7 +98,6 @@ const AppViewLayout = () => {
     useEagerConnect();
 
     const [loading, setLoading] = useState(false);
-    const [response, setResponse] = useState();
 
     const [open, setOpen] = useState(true);
 
@@ -102,7 +106,7 @@ const AppViewLayout = () => {
     };
 
     const createAccountHandler = async (email, username) => {
-        let url = " http://localhost:8000/api/user/create-user";
+        let url = `${baseUrl}create-user`;
         setLoading(true);
         try {
             let signatureOutput = await sign(signupmessage);
@@ -123,14 +127,14 @@ const AppViewLayout = () => {
                     "Content-type": "application/json",
                 },
             });
-            let error = await res.json();
+            let data = await res.json();
             if (res.status !== 200) {
                 setOpen(!open);
                 setLoading(false);
-                addToast(error.error.message, { appearance: "error" });
+                addToast(data.error.message, { appearance: "error" });
             } else {
                 setLoading(false);
-                localStorage.setItem("sig", signatureOutput)
+                localStorage.setItem("token", data.token)
                 addToast("account created successfull", {
                     appearance: "success",
                 });
@@ -144,7 +148,7 @@ const AppViewLayout = () => {
     };
 
     const signHandler = async () => {
-        let url = "http://localhost:8000/api/user/get-user";
+        let url = `${baseUrl}get-user`;
         setLoading(true);
         try {
             let output = await sign(message);
@@ -162,8 +166,9 @@ const AppViewLayout = () => {
                 },
             });
             let result = await response.json();
+            const {token} =result
             dispatch(SAVE_AUTH_DETAILS_TO_STORE(result));
-            localStorage.setItem("sig", output);
+            localStorage.setItem("token",token);
             setOpen(false);
             setLoading(false);
         } catch (error) {
@@ -175,13 +180,13 @@ const AppViewLayout = () => {
     // check if user exist
     const checkUserExist = async () => {
         let formatAddress = account.toLowerCase();
-        let url = `http://localhost:8000/api/user/check/?walletAddress=${formatAddress}`;
+        let url = `${baseUrl}check/?walletAddress=${formatAddress}`;
         setLoading(true);
         try {
             if (!active) return;
             const response = await fetch(url);
             const data = await response.json();
-            setResponse(data.exist);
+            dispatch(SAVE_USER_STATUS(data));
             setLoading(false);
         } catch (error) {
             setLoading(false);
@@ -189,7 +194,7 @@ const AppViewLayout = () => {
         }
     };
 
-    let sig = localStorage.getItem("sig");
+    let sig = localStorage.getItem("token");
 
     const [openSidebar, setOpenSidebar] = useState(false);
     const [renderSideDrawer, setRenderSideDrawer] = useState(
@@ -230,7 +235,7 @@ const AppViewLayout = () => {
         const { ethereum } = window;
 
         const handleAccountsChanged = () => {
-            localStorage.removeItem("sig");
+            localStorage.removeItem("token");
             if (accounts.length > 0) {
                 // eat errors
                 activate(injected, undefined, true).catch((error) => {
@@ -307,7 +312,7 @@ const AppViewLayout = () => {
                 />
             </ModalWrapper>
             {/* doesn't have an account yet and address is active */}
-            { active && !loading && !response && (
+            { active && !loading && !exist && (
                 <AuthWrapper
                     open={authModalState.open}
                     onClose={toggleAuthModalDisplay}
@@ -333,7 +338,7 @@ const AppViewLayout = () => {
             )} */}
 
             {/* has account in db and connected and signature is not null */}
-            {  active && response && !loading && !sig  && (
+            {  active && exist && !loading && !sig  && (
                 <SignInWrapper open={open} onClose={closeSignInAuth}>
                     <div className="flex justify-center">
                         <Button action={signHandler}>SignIn</Button>
