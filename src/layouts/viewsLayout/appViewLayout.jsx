@@ -23,7 +23,6 @@ import {
     OPEN_AUTH_MODAL,
     CLOSE_AUTH_MODAL,
     AuthModal,
-    SAVE_AUTH_DETAILS_TO_STORE,
     SAVE_USER_STATUS
 } from "../../common/AuthModal";
 import {
@@ -39,11 +38,8 @@ import { useEagerConnect } from "../../web3";
 import { useWeb3React } from "@web3-react/core";
 import Loader from "../../common/loader/loader";
 import Button from "../../common/buttons/button";
-import { useSignature } from "../../web3/hooks/useSignature";
-import { useSignUpMessage, useSignInMessage } from "../../web3/constants";
 import SignInWrapper from "../../common/modalWrapper/signInWrapper";
-import { useToasts } from "react-toast-notifications";
-import { baseUrl } from "../../utils";
+import { baseUrl, useAuthFunc } from "../../utils";
 // const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
@@ -51,9 +47,10 @@ const CreatePurse = lazy(() => import("../../pages/createPurse/createPurse"));
 const NotFound = lazy(() => import("../notFound"));
 const ViewPurse = lazy(() => import("../../pages/viewPurse/viewPurse"));
 
+
+
 const AppViewLayout = () => {
     const { active, account } = useWeb3React();
-    const { addToast } = useToasts();
     const connectWalletModalState = useSelector(
         (state) => state.connectWalletModal
     );
@@ -64,16 +61,14 @@ const AppViewLayout = () => {
 
     const auths = useSelector((store) => store.auth)
   const {exist} = useSelector((store) => store.status)
+  console.log("Auths:", auths)
+
+    const  {loading, createAccountHandler,open,setOpen, signHandler,setLoading}  =  useAuthFunc()
 
 
-        // console.log("status:", status)
-        console.log("auths", auths)
     const authModalState = useSelector((state) => state.authModal);
 
     const dispatch = useDispatch();
-    const { sign } = useSignature();
-    const {message} = useSignInMessage()
-    const {signupmessage} = useSignUpMessage()
 
     const toggleWalletModalDisplay = () => {
         if (connectWalletModalState.open) return dispatch(CLOSE_WALLET_MODAL());
@@ -97,84 +92,10 @@ const AppViewLayout = () => {
     // connecting eagerly
     useEagerConnect();
 
-    const [loading, setLoading] = useState(false);
 
-    const [open, setOpen] = useState(true);
 
     const closeSignInAuth = () => {
         setOpen(!open);
-    };
-
-    const createAccountHandler = async (email, username) => {
-        let url = `${baseUrl}create-user`;
-        setLoading(true);
-        try {
-            let signatureOutput = await sign(signupmessage);
-            let resData = {
-                signature: signatureOutput,
-                message: signupmessage,
-                userData: {
-                    walletAddress: account,
-                    email: email,
-                    username: username,
-                },
-            };
-
-            let res = await fetch(url, {
-                method: "POST",
-                body: JSON.stringify(resData),
-                headers: {
-                    "Content-type": "application/json",
-                },
-            });
-            let data = await res.json();
-            if (res.status !== 200) {
-                setOpen(!open);
-                setLoading(false);
-                addToast(data.error.message, { appearance: "error" });
-            } else {
-                setLoading(false);
-                localStorage.setItem("token", data.token)
-                addToast("account created successfull", {
-                    appearance: "success",
-                });
-            }
-        } catch (error) {
-            setLoading(false);
-            console.error(error);
-        }
-        // get username and password field
-        // call signSignature and return signature
-    };
-
-    const signHandler = async () => {
-        let url = `${baseUrl}get-user`;
-        setLoading(true);
-        try {
-            let output = await sign(message);
-            let resData = {
-                signature: output,
-                message: message,
-                address: account,
-            };
-            
-            const response = await fetch(url, {
-                method: "POST",
-                body: JSON.stringify(resData),
-                headers: {
-                    "Content-type": "application/json",
-                },
-            });
-            let result = await response.json();
-            const {token} =result
-            dispatch(SAVE_AUTH_DETAILS_TO_STORE(result));
-            localStorage.setItem("token",token);
-            setOpen(false);
-            setLoading(false);
-        } catch (error) {
-            setLoading(false);
-            console.error(error);
-        }
     };
 
     // check if user exist

@@ -1,3 +1,11 @@
+import { useSignature } from "../web3/hooks/useSignature";
+import { useState } from "react";
+import { SAVE_AUTH_DETAILS_TO_STORE } from "../common/AuthModal";
+import { useSignInMessage, useSignUpMessage } from "../web3/constants";
+import { useWeb3React } from "@web3-react/core";
+import { useToasts } from "react-toast-notifications";
+import { useDispatch } from "react-redux";
+
 export const shortenAddress = (address) => {
     if (!address) return null;
     return `${address.substr(0, 6)}...${address.substr(
@@ -51,13 +59,106 @@ export const formatDate = (epochTime) => {
     const date = new Date(epochTime * 1000);
     const dateArray = date.toString().split(" ");
 
-    return `${dateArray[1]} ${dateArray[2]}, ${dateArray[3]}`
-}
+    return `${dateArray[1]} ${dateArray[2]}, ${dateArray[3]}`;
+};
 
 export const validEmail = new RegExp(
-    '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
- );
+    "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
+);
 
- export const validUsername = new RegExp('^[A-Za-z][A-Za-z0-9_]{7,29}$');
+export const validUsername = new RegExp("^[A-Za-z][A-Za-z0-9_]{7,29}$");
 
- export const baseUrl = "https://chainedthrift-server.herokuapp.com/api/user/"
+export const baseUrl = "https://chainedthrift-server.herokuapp.com/api/user/";
+
+export const useAuthFunc = () => {
+    const { sign } = useSignature();
+    const { message } = useSignInMessage();
+    const { signupmessage } = useSignUpMessage();
+    const [loading, setLoading] = useState(false);
+    const [open, setOpen] = useState(true);
+    const { account } = useWeb3React();
+    const { addToast } = useToasts();
+
+    const dispatch = useDispatch();
+
+    const createAccountHandler = async (email, username) => {
+        let url = `${baseUrl}create-user`;
+        setLoading(true);
+        try {
+            let signatureOutput = await sign(signupmessage);
+            let resData = {
+                signature: signatureOutput,
+                message: signupmessage,
+                userData: {
+                    walletAddress: account,
+                    email: email,
+                    username: username,
+                },
+            };
+
+            let res = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(resData),
+                headers: {
+                    "Content-type": "application/json",
+                },
+            });
+            let data = await res.json();
+            if (res.status !== 200) {
+                setOpen(!open);
+                setLoading(false);
+                addToast(data.error.message, { appearance: "error" });
+            } else {
+                setLoading(false);
+                localStorage.setItem("token", data.token);
+                addToast("account created successfull", {
+                    appearance: "success",
+                });
+            }
+        } catch (error) {
+            setLoading(false);
+            console.error(error);
+        }
+        // get username and password field
+        // call signSignature and return signature
+    };
+
+    const signHandler = async () => {
+        let url = `${baseUrl}get-user`;
+        setLoading(true);
+        try {
+            let output = await sign(message);
+            let resData = {
+                signature: output,
+                message: message,
+                address: account,
+            };
+
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(resData),
+                headers: {
+                    "Content-type": "application/json",
+                },
+            });
+            let result = await response.json();
+            const { token } = result;
+            dispatch(SAVE_AUTH_DETAILS_TO_STORE(result));
+            localStorage.setItem("token", token);
+            setOpen(false);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.error(error);
+        }
+    };
+
+    return {
+        createAccountHandler,
+        loading,
+        signHandler,
+        open,
+        setOpen,
+        setLoading
+    };
+};
