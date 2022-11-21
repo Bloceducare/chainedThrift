@@ -9,7 +9,7 @@ const AuthWrapper = ({ open, children, onClose, label }) => {
         <Modal
             closeTimeoutMS={300}
             isOpen={open}
-            // onRequestClose={onClose}
+            onRequestClose={onClose}
             contentLabel={label}
             overlayClassName="fixed inset-0 backdrop-blur-sm z-10"
             className={clsx({

@@ -1,33 +1,40 @@
 import { useWeb3React } from "@web3-react/core";
-import React, { useCallback, useEffect, useState} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { IoIosArrowBack, IoIosHelpCircleOutline } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
-import { isValidAmountValue, isPositiveInt } from "../../utils/helpers";
+import {
+    isValidAmountValue,
+    isPositiveInt,
+    useAuthFunc,
+} from "../../utils/helpers";
 import "./index.scss";
 import { OPEN_WALLET_MODAL } from "../../common/connectWalletModal";
 import Dropdown from "rc-dropdown";
 import Menu, { Item as MenuItem } from "rc-menu";
-import 'rc-dropdown/assets/index.css';
+import "rc-dropdown/assets/index.css";
 import { tokensConfig } from "../../web3";
 import useToken from "../../web3/hooks/useToken";
 import { parseUnits } from "ethers/lib/utils";
 import usePurseFactory from "../../web3/hooks/usePurseFactory";
 import { useToasts } from "react-toast-notifications";
-import axios from 'axios';
-
-
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { AuthWrapper } from "../../common/modalWrapper";
+import { AuthModal } from "../../common/AuthModal";
+import SignInWrapper from "../../common/modalWrapper/signInWrapper";
+import Button from "../../common/buttons/button";
 
 const CreatePurse = () => {
     const navigate = useNavigate();
-    const {active, chainId,  account} = useWeb3React()
-    const dispatch = useDispatch()
-    const [approving, setapproving] = useState(false)
-    const [creating, setCreating] = useState(false)
+    const { active, chainId, account } = useWeb3React();
+    const { signHandler, createAccountHandler } = useAuthFunc();
+    const dispatch = useDispatch();
+    const [approving, setapproving] = useState(false);
+    const [creating, setCreating] = useState(false);
     const { addToast } = useToasts();
-
 
     const [data, setData] = useState({
         token: null,
@@ -36,37 +43,49 @@ const CreatePurse = () => {
         frequency: "",
         collateral: 0,
         total: 0,
-        pos:1
+        pos: 1,
     });
-   
 
-    const { token, amount, membersCount, frequency, collateral, total,pos } = data;
+    const { token, amount, membersCount, frequency, collateral, total, pos } =
+        data;
 
-    const { symbol:tokenSymbol, decimals, getAllowance, approve, balance} = useToken(token?.address);
+    const {
+        symbol: tokenSymbol,
+        decimals,
+        getAllowance,
+        approve,
+        balance,
+    } = useToken(token?.address);
 
-    const {createPurse} = usePurseFactory()
+    const { createPurse } = usePurseFactory();
     const handleInputError = () => {
         let error;
-        if(!amount){
-            error = addToast("Enter an amount", {appearance: "error"})
+        if (!amount) {
+            error = addToast("Enter an amount", { appearance: "error" });
         }
-        if(amount > balance){
-            error =  addToast("amount exceed your balance", {appearance: "error"})
+        if (amount > balance) {
+            error = addToast("amount exceed your balance", {
+                appearance: "error",
+            });
         }
-        if(!membersCount){
-            error =  addToast("Enter member count", {appearance: "error"})
+        if (!membersCount) {
+            error = addToast("Enter member count", { appearance: "error" });
         }
-        if(frequency < 0){
-            error = addToast("Enter Frequency in days", {appearance: "error"})
+        if (frequency < 0) {
+            error = addToast("Enter Frequency in days", {
+                appearance: "error",
+            });
         }
-        return {error}
-    }
+        return { error };
+    };
 
-    
     useEffect(() => {
         // if(token) return;
-        setData(prev => ({...prev, token: !!tokensConfig[chainId] ? tokensConfig[chainId][0] : null}))
-    }, [chainId])
+        setData((prev) => ({
+            ...prev,
+            token: !!tokensConfig[chainId] ? tokensConfig[chainId][0] : null,
+        }));
+    }, [chainId]);
 
     useEffect(() => {
         if (Number(collateral) > 0 && Number(amount) > 0) {
@@ -125,231 +144,293 @@ const CreatePurse = () => {
                 else if (isPositiveInt(value))
                     return setData((prev) => ({ ...prev, frequency: value }));
                 break;
-                case "pos":
-                    if(value === "")
-                    return setData((prev) => ({...prev, pos:""}))
-                    else if (isPositiveInt(value))
-                    return setData((prev) => ({...prev, pos:value}))
-                    break;
+            case "pos":
+                if (value === "")
+                    return setData((prev) => ({ ...prev, pos: "" }));
+                else if (isPositiveInt(value))
+                    return setData((prev) => ({ ...prev, pos: value }));
+                break;
 
             default:
                 break;
         }
     };
 
-    
-    const onselectToken = useCallback(({key}) => {
-        const tokenData = tokensConfig[chainId].find(token => token.address === key)
-        setData(prev => ({...prev, token: tokenData}));
-    },[setData, chainId])
+    const onselectToken = useCallback(
+        ({ key }) => {
+            const tokenData = tokensConfig[chainId].find(
+                (token) => token.address === key
+            );
+            setData((prev) => ({ ...prev, token: tokenData }));
+        },
+        [setData, chainId]
+    );
 
+    const { exist } = useSelector((store) => store.status);
+
+    const [opens, setOpens] = useState(false);
+    const [open2, setOpen2] = useState(false)
+
+    const closeSignUp = () =>{
+        setOpens(!opens)
+    }
+
+    const closeSignIn = () =>{
+        setOpen2(!open2)
+    }
+
+    const signUp = () => {
+        setOpens(true);
+    };
+
+    const signIn = () => {
+        setOpen2(true);
+    };
+    const localToken = localStorage.getItem("token");
     const handleCreatePurse = async () => {
         const allowance = await getAllowance();
         const totalBN = parseUnits(total.toString(), decimals);
-        let  chatId;
+        let chatId;
 
-        if(allowance.lt(totalBN)) {
-            setapproving(true)
-           await approve(undefined, totalBN, async (res) => {
-               if(!res.hash){
-                setapproving(false)
-                return addToast(res.message, {appearance: "error"});
-               }
-               await res.wait()
-               setapproving(false)
-               addToast(`${total} ${tokenSymbol} token approval successfull!`, {appearance: "success"});
-              
-            // make server request to get or create user with username = account
-              const username = account;
-              const title = `Thrift ${amount} ${tokenSymbol} Members`;
-              var details = {
-                "username": username,
-                "secret": username
-              };
-              const config = {
-                method: 'put',
-                url: 'https://api.chatengine.io/users/',
+        if (allowance.lt(totalBN)) {
+            setapproving(true);
+            await approve(undefined, totalBN, async (res) => {
+                if (!res.hash) {
+                    setapproving(false);
+                    return addToast(res.message, { appearance: "error" });
+                }
+                await res.wait();
+                setapproving(false);
+                addToast(
+                    `${total} ${tokenSymbol} token approval successfull!`,
+                    { appearance: "success" }
+                );
+
+                // make server request to get or create user with username = account
+                const username = account;
+                const title = `Thrift ${amount} ${tokenSymbol} Members`;
+                var details = {
+                    username: username,
+                    secret: username,
+                };
+                const config = {
+                    method: "put",
+                    url: "https://api.chatengine.io/users/",
+                    headers: {
+                        "PRIVATE-KEY": "19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1",
+                    },
+                    data: details,
+                };
+                const user = await axios(config);
+                const userData = await user.data;
+                const userName = userData.username;
+                //  console.log(userName)
+                //  create chat
+                var Chatdetails = {
+                    title: title,
+                    is_direct_chat: false,
+                };
+                const Chatconfig = {
+                    method: "post",
+                    url: "https://api.chatengine.io/chats/",
+                    headers: {
+                        "Project-ID": "21f51b31-abf1-4e3e-9ed4-00a1b0215871",
+                        "User-Name": userName,
+                        "User-Secret": userName,
+                    },
+                    data: Chatdetails,
+                };
+                const chat = await axios(Chatconfig);
+                const chatData = await chat.data;
+                chatId = chatData.id;
+                if (
+                    chatId !== null ||
+                    chatId !== "undefined" ||
+                    chatId !== undefined
+                ) {
+                    console.log("chatId", chatId);
+
+                    // const {error} = PurseInfo(amount,frequency,membersCount,balance);
+                    // if(error){
+                    //     return
+                    // }
+                    setCreating(true);
+                    await createPurse(
+                        parseUnits(amount.toString(), decimals),
+                        // parseUnits(collateral.toString(), decimals),
+                        Number(membersCount),
+                        Number(frequency),
+                        chatId,
+                        token.address,
+                        pos,
+                        async (res) => {
+                            if (!res.hash) {
+                                setCreating(false);
+                                return addToast(res.message, {
+                                    appearance: "error",
+                                });
+                            }
+
+                            const result = await res.wait();
+                            const address = await result.events[0].address;
+                            addToast("Purse created successfully!", {
+                                appearance: "success",
+                            });
+                            navigate(`/app/purse/${address}`);
+                        }
+                    );
+                }
+            }).catch((err) => {
+                setapproving(false);
+                setCreating(false);
+                return addToast("something went wrong!", {
+                    appearance: "error",
+                });
+
+                //  const deleteConfig = {
+                //     method: 'delete',
+                //     url: `https://api.chatengine.io/chats/${chatId}/`,
+                //     headers: {
+                //         'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
+                //         'User-Name': account,
+                //         'User-Secret': account
+                //     },
+                //  }
+                //  axios(deleteConfig);
+            });
+        } else {
+            //    create user and chatgroup
+            const username = account;
+            const title = `Thrift ${amount} ${tokenSymbol} Members`;
+            var details = {
+                username: username,
+                secret: username,
+            };
+            const config = {
+                method: "put",
+                url: "https://api.chatengine.io/users/",
                 headers: {
-                    'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+                    "PRIVATE-KEY": "19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1",
                 },
-                data : details
-             }
-             const user = await axios(config)
-             const userData = await user.data;
-             const userName = userData.username;
-            //  console.log(userName)
+                data: details,
+            };
+            const user = await axios(config);
+            const userData = await user.data;
+            const userName = userData.username;
+            console.log(userName);
             //  create chat
-             var Chatdetails = {
-              "title": title,
-              "is_direct_chat": false
-            };   
+            var Chatdetails = {
+                title: title,
+                is_direct_chat: false,
+            };
             const Chatconfig = {
-              method: 'post',
-              url: 'https://api.chatengine.io/chats/',
-              headers: {  
-             'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-             'User-Name': userName,                 
-             'User-Secret': userName
-            },
-            data : Chatdetails
-           }
-          const chat = await axios(Chatconfig)
-          const chatData = await chat.data;
-          chatId = chatData.id;
-         if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
-            console.log("chatId", chatId);
-            
-            // const {error} = PurseInfo(amount,frequency,membersCount,balance);
-            // if(error){
-            //     return
-            // }
-            setCreating(true)
-            await createPurse(
-                 parseUnits(amount.toString(), decimals),
-                 // parseUnits(collateral.toString(), decimals),
-                 Number(membersCount),
-                 Number(frequency),
-                 chatId,
-                 token.address,
-                 pos,
-                 async (res) => {
-                     if(!res.hash){
-                        setCreating(false)
-                        return addToast(res.message, {appearance: "error"});
-                     }
-                     
-                     const result =    await res.wait()
-                     const address = await result.events[0].address
-                     addToast("Purse created successfully!", {appearance: "success"});
-                     navigate(`/app/purse/${address}`)
-                 }
-             );
-         }
-           }).catch(err => {
-            setapproving(false)
-            setCreating(false)
-             return addToast("something went wrong!", {appearance: "error"});
-             
-            //  const deleteConfig = {
-            //     method: 'delete',
-            //     url: `https://api.chatengine.io/chats/${chatId}/`,
-            //     headers: {
-            //         'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-            //         'User-Name': account,
-            //         'User-Secret': account
-            //     },
-            //  }
-            //  axios(deleteConfig);
-           })
-        }else{
-
-    //    create user and chatgroup   
-           const username = account;
-              const title = `Thrift ${amount} ${tokenSymbol} Members`;
-              var details = {
-                "username": username,
-                "secret": username
-              };
-              const config = {
-                method: 'put',
-                url: 'https://api.chatengine.io/users/',
+                method: "post",
+                url: "https://api.chatengine.io/chats/",
                 headers: {
-                    'PRIVATE-KEY': '19fe93ef-efc1-4cd9-99e1-c8fd79f9b2e1'
+                    "Project-ID": "21f51b31-abf1-4e3e-9ed4-00a1b0215871",
+                    "User-Name": userName,
+                    "User-Secret": userName,
                 },
-                data: details
-             }
-             const user = await axios(config)
-             const userData = await user.data;
-             const userName = userData.username;
-             console.log(userName)
-            //  create chat
-             var Chatdetails = {
-              "title": title,
-              "is_direct_chat": false
-            };   
-            const Chatconfig = {
-              method: 'post',
-              url: 'https://api.chatengine.io/chats/',
-              headers: {  
-             'Project-ID': '21f51b31-abf1-4e3e-9ed4-00a1b0215871',
-             'User-Name': userName,                 
-             'User-Secret': userName
-            },
-            data: Chatdetails
-           }
-          const chat = await axios(Chatconfig)
-          const chatData = await chat.data;
-          chatId = chatData.id;
+                data: Chatdetails,
+            };
+            const chat = await axios(Chatconfig);
+            const chatData = await chat.data;
+            chatId = chatData.id;
 
-          if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
-            console.log("chatId", chatId);
-            // const {error} = PurseInfo(amount,frequency,membersCount,balance);
-            // if(error){
-            //     return
-            // }
-            setCreating(true)
-            await createPurse(
-                 parseUnits(amount.toString(), decimals),
-                 // parseUnits(collateral.toString(), decimals),
-                 Number(membersCount),
-                 Number(frequency),
-                 chatId,
-                 token.address,
-                 pos,
-                 async (res) => {
-                     if(!res.hash){
-                        setCreating(false)
-                        return addToast(res.message, {appearance: "error"});
-                     }
-                     const result =    await res.wait()
-                     const address = await result.events[0].address
-                     setCreating(false)
-                     addToast("Purse created successfully!", {appearance: "success"});
-                     navigate(`/app/purse/${address}`)
-                 }
-             );
-         }     
-         
-         if(chatId !== null || chatId !== 'undefined' || chatId !== undefined){
-            console.log("chatId", chatId);
-            // const {error} = PurseInfo(amount,frequency,membersCount,balance);
-            // if(error){
-            //     return
-            // }
-            setCreating(true)
-            await createPurse(
-                 parseUnits(amount.toString(), decimals),
-                 // parseUnits(collateral.toString(), decimals),
-                 Number(membersCount),
-                 Number(frequency),
-                 chatId,
-                 token.address,
-                 pos,
-                 async (res) => {
-                     if(!res.hash){
-                        setCreating(false)
-                        return addToast(res.message, {appearance: "error"});
-                     }
-                     
-                     const result =    await res.wait()
-                     const address = await result.events[0].address
-                     setCreating(false )
-                     addToast("Purse created successfully!", {appearance: "success"});
-                     navigate(`/app/purse/${address}`)
-                 }
-             );
-         }
+            if (
+                chatId !== null ||
+                chatId !== "undefined" ||
+                chatId !== undefined
+            ) {
+                console.log("chatId", chatId);
+                // const {error} = PurseInfo(amount,frequency,membersCount,balance);
+                // if(error){
+                //     return
+                // }
+                setCreating(true);
+                await createPurse(
+                    parseUnits(amount.toString(), decimals),
+                    // parseUnits(collateral.toString(), decimals),
+                    Number(membersCount),
+                    Number(frequency),
+                    chatId,
+                    token.address,
+                    pos,
+                    async (res) => {
+                        if (!res.hash) {
+                            setCreating(false);
+                            return addToast(res.message, {
+                                appearance: "error",
+                            });
+                        }
+                        const result = await res.wait();
+                        const address = await result.events[0].address;
+                        setCreating(false);
+                        addToast("Purse created successfully!", {
+                            appearance: "success",
+                        });
+                        navigate(`/app/purse/${address}`);
+                    }
+                );
+            }
+
+            if (
+                chatId !== null ||
+                chatId !== "undefined" ||
+                chatId !== undefined
+            ) {
+                console.log("chatId", chatId);
+                // const {error} = PurseInfo(amount,frequency,membersCount,balance);
+                // if(error){
+                //     return
+                // }
+                setCreating(true);
+                await createPurse(
+                    parseUnits(amount.toString(), decimals),
+                    // parseUnits(collateral.toString(), decimals),
+                    Number(membersCount),
+                    Number(frequency),
+                    chatId,
+                    token.address,
+                    pos,
+                    async (res) => {
+                        if (!res.hash) {
+                            setCreating(false);
+                            return addToast(res.message, {
+                                appearance: "error",
+                            });
+                        }
+
+                        const result = await res.wait();
+                        const address = await result.events[0].address;
+                        setCreating(false);
+                        addToast("Purse created successfully!", {
+                            appearance: "success",
+                        });
+                        navigate(`/app/purse/${address}`);
+                    }
+                );
+            }
         }
-    }
-
+    };
 
     const tokenMenu = (
         <Menu className="token_menu_class pointer" onSelect={onselectToken}>
-            {tokensConfig[chainId]?.map(token => <MenuItem key={token.address}className="token_menu_item_class pointer">
-                <img src={token.logoSrc} alt="token logo" className="inline w-4 h-4 mr-2" /> <span>{token.symbol}</span>
-            </MenuItem>)}
+            {tokensConfig[chainId]?.map((token) => (
+                <MenuItem
+                    key={token.address}
+                    className="token_menu_item_class pointer"
+                >
+                    <img
+                        src={token.logoSrc}
+                        alt="token logo"
+                        className="inline w-4 h-4 mr-2"
+                    />{" "}
+                    <span>{token.symbol}</span>
+                </MenuItem>
+            ))}
         </Menu>
-      );
+    );
 
     return (
         <main className="min-h-screen bg-cover bg-overlay-img-light dark:bg-overlay-img">
@@ -382,24 +463,28 @@ const CreatePurse = () => {
                                     token
                                 </span>
                                 <Dropdown
-                                    trigger={['click']}
+                                    trigger={["click"]}
                                     overlay={tokenMenu}
                                     animation="slide-up"
-                                    overlayClassName = "bg-white-1 dark:bg-dark-1"
-                                    openClassName = "bg-white-1 dark:bg-dark-1"
+                                    overlayClassName="bg-white-1 dark:bg-dark-1"
+                                    openClassName="bg-white-1 dark:bg-dark-1"
                                 >
                                     <button
                                         className="flex items-center px-4 py-2 text-sm rounded bg-gray-2 text-white-1"
                                         type="button"
                                     >
-                                        {token ?
-                                        <>
-                                            <img src={token.logoSrc} alt="token icon" className="w-4 h-4 mr-2" />
-                                            <span>{token.symbol}</span>
-                                        </> :
-                                        <span>Select token</span>
-                                            
-                                        }
+                                        {token ? (
+                                            <>
+                                                <img
+                                                    src={token.logoSrc}
+                                                    alt="token icon"
+                                                    className="w-4 h-4 mr-2"
+                                                />
+                                                <span>{token.symbol}</span>
+                                            </>
+                                        ) : (
+                                            <span>Select token</span>
+                                        )}
                                         <RiArrowDropDownLine className="inline text-xl" />
                                     </button>
                                 </Dropdown>
@@ -509,58 +594,129 @@ const CreatePurse = () => {
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-2 mb-6">
-                        <div className="col-span-1">
-                        <label
-                                   htmlFor="position"
-                                   className="block text-xs"
-                               >
-                                     <IoIosHelpCircleOutline
-                                       data-tip="Order in which you want to receive thrift contribution"
-                                       className="inline text-xl"
-                                   />{" "}
-                                   Position
-                               </label>
-                               <select value={pos} onChange={onInputChange} name="pos" className="w-full px-2 py-1 border rounded outline-none dark:bg-zinc-900 border-gray-10 ">
-                               {
-                                Array(membersCount - 1 + 1).fill().map((_, idx) => 1 + idx).map((num,idx) =>{
-                                    return(
-                                        <option className="bg-transparent" key={idx}>{num}</option>
-                                    )
-                                })
- 
-                               }
- 
-                           </select>
+                            <div className="col-span-1">
+                                <label
+                                    htmlFor="position"
+                                    className="block text-xs"
+                                >
+                                    <IoIosHelpCircleOutline
+                                        data-tip="Order in which you want to receive thrift contribution"
+                                        className="inline text-xl"
+                                    />{" "}
+                                    Position
+                                </label>
+                                <select
+                                    value={pos}
+                                    onChange={onInputChange}
+                                    name="pos"
+                                    className="w-full px-2 py-1 border rounded outline-none dark:bg-zinc-900 border-gray-10 "
+                                >
+                                    {Array(membersCount - 1 + 1)
+                                        .fill()
+                                        .map((_, idx) => 1 + idx)
+                                        .map((num, idx) => {
+                                            return (
+                                                <option
+                                                    className="bg-transparent"
+                                                    key={idx}
+                                                >
+                                                    {num}
+                                                </option>
+                                            );
+                                        })}
+                                </select>
+                            </div>
+                        </div>
 
-                        </div>
-                        </div>
+                        {!localToken ? (
+                            <div className="w-full">
+                                {active && exist ? (
+                                    <button
+                                        className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
+                                        type="button"
+                                        onClick={() => {
+                                            signIn();
+                                        }}
+                                    >
+                                        SignIn
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
+                                        type="button"
+                                        onClick={() => {
+                                            signUp();
+                                        }}
+                                    >
+                                        SignUp
+                                    </button>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="w-full">
+                                {active ? (
+                                    <button
+                                        className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
+                                        type="button"
+                                        onClick={() => {
+                                            handleCreatePurse();
+                                        }}
+                                        disabled={
+                                            approving === true ||
+                                            creating === true
+                                        }
+                                    >
+                                        {approving || creating ? (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="w-6 h-6 mr-2 animate-spin"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                                                />
+                                            </svg>
+                                        ) : (
+                                            ""
+                                        )}
+                                        {approving
+                                            ? "approving.."
+                                            : handleInputError &&
+                                              "Create purse"}
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
+                                        onClick={() => {
+                                            dispatch(OPEN_WALLET_MODAL());
+                                        }}
+                                    >
+                                        Connect Wallet
+                                    </button>
+                                )}
+                            </div>
+                        )}
 
-                        <div className="w-full">
-                            {
-                                active ? 
-                                <button
-                                className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
-                                type="button"
-                                onClick={ () => {handleCreatePurse()}}
-                                disabled={approving === true|| creating === true}
-                            >
-                                {approving || creating ? <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>: ""}
-                                {approving ? "approving.." : handleInputError && "Create purse"}
-                            </button> : 
-                            <button type="button"  className="flex justify-center w-full px-4 py-2 text-sm align-middle rounded bg-gray-2 text-white-1"
-                            onClick={() => {
-                                dispatch(OPEN_WALLET_MODAL())
-                            }}>
-                                Connect Wallet
-                            </button>
-                            }
-                        </div>
                         <ReactTooltip className="max-w-tooltip" />
                     </form>
                 </div>
             </section>
+            <AuthWrapper open={opens} onClose={closeSignUp}>
+                <AuthModal createAccountHandler={createAccountHandler} onClose={closeSignUp}/>
+            </AuthWrapper>
+            {/* {modal} */}
+
+            <SignInWrapper open={open2} onClose={closeSignIn}>
+                <div className="flex justify-center">
+                    <Button action={signHandler}>SignIn</Button>
+                </div>
+            </SignInWrapper>
         </main>
     );
 };

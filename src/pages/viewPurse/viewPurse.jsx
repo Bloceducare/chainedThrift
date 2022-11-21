@@ -6,7 +6,7 @@ import { CardList } from "./component/CardList";
 import usePurse from "../../web3/hooks/usePurse";
 import {  useParams } from "react-router-dom";
 import { parseUnits, formatUnits } from "ethers/lib/utils";
-import { formatDate, shortenAddress } from "../../utils";
+import { formatDate, shortenAddress, useAuthFunc } from "../../utils";
 import { useWeb3React } from "@web3-react/core";
 import { useNavigate } from "react-router-dom";
 import useToken from "../../web3/hooks/useToken";
@@ -15,6 +15,11 @@ import ViewPurseSkeleton from "../../common/skeleton/viewPurse";
 import axios from "axios";
 import { copyToClipBoard } from "../../utils";
 import "./index.scss";
+import { AuthWrapper } from "../../common/modalWrapper";
+import { AuthModal } from "../../common/AuthModal";
+import SignInWrapper from "../../common/modalWrapper/signInWrapper";
+import Button from "../../common/buttons/button";
+import { useSelector } from "react-redux";
 
 const ViewPurse = () => {
     const { addToast } = useToasts();
@@ -140,6 +145,29 @@ const ViewPurse = () => {
             });
         }
     };
+          const {signHandler, createAccountHandler}  = useAuthFunc()
+    const [signup, setSignUp] = useState(false);
+    const [signin, setSignIn] = useState(false)
+
+    const closeSignUp = () =>{
+        setSignUp(!signup)
+    }
+
+   
+    const closeSignIn = () =>{
+        setSignIn(!signin)
+    }
+
+    const signUp = () => {
+        setSignUp(true);
+    };
+
+    const signIn = () => {
+        setSignIn(true);
+    };
+  const {exist} =   useSelector((store) => store.status)
+
+    const localToken = localStorage.getItem("token");
 
     const joinPurseHandler = async () => {
         if (!active) return;
@@ -328,7 +356,13 @@ const ViewPurse = () => {
                             </p>
                             <div className="mt-6 flex justify-between mb-12 items-center">
                                 <div className="flex items-end gap-x-2">
-                                    <button
+                                  {
+                                    !localToken?(
+                                      (
+                                        exist? <button onClick={signIn} className="bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1">SignIn</button> : <button onClick={signUp} className="bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1">SignUp</button>
+                                      )  
+                                    ) : (
+                                        <button
                                         onClick={joinPurseHandler}
                                         disabled={
                                             currentMember === maxMembers
@@ -343,6 +377,8 @@ const ViewPurse = () => {
                                     >
                                         Join Purse
                                     </button>
+                                    )
+                                  }
                                     <div>
                                         <span className="block text-xs">
                                             Choose position
@@ -401,6 +437,15 @@ const ViewPurse = () => {
                             </div>
                         </div>
                     </section>
+                    <AuthWrapper open={signup} onClose={closeSignUp}>
+                        <AuthModal createAccountHandler={createAccountHandler} onClose={closeSignUp}/>
+                    </AuthWrapper>
+
+                    <SignInWrapper open={signin} onClose={closeSignIn}>
+                    <div className="flex justify-center">
+                        <Button action={signHandler}>SignIn</Button>
+                    </div>
+                    </SignInWrapper>
                 </main>
             )}
         </>
