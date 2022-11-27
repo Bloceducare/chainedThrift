@@ -56,7 +56,7 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
                         type="text"
                         className={`w-full px-2 py-2 text-black dark:text-white ${usernameError} bg-transparent outline-none border rounded border-gray-10`}
                     />
-                    {usernameErr && <p className="text-red-500 mt-1">username should be greater than 8 characters and can contain alphanumeric characters</p>}
+                    {usernameErr && <p className="text-red-500 mt-1">username should be  8 characters and can contain alphanumeric characters</p>}
                 </div>
 
                 <div className="mb-6">
