@@ -66,7 +66,7 @@ export const validEmail = new RegExp(
     "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
 );
 
-export const validUsername = new RegExp("^[A-Za-z][A-Za-z0-9_]{7,29}$");
+export const validUsername = new RegExp("^[A-Za-z][A-Za-z0-9_]{2,7}$");
 
 export const baseUrl = "https://chainedthrift-server.herokuapp.com/api/user/";
 
@@ -92,7 +92,7 @@ export const useAuthFunc = () => {
                 userData: {
                     walletAddress: account,
                     email: email,
-                    username: username,
+                    username: username.toLowerCase(),
                 },
             };
 
@@ -104,11 +104,16 @@ export const useAuthFunc = () => {
                 },
             });
             let data = await res.json();
-            if (res.status !== 200) {
+            if (res.status === 409) {
                 setOpen(!open);
                 setLoading(false);
-                addToast(data.error.message, { appearance: "error" });
-            } else {
+                addToast(data?.error?.message, { appearance: "error" });
+            } else if(res.status === 400){
+                setOpen(!open);
+                setLoading(false);
+                console.log(data)
+                addToast(data?.error?.message.message, { appearance: "error" });
+            } else{
                 setLoading(false);
                 localStorage.setItem("token", data.token);
                 addToast("account created successfull", {
