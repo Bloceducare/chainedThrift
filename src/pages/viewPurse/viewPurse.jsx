@@ -4,7 +4,7 @@ import { AiOutlineShareAlt } from "react-icons/ai";
 import { ImNotification } from "react-icons/im";
 import { CardList } from "./component/CardList";
 import usePurse from "../../web3/hooks/usePurse";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { parseUnits, formatUnits } from "ethers/lib/utils";
 import { formatDate, shortenAddress, useAuthFunc } from "../../utils";
 import { useWeb3React } from "@web3-react/core";
@@ -63,7 +63,6 @@ const ViewPurse = () => {
             const frequencyMulSeconds = Number(frequency);
             const sumSecondsTotal = time + frequencyMulSeconds;
             const endTime = new Date(sumSecondsTotal * 1000).toDateString();
-
             setChatId(chatId);
 
             setPurseDetail({
@@ -90,7 +89,7 @@ const ViewPurse = () => {
 
     const positionDetail = async () => {
         const data = await getPositionInfo(id);
-        const formatData = data.map((num) => { return Number(num)})
+        const formatData = data.map((num) => { return Number(num) })
         setAvailPos(formatData);
     };
 
@@ -98,20 +97,20 @@ const ViewPurse = () => {
 
     function range() {
         let result = [];
-        for(let i=1; i <= purseDetail?.max_member; i++){
+        for (let i = 1; i <= purseDetail?.max_member; i++) {
             result.push(i)
         }
         return result
-      }
+    }
     const result = range()
     const filterArray = (arr1, arr2) => {
         const filtered = arr1.filter(el => {
-           return arr2.indexOf(el) === -1;
+            return arr2.indexOf(el) === -1;
         });
         return filtered;
-     };
-     const filteredResult = filterArray(result,availPos)
-     
+    };
+    const filteredResult = filterArray(result, availPos)
+
 
 
 
@@ -145,16 +144,16 @@ const ViewPurse = () => {
             });
         }
     };
-          const {signHandler, createAccountHandler}  = useAuthFunc()
+    const { signHandler, createAccountHandler } = useAuthFunc()
     const [signup, setSignUp] = useState(false);
     const [signin, setSignIn] = useState(false)
 
-    const closeSignUp = () =>{
+    const closeSignUp = () => {
         setSignUp(!signup)
     }
 
-   
-    const closeSignIn = () =>{
+
+    const closeSignIn = () => {
         setSignIn(!signin)
     }
 
@@ -165,7 +164,7 @@ const ViewPurse = () => {
     const signIn = () => {
         setSignIn(true);
     };
-  const {exist} =   useSelector((store) => store.status)
+    const { exist } = useSelector((store) => store.status)
 
     const localToken = localStorage.getItem("token");
 
@@ -297,47 +296,47 @@ const ViewPurse = () => {
         getSinglePurseDetail();
         positionDetail();
         // eslint-disable-next-line
-    }, [id,active]);
+    }, [id, active]);
 
     return (
         <>
             {loading ? (
                 <ViewPurseSkeleton />
             ) : (
-                <main className="bg-overlay-img-light dark:bg-overlay-img bg-cover min-h-screen">
-                    <section className="container flex flex-col mx-auto h-auto px-8 md:px-0 mt-12 view_purse_mobile dark:text-white-1">
-                        <div className="lg:mx-36 md:mx-24 mt-2 md:mt-6">
+                <main className="min-h-screen bg-cover bg-overlay-img-light dark:bg-overlay-img">
+                    <section className="container flex flex-col h-auto px-8 mx-auto mt-12 md:px-0 view_purse_mobile dark:text-white-1">
+                        <div className="mt-2 lg:mx-36 md:mx-24 md:mt-6">
                             <div className="flex items-center mb-2">
-                                <IoIosArrowBack className="dark:text-white/80 -ml-1" />
+                                <IoIosArrowBack className="-ml-1 dark:text-white/80" />
                                 <span
                                     onClick={previousPageHandler}
-                                    className="text-xs cursor-pointer font-light"
+                                    className="text-xs font-light cursor-pointer"
                                 >
                                     Go Back
                                 </span>
                             </div>
                             <div className="flex justify-between w-full mb-4">
-                                <p className="Montserrat font-bold md:text-2xl">
+                                <p className="font-bold Montserrat md:text-2xl">
                                     {shortenAddress(purseDetail.address)}
                                 </p>
-                                <div className="flex gap-2 items-center mb-2 mt-1">
-                                    <AiOutlineShareAlt className="dark:text-white/80 -ml-1" />
+                                <div className="flex items-center gap-2 mt-1 mb-2">
+                                    <AiOutlineShareAlt className="-ml-1 dark:text-white/80" />
                                     <button className="text-xs font-light cursor-pointer" onClick={copyToClipBoardHandler}>
                                         Invite new member
                                     </button>
                                 </div>
                             </div>
-                            <div className="flex gap-3 items-center mb-2">
+                            <div className="flex items-center gap-3 mb-2">
                                 <span className="text-sm font-light">
                                     Purse Overview
                                 </span>
-                                <ImNotification className="text-white/80 -ml-1" />
+                                <ImNotification className="-ml-1 text-white/80" />
                             </div>
                             <CardList purseDetail={purseDetail} />
-                            <p className="font-bold Poppins text-xl sm:text-base">
+                            <p className="text-xl font-bold Poppins sm:text-base">
                                 Note:
                             </p>
-                            <p className="Poppins font-light">
+                            <p className="font-light Poppins">
                                 You are to deposit a collateral of{" "}
                                 {`${purseDetail.collateral} CTT`} which will be
                                 put in yield farming. You can withdraw this
@@ -345,7 +344,7 @@ const ViewPurse = () => {
                                 immediately after everyone have gotten their
                                 funds from the purse
                             </p>
-                            <p className="Poppins font-light mt-5">
+                            <p className="mt-5 font-light Poppins">
                                 By clicking the "JOIN PURSE" button, you are
                                 sending
                                 {`${purseDetail.deposit_amount} CTT`} as
@@ -354,31 +353,30 @@ const ViewPurse = () => {
                                 purse amount which makes it total of{" "}
                                 {`${purseDetail.contract_total_collateral_balance} CTT`}
                             </p>
-                            <div className="mt-6 flex justify-between mb-12 items-center">
+                            <div className="flex items-center justify-between mt-6 mb-12">
                                 <div className="flex items-end gap-x-2">
-                                  {
-                                    !localToken?(
-                                      (
-                                        exist? <button onClick={signIn} className="bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1">SignIn</button> : <button onClick={signUp} className="bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1">SignUp</button>
-                                      )  
-                                    ) : (
-                                        <button
-                                        onClick={joinPurseHandler}
-                                        disabled={
-                                            currentMember === maxMembers
-                                            // purseExpire
-                                        }
-                                        className={`${
-                                            currentMember === maxMembers
-                                                ? // purseExpire
-                                                  "bg-slate-400"
-                                                : ""
-                                        } bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1`}
-                                    >
-                                        Join Purse
-                                    </button>
-                                    )
-                                  }
+                                    {
+                                        !localToken ? (
+                                            (
+                                                exist ? <button onClick={signIn} className="px-16 py-1 text-xs font-bold rounded-md cursor-pointer bg-gray-2 Poppins text-white-1">SignIn</button> : <button onClick={signUp} className="px-16 py-1 text-xs font-bold rounded-md cursor-pointer bg-gray-2 Poppins text-white-1">SignUp</button>
+                                            )
+                                        ) : (
+                                            <button
+                                                onClick={joinPurseHandler}
+                                                disabled={
+                                                    currentMember === maxMembers
+                                                    // purseExpire
+                                                }
+                                                className={`${currentMember === maxMembers
+                                                    ? // purseExpire
+                                                    "bg-slate-400"
+                                                    : ""
+                                                    } bg-gray-2 px-16 py-1 Poppins text-xs cursor-pointer rounded-md font-bold text-white-1`}
+                                            >
+                                                Join Purse
+                                            </button>
+                                        )
+                                    }
                                     <div>
                                         <span className="block text-xs">
                                             Choose position
@@ -387,7 +385,7 @@ const ViewPurse = () => {
                                             value={position}
                                             onChange={onInputChange}
                                             name="pos"
-                                            className="dark:bg-zinc-900  outline-none py-1 px-2 border border-gray-10 rounded w-full "
+                                            className="w-full px-2 py-1 border rounded outline-none dark:bg-zinc-900 border-gray-10 "
                                         >
                                             {/* {Array(
                                                 purseDetail?.max_member - 1 + 1
@@ -404,33 +402,33 @@ const ViewPurse = () => {
                                                         </option>
                                                     );
                                                 })} */}
-                                                <option>Select position </option>
-                                                {
-                                                    filteredResult.map((num, idx) =>{
-                                                        return (
-                                                            <option
+                                            <option>Select position </option>
+                                            {
+                                                filteredResult.map((num, idx) => {
+                                                    return (
+                                                        <option
                                                             className="bg-transparent"
                                                             key={idx}
                                                         >
                                                             {num}
                                                         </option>
-                                                        )
-                                                    })
-                                                }
+                                                    )
+                                                })
+                                            }
                                         </select>
                                     </div>
                                 </div>
-                                <div className="flex gap-4 items-baseline">
-                                    {/* <p className="Poppins text-xs">Due Date</p> */}
+                                <div className="flex items-baseline gap-4">
+                                    {/* <p className="text-xs Poppins">Due Date</p> */}
                                     <div>
                                         {currentMember === maxMembers ? (
-                                            <p className="Poppins text-rose-500 text-xs">
+                                            <p className="text-xs Poppins text-rose-500">
                                                 Purse is closed!
                                             </p>
                                         ) : null
-                                        // <p className="Poppins text-xs">
-                                        // {purseDetail.endTime}
-                                        // </p>
+                                            // <p className="text-xs Poppins">
+                                            // {purseDetail.endTime}
+                                            // </p>
                                         }
                                     </div>
                                 </div>
@@ -438,13 +436,13 @@ const ViewPurse = () => {
                         </div>
                     </section>
                     <AuthWrapper open={signup} onClose={closeSignUp}>
-                        <AuthModal createAccountHandler={createAccountHandler} onClose={closeSignUp}/>
+                        <AuthModal createAccountHandler={createAccountHandler} onClose={closeSignUp} />
                     </AuthWrapper>
 
                     <SignInWrapper open={signin} onClose={closeSignIn}>
-                    <div className="flex justify-center">
-                        <Button action={signHandler}>SignIn</Button>
-                    </div>
+                        <div className="flex justify-center">
+                            <Button action={signHandler}>SignIn</Button>
+                        </div>
                     </SignInWrapper>
                 </main>
             )}
