@@ -18,7 +18,7 @@ const PurseSettings = () => {
     checkAccess(params);
     try {
       const res = await fetch(
-        "http://localhost:8000/api/google-calender/add-event",
+        "https://chainedthrift-server.herokuapp.com/api/google-calender/add-event",
         {
           method: "POST",
           headers: {
