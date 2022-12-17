@@ -5,10 +5,10 @@ export const landingNav = [
         value: "About",
         link: absoluteRoutes.about,
     },
-    // {
-    //     value: "Privacy Policy",
-    //     link: absoluteRoutes.policy,
-    // },
+    {
+        value: "Privacy Policy",
+        link: absoluteRoutes.policy,
+    },
     // {
     //     value: "Help",
     //     link: "!#",
