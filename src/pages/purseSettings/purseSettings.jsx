@@ -67,7 +67,7 @@ const PurseSettings = () => {
 
   return (
     <div className="flex items-center mt-10">
-      <p className="text-black font-bold">To Add Notification Sign in with:</p>
+      <p className="text-black dark:text-white font-bold">To Add Notification Sign in with:</p>
       <button
         className="rounded-md text-black"
         onClick={() => {
