@@ -6,6 +6,7 @@ import { useToasts } from 'react-toast-notifications';
 
 
 
+
 const PurseSettings = () => {
   const { id } = useParams();
   const {
@@ -66,12 +67,16 @@ const PurseSettings = () => {
 
   return (
     <div className="flex items-center mt-10">
+      <p className="text-black font-bold">To Add Notification Sign in with:</p>
       <button
-        className="p-4 text-white bg-blue-700 rounded-md"
+        className="rounded-md text-black"
         onClick={() => {
           googleLogin()
         }}
-      > Add Notification</button>
+      >
+        <img src="/assets/google_light.png" alt='google_light'></img>
+      </button>
+
     </div>
   )
 };
