@@ -1,11 +1,11 @@
 import React from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
-import { NavLink } from 'react-router-dom'
-// import HeaderButton from '../buttons/headerButton'
+import { NavLink,useNavigate } from 'react-router-dom'
+import HeaderButton from '../buttons/headerButton'
 
 const SideDrawer = ({navData, open, toggleDrawer}) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Drawer
@@ -34,7 +34,7 @@ const SideDrawer = ({navData, open, toggleDrawer}) => {
            target="_blank" rel="noopener noreferrer"
           >Claim CTT Token</a> */}
         </nav>
-        {/* <HeaderButton action={() => navigate("/app/purses")}>Launch App</HeaderButton> */}
+        <HeaderButton action={() => navigate("/app/purses")}>Launch App</HeaderButton>
       </div>
     </Drawer>
   )
