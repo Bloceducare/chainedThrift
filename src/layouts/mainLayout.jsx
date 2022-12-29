@@ -8,7 +8,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const MainLayout = () => {
     return (
-        <GoogleOAuthProvider clientId="784150015711-4uc18grcq9hrjju7mnsb6fj2ps4n4bpj.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId="456976918243-bumaigvnqbrpeuhmlq43slsj67b0uspn.apps.googleusercontent.com">
             <AppProvider>
                 <Routes>
                     <Route path="/*" element={<LandingViewLayout />} />
