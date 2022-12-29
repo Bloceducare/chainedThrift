@@ -21,6 +21,7 @@ const PurseSettings = () => {
       const res = await fetch(
         "https://chainedthrift-server.herokuapp.com/api/google-calender/add-event",
         {
+          mode: "no-cors",
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -40,7 +41,7 @@ const PurseSettings = () => {
       });
 
     } catch (error) {
-      console.error(error)
+      console.error(error, "notification error")
     }
   };
 
@@ -67,9 +68,9 @@ const PurseSettings = () => {
 
   return (
     <div className="flex items-center mt-10">
-      <p className="text-black dark:text-white font-bold">To Add Notification Sign in with:</p>
+      <p className="font-bold text-black dark:text-white">To Add Notification Sign in with:</p>
       <button
-        className="rounded-md text-black"
+        className="p-0 m-0 text-black rounded-md"
         onClick={() => {
           googleLogin()
         }}
