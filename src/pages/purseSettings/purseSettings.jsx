@@ -20,8 +20,8 @@ const PurseSettings = () => {
     try {
       const res = await fetch(
         "https://chainedthrift-server.herokuapp.com/api/google-calender/add-event",
+        // "http://localhost:8000/api/google-calender/add-event",
         {
-          mode: "no-cors",
           method: "POST",
           headers: {
             Accept: "application/json",
