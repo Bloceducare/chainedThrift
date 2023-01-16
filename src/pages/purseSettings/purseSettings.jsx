@@ -17,10 +17,14 @@ const PurseSettings = () => {
   const onSuccessesHandler = async (params) => {
     const purseData = await getPurseData(id);
     checkAccess(params);
+    // let header = new Headers()
+    // headers.append('Content-Type', 'application/json');
+    // headers.append('Accept', 'application/json');
+    // headers.append('Origin', 'http://localhost:3000');
     try {
       const res = await fetch(
         "https://chainedthrift-server.herokuapp.com/api/google-calender/add-event",
-        // "http://localhost:8000/api/google-calender/add-event",
+        //"http://localhost:8000/api/google-calender/add-event",
         {
           method: "POST",
           headers: {
@@ -36,6 +40,7 @@ const PurseSettings = () => {
           }),
         }
       );
+      console.log(Number(Number((Number(purseData.time_interval.toString()) / 86400) - 1)), "starttime")
       addToast("Notication successfully added!", {
         appearance: "success",
       });
