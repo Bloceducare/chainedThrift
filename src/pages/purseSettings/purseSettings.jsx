@@ -3,10 +3,6 @@ import usePurse from "../../web3/hooks/usePurse";
 import { useParams } from "react-router-dom";
 import { useToasts } from 'react-toast-notifications';
 
-
-
-
-
 const PurseSettings = () => {
   const { id } = useParams();
   const {
@@ -17,13 +13,13 @@ const PurseSettings = () => {
   const onSuccessesHandler = async (params) => {
     const purseData = await getPurseData(id);
     checkAccess(params);
-    // let header = new Headers()
+    //let header = new Headers()
     // headers.append('Content-Type', 'application/json');
     // headers.append('Accept', 'application/json');
     // headers.append('Origin', 'http://localhost:3000');
     try {
       const res = await fetch(
-        "https://chainedthrift-server.herokuapp.com/api/google-calender/add-event",
+       "https://cors-chainthrift.herokuapp.com/https://chainedthrift-server.herokuapp.com/api/google-calender/add-event",
         //"http://localhost:8000/api/google-calender/add-event",
         {
           method: "POST",
@@ -32,15 +28,19 @@ const PurseSettings = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            // code: params.code,
+            // startTimestamp: Number(purseData.timeCreated.toString()),
+            // frequencyInDays: Number((Number(purseData.time_interval.toString()) / 86400) - 1),
+            // rounds: Number(Number(purseData.max_member_num) - 1),
             code: params.code,
-            startTimestamp: Number(purseData.timeCreated.toString()),
-            frequencyInDays: Number((Number(purseData.time_interval.toString()) / 86400) - 1),
-            rounds: Number(Number(purseData.max_member_num) - 1),
-            description: "ChainThrift Payment Notification",
+            startTimestamp:  Date.now() / 1000 + 86400,
+            frequencyInDays: 3,
+            rounds: 3,
+            description: "ChainedThrift Payment Notification",
           }),
         }
       );
-      console.log(Number(Number((Number(purseData.time_interval.toString()) / 86400) - 1)), "starttime")
+      //console.log(Number(Number((Number(purseData.time_interval.toString()) / 86400) - 1)), "starttime")
       addToast("Notication successfully added!", {
         appearance: "success",
       });
