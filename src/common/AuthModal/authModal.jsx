@@ -6,7 +6,6 @@ import "./auth.scss";
 
 
 export const AuthModal = ({ onClose,createAccountHandler }) => {
-
     const {
         value:email,
         valueChangeHandler:emailChangeHandler,
@@ -34,7 +33,7 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
 
     return (
         <Fragment>
-            <div className="mt-2 text-black dark:text-white-1 font-semibold my-8">
+            <div className="my-8 mt-2 font-semibold text-black dark:text-white-1">
                 Sign-in and start building your savings with ChainedThrift.
             </div>
 
@@ -45,7 +44,7 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
                 <div className="mb-4">
                     <label
                         htmlFor="username"
-                        className="block text-xs text-black dark:text-white-1 mb-2"
+                        className="block mb-2 text-xs text-black dark:text-white-1"
                     >
                         Username
                     </label>
@@ -56,11 +55,11 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
                         type="text"
                         className={`w-full px-2 py-2 text-black dark:text-white ${usernameError} bg-transparent outline-none border rounded border-gray-10`}
                     />
-                    {usernameErr && <p className="text-red-500 mt-1">username should be  8 characters and can contain alphanumeric characters</p>}
+                    {usernameErr && <p className="mt-1 text-red-500">username should be  8 characters and can contain alphanumeric characters</p>}
                 </div>
 
                 <div className="mb-6">
-                    <label className="block block text-xs text-black dark:text-white mb-2">
+                    <label className="block mb-2 text-xs text-black dark:text-white">
                         Email Address
                     </label>
                     <input
@@ -70,16 +69,16 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
                         type="email"
                         className={`w-full px-2 py-2 text-black dark:text-white  ${emailError}  outline-none bg-transparent border rounded border-gray-10`}
                     />
-                    {emailErr && <p className="text-red-500 mt-1">Wrong email format. format should be e.g example@gmail.com</p>}
+                    {emailErr && <p className="mt-1 text-red-500">Wrong email format. format should be e.g example@gmail.com</p>}
                 </div>
             </form>
 
-            <div className="flex items-center space-x-2 my-4">
+            <div className="flex items-center my-4 space-x-2">
                 <div>
                     <img src="/assets/fa.png" alt="icon" />
                 </div>
                 <div>
-                    <p className="text-black dark:text-white-1 text-xs">
+                    <p className="text-xs text-black dark:text-white-1">
                         Select your preferred username
                     </p>
                 </div>
@@ -89,18 +88,18 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
                     <img src="/assets/famark.png" alt="icon" />
                 </div>
                 <div>
-                    <p className="text-black dark:text-white-1 text-xs">
+                    <p className="text-xs text-black dark:text-white-1">
                         Input an e-mail address for purpose of setting
                         reminders.
                     </p>
                 </div>
             </div>
 
-            <p className=" my-4 text-black dark:text-white ">
+            <p className="my-4 text-black  dark:text-white">
                 By inputing your email address and connecting your wallet using
                 ChainedThrift, you agree to{" "}
                 <a
-                    className="text-base font-normal font-Poppins mr-1 text-linear underline"
+                    className="mr-1 text-base font-normal underline font-Poppins text-linear"
                     href="https://drive.google.com/file/d/1LH0tX4qrbQyagSFtEcDTrJIE7VqkpmHp/view?usp=sharing"
                     target="_blank"
                     rel="noreferrer"
@@ -114,14 +113,14 @@ export const AuthModal = ({ onClose,createAccountHandler }) => {
                 </a>
             </p>
 
-            <div className="flex item-center justify-center space-x-2">
+            <div className="flex justify-center space-x-2 item-center">
                 <button
                     onClick={onClose}
-                    className=" font-semibold border-linear rounded-full p-1 md:p-4 lg:p-4 before:bg-white-1 dark:before:bg-dark-1 w-full text-black dark:text-white-1"
+                    className="w-full p-1 font-semibold text-black rounded-full  border-linear md:p-4 lg:p-4 before:bg-white-1 dark:before:bg-dark-1 dark:text-white-1"
                 >
                     Cancel
                 </button>
-                <button onClick={submit} disabled={emailErr || usernameErr} className="bg-pallet-5 font-semibold text-white dark:text-white w-full rounded-full p-1 md:p-4 lg:p-4">
+                <button onClick={submit} disabled={emailErr || usernameErr} className="w-full p-1 font-semibold text-white rounded-full bg-pallet-5 dark:text-white md:p-4 lg:p-4">
                     Create Account
                 </button>
             </div>
