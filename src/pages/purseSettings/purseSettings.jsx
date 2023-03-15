@@ -19,7 +19,7 @@ const PurseSettings = () => {
     // headers.append('Origin', 'http://localhost:3000');
     try {
       const res = await fetch(
-       "https://chainedthrift-server.herokuapp.com/api/google-calender/add-event",
+       "https://cors-chainthrift.herokuapp.com/https://chainedthrift-server.herokuapp.com/api/google-calender/add-event",
         //"http://localhost:8000/api/google-calender/add-event",
         {
           method: "POST",
@@ -33,7 +33,7 @@ const PurseSettings = () => {
             // frequencyInDays: Number((Number(purseData.time_interval.toString()) / 86400) - 1),
             // rounds: Number(Number(purseData.max_member_num) - 1),
             code: params.code,
-            startTimestamp:  Date.now() / 1000 + 86400,
+            startTimestamp:  1678880403,
             frequencyInDays: 3,
             rounds: 3,
             description: "ChainedThrift Payment Notification",
