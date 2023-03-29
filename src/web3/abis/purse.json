@@ -32,7 +32,7 @@
         "type": "uint256"
       }
     ],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "constructor"
   },
   {
@@ -126,6 +126,25 @@
       }
     ],
     "name": "DonationDeposited",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_member",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_time",
+        "type": "uint256"
+      }
+    ],
+    "name": "MemberLeft",
     "type": "event"
   },
   {
@@ -241,7 +260,7 @@
     "outputs": [
       {
         "internalType": "address[]",
-        "name": "",
+        "name": "trimmed_members_who_member_didnt_donate_for",
         "type": "address[]"
       },
       {
@@ -265,7 +284,7 @@
     "outputs": [
       {
         "internalType": "address[]",
-        "name": "",
+        "name": "trimmed_members_who_didnt_donate_for_user",
         "type": "address[]"
       },
       {
@@ -321,13 +340,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "deposit_funds_to_bentoBox",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -336,6 +348,30 @@
       }
     ],
     "name": "hasWithdrawnCollateralAndYield",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "has_been_donated_for_by_member",
     "outputs": [
       {
         "internalType": "bool",
@@ -403,6 +439,13 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "leavePurse",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -441,48 +484,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "memberVoteForPurseState",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "voteToClose",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "voteToReOpen",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "voteToTerminate",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "member_close_Purse_Vote",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -491,44 +492,6 @@
       }
     ],
     "name": "member_has_recieved",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "member_reOpen_Purse_Vote",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "member_terminate_PurseVote",
     "outputs": [
       {
         "internalType": "bool",
@@ -624,11 +587,6 @@
       {
         "internalType": "uint256",
         "name": "required_collateral",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "purseId",
         "type": "uint256"
       },
       {
