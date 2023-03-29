@@ -76,7 +76,7 @@ export const getUserBalances = async (address, library) => {
 //     }
 // };
 export const tokensConfig = {
-    5: [
+    11155111: [
         {
             symbol: "CTT",
             address: addresses[11155111].CTTAddress,
