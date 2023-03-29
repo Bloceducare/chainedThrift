@@ -70,6 +70,7 @@ export const validUsername = new RegExp("^[A-Za-z][A-Za-z0-9_]{2,7}$");
 
 export const baseUrl = "https://chainedthrift-server.herokuapp.com/api/user/";
 
+
 export const useAuthFunc = () => {
     const { sign } = useSignature();
     const { message } = useSignInMessage();

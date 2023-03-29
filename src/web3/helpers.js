@@ -79,7 +79,7 @@ export const tokensConfig = {
     5: [
         {
             symbol: "CTT",
-            address: addresses[5].CTTAddress,
+            address: addresses[11155111].CTTAddress,
             logoSrc: "/assets/Vector.svg",
         },
     ],
@@ -89,7 +89,7 @@ export const getRpcUrl = () => {
     const env = process.env.REACT_APP_ENV;
     switch (env) {
         case "testnet":
-            return RPC_URL[5];
+            return RPC_URL[11155111];
         default:
             return RPC_URL[137];
     }
@@ -99,7 +99,7 @@ export const getChainID = () => {
     const env = process.env.REACT_APP_ENV;
     switch (env) {
         case "testnet":
-            return 5;
+            return 11155111;
         default:
             return 137;
     }
