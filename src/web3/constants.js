@@ -16,7 +16,7 @@ export const useSignUpMessage = () => {
 export const siginUpMessage = "Create Account to use ChainedThrift!";
 export const addresses = {
     11155111: {
-        purseFactoryAddress: "0xD0B8F0140462a85175FF4ECb95674B91F658878d",
+        purseFactoryAddress: "0xA445Ec50b7057CEbf5B231E416B5f3eb1DbF14BA",
         // purseFactoryAddress: "0xBab751A09CfAF14b5f20f9F3169726E9794d0C74",
         // CTTAddress: "0x0752A2c48e3Df4Ec9901CCF5d2E63acBD15eF7d7",
         // CTTAddress:"0xC43C4408dA7bEc20C7f4956aCf525B4c6002b279"
