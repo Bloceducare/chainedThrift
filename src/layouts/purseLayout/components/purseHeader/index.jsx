@@ -33,7 +33,7 @@ const readableTimer = moment.unix(currentRound.timer).toString()
         try {
             const purseData = await getPurseData(id);
             const pursemember = await getPurseMembers(id);
-            const res = await getBentoBalance();
+            // const res = await getBentoBalance();
             // console.log(purseData)
             setPurseDetail({
                 address: purseData?.purseAddress,
@@ -47,7 +47,7 @@ const readableTimer = moment.unix(currentRound.timer).toString()
                     purseData.contract_total_collateral_balance
                 ),
                 token_address: purseData._address_of_token,
-                bento_balance: formatUnits(res), 
+                // bento_balance: formatUnits(res), 
             });
             setLoading(false);
         } catch (error) {
