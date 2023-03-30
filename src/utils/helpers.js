@@ -1,5 +1,5 @@
 import { useSignature } from "../web3/hooks/useSignature";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { SAVE_AUTH_DETAILS_TO_STORE } from "../common/AuthModal";
 import { useSignInMessage, useSignUpMessage } from "../web3/constants";
 import { useWeb3React } from "@web3-react/core";
@@ -70,7 +70,6 @@ export const validUsername = new RegExp("^[A-Za-z][A-Za-z0-9_]{2,7}$");
 
 export const baseUrl = "https://chainedthrift-server.herokuapp.com/api/user/";
 
-
 export const useAuthFunc = () => {
     const { sign } = useSignature();
     const { message } = useSignInMessage();
@@ -109,12 +108,12 @@ export const useAuthFunc = () => {
                 setOpen(!open);
                 setLoading(false);
                 addToast(data?.error?.message, { appearance: "error" });
-            } else if(res.status === 400){
+            } else if (res.status === 400) {
                 setOpen(!open);
                 setLoading(false);
-                console.log(data)
+                console.log(data);
                 addToast(data?.error?.message.message, { appearance: "error" });
-            } else{
+            } else {
                 setLoading(false);
                 localStorage.setItem("token", data.token);
                 addToast("account created successfull", {
@@ -165,6 +164,25 @@ export const useAuthFunc = () => {
         signHandler,
         open,
         setOpen,
-        setLoading
+        setLoading,
     };
+};
+
+export const useSwitchNetwork = () => {
+    const chainId = 11155111;
+    const [error, setError] = useState();
+
+    const changeNetwork = useCallback(async () => {
+        try {
+            if (!window.ethereum) throw new Error("No crypto wallet found");
+            await window.ethereum.request?.({
+                method: "wallet_switchEthereumChain",
+                params: [{ chainId: `0x${chainId?.toString(16)}` }],
+            });
+        } catch (err) {
+            setError(err.message);
+        }
+    }, [chainId]);
+
+    return { changeNetwork };
 };

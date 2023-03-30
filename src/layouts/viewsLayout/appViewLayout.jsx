@@ -5,6 +5,7 @@ import React, {
     useEffect,
     useCallback,
     Fragment,
+    useMemo,
 } from "react";
 import { Routes, Route } from "react-router-dom";
 import Fallback from "../fallback";
@@ -23,7 +24,7 @@ import {
     OPEN_AUTH_MODAL,
     CLOSE_AUTH_MODAL,
     AuthModal,
-    SAVE_USER_STATUS
+    SAVE_USER_STATUS,
 } from "../../common/AuthModal";
 import {
     ModalWrapper,
@@ -39,15 +40,13 @@ import { useWeb3React } from "@web3-react/core";
 import Loader from "../../common/loader/loader";
 import Button from "../../common/buttons/button";
 import SignInWrapper from "../../common/modalWrapper/signInWrapper";
-import { baseUrl, useAuthFunc } from "../../utils";
+import { baseUrl, useAuthFunc, useSwitchNetwork } from "../../utils";
 // const Swap = lazy(() => import("../../pages/swap/swap"));
 const Purses = lazy(() => import("../../pages/purses/purses"));
 const PurseLayout = lazy(() => import("../purseLayout/purseLayout"));
 const CreatePurse = lazy(() => import("../../pages/createPurse/createPurse"));
 const NotFound = lazy(() => import("../notFound"));
 const ViewPurse = lazy(() => import("../../pages/viewPurse/viewPurse"));
-
-
 
 const AppViewLayout = () => {
     const { active, account } = useWeb3React();
@@ -59,12 +58,18 @@ const AppViewLayout = () => {
         (state) => state.accountDetailsModal
     );
 
-    const auths = useSelector((store) => store.auth)
-  const {exist} = useSelector((store) => store.status)
-  console.log("Auths:", auths)
+    const auths = useSelector((store) => store.auth);
+    const { exist } = useSelector((store) => store.status);
+    console.log("Auths:", auths);
 
-    const  {loading, createAccountHandler,open,setOpen, signHandler,setLoading}  =  useAuthFunc()
-
+    const {
+        loading,
+        createAccountHandler,
+        open,
+        setOpen,
+        signHandler,
+        setLoading,
+    } = useAuthFunc();
 
     const authModalState = useSelector((state) => state.authModal);
 
@@ -92,7 +97,19 @@ const AppViewLayout = () => {
     // connecting eagerly
     useEagerConnect();
 
+    const { chainId } = useWeb3React();
 
+    const { changeNetwork } = useSwitchNetwork();
+    const transformChainId = useMemo(
+        () => `0x${Number(chainId).toString(16)}`,
+        [chainId]
+    );
+
+    useEffect(() => {
+        if (transformChainId !== "AA36A7") {
+            changeNetwork();
+        }
+    }, [transformChainId]);
 
     const closeSignInAuth = () => {
         setOpen(!open);
@@ -179,7 +196,6 @@ const AppViewLayout = () => {
         };
     }, [account, active]);
 
-
     return (
         <Fragment>
             <AppHeader
@@ -233,7 +249,7 @@ const AppViewLayout = () => {
                 />
             </ModalWrapper>
             {/* doesn't have an account yet and address is active */}
-            { active && !loading && !exist && (
+            {active && !loading && !exist && (
                 <AuthWrapper
                     open={authModalState.open}
                     onClose={toggleAuthModalDisplay}
@@ -259,7 +275,7 @@ const AppViewLayout = () => {
             )} */}
 
             {/* has account in db and connected and signature is not null */}
-            {  active && exist && !loading && !sig  && (
+            {active && exist && !loading && !sig && (
                 <SignInWrapper open={open} onClose={closeSignInAuth}>
                     <div className="flex justify-center">
                         <Button action={signHandler}>SignIn</Button>
