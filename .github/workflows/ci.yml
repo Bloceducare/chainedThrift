@@ -8,6 +8,8 @@ on:
 jobs:
     build:
         runs-on: self-hosted
+        env:
+            CI: ${{ secrets.CI }}
 
         steps:
             - name: Checkout code

@@ -68,7 +68,8 @@ export const validEmail = new RegExp(
 
 export const validUsername = new RegExp("^[A-Za-z][A-Za-z0-9_]{2,7}$");
 
-export const baseUrl = "https://cors-chainthrift.herokuapp.com/https://chainedthrift-server.herokuapp.com/api/user/";
+export const baseUrl =
+    "https://cors-chainthrift.herokuapp.com/https://chainedthrift-server.herokuapp.com/api/user/";
 
 export const useAuthFunc = () => {
     const { sign } = useSignature();
@@ -111,7 +112,7 @@ export const useAuthFunc = () => {
             } else if (res.status === 400) {
                 setOpen(!open);
                 setLoading(false);
-                console.log(data);
+
                 addToast(data?.error?.message.message, { appearance: "error" });
             } else {
                 setLoading(false);

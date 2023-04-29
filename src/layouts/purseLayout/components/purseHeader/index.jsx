@@ -18,7 +18,7 @@ const PurseHeader = ({ currentTab,currentRound,amount }) => {
     const { symbol: tokenSymbol } = useToken(purseDetail?.token_address);
 
     const { id } = useParams();
-    const { getPurseData, getPurseMembers, getBentoBalance } = usePurse();
+    const { getPurseData, getPurseMembers } = usePurse();
 
     // eslint-disable-next-line
     const [loading, setLoading] = useState(false);

@@ -169,15 +169,15 @@ const CreatePurse = () => {
     const { exist } = useSelector((store) => store.status);
 
     const [opens, setOpens] = useState(false);
-    const [open2, setOpen2] = useState(false)
+    const [open2, setOpen2] = useState(false);
 
-    const closeSignUp = () =>{
-        setOpens(!opens)
-    }
+    const closeSignUp = () => {
+        setOpens(!opens);
+    };
 
-    const closeSignIn = () =>{
-        setOpen2(!open2)
-    }
+    const closeSignIn = () => {
+        setOpen2(!open2);
+    };
 
     const signUp = () => {
         setOpens(true);
@@ -248,7 +248,7 @@ const CreatePurse = () => {
                     chatId !== "undefined" ||
                     chatId !== undefined
                 ) {
-                    console.log("chatId", chatId);
+                    // console.log("chatId", chatId);
 
                     // const {error} = PurseInfo(amount,frequency,membersCount,balance);
                     // if(error){
@@ -708,7 +708,10 @@ const CreatePurse = () => {
                 </div>
             </section>
             <AuthWrapper open={opens} onClose={closeSignUp}>
-                <AuthModal createAccountHandler={createAccountHandler} onClose={closeSignUp}/>
+                <AuthModal
+                    createAccountHandler={createAccountHandler}
+                    onClose={closeSignUp}
+                />
             </AuthWrapper>
             {/* {modal} */}
 

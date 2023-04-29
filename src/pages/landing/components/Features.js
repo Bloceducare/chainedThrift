@@ -1,8 +1,7 @@
-import React from 'react';
-import { BsArrowRightShort } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+
+
 function Features() {
-    const navigate = useNavigate();
     return (
         <React.Fragment>
             <section className="container p-6 mx-auto dark:bg-dark-1 bg-light-1 md:p-12 lg:flex lg:justify-between lg:mt-12">
@@ -18,7 +17,10 @@ function Features() {
                         />
                         <p className="mt-6 font-light text-dark-1 font-Montserrat leading-sm-height">
                             Fully transparent and secure purses. Our purse is
-                            <span className='ml-1 font-bold'>open source</span> and trusted by all.
+                            <span className="ml-1 font-bold">
+                                open source
+                            </span>{" "}
+                            and trusted by all.
                         </p>
                     </div>
                 </div>
@@ -39,7 +41,8 @@ function Features() {
                                 Task Reminders
                             </h5>
                             <p className="font-normal text-dark-1 font-Montserrat leading-sm-height">
-                                Reminding you to manage purse adequately as required
+                                Reminding you to manage purse adequately as
+                                required
                             </p>
                             {/* <p className="flex items-center mt-4 text-purple-600">
                                 <span className="font-semibold font-Monserat">
@@ -57,9 +60,12 @@ function Features() {
                             src="/assets/check.svg"
                             alt="chat-svg"
                         />
-                        <h5 className="font-extrabold text-dark-1 text-medium font-Poppins">Flexible purses</h5>
+                        <h5 className="font-extrabold text-dark-1 text-medium font-Poppins">
+                            Flexible purses
+                        </h5>
                         <p className="font-light text-dark-1 font-Montserrat leading-sm-height">
-                            Create/join purses that meet your money your financial position, for business/personal needs.{" "}
+                            Create/join purses that meet your money your
+                            financial position, for business/personal needs.{" "}
                         </p>
                         {/* <p className="flex items-center mt-4 text-purple-600">
                             <span className="font-semibold font-Monserat">
@@ -73,7 +79,7 @@ function Features() {
                 </div>
             </section>
         </React.Fragment>
-    )
+    );
 }
 
-export default Features
+export default Features;

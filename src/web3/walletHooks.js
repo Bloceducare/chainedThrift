@@ -13,7 +13,7 @@ export const useEagerConnect = () => {
                 if (isAuthorized) activate(injected);
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             })
             .finally(() => {
                 setTriedEagerConnect(true);
