@@ -1,0 +1,25 @@
+name: CI/CD Workflow
+
+on:
+    push:
+        branches:
+            - develop
+
+jobs:
+    build:
+        runs-on: self-hosted
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Build app
+              run: npm run build
+            - name: Copy Server File
+              run: cp -r build /var/www/chainedThrift
+
+            - name: Restart Server
+              run: pm2 restart chainedThrift || pm2 start --name chainedThrift npm -- start
