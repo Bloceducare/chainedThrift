@@ -10,6 +10,9 @@ jobs:
         runs-on: self-hosted
         env:
             CI: ${{ secrets.CI }}
+            REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
+            REACT_APP_CORS_URL: ${{ secrets.REACT_APP_CORS_URL }}
+            REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
 
         steps:
             - name: Checkout code
@@ -22,6 +25,12 @@ jobs:
 
             - name: Install dependencies
               run: npm install
+
+            - name: Write env file
+              run: |
+                  echo "REACT_APP_ENV=${REACT_APP_ENV}" >> .env
+                  echo "REACT_APP_API_ENDPOINT=${REACT_APP_API_ENDPOINT}" >> .env
+                  echo "REACT_APP_CORS_URL=${REACT_APP_CORS_URL}" >> .env
 
             - name: Build app
               run: NODE_OPTIONS=--max_old_space_size=4096 npm run build
