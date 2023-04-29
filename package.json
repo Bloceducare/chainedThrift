@@ -41,7 +41,7 @@
         "web-vitals": "^2.1.2"
     },
     "scripts": {
-        "start": "react-app-rewired start --port 3002",
+        "start": "PORT=3002 react-app-rewired start ",
         "start:testnet": "REACT_APP_ENV=testnet npm start",
         "start:testnet:windows": "set REACT_APP_ENV=testnet && npm start",
         "build": "react-app-rewired build",
